@@ -18,20 +18,23 @@ namespace ConsoleWSTester
         private string publicName;
         private ILogger logger;
         private string xmlObject;
+        private CAWebService.CAdxParamKeyValue[] objectKeys;
 
         public enum OperationMode
         {
             Query,
             Modify,
+            Read,
             Save
         }
 
-        public WebServiceCall(string hostUrl, string poolAlias, string lang, string publicName, ILogger logger)
+        public WebServiceCall(string hostUrl, string poolAlias, string lang, string publicName, CAWebService.CAdxParamKeyValue[] objectKeys, ILogger logger)
         {
             this.hostUrl = hostUrl;
             this.poolAlias = poolAlias;
             this.language = lang;
             this.publicName = publicName;
+            this.objectKeys = objectKeys;
             this.logger = logger;
         }
 
@@ -44,6 +47,10 @@ namespace ConsoleWSTester
         {
             this.xmlObject = File.ReadAllText(xmlFileName);
             LaunchWSCall(OperationMode.Modify);
+        }
+        public void Read(string xmlFileName)
+        {
+            LaunchWSCall(OperationMode.Read);
         }
 
         public void Save(string xmlFileName)
@@ -88,7 +95,10 @@ namespace ConsoleWSTester
                             result = caWebService.query(context, publicName, null, MaxListSize);
                             break;
                         case OperationMode.Modify:
-                            result = caWebService.modify(context, publicName, null, this.xmlObject);
+                            result = caWebService.modify(context, publicName, objectKeys, this.xmlObject);
+                            break;
+                        case OperationMode.Read:
+                            result = caWebService.read(context, publicName, objectKeys);
                             break;
                         case OperationMode.Save:
                             result = caWebService.save(context, publicName, this.xmlObject);

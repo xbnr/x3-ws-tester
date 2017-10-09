@@ -14,23 +14,28 @@ namespace ConsoleWSTester
         {
             SetTextFromSettings(Settings.Default.Host, this.tbHost);
             SetTextFromSettings(Settings.Default.PoolAlias, this.tbPoolAlias);
-            SetTextFromSettings(Settings.Default.Language, this.tbLanguage);
+            SetTextFromSettings(Settings.Default.Language, this.cbLanguage);
             SetTextFromSettings(Settings.Default.PublicName, this.cbPublicName);
             SetTextFromSettings(Settings.Default.OperationMode, this.cbMode);
+            SetTextFromSettings(Settings.Default.RequestConfiguration, this.tbRequestConfiguration);
+            SetTextFromSettings(Settings.Default.Key0, this.tbKey);
+            SetTextFromSettings(Settings.Default.Value0, this.tbValue);
             SetTextFromSettings(Settings.Default.XmlFilename, this.tbXmlFilename);
         }
+
         private void SaveSettings()
         {
             Settings.Default.Host = this.tbHost.Text;
             Settings.Default.PoolAlias = this.tbPoolAlias.Text;
-            Settings.Default.Language = this.tbLanguage.Text;
+            Settings.Default.Language = this.cbLanguage.Text;
             Settings.Default.PublicName = this.cbPublicName.Text;
             Settings.Default.OperationMode = this.cbMode.Text;
+            Settings.Default.RequestConfiguration = this.tbRequestConfiguration.Text;
+            Settings.Default.Key0 = this.tbKey.Text;
+            Settings.Default.Value0 = this.tbValue.Text;
             Settings.Default.XmlFilename = this.tbXmlFilename.Text;
-
             Settings.Default.Save();
         }
-
 
         private void SetTextFromSettings(string settingValue, TextBox textBox)
         {
@@ -52,7 +57,17 @@ namespace ConsoleWSTester
         private void launch_Click(object sender, EventArgs e)
         {
             Logger logger = new Logger(tbLogs);
-            var ws = new WebServiceCall(tbHost.Text, tbPoolAlias.Text, tbLanguage.Text, cbPublicName.Text, logger);
+
+            CAWebService.CAdxParamKeyValue[] objectKeys = null;
+            if (!string.IsNullOrEmpty(tbKey.Text))
+            {
+                objectKeys = new CAWebService.CAdxParamKeyValue[1];
+                objectKeys[0] = new CAWebService.CAdxParamKeyValue();
+                objectKeys[0].key = tbKey.Text;
+                objectKeys[0].value = tbValue.Text;
+            }
+
+            var ws = new WebServiceCall(tbHost.Text, tbPoolAlias.Text, cbLanguage.Text, cbPublicName.Text, objectKeys, logger);
             WebServiceCall.OperationMode action = GetAction();
             switch (action)
             {

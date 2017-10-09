@@ -106,5 +106,41 @@ namespace ConsoleWSTester {
                 this["XmlFilename"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RequestConfiguration {
+            get {
+                return ((string)(this["RequestConfiguration"]));
+            }
+            set {
+                this["RequestConfiguration"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Key0 {
+            get {
+                return ((string)(this["Key0"]));
+            }
+            set {
+                this["Key0"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Value0 {
+            get {
+                return ((string)(this["Value0"]));
+            }
+            set {
+                this["Value0"] = value;
+            }
+        }
     }
 }
