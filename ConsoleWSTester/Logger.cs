@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ConsoleWSTester
 {
-    class Logger : ILogger
+    public class Logger : ILogger
     {
         private TextBox control;
 
