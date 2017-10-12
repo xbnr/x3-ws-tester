@@ -51,6 +51,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tbValue = new System.Windows.Forms.TextBox();
             this.panelXmlFile = new System.Windows.Forms.Panel();
+            this.cbListSize = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.labelLogin = new System.Windows.Forms.Label();
+            this.tbLogin = new System.Windows.Forms.TextBox();
+            this.labelPassword = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.llClearConsole = new System.Windows.Forms.LinkLabel();
+            this.cbPath = new System.Windows.Forms.ComboBox();
+            this.labelPath = new System.Windows.Forms.Label();
             this.panelXmlFile.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +69,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Location = new System.Drawing.Point(12, 485);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(634, 38);
+            this.button1.Size = new System.Drawing.Size(651, 38);
             this.button1.TabIndex = 0;
             this.button1.Text = "Send";
             this.button1.UseVisualStyleBackColor = true;
@@ -77,7 +86,7 @@
             // 
             // tbPoolAlias
             // 
-            this.tbPoolAlias.Location = new System.Drawing.Point(120, 51);
+            this.tbPoolAlias.Location = new System.Drawing.Point(120, 73);
             this.tbPoolAlias.Name = "tbPoolAlias";
             this.tbPoolAlias.Size = new System.Drawing.Size(144, 20);
             this.tbPoolAlias.TabIndex = 2;
@@ -92,13 +101,13 @@
             this.tbLogs.Multiline = true;
             this.tbLogs.Name = "tbLogs";
             this.tbLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbLogs.Size = new System.Drawing.Size(634, 207);
+            this.tbLogs.Size = new System.Drawing.Size(651, 207);
             this.tbLogs.TabIndex = 3;
             // 
             // labelPoolAlias
             // 
             this.labelPoolAlias.AutoSize = true;
-            this.labelPoolAlias.Location = new System.Drawing.Point(50, 54);
+            this.labelPoolAlias.Location = new System.Drawing.Point(50, 76);
             this.labelPoolAlias.Name = "labelPoolAlias";
             this.labelPoolAlias.Size = new System.Drawing.Size(56, 13);
             this.labelPoolAlias.TabIndex = 4;
@@ -148,7 +157,7 @@
             "read",
             "modify",
             "save"});
-            this.cbMode.Location = new System.Drawing.Point(120, 77);
+            this.cbMode.Location = new System.Drawing.Point(120, 99);
             this.cbMode.Name = "cbMode";
             this.cbMode.Size = new System.Drawing.Size(144, 21);
             this.cbMode.TabIndex = 11;
@@ -159,7 +168,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbXmlFilename.Location = new System.Drawing.Point(61, 7);
             this.tbXmlFilename.Name = "tbXmlFilename";
-            this.tbXmlFilename.Size = new System.Drawing.Size(539, 20);
+            this.tbXmlFilename.Size = new System.Drawing.Size(556, 20);
             this.tbXmlFilename.TabIndex = 12;
             this.tbXmlFilename.Text = "C:\\Users\\frdepo\\OneDrive - Sage Software, Inc\\X3\\X3-57422-SOAP Web Services - del" +
     "eting lines on orders and quotes\\TEST1FROMD3.txt";
@@ -187,7 +196,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 80);
+            this.label3.Location = new System.Drawing.Point(21, 102);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 13);
             this.label3.TabIndex = 15;
@@ -196,7 +205,7 @@
             // btBrowseXmlFile
             // 
             this.btBrowseXmlFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBrowseXmlFile.Location = new System.Drawing.Point(608, 7);
+            this.btBrowseXmlFile.Location = new System.Drawing.Point(625, 7);
             this.btBrowseXmlFile.Name = "btBrowseXmlFile";
             this.btBrowseXmlFile.Size = new System.Drawing.Size(39, 23);
             this.btBrowseXmlFile.TabIndex = 16;
@@ -219,7 +228,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 127);
+            this.label4.Location = new System.Drawing.Point(0, 148);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(114, 13);
             this.label4.TabIndex = 19;
@@ -227,7 +236,7 @@
             // 
             // tbRequestConfiguration
             // 
-            this.tbRequestConfiguration.Location = new System.Drawing.Point(120, 124);
+            this.tbRequestConfiguration.Location = new System.Drawing.Point(120, 145);
             this.tbRequestConfiguration.Name = "tbRequestConfiguration";
             this.tbRequestConfiguration.Size = new System.Drawing.Size(408, 20);
             this.tbRequestConfiguration.TabIndex = 18;
@@ -236,7 +245,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(89, 164);
+            this.label5.Location = new System.Drawing.Point(89, 177);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(25, 13);
             this.label5.TabIndex = 21;
@@ -244,7 +253,7 @@
             // 
             // tbKey
             // 
-            this.tbKey.Location = new System.Drawing.Point(120, 161);
+            this.tbKey.Location = new System.Drawing.Point(120, 174);
             this.tbKey.Name = "tbKey";
             this.tbKey.Size = new System.Drawing.Size(144, 20);
             this.tbKey.TabIndex = 20;
@@ -252,7 +261,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(345, 164);
+            this.label6.Location = new System.Drawing.Point(345, 177);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 23;
@@ -260,7 +269,7 @@
             // 
             // tbValue
             // 
-            this.tbValue.Location = new System.Drawing.Point(384, 161);
+            this.tbValue.Location = new System.Drawing.Point(384, 174);
             this.tbValue.Name = "tbValue";
             this.tbValue.Size = new System.Drawing.Size(144, 20);
             this.tbValue.TabIndex = 22;
@@ -274,13 +283,108 @@
             this.panelXmlFile.Controls.Add(this.label2);
             this.panelXmlFile.Location = new System.Drawing.Point(-1, 212);
             this.panelXmlFile.Name = "panelXmlFile";
-            this.panelXmlFile.Size = new System.Drawing.Size(659, 33);
+            this.panelXmlFile.Size = new System.Drawing.Size(676, 33);
             this.panelXmlFile.TabIndex = 24;
+            // 
+            // cbListSize
+            // 
+            this.cbListSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbListSize.FormattingEnabled = true;
+            this.cbListSize.Location = new System.Drawing.Point(384, 74);
+            this.cbListSize.Name = "cbListSize";
+            this.cbListSize.Size = new System.Drawing.Size(144, 21);
+            this.cbListSize.TabIndex = 26;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(323, 80);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 13);
+            this.label7.TabIndex = 25;
+            this.label7.Text = "List size:";
+            // 
+            // labelLogin
+            // 
+            this.labelLogin.AutoSize = true;
+            this.labelLogin.Location = new System.Drawing.Point(549, 14);
+            this.labelLogin.Name = "labelLogin";
+            this.labelLogin.Size = new System.Drawing.Size(36, 13);
+            this.labelLogin.TabIndex = 28;
+            this.labelLogin.Text = "Login:";
+            // 
+            // tbLogin
+            // 
+            this.tbLogin.Location = new System.Drawing.Point(552, 32);
+            this.tbLogin.Name = "tbLogin";
+            this.tbLogin.Size = new System.Drawing.Size(111, 20);
+            this.tbLogin.TabIndex = 27;
+            this.tbLogin.Text = "admin";
+            // 
+            // labelPassword
+            // 
+            this.labelPassword.AutoSize = true;
+            this.labelPassword.Location = new System.Drawing.Point(549, 62);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Size = new System.Drawing.Size(56, 13);
+            this.labelPassword.TabIndex = 30;
+            this.labelPassword.Text = "Password:";
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Location = new System.Drawing.Point(552, 78);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
+            this.tbPassword.Size = new System.Drawing.Size(108, 20);
+            this.tbPassword.TabIndex = 29;
+            this.tbPassword.Text = "admin";
+            // 
+            // llClearConsole
+            // 
+            this.llClearConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.llClearConsole.AutoSize = true;
+            this.llClearConsole.Location = new System.Drawing.Point(15, 466);
+            this.llClearConsole.Name = "llClearConsole";
+            this.llClearConsole.Size = new System.Drawing.Size(71, 13);
+            this.llClearConsole.TabIndex = 31;
+            this.llClearConsole.TabStop = true;
+            this.llClearConsole.Text = "Clear console";
+            this.llClearConsole.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llClearConsole_LinkClicked);
+            // 
+            // cbPath
+            // 
+            this.cbPath.FormattingEnabled = true;
+            this.cbPath.Items.AddRange(new object[] {
+            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
+            "/adxwsvc/services/CAdxWebServiceXmlCC"});
+            this.cbPath.Location = new System.Drawing.Point(120, 51);
+            this.cbPath.Name = "cbPath";
+            this.cbPath.Size = new System.Drawing.Size(144, 21);
+            this.cbPath.TabIndex = 33;
+            this.cbPath.Text = "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC";
+            // 
+            // labelPath
+            // 
+            this.labelPath.AutoSize = true;
+            this.labelPath.Location = new System.Drawing.Point(39, 54);
+            this.labelPath.Name = "labelPath";
+            this.labelPath.Size = new System.Drawing.Size(32, 13);
+            this.labelPath.TabIndex = 32;
+            this.labelPath.Text = "Path:";
             // 
             // Workspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbPath);
+            this.Controls.Add(this.labelPath);
+            this.Controls.Add(this.llClearConsole);
+            this.Controls.Add(this.labelPassword);
+            this.Controls.Add(this.tbPassword);
+            this.Controls.Add(this.labelLogin);
+            this.Controls.Add(this.tbLogin);
+            this.Controls.Add(this.cbListSize);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.panelXmlFile);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.tbValue);
@@ -302,7 +406,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "Workspace";
-            this.Size = new System.Drawing.Size(658, 531);
+            this.Size = new System.Drawing.Size(675, 531);
             this.Load += new System.EventHandler(this.Workspace_Load);
             this.panelXmlFile.ResumeLayout(false);
             this.panelXmlFile.PerformLayout();
@@ -336,5 +440,14 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbValue;
         private System.Windows.Forms.Panel panelXmlFile;
+        private System.Windows.Forms.ComboBox cbListSize;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelLogin;
+        private System.Windows.Forms.TextBox tbLogin;
+        private System.Windows.Forms.Label labelPassword;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.LinkLabel llClearConsole;
+        private System.Windows.Forms.ComboBox cbPath;
+        private System.Windows.Forms.Label labelPath;
     }
 }

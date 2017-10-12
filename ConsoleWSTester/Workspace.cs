@@ -14,7 +14,13 @@ namespace ConsoleWSTester
         public Workspace()
         {
             InitializeComponent();
+            FillComboBox();
+        }
+
+        private void FillComboBox()
+        {
             cbMode.DataSource = Enum.GetNames(typeof(WebServiceCall.OperationMode));
+            cbListSize.DataSource = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         }
 
         private string filename;
@@ -27,8 +33,9 @@ namespace ConsoleWSTester
                 Directory.CreateDirectory(wsDirectory);
 
             if (string.IsNullOrEmpty(this.filename))
+            {
                 this.filename = WorkspaceConfig.GetWorkspaceFilename();
-
+            }
             string json = JsonConvert.SerializeObject(config, Formatting.Indented, new JsonSerializerSettings
             {
                 Converters = new List<JsonConverter> { new StringEnumConverter() },
@@ -47,10 +54,14 @@ namespace ConsoleWSTester
             this.filename = filename;
             WorkspaceConfig config = JsonConvert.DeserializeObject<WorkspaceConfig>(File.ReadAllText(filename));
             SetTextFromSettings(config.HostUrl, this.tbHost);
+            SetTextFromSettings(config.Path, this.cbPath);
             SetTextFromSettings(config.PoolAlias, this.tbPoolAlias);
             SetTextFromSettings(config.Language, this.cbLanguage);
             SetTextFromSettings(config.PublicName, this.cbPublicName);
+            this.cbListSize.SelectedIndex = (int)config.ListSize - 1;
             this.cbMode.SelectedIndex = (int)config.OperatMode;
+            SetTextFromSettings(config.Login, this.tbLogin);
+            SetTextFromSettings(config.Password, this.tbPassword);
             SetTextFromSettings(config.RequestConfiguration, this.tbRequestConfiguration);
 
             foreach (var item in config.ObjectKeys)
@@ -81,12 +92,17 @@ namespace ConsoleWSTester
             }
             conf.OperatMode = opEnum;
             conf.HostUrl = tbHost.Text;
+            conf.Path = cbPath.Text;
             conf.PoolAlias = tbPoolAlias.Text;
             conf.Language = cbLanguage.Text;
             conf.PublicName = cbPublicName.Text;
+            conf.ListSize = int.Parse( cbListSize.Text);
             conf.ObjectKeys = objectKeys;
             conf.RequestConfiguration = tbRequestConfiguration.Text;
             conf.XmlFilename = tbXmlFilename.Text;
+
+            conf.Login = tbLogin.Text;
+            conf.Password= tbPassword.Text;
             return conf;
         }
 
@@ -152,10 +168,12 @@ namespace ConsoleWSTester
 
         private void Workspace_Load(object sender, EventArgs e)
         {
-           // cbMode.DataSource = Enum.GetValues(typeof( WebServiceCall.OperationMode));
 
         }
 
-
+        private void llClearConsole_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            tbLogs.Clear();
+        }
     }
 }

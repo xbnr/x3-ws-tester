@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,6 +14,12 @@ namespace ConsoleWSTester
 
         private void Main_Load(object sender, EventArgs e)
         {
+            string wsDirectory = WorkspaceConfig.GetWorkspaceDirectory();
+            if (!Directory.Exists(wsDirectory))
+            {
+                Directory.CreateDirectory(wsDirectory);
+            }
+
             if (tabPage1.Controls.Count > 0)
             {
                 tabPage1.Controls.Clear();
@@ -35,7 +40,7 @@ namespace ConsoleWSTester
                 Workspace ws = new Workspace();
                 ws.LoadConfigFromJSON( item.FullName );
                 ws.Location = new System.Drawing.Point(5, 5);
-                ws.Size = new System.Drawing.Size(662, 520);
+                ws.Size = new System.Drawing.Size(670, 530);
                 ws.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
                 tabPage.Controls.Add(ws);
             }

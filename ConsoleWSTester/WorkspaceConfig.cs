@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 using Newtonsoft.Json.Converters;
@@ -16,6 +12,10 @@ namespace ConsoleWSTester
 
         [JsonProperty]
         public string HostUrl { get; set; }
+
+        [JsonProperty]
+        public string Path { get; set; }
+
 
         [JsonProperty]
         public string PoolAlias { get; set; }
@@ -43,7 +43,13 @@ namespace ConsoleWSTester
         public CAWebService.CAdxParamKeyValue[] ObjectKeys { get; set; }
 
         [JsonProperty]
-        public int ListSize => MaxListSize;
+        public int ListSize { get; set; }
+
+        [JsonProperty]
+        public string Login { get; set; }
+
+        [JsonProperty]
+        public string Password { get; set; }
 
 
         internal static string GetWorkspaceShortName()
@@ -58,12 +64,12 @@ namespace ConsoleWSTester
 
         internal static string GetWorkspaceFilename()
         {
-            return Path.Combine(WorkspaceConfig.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
+            return System.IO.Path.Combine(WorkspaceConfig.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
 
         internal static string GetWorkspaceDirectory()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Sage", "X3WsTester");
+            return System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Sage", "X3WsTester");
         }
 
     }

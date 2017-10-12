@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
 using System.Windows.Forms;
 
 namespace ConsoleWSTester

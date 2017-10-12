@@ -4,16 +4,13 @@ using System;
 using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Text;
 
 namespace ConsoleWSTester
 {
     public class WebServiceCall
     {
-
-        private const string CAdxWebServiceXmlCC = "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC";
-        //string endPointUrl = "http://localhost:8126/soap-wsdl/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC?wsdl";
-        private const int MaxListSize = 4;
-
+        // private const string CAdxWebServiceXmlCC = "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC"; // ?wsdl";
         private ILogger logger;
         private WorkspaceConfig conf;
 
@@ -22,7 +19,10 @@ namespace ConsoleWSTester
             Query,
             Modify,
             Read,
-            Save
+            Save,
+            GetDescription,
+            DeleteLines,
+            InsertLines
         }
 
         public WebServiceCall(WorkspaceConfig config, ILogger logger)
@@ -53,15 +53,23 @@ namespace ConsoleWSTester
             LaunchWSCall(OperationMode.Save);
         }
 
+
+        private static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return Convert.ToBase64String(plainTextBytes);
+        }
+
         private void LaunchWSCall(OperationMode mode)
         {
             var caWebService = new CAWebService.CAdxWebServiceXmlCCClient();
             var context = new CAWebService.CAdxCallContext();
             context.poolAlias = conf.PoolAlias;
+            // context.codeUser = conf.Login;
             context.codeLang = conf.Language;
             context.requestConfig = conf.RequestConfiguration;
 
-            string absUrl = conf.HostUrl + CAdxWebServiceXmlCC;
+            string absUrl = conf.HostUrl + conf.Path;
             caWebService.Endpoint.ListenUri = new Uri(absUrl);
             caWebService.Endpoint.Address = new EndpointAddress(absUrl);
 
@@ -70,7 +78,8 @@ namespace ConsoleWSTester
             {
                 // Add a HTTP Header to an outgoing request
                 HttpRequestMessageProperty requestMessage = new HttpRequestMessageProperty();
-                requestMessage.Headers["Authorization"] = "Basic YWRtaW46YWRtaW4=";
+                // requestMessage.Headers["Authorization"] = "Basic YWRtaW46YWRtaW4=";
+                requestMessage.Headers["Authorization"] = $"Basic {Base64Encode(conf.Login + ":" + conf.Password)}";
                 requestMessage.Headers["Accept"] = "application/soap+xml, application/dime, multipart/related, text/*";
                 OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] = requestMessage;
 
@@ -92,7 +101,7 @@ namespace ConsoleWSTester
                     {
                         default:
                         case OperationMode.Query:
-                            result = caWebService.query(context, conf.PublicName, null, MaxListSize);
+                            result = caWebService.query(context, conf.PublicName, null, conf.ListSize);
                             break;
                         case OperationMode.Modify:
                             result = caWebService.modify(context, conf.PublicName, conf.ObjectKeys, conf.XmlObject);
@@ -124,8 +133,6 @@ namespace ConsoleWSTester
                     logger.Log(e.StackTrace);
                 }
             }
-
-
         }
 
         private string GetParsedResult(string s)
@@ -141,13 +148,12 @@ namespace ConsoleWSTester
             {
                 // JSON ?
             }
-            if (! ok)
+            if (!ok)
             {
                 try
                 {
                     result = JToken.Parse(s).ToString();
                     ok = true;
-                    // result = JsonConvert.SerializeObject(s, Formatting.Indented);
                 }
                 catch (Exception)
                 {
