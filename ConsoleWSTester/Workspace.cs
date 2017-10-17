@@ -64,10 +64,19 @@ namespace ConsoleWSTester
             SetTextFromSettings(config.Password, this.tbPassword);
             SetTextFromSettings(config.RequestConfiguration, this.tbRequestConfiguration);
 
-            foreach (var item in config.ObjectKeys)
+            if (config.ObjectKeys != null)
             {
-                SetTextFromSettings(item.key, this.tbKey);
-                SetTextFromSettings(item.value, this.tbValue);
+                foreach (var item in config.ObjectKeys)
+                {
+                    SetTextFromSettings(item.key, this.tbKey);
+                    SetTextFromSettings(item.value, this.tbValue);
+                }
+            }
+
+            SetTextFromSettings(config.BlocKey, this.tbBlocKey);
+            if (config.LineKeys != null)
+            {
+                this.tbLineKeys.Text = string.Join(",", config.LineKeys);
             }
             SetTextFromSettings(config.XmlFilename, this.tbXmlFilename);
         }
@@ -96,13 +105,16 @@ namespace ConsoleWSTester
             conf.PoolAlias = tbPoolAlias.Text;
             conf.Language = cbLanguage.Text;
             conf.PublicName = cbPublicName.Text;
-            conf.ListSize = int.Parse( cbListSize.Text);
+            conf.ListSize = int.Parse(cbListSize.Text);
             conf.ObjectKeys = objectKeys;
             conf.RequestConfiguration = tbRequestConfiguration.Text;
             conf.XmlFilename = tbXmlFilename.Text;
+            // DeleteLines
+            conf.BlocKey = tbBlocKey.Text;
+            conf.LineKeys = this.tbLineKeys.Text.Split(new char[] { ',', ';', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             conf.Login = tbLogin.Text;
-            conf.Password= tbPassword.Text;
+            conf.Password = tbPassword.Text;
             return conf;
         }
 
@@ -174,6 +186,11 @@ namespace ConsoleWSTester
         private void llClearConsole_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             tbLogs.Clear();
+        }
+
+        private void cbMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

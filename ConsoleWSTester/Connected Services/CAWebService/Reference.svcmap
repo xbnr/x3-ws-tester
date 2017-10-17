@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8126/soap-wsdl/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://testcfg801win.sagefr.adinternal.com:28880/adxwsvc/services/CAdxWebServiceXmlCC?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="CAdxWebServiceXmlCC.wsdl" MetadataType="Wsdl" ID="133fc88c-8c25-456b-8d13-76a2710559bd" SourceId="1" SourceUrl="http://localhost:8126/soap-wsdl/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC?wsdl" />
+    <MetadataFile FileName="CAdxWebServiceXmlCC11.wsdl" MetadataType="Wsdl" ID="ee293c9e-6cf8-4c27-b3ee-a5948fd752b4" SourceId="1" SourceUrl="http://testcfg801win.sagefr.adinternal.com:28880/adxwsvc/services/CAdxWebServiceXmlCC?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

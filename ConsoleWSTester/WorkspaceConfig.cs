@@ -43,6 +43,12 @@ namespace ConsoleWSTester
         public CAWebService.CAdxParamKeyValue[] ObjectKeys { get; set; }
 
         [JsonProperty]
+        public string BlocKey { get; set; }
+
+        [JsonProperty]
+        public string[] LineKeys { get; set; }
+
+        [JsonProperty]
         public int ListSize { get; set; }
 
         [JsonProperty]

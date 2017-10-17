@@ -85,28 +85,6 @@ namespace ConsoleWSTester.CAWebService {
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxParamKeyValue))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxMessage))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="modifyReturn")]
-        ConsoleWSTester.CAWebService.CAdxResultXml modify(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="modifyReturn")]
-        System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> modifyAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxParamKeyValue))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxMessage))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="actionObjectReturn")]
-        ConsoleWSTester.CAWebService.CAdxResultXml actionObject(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="actionObjectReturn")]
-        System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> actionObjectAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxParamKeyValue))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxMessage))]
         [return: System.ServiceModel.MessageParameterAttribute(Name="actionObjectKeysReturn")]
         ConsoleWSTester.CAWebService.CAdxResultXml actionObjectKeys(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys);
         
@@ -118,12 +96,23 @@ namespace ConsoleWSTester.CAWebService {
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxParamKeyValue))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxMessage))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="getDataXmlSchemaReturn")]
-        ConsoleWSTester.CAWebService.CAdxResultXml getDataXmlSchema(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="modifyReturn")]
+        ConsoleWSTester.CAWebService.CAdxResultXml modify(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="getDataXmlSchemaReturn")]
-        System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> getDataXmlSchemaAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="modifyReturn")]
+        System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> modifyAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxParamKeyValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxMessage))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="deleteLinesReturn")]
+        ConsoleWSTester.CAWebService.CAdxResultXml deleteLines(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="deleteLinesReturn")]
+        System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> deleteLinesAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
@@ -140,12 +129,23 @@ namespace ConsoleWSTester.CAWebService {
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxParamKeyValue))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxMessage))]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="deleteLinesReturn")]
-        ConsoleWSTester.CAWebService.CAdxResultXml deleteLines(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getDataXmlSchemaReturn")]
+        ConsoleWSTester.CAWebService.CAdxResultXml getDataXmlSchema(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName);
         
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="deleteLinesReturn")]
-        System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> deleteLinesAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys);
+        [return: System.ServiceModel.MessageParameterAttribute(Name="getDataXmlSchemaReturn")]
+        System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> getDataXmlSchemaAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxParamKeyValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CAdxMessage))]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="actionObjectReturn")]
+        ConsoleWSTester.CAWebService.CAdxResultXml actionObject(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="actionObjectReturn")]
+        System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> actionObjectAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml);
     }
     
     /// <remarks/>
@@ -157,6 +157,10 @@ namespace ConsoleWSTester.CAWebService {
     public partial class CAdxCallContext : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string codeLangField;
+        
+        private string codeUserField;
+        
+        private string passwordField;
         
         private string poolAliasField;
         
@@ -173,6 +177,30 @@ namespace ConsoleWSTester.CAWebService {
             set {
                 this.codeLangField = value;
                 this.RaisePropertyChanged("codeLang");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.SoapElementAttribute(IsNullable=true)]
+        public string codeUser {
+            get {
+                return this.codeUserField;
+            }
+            set {
+                this.codeUserField = value;
+                this.RaisePropertyChanged("codeUser");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.SoapElementAttribute(IsNullable=true)]
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+                this.RaisePropertyChanged("password");
             }
         }
         
@@ -729,22 +757,6 @@ namespace ConsoleWSTester.CAWebService {
             return base.Channel.getDescriptionAsync(callContext, publicName);
         }
         
-        public ConsoleWSTester.CAWebService.CAdxResultXml modify(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml) {
-            return base.Channel.modify(callContext, publicName, objectKeys, objectXml);
-        }
-        
-        public System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> modifyAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml) {
-            return base.Channel.modifyAsync(callContext, publicName, objectKeys, objectXml);
-        }
-        
-        public ConsoleWSTester.CAWebService.CAdxResultXml actionObject(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml) {
-            return base.Channel.actionObject(callContext, publicName, actionCode, objectXml);
-        }
-        
-        public System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> actionObjectAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml) {
-            return base.Channel.actionObjectAsync(callContext, publicName, actionCode, objectXml);
-        }
-        
         public ConsoleWSTester.CAWebService.CAdxResultXml actionObjectKeys(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys) {
             return base.Channel.actionObjectKeys(callContext, publicName, actionCode, objectKeys);
         }
@@ -753,12 +765,20 @@ namespace ConsoleWSTester.CAWebService {
             return base.Channel.actionObjectKeysAsync(callContext, publicName, actionCode, objectKeys);
         }
         
-        public ConsoleWSTester.CAWebService.CAdxResultXml getDataXmlSchema(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName) {
-            return base.Channel.getDataXmlSchema(callContext, publicName);
+        public ConsoleWSTester.CAWebService.CAdxResultXml modify(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml) {
+            return base.Channel.modify(callContext, publicName, objectKeys, objectXml);
         }
         
-        public System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> getDataXmlSchemaAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName) {
-            return base.Channel.getDataXmlSchemaAsync(callContext, publicName);
+        public System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> modifyAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml) {
+            return base.Channel.modifyAsync(callContext, publicName, objectKeys, objectXml);
+        }
+        
+        public ConsoleWSTester.CAWebService.CAdxResultXml deleteLines(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys) {
+            return base.Channel.deleteLines(callContext, publicName, objectKeys, blocKey, lineKeys);
+        }
+        
+        public System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> deleteLinesAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys) {
+            return base.Channel.deleteLinesAsync(callContext, publicName, objectKeys, blocKey, lineKeys);
         }
         
         public ConsoleWSTester.CAWebService.CAdxResultXml insertLines(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string lineKey, string lineXml) {
@@ -769,12 +789,20 @@ namespace ConsoleWSTester.CAWebService {
             return base.Channel.insertLinesAsync(callContext, publicName, objectKeys, blocKey, lineKey, lineXml);
         }
         
-        public ConsoleWSTester.CAWebService.CAdxResultXml deleteLines(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys) {
-            return base.Channel.deleteLines(callContext, publicName, objectKeys, blocKey, lineKeys);
+        public ConsoleWSTester.CAWebService.CAdxResultXml getDataXmlSchema(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName) {
+            return base.Channel.getDataXmlSchema(callContext, publicName);
         }
         
-        public System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> deleteLinesAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleWSTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys) {
-            return base.Channel.deleteLinesAsync(callContext, publicName, objectKeys, blocKey, lineKeys);
+        public System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> getDataXmlSchemaAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName) {
+            return base.Channel.getDataXmlSchemaAsync(callContext, publicName);
+        }
+        
+        public ConsoleWSTester.CAWebService.CAdxResultXml actionObject(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml) {
+            return base.Channel.actionObject(callContext, publicName, actionCode, objectXml);
+        }
+        
+        public System.Threading.Tasks.Task<ConsoleWSTester.CAWebService.CAdxResultXml> actionObjectAsync(ConsoleWSTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml) {
+            return base.Channel.actionObjectAsync(callContext, publicName, actionCode, objectXml);
         }
     }
 }

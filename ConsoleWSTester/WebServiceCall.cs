@@ -65,7 +65,7 @@ namespace ConsoleWSTester
             var caWebService = new CAWebService.CAdxWebServiceXmlCCClient();
             var context = new CAWebService.CAdxCallContext();
             context.poolAlias = conf.PoolAlias;
-            // context.codeUser = conf.Login;
+            context.codeUser = conf.Login;
             context.codeLang = conf.Language;
             context.requestConfig = conf.RequestConfiguration;
 
@@ -111,6 +111,9 @@ namespace ConsoleWSTester
                             break;
                         case OperationMode.Save:
                             result = caWebService.save(context, conf.PublicName, conf.XmlObject);
+                            break;
+                        case OperationMode.DeleteLines:
+                            result = caWebService.deleteLines(context, conf.PublicName, conf.ObjectKeys, conf.BlocKey, conf.LineKeys);
                             break;
                     }
 

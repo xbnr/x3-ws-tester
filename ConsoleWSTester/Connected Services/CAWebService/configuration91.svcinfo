@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="5Oh0HVa9vEECQrrcWjxhiKIncQo=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="MxAcQJxcc+RHBn0s/1yJOaLe0cA=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="CAdxWebServiceXmlCCSoapBinding">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="CAdxWebServiceXmlCC" contract="CAWebService.CAdxWebServiceXmlCC" bindingType="basicHttpBinding" address="http://localhost:8126/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC" bindingConfiguration="CAdxWebServiceXmlCCSoapBinding">
+    <endpoint name="CAdxWebServiceXmlCC" contract="CAWebService.CAdxWebServiceXmlCC" bindingType="basicHttpBinding" address="http://testcfg801win.sagefr.adinternal.com:28880/adxwsvc/services/CAdxWebServiceXmlCC" bindingConfiguration="CAdxWebServiceXmlCCSoapBinding">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8126/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC</serializedValue>
+          <serializedValue>http://testcfg801win.sagefr.adinternal.com:28880/adxwsvc/services/CAdxWebServiceXmlCC</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

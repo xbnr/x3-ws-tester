@@ -99,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Connected Services\CAWebService\CAdxWebServiceXmlCC.wsdl" />
+    <None Include="Connected Services\CAWebService\CAdxWebServiceXmlCC11.wsdl" />
     <None Include="Connected Services\CAWebService\ConsoleWSTester.CAWebService.CAdxResultXml.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

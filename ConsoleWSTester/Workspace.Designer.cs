@@ -60,14 +60,20 @@
             this.llClearConsole = new System.Windows.Forms.LinkLabel();
             this.cbPath = new System.Windows.Forms.ComboBox();
             this.labelPath = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tbBlocKey = new System.Windows.Forms.TextBox();
+            this.panelDeleteLines = new System.Windows.Forms.Panel();
+            this.tbLineKeys = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.panelXmlFile.SuspendLayout();
+            this.panelDeleteLines.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(12, 485);
+            this.button1.Location = new System.Drawing.Point(12, 503);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(651, 38);
             this.button1.TabIndex = 0;
@@ -88,7 +94,7 @@
             // 
             this.tbPoolAlias.Location = new System.Drawing.Point(120, 73);
             this.tbPoolAlias.Name = "tbPoolAlias";
-            this.tbPoolAlias.Size = new System.Drawing.Size(144, 20);
+            this.tbPoolAlias.Size = new System.Drawing.Size(170, 20);
             this.tbPoolAlias.TabIndex = 2;
             this.tbPoolAlias.Text = "MYPOOL1";
             // 
@@ -97,11 +103,11 @@
             this.tbLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLogs.Location = new System.Drawing.Point(12, 258);
+            this.tbLogs.Location = new System.Drawing.Point(12, 287);
             this.tbLogs.Multiline = true;
             this.tbLogs.Name = "tbLogs";
             this.tbLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbLogs.Size = new System.Drawing.Size(651, 207);
+            this.tbLogs.Size = new System.Drawing.Size(651, 196);
             this.tbLogs.TabIndex = 3;
             // 
             // labelPoolAlias
@@ -144,7 +150,7 @@
             // 
             this.tbHost.Location = new System.Drawing.Point(120, 26);
             this.tbHost.Name = "tbHost";
-            this.tbHost.Size = new System.Drawing.Size(144, 20);
+            this.tbHost.Size = new System.Drawing.Size(170, 20);
             this.tbHost.TabIndex = 9;
             this.tbHost.Text = "http://localhost:8126";
             // 
@@ -159,8 +165,9 @@
             "save"});
             this.cbMode.Location = new System.Drawing.Point(120, 99);
             this.cbMode.Name = "cbMode";
-            this.cbMode.Size = new System.Drawing.Size(144, 21);
+            this.cbMode.Size = new System.Drawing.Size(170, 21);
             this.cbMode.TabIndex = 11;
+            this.cbMode.SelectedIndexChanged += new System.EventHandler(this.cbMode_SelectedIndexChanged);
             // 
             // tbXmlFilename
             // 
@@ -343,7 +350,7 @@
             // 
             this.llClearConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.llClearConsole.AutoSize = true;
-            this.llClearConsole.Location = new System.Drawing.Point(15, 466);
+            this.llClearConsole.Location = new System.Drawing.Point(15, 484);
             this.llClearConsole.Name = "llClearConsole";
             this.llClearConsole.Size = new System.Drawing.Size(71, 13);
             this.llClearConsole.TabIndex = 31;
@@ -359,23 +366,67 @@
             "/adxwsvc/services/CAdxWebServiceXmlCC"});
             this.cbPath.Location = new System.Drawing.Point(120, 51);
             this.cbPath.Name = "cbPath";
-            this.cbPath.Size = new System.Drawing.Size(144, 21);
+            this.cbPath.Size = new System.Drawing.Size(170, 21);
             this.cbPath.TabIndex = 33;
             this.cbPath.Text = "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC";
             // 
             // labelPath
             // 
             this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(39, 54);
+            this.labelPath.Location = new System.Drawing.Point(74, 54);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(32, 13);
             this.labelPath.TabIndex = 32;
             this.labelPath.Text = "Path:";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 9);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 13);
+            this.label8.TabIndex = 35;
+            this.label8.Text = "BlocKey";
+            // 
+            // tbBlocKey
+            // 
+            this.tbBlocKey.Location = new System.Drawing.Point(61, 6);
+            this.tbBlocKey.Name = "tbBlocKey";
+            this.tbBlocKey.Size = new System.Drawing.Size(128, 20);
+            this.tbBlocKey.TabIndex = 34;
+            // 
+            // panelDeleteLines
+            // 
+            this.panelDeleteLines.Controls.Add(this.tbLineKeys);
+            this.panelDeleteLines.Controls.Add(this.label9);
+            this.panelDeleteLines.Controls.Add(this.tbBlocKey);
+            this.panelDeleteLines.Controls.Add(this.label8);
+            this.panelDeleteLines.Location = new System.Drawing.Point(-1, 252);
+            this.panelDeleteLines.Name = "panelDeleteLines";
+            this.panelDeleteLines.Size = new System.Drawing.Size(676, 29);
+            this.panelDeleteLines.TabIndex = 36;
+            // 
+            // tbLineKeys
+            // 
+            this.tbLineKeys.Location = new System.Drawing.Point(300, 4);
+            this.tbLineKeys.Name = "tbLineKeys";
+            this.tbLineKeys.Size = new System.Drawing.Size(128, 20);
+            this.tbLineKeys.TabIndex = 36;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(248, 7);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(50, 13);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "LineKeys";
+            // 
             // Workspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panelDeleteLines);
             this.Controls.Add(this.cbPath);
             this.Controls.Add(this.labelPath);
             this.Controls.Add(this.llClearConsole);
@@ -406,10 +457,12 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "Workspace";
-            this.Size = new System.Drawing.Size(675, 531);
+            this.Size = new System.Drawing.Size(675, 549);
             this.Load += new System.EventHandler(this.Workspace_Load);
             this.panelXmlFile.ResumeLayout(false);
             this.panelXmlFile.PerformLayout();
+            this.panelDeleteLines.ResumeLayout(false);
+            this.panelDeleteLines.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -449,5 +502,10 @@
         private System.Windows.Forms.LinkLabel llClearConsole;
         private System.Windows.Forms.ComboBox cbPath;
         private System.Windows.Forms.Label labelPath;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox tbBlocKey;
+        private System.Windows.Forms.Panel panelDeleteLines;
+        private System.Windows.Forms.TextBox tbLineKeys;
+        private System.Windows.Forms.Label label9;
     }
 }

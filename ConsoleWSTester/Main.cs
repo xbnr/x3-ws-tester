@@ -29,23 +29,36 @@ namespace ConsoleWSTester
                 tabControl1.Controls.Clear();
             }
 
-            // List<Workspace> wsList = new List<Workspace>();
             var dir = new DirectoryInfo(WorkspaceConfig.GetWorkspaceDirectory());
-            foreach (var item in dir.GetFiles().OrderBy(p => p.Name)
-                .Where(p => p.Name.StartsWith(WorkspaceConfig.GetWorkspaceShortName())))
+            var wSConfigFiles = dir.GetFiles().OrderBy(p => p.Name);
+            foreach (var item in wSConfigFiles.Where(p => p.Name.StartsWith(WorkspaceConfig.GetWorkspaceShortName())))
             {
                 TabPage tabPage = new TabPage(item.Name);
                 tabControl1.Controls.Add(tabPage);
+                Workspace ws = CreateWS(item);
+                tabPage.Controls.Add(ws);
+            }
 
-                Workspace ws = new Workspace();
-                ws.LoadConfigFromJSON( item.FullName );
-                ws.Location = new System.Drawing.Point(5, 5);
-                ws.Size = new System.Drawing.Size(670, 530);
-                ws.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+            if (wSConfigFiles.Count() == 0)
+            {
+                TabPage tabPage = new TabPage("New");
+                tabControl1.Controls.Add(tabPage);
+                Workspace ws = CreateWS(null);
                 tabPage.Controls.Add(ws);
             }
 
             tabControl1.Refresh();
+        }
+
+        private static Workspace CreateWS(FileInfo item)
+        {
+            Workspace ws = new Workspace();
+            if (item != null)
+                ws.LoadConfigFromJSON(item.FullName);
+            ws.Location = new System.Drawing.Point(5, 5);
+            ws.Size = new System.Drawing.Size(670, 530);
+            ws.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+            return ws;
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
