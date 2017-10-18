@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ConsoleWSTester
+namespace ConsoleTester
 {
     public partial class Workspace : UserControl
     {
@@ -28,7 +28,7 @@ namespace ConsoleWSTester
         internal void SaveWorkspace()
         {
             var config = GetConfigFromUI();
-            string wsDirectory = WorkspaceConfig.GetWorkspaceDirectory();
+            string wsDirectory = Program.GetWorkspaceDirectory();
             if (!Directory.Exists(wsDirectory))
                 Directory.CreateDirectory(wsDirectory);
 
@@ -79,6 +79,16 @@ namespace ConsoleWSTester
                 this.tbLineKeys.Text = string.Join(",", config.LineKeys);
             }
             SetTextFromSettings(config.XmlFilename, this.tbXmlFilename);
+            if (!string.IsNullOrEmpty(config.XmlFilename) && File.Exists(config.XmlFilename))
+            {
+                ShowFileText(config.XmlFilename);
+            }
+        }
+
+        private void ShowFileText(string xmlFile)
+        {
+            this.tbXmlObject.Text = File.ReadAllText(xmlFile);
+            this.tbXmlObject.ReadOnly = true;
         }
 
         private WorkspaceConfig GetConfigFromUI()
@@ -153,7 +163,13 @@ namespace ConsoleWSTester
                 case WebServiceCall.OperationMode.Read:
                     ws.Read();
                     break;
+                case WebServiceCall.OperationMode.GetDescription:
+                    ws.GetDescription();
+                    break;
                 case WebServiceCall.OperationMode.Modify:
+                    ws.Modify(tbXmlFilename.Text);
+                    break;
+                case WebServiceCall.OperationMode.DeleteLines:
                     ws.Modify(tbXmlFilename.Text);
                     break;
                 case WebServiceCall.OperationMode.Save:
@@ -176,6 +192,7 @@ namespace ConsoleWSTester
             var result = folder.ShowDialog();
 
             tbXmlFilename.Text = folder.FileName;
+            ShowFileText(folder.FileName);
         }
 
         private void Workspace_Load(object sender, EventArgs e)

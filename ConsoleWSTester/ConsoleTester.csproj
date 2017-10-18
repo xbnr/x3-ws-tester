@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{64258A38-3C98-474D-92DF-C8DB90323371}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ConsoleWSTester</RootNamespace>
-    <AssemblyName>ConsoleWSTester</AssemblyName>
+    <RootNamespace>ConsoleTester</RootNamespace>
+    <AssemblyName>ConsoleTester</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,7 +48,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ConsoleWSTester.Program</StartupObject>
+    <StartupObject>ConsoleTester.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>L_SAGE_Bright_Green.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -68,6 +71,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogAnalyze.cs" />
+    <Compile Include="LogAnalyzer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogAnalyzer.Designer.cs">
+      <DependentUpon>LogAnalyzer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rule.cs" />
+    <Compile Include="WsTester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WsTester.Designer.cs">
+      <DependentUpon>WsTester.cs</DependentUpon>
+    </Compile>
     <Compile Include="WorkspaceConfig.cs" />
     <Compile Include="Connected Services\CAWebService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -100,7 +117,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Connected Services\CAWebService\CAdxWebServiceXmlCC11.wsdl" />
-    <None Include="Connected Services\CAWebService\ConsoleWSTester.CAWebService.CAdxResultXml.datasource">
+    <None Include="Connected Services\CAWebService\ConsoleTester.CAWebService.CAdxResultXml.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -128,6 +145,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="LogAnalyzer.resx">
+      <DependentUpon>LogAnalyzer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WsTester.resx">
+      <DependentUpon>WsTester.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Workspace.resx">
       <DependentUpon>Workspace.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,6 +169,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="L_SAGE_Bright_Green.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

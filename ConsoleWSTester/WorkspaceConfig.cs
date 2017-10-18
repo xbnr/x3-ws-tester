@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.IO;
 using Newtonsoft.Json.Converters;
 
-namespace ConsoleWSTester
+namespace ConsoleTester
 {
     [JsonObject(IsReference = false)]
     public class WorkspaceConfig
@@ -70,13 +70,10 @@ namespace ConsoleWSTester
 
         internal static string GetWorkspaceFilename()
         {
-            return System.IO.Path.Combine(WorkspaceConfig.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
+            return System.IO.Path.Combine(Program.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
 
-        internal static string GetWorkspaceDirectory()
-        {
-            return System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Sage", "X3WsTester");
-        }
+        
 
     }
 }

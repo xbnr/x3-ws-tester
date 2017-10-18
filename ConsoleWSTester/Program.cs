@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
-namespace ConsoleWSTester
+namespace ConsoleTester
 {
     class Program
     {
@@ -19,6 +21,26 @@ namespace ConsoleWSTester
                 Console.WriteLine(e.StackTrace);
             }
         }
-        
+
+        internal static string GetWorkspaceDirectory()
+        {
+            return System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Sage", "X3WsTester");
+        }
+
+        internal static string GetAppliVersion(bool applicationNameOrVersion)
+        {
+            Assembly ass = System.Reflection.Assembly.GetEntryAssembly();
+            if (ass == null)
+                ass = Assembly.GetExecutingAssembly();
+            AssemblyName assn = ass.GetName();
+            if (applicationNameOrVersion)
+            {
+                object[] customAttributes = ass.GetCustomAttributes(false);
+                AssemblyProductAttribute product = customAttributes.Where(p => p.GetType() == typeof(AssemblyProductAttribute)).SingleOrDefault() as AssemblyProductAttribute;
+                return product == null ? assn.Name : product.Product;
+            }
+
+            return assn.Version.ToString();
+        }
     }
 }

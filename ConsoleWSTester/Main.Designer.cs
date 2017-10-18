@@ -1,4 +1,4 @@
-﻿namespace ConsoleWSTester
+﻿namespace ConsoleTester
 {
     partial class Main
     {
@@ -28,63 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.workspace1 = new ConsoleWSTester.Workspace();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.btSOAPTester = new System.Windows.Forms.Button();
+            this.btLogAnalyzer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // workspace1
+            // btSOAPTester
             // 
-            this.workspace1.Location = new System.Drawing.Point(0, 6);
-            this.workspace1.Name = "workspace1";
-            this.workspace1.Size = new System.Drawing.Size(662, 520);
-            this.workspace1.TabIndex = 25;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.btSOAPTester.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(1, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(709, 601);
-            this.tabControl1.TabIndex = 26;
+            this.btSOAPTester.Location = new System.Drawing.Point(32, 96);
+            this.btSOAPTester.Name = "btSOAPTester";
+            this.btSOAPTester.Size = new System.Drawing.Size(526, 45);
+            this.btSOAPTester.TabIndex = 0;
+            this.btSOAPTester.Text = "SOAP WebService";
+            this.btSOAPTester.UseVisualStyleBackColor = true;
+            this.btSOAPTester.Click += new System.EventHandler(this.btSOAPTester_Click);
             // 
-            // tabPage1
+            // btLogAnalyzer
             // 
-            this.tabPage1.Controls.Add(this.workspace1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(701, 575);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.btLogAnalyzer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btLogAnalyzer.Location = new System.Drawing.Point(32, 178);
+            this.btLogAnalyzer.Name = "btLogAnalyzer";
+            this.btLogAnalyzer.Size = new System.Drawing.Size(526, 45);
+            this.btLogAnalyzer.TabIndex = 1;
+            this.btLogAnalyzer.Text = "Log analyzer";
+            this.btLogAnalyzer.UseVisualStyleBackColor = true;
+            this.btLogAnalyzer.Click += new System.EventHandler(this.btLogAnalyzer_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 612);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(584, 322);
+            this.Controls.Add(this.btLogAnalyzer);
+            this.Controls.Add(this.btSOAPTester);
             this.Name = "Main";
-            this.Text = "X3 WebService";
+            this.Text = "X3  Maintenance";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Workspace workspace1;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button btSOAPTester;
+        private System.Windows.Forms.Button btLogAnalyzer;
     }
 }

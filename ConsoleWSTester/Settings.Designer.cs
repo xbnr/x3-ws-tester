@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ConsoleWSTester {
+namespace ConsoleTester {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

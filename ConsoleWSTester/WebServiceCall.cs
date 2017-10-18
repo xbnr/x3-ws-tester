@@ -1,16 +1,13 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Text;
 
-namespace ConsoleWSTester
+namespace ConsoleTester
 {
     public class WebServiceCall
     {
-        // private const string CAdxWebServiceXmlCC = "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC"; // ?wsdl";
         private ILogger logger;
         private WorkspaceConfig conf;
 
@@ -42,11 +39,18 @@ namespace ConsoleWSTester
             this.conf.XmlObject = File.ReadAllText(xmlFileName);
             LaunchWSCall(OperationMode.Modify);
         }
+        public void DeleteLines(string xmlFileName)
+        {
+            LaunchWSCall(OperationMode.DeleteLines);
+        }
         public void Read()
         {
             LaunchWSCall(OperationMode.Read);
         }
-
+        public void GetDescription()
+        {
+            LaunchWSCall(OperationMode.GetDescription);
+        }
         public void Save(string xmlFileName)
         {
             conf.XmlObject = File.ReadAllText(xmlFileName);
@@ -111,6 +115,9 @@ namespace ConsoleWSTester
                             break;
                         case OperationMode.Save:
                             result = caWebService.save(context, conf.PublicName, conf.XmlObject);
+                            break;
+                        case OperationMode.GetDescription:
+                            result = caWebService.getDescription(context, conf.PublicName);
                             break;
                         case OperationMode.DeleteLines:
                             result = caWebService.deleteLines(context, conf.PublicName, conf.ObjectKeys, conf.BlocKey, conf.LineKeys);
