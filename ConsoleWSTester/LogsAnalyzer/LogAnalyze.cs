@@ -52,44 +52,56 @@ namespace ConsoleTester.LogsAnalyzer
             this.logger = logger;
         }
 
-        internal Rules LoadRules()
+        private Rules LoadRules()
         {
-            Rules config = JsonConvert.DeserializeObject<Rules>(File.ReadAllText(GetRulesFilename()));
+            string fileName = GetRulesFilename();
+            if (!File.Exists(fileName))
+            {
+                return null;
+            }
+            return JsonConvert.DeserializeObject<Rules>(File.ReadAllText(fileName));
+       }
 
-            return config;
-            //var rules = new Rules();
-            //rules.RulesList = new List<Rule>();
-            //rules.IgnoreCase = true;
+        private Rules CreateConfig()
+        {
+            var rules = new Rules();
+            rules.RulesList = new List<Rule>();
 
-            //var rule0 = new Rule();
-            //rule0.Keywords = new List<string>();
-            //rule0.Keywords.Add("Error");
-            //rule0.Name = rule0.GetKey();
-            //rule0.MatchCase = true;
-            //rule0.MatchWholeWord = true;
-            //rule0.Results = new List<Result>();
-            //rules.RulesList.Add(rule0);
+            var rule0 = new Rule();
+            rule0.Keywords = new List<string>();
+            rule0.Keywords.Add("Error");
+            rule0.Name = rule0.GetKey();
+            rule0.MatchCase = true;
+            rule0.MatchWholeWord = true;
+            rule0.Results = new List<Result>();
+            rules.RulesList.Add(rule0);
 
-            //var rule1 = new Rule();
-            //rule1.Keywords = new List<string>();
-            //rule1.Keywords.Add("SYRACUSE REQUEST");
-            //rule1.Keywords.Add("trackingId={guid}");
-            //rule1.ChildKeywords = new List<string>();
-            //rule1.ChildKeywords.Add("SYRACUSE RESPONSE");
-            //rule1.ChildKeywords.Add("trackingId={guid}");
-            //rule1.Options = "trackingId={guid}";
-            //rule1.Name = rule1.GetKey();
-            //rule1.MatchCase = true;
-            //rule1.MatchWholeWord = true;
-            //rule1.Results = new List<Result>();
-            //rules.RulesList.Add(rule1);
+            var rule1 = new Rule();
+            rule1.Keywords = new List<string>();
+            rule1.Keywords.Add("SYRACUSE REQUEST");
+            rule1.Keywords.Add("trackingId={guid}");
+            rule1.ChildKeywords = new List<string>();
+            rule1.ChildKeywords.Add("SYRACUSE RESPONSE");
+            rule1.ChildKeywords.Add("trackingId={guid}");
+            rule1.Name = rule1.GetKey();
+            rule1.MatchCase = true;
+            rule1.MatchWholeWord = true;
+            rule1.Results = new List<Result>();
+            rules.RulesList.Add(rule1);
 
-            //return rules;
+            return rules;
         }
 
         internal void LaunchAnalyze()
         {
             this.rules = LoadRules();
+            if (this.rules == null )
+            {
+                string destination = GetRulesFilename();
+                this.logger.Log($"Create ConfigFile: {destination}" );
+                this.rules = CreateConfig();
+                SaveResults(this.rules, new FileInfo(destination));
+            }
             var list = GetAllFiles(this.folder, this.filter, this.recurseSubFolder);
             this.logger.Log($"Start analyze: {list.Count()} files in {this.folder}. Filter: {this.filter}");
             foreach (var fileName in list)
@@ -104,6 +116,10 @@ namespace ConsoleTester.LogsAnalyzer
         private FileInfo[] GetAllFiles(string folder, string searchPattern, bool recurseDir)
         {
             DirectoryInfo dir = new DirectoryInfo(folder);
+            if (! dir.Exists )
+            {
+                throw new IOException($"Directory {dir.FullName} doesnt exist");
+            }
             return dir.GetFiles(searchPattern, recurseDir ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
         }
 
@@ -144,7 +160,7 @@ namespace ConsoleTester.LogsAnalyzer
 
             int nbResults = 0;
             string suffix = "";
-            foreach (var rule in rules.RulesList)
+            foreach (var rule in rules?.RulesList)
             {
                 suffix += $"{rule.Name}: {rule.Results.Count} results  ";
                 nbResults += rule.Results.Count;
