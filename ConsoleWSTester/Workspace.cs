@@ -4,8 +4,10 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using static System.Environment;
 
 namespace ConsoleTester
 {
@@ -20,7 +22,7 @@ namespace ConsoleTester
         private void FillComboBox()
         {
             cbMode.DataSource = Enum.GetNames(typeof(WebServiceCall.OperationMode));
-            cbListSize.DataSource = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            cbListSize.DataSource = Enumerable.Range(0, 100).ToArray(); // new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         }
 
         private string filename;
@@ -188,7 +190,7 @@ namespace ConsoleTester
         {
             var folder = new OpenFileDialog();
             folder.Multiselect = false;
-            folder.InitialDirectory = @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
+            folder.InitialDirectory = Environment.GetFolderPath(SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
             var result = folder.ShowDialog();
 
             tbXmlFilename.Text = folder.FileName;

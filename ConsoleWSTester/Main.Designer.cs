@@ -30,6 +30,7 @@
         {
             this.btSOAPTester = new System.Windows.Forms.Button();
             this.btLogAnalyzer = new System.Windows.Forms.Button();
+            this.llConfigFolder = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btSOAPTester
@@ -56,11 +57,23 @@
             this.btLogAnalyzer.UseVisualStyleBackColor = true;
             this.btLogAnalyzer.Click += new System.EventHandler(this.btLogAnalyzer_Click);
             // 
+            // llConfigFolder
+            // 
+            this.llConfigFolder.AutoSize = true;
+            this.llConfigFolder.Location = new System.Drawing.Point(32, 297);
+            this.llConfigFolder.Name = "llConfigFolder";
+            this.llConfigFolder.Size = new System.Drawing.Size(94, 13);
+            this.llConfigFolder.TabIndex = 2;
+            this.llConfigFolder.TabStop = true;
+            this.llConfigFolder.Text = "Open config folder";
+            this.llConfigFolder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llConfigFolder_LinkClicked);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 322);
+            this.Controls.Add(this.llConfigFolder);
             this.Controls.Add(this.btLogAnalyzer);
             this.Controls.Add(this.btSOAPTester);
             this.Name = "Main";
@@ -68,6 +81,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -75,5 +89,6 @@
 
         private System.Windows.Forms.Button btSOAPTester;
         private System.Windows.Forms.Button btLogAnalyzer;
+        private System.Windows.Forms.LinkLabel llConfigFolder;
     }
 }

@@ -30,10 +30,15 @@
         {
             this.tbLogs = new System.Windows.Forms.TextBox();
             this.panelXmlFile = new System.Windows.Forms.Panel();
+            this.tbFilter = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbRecurseDir = new System.Windows.Forms.CheckBox();
             this.btBrowseFile = new System.Windows.Forms.Button();
             this.tbFolder = new System.Windows.Forms.TextBox();
             this.lbFolder = new System.Windows.Forms.Label();
             this.btAnalyze = new System.Windows.Forms.Button();
+            this.llOpenFolder = new System.Windows.Forms.LinkLabel();
+            this.llClearLogs = new System.Windows.Forms.LinkLabel();
             this.panelXmlFile.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,29 +47,65 @@
             this.tbLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLogs.Location = new System.Drawing.Point(12, 90);
+            this.tbLogs.Location = new System.Drawing.Point(12, 110);
             this.tbLogs.Multiline = true;
             this.tbLogs.Name = "tbLogs";
+            this.tbLogs.ReadOnly = true;
             this.tbLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbLogs.Size = new System.Drawing.Size(674, 214);
+            this.tbLogs.Size = new System.Drawing.Size(794, 241);
             this.tbLogs.TabIndex = 4;
             // 
             // panelXmlFile
             // 
             this.panelXmlFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelXmlFile.Controls.Add(this.tbFilter);
+            this.panelXmlFile.Controls.Add(this.label1);
+            this.panelXmlFile.Controls.Add(this.cbRecurseDir);
             this.panelXmlFile.Controls.Add(this.btBrowseFile);
             this.panelXmlFile.Controls.Add(this.tbFolder);
             this.panelXmlFile.Controls.Add(this.lbFolder);
             this.panelXmlFile.Location = new System.Drawing.Point(12, 12);
             this.panelXmlFile.Name = "panelXmlFile";
-            this.panelXmlFile.Size = new System.Drawing.Size(674, 33);
+            this.panelXmlFile.Size = new System.Drawing.Size(794, 53);
             this.panelXmlFile.TabIndex = 25;
+            // 
+            // tbFilter
+            // 
+            this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbFilter.Location = new System.Drawing.Point(61, 31);
+            this.tbFilter.Name = "tbFilter";
+            this.tbFilter.Size = new System.Drawing.Size(310, 20);
+            this.tbFilter.TabIndex = 18;
+            this.tbFilter.Text = "*.log";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Filter:";
+            // 
+            // cbRecurseDir
+            // 
+            this.cbRecurseDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbRecurseDir.AutoSize = true;
+            this.cbRecurseDir.Checked = true;
+            this.cbRecurseDir.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbRecurseDir.Location = new System.Drawing.Point(655, 33);
+            this.cbRecurseDir.Name = "cbRecurseDir";
+            this.cbRecurseDir.Size = new System.Drawing.Size(91, 17);
+            this.cbRecurseDir.TabIndex = 17;
+            this.cbRecurseDir.Text = "All sub-folders";
+            this.cbRecurseDir.UseVisualStyleBackColor = true;
             // 
             // btBrowseFile
             // 
             this.btBrowseFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBrowseFile.Location = new System.Drawing.Point(632, 7);
+            this.btBrowseFile.Location = new System.Drawing.Point(752, 7);
             this.btBrowseFile.Name = "btBrowseFile";
             this.btBrowseFile.Size = new System.Drawing.Size(39, 23);
             this.btBrowseFile.TabIndex = 16;
@@ -78,7 +119,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbFolder.Location = new System.Drawing.Point(61, 7);
             this.tbFolder.Name = "tbFolder";
-            this.tbFolder.Size = new System.Drawing.Size(565, 20);
+            this.tbFolder.Size = new System.Drawing.Size(685, 20);
             this.tbFolder.TabIndex = 12;
             this.tbFolder.Text = "C:\\Users\\frdepo\\OneDrive - Sage Software, Inc\\X3\\X3-37916-Restart of Syracuse ran" +
     "domly";
@@ -94,20 +135,47 @@
             // 
             // btAnalyze
             // 
-            this.btAnalyze.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAnalyze.Location = new System.Drawing.Point(12, 51);
+            this.btAnalyze.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAnalyze.Location = new System.Drawing.Point(12, 71);
             this.btAnalyze.Name = "btAnalyze";
-            this.btAnalyze.Size = new System.Drawing.Size(251, 33);
+            this.btAnalyze.Size = new System.Drawing.Size(371, 33);
             this.btAnalyze.TabIndex = 17;
             this.btAnalyze.Text = "Analyze";
             this.btAnalyze.UseVisualStyleBackColor = true;
             this.btAnalyze.Click += new System.EventHandler(this.btAnalyze_Click);
             // 
+            // llOpenFolder
+            // 
+            this.llOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.llOpenFolder.AutoSize = true;
+            this.llOpenFolder.Location = new System.Drawing.Point(12, 354);
+            this.llOpenFolder.Name = "llOpenFolder";
+            this.llOpenFolder.Size = new System.Drawing.Size(90, 13);
+            this.llOpenFolder.TabIndex = 26;
+            this.llOpenFolder.TabStop = true;
+            this.llOpenFolder.Text = "Open result folder";
+            this.llOpenFolder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llOpenFolder_LinkClicked);
+            // 
+            // llClearLogs
+            // 
+            this.llClearLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.llClearLogs.AutoSize = true;
+            this.llClearLogs.Location = new System.Drawing.Point(136, 354);
+            this.llClearLogs.Name = "llClearLogs";
+            this.llClearLogs.Size = new System.Drawing.Size(53, 13);
+            this.llClearLogs.TabIndex = 27;
+            this.llClearLogs.TabStop = true;
+            this.llClearLogs.Text = "Clear logs";
+            this.llClearLogs.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llClearLogs_LinkClicked);
+            // 
             // LogAnalyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 315);
+            this.ClientSize = new System.Drawing.Size(818, 374);
+            this.Controls.Add(this.llClearLogs);
+            this.Controls.Add(this.llOpenFolder);
             this.Controls.Add(this.btAnalyze);
             this.Controls.Add(this.panelXmlFile);
             this.Controls.Add(this.tbLogs);
@@ -128,5 +196,10 @@
         private System.Windows.Forms.TextBox tbFolder;
         private System.Windows.Forms.Label lbFolder;
         private System.Windows.Forms.Button btAnalyze;
+        private System.Windows.Forms.LinkLabel llOpenFolder;
+        private System.Windows.Forms.CheckBox cbRecurseDir;
+        private System.Windows.Forms.TextBox tbFilter;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel llClearLogs;
     }
 }

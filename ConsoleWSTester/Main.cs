@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -34,6 +35,11 @@ namespace ConsoleTester
         {
             var logAnalyzer = new LogAnalyzer();
             logAnalyzer.Show(this);
+        }
+
+        private void llConfigFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("explorer.exe", Program.GetWorkspaceDirectory());
         }
     }
 }

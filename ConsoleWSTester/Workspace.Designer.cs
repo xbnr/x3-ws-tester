@@ -66,19 +66,19 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPageCredentials = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.tbXmlObject = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tabPageCredentials = new System.Windows.Forms.TabPage();
             this.panelXmlFile.SuspendLayout();
             this.panelDeleteLines.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPageCredentials.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tabPageCredentials.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -180,8 +180,6 @@
             this.tbXmlFilename.Name = "tbXmlFilename";
             this.tbXmlFilename.Size = new System.Drawing.Size(537, 20);
             this.tbXmlFilename.TabIndex = 12;
-            this.tbXmlFilename.Text = "C:\\Users\\frdepo\\OneDrive - Sage Software, Inc\\X3\\X3-57422-SOAP Web Services - del" +
-    "eting lines on orders and quotes\\TEST1FROMD3.txt";
             // 
             // label2
             // 
@@ -465,20 +463,6 @@
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPageCredentials
-            // 
-            this.tabPageCredentials.Controls.Add(this.labelLogin);
-            this.tabPageCredentials.Controls.Add(this.tbLogin);
-            this.tabPageCredentials.Controls.Add(this.tbPassword);
-            this.tabPageCredentials.Controls.Add(this.labelPassword);
-            this.tabPageCredentials.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCredentials.Name = "tabPageCredentials";
-            this.tabPageCredentials.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCredentials.Size = new System.Drawing.Size(652, 239);
-            this.tabPageCredentials.TabIndex = 1;
-            this.tabPageCredentials.Text = "Credentials";
-            this.tabPageCredentials.UseVisualStyleBackColor = true;
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.tbXmlObject);
@@ -490,17 +474,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Data: XmlObject";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.tbKey);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.tbValue);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Location = new System.Drawing.Point(3, 80);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(653, 34);
-            this.panel1.TabIndex = 37;
             // 
             // tbXmlObject
             // 
@@ -526,6 +499,31 @@
             this.tabPage4.Text = "Params";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tbKey);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.tbValue);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Location = new System.Drawing.Point(3, 80);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(653, 34);
+            this.panel1.TabIndex = 37;
+            // 
+            // tabPageCredentials
+            // 
+            this.tabPageCredentials.Controls.Add(this.labelLogin);
+            this.tabPageCredentials.Controls.Add(this.tbLogin);
+            this.tabPageCredentials.Controls.Add(this.tbPassword);
+            this.tabPageCredentials.Controls.Add(this.labelPassword);
+            this.tabPageCredentials.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCredentials.Name = "tabPageCredentials";
+            this.tabPageCredentials.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCredentials.Size = new System.Drawing.Size(652, 239);
+            this.tabPageCredentials.TabIndex = 1;
+            this.tabPageCredentials.Text = "Credentials";
+            this.tabPageCredentials.UseVisualStyleBackColor = true;
+            // 
             // Workspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -544,13 +542,13 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPageCredentials.ResumeLayout(false);
-            this.tabPageCredentials.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
+            this.tabPageCredentials.ResumeLayout(false);
+            this.tabPageCredentials.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

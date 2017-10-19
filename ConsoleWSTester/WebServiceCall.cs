@@ -94,6 +94,16 @@ namespace ConsoleTester
                         + $"Operation mode: {mode}  "
                         + $"Pool: {conf.PoolAlias}   PublicName: {conf.PublicName}   "
                         + $"RequestConfiguration: { conf.RequestConfiguration }  ... ");
+                    if (mode == OperationMode.Read || mode == OperationMode.Modify)
+                    {
+                        string keysStrings = $"ObjectKeys: ";
+                        foreach (var item in conf.ObjectKeys)
+                        {
+                            keysStrings += $"{item.key}: {item.value}, "; 
+                        }
+                        logger.Log(keysStrings);
+
+                    }
                     if (mode == OperationMode.Modify && !string.IsNullOrEmpty(this.conf.XmlFilename))
                     {
                         logger.Log($"Read filename: {Path.GetFileName(this.conf.XmlFilename)}");
