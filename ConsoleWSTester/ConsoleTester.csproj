@@ -71,36 +71,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogAnalyze.cs" />
-    <Compile Include="LogAnalyzer.cs">
+    <Compile Include="LogsAnalyzer\LogAnalyze.cs" />
+    <Compile Include="LogsAnalyzer\Result.cs" />
+    <Compile Include="LogsAnalyzer\Rules.cs" />
+    <Compile Include="UI\LogAnalyzer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogAnalyzer.Designer.cs">
+    <Compile Include="UI\LogAnalyzer.Designer.cs">
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rule.cs" />
-    <Compile Include="WsTester.cs">
+    <Compile Include="LogsAnalyzer\Rule.cs" />
+    <Compile Include="UI\WsTester.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WsTester.Designer.cs">
+    <Compile Include="UI\WsTester.Designer.cs">
       <DependentUpon>WsTester.cs</DependentUpon>
     </Compile>
-    <Compile Include="WorkspaceConfig.cs" />
+    <Compile Include="WebService\WorkspaceConfig.cs" />
     <Compile Include="Connected Services\CAWebService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Workspace.cs">
+    <Compile Include="UI\WsWorkspace.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Workspace.Designer.cs">
-      <DependentUpon>Workspace.cs</DependentUpon>
+    <Compile Include="UI\WsWorkspace.Designer.cs">
+      <DependentUpon>WsWorkspace.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs">
+    <Compile Include="UI\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
+    <Compile Include="UI\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="ILogger.cs" />
@@ -111,7 +113,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="WebServiceCall.cs" />
+    <Compile Include="WebService\WebServiceCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -145,16 +147,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="LogAnalyzer.resx">
+    <EmbeddedResource Include="UI\LogAnalyzer.resx">
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WsTester.resx">
+    <EmbeddedResource Include="UI\WsTester.resx">
       <DependentUpon>WsTester.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Workspace.resx">
-      <DependentUpon>Workspace.cs</DependentUpon>
+    <EmbeddedResource Include="UI\WsWorkspace.resx">
+      <DependentUpon>WsWorkspace.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="UI\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

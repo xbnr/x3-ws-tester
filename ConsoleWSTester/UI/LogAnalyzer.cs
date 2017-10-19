@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleTester.LogsAnalyzer;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 
