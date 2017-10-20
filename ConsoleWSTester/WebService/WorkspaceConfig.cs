@@ -9,6 +9,8 @@ namespace ConsoleTester
     public class WorkspaceConfig
     {
         private const int MaxListSize = 4;
+        public const string WsConfig = "WorkspaceConfig";
+
 
         [JsonProperty]
         public string HostUrl { get; set; }
@@ -57,23 +59,19 @@ namespace ConsoleTester
         [JsonProperty]
         public string Password { get; set; }
 
+        [JsonProperty]
+        public string Name { get; set; }
 
-        internal static string GetWorkspaceShortName()
-        {
-            return "WorkspaceConfig";
-        }
 
         internal static string GetWorkspaceShortFilename()
         {
-            return $"{GetWorkspaceShortName()}.json";
+            return $"{WsConfig}.json";
         }
 
         internal static string GetWorkspaceFilename()
         {
             return System.IO.Path.Combine(Program.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
-
-        
 
     }
 }

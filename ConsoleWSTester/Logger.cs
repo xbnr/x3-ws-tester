@@ -22,8 +22,14 @@ namespace ConsoleTester
             Log(message, false);
         }
 
-        public void Log(string message, bool error)
+        private List<string> logs = new List<string>();
+
+        protected List<string> Logs => logs;
+
+        public virtual void Log(string message, bool error)
         {
+            logs.Add(message);
+
             int argbColorTextBox = 0;
             if (error)
             {

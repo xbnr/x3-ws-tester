@@ -39,6 +39,7 @@
             this.btAnalyze = new System.Windows.Forms.Button();
             this.llOpenFolder = new System.Windows.Forms.LinkLabel();
             this.llClearLogs = new System.Windows.Forms.LinkLabel();
+            this.llOpenConfigurationFile = new System.Windows.Forms.LinkLabel();
             this.panelXmlFile.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +60,7 @@
             // 
             this.panelXmlFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelXmlFile.Controls.Add(this.llOpenConfigurationFile);
             this.panelXmlFile.Controls.Add(this.tbFilter);
             this.panelXmlFile.Controls.Add(this.label1);
             this.panelXmlFile.Controls.Add(this.cbRecurseDir);
@@ -72,8 +74,6 @@
             // 
             // tbFilter
             // 
-            this.tbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbFilter.Location = new System.Drawing.Point(61, 31);
             this.tbFilter.Name = "tbFilter";
             this.tbFilter.Size = new System.Drawing.Size(310, 20);
@@ -169,6 +169,18 @@
             this.llClearLogs.Text = "Clear logs";
             this.llClearLogs.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llClearLogs_LinkClicked);
             // 
+            // llOpenConfigurationFile
+            // 
+            this.llOpenConfigurationFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.llOpenConfigurationFile.AutoSize = true;
+            this.llOpenConfigurationFile.Location = new System.Drawing.Point(470, 34);
+            this.llOpenConfigurationFile.Name = "llOpenConfigurationFile";
+            this.llOpenConfigurationFile.Size = new System.Drawing.Size(113, 13);
+            this.llOpenConfigurationFile.TabIndex = 28;
+            this.llOpenConfigurationFile.TabStop = true;
+            this.llOpenConfigurationFile.Text = "Open configuration file";
+            this.llOpenConfigurationFile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llOpenConfigurationFile_LinkClicked);
+            // 
             // LogAnalyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -181,6 +193,8 @@
             this.Controls.Add(this.tbLogs);
             this.Name = "LogAnalyzer";
             this.Text = "LogAnalyzer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogAnalyzer_FormClosing);
+            this.Load += new System.EventHandler(this.LogAnalyzer_Load);
             this.panelXmlFile.ResumeLayout(false);
             this.panelXmlFile.PerformLayout();
             this.ResumeLayout(false);
@@ -201,5 +215,6 @@
         private System.Windows.Forms.TextBox tbFilter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel llClearLogs;
+        private System.Windows.Forms.LinkLabel llOpenConfigurationFile;
     }
 }

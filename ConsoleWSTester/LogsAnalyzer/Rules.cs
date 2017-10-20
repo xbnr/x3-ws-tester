@@ -18,5 +18,16 @@ namespace ConsoleTester.LogsAnalyzer
 
         [JsonProperty]
         public string File { get; set; }
-    }
+
+        public int CountResults()
+        {
+            int nbResults = 0;
+            foreach (var rule in this.RulesList)
+            {
+                nbResults += rule.Results == null ? 0 : rule.Results.Count;
+            }
+            return nbResults;
+        }
+
+}
 }

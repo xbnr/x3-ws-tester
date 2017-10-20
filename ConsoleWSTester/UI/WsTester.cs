@@ -35,7 +35,7 @@ namespace ConsoleTester
 
             var dir = new DirectoryInfo(Program.GetWorkspaceDirectory());
             var wSConfigFiles = dir.GetFiles().OrderBy(p => p.Name);
-            foreach (var item in wSConfigFiles.Where(p => p.Name.StartsWith(WorkspaceConfig.GetWorkspaceShortName())))
+            foreach (var item in wSConfigFiles.Where(p => p.Name.StartsWith(WorkspaceConfig.WsConfig)))
             {
                 TabPage tabPage = new TabPage(item.Name);
                 tabControl1.Controls.Add(tabPage);

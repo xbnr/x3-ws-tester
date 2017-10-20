@@ -22,7 +22,7 @@ namespace ConsoleTester
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
+            Settings.Default.Save();
         }
 
         private void btSOAPTester_Click(object sender, EventArgs e)

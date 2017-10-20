@@ -68,17 +68,21 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tbXmlObject = new System.Windows.Forms.TextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPageParams = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabPageCredentials = new System.Windows.Forms.TabPage();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.ColumnKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelXmlFile.SuspendLayout();
             this.panelDeleteLines.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tabPageParams.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPageCredentials.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -429,7 +433,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPageParams);
             this.tabControl1.Controls.Add(this.tabPageCredentials);
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
@@ -487,27 +491,28 @@
             this.tbXmlObject.Size = new System.Drawing.Size(641, 174);
             this.tbXmlObject.TabIndex = 38;
             // 
-            // tabPage4
+            // tabPageParams
             // 
-            this.tabPage4.Controls.Add(this.panel1);
-            this.tabPage4.Controls.Add(this.panelDeleteLines);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(652, 239);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Params";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPageParams.Controls.Add(this.panel1);
+            this.tabPageParams.Controls.Add(this.panelDeleteLines);
+            this.tabPageParams.Location = new System.Drawing.Point(4, 22);
+            this.tabPageParams.Name = "tabPageParams";
+            this.tabPageParams.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageParams.Size = new System.Drawing.Size(652, 239);
+            this.tabPageParams.TabIndex = 3;
+            this.tabPageParams.Text = "Parameters";
+            this.tabPageParams.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.dataGridView2);
             this.panel1.Controls.Add(this.tbKey);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.tbValue);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Location = new System.Drawing.Point(3, 80);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(653, 34);
+            this.panel1.Size = new System.Drawing.Size(653, 156);
             this.panel1.TabIndex = 37;
             // 
             // tabPageCredentials
@@ -523,6 +528,27 @@
             this.tabPageCredentials.TabIndex = 1;
             this.tabPageCredentials.Text = "Credentials";
             this.tabPageCredentials.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnKey,
+            this.ColumnValue});
+            this.dataGridView2.Location = new System.Drawing.Point(62, 33);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(380, 113);
+            this.dataGridView2.TabIndex = 39;
+            // 
+            // ColumnKey
+            // 
+            this.ColumnKey.HeaderText = "Key";
+            this.ColumnKey.Name = "ColumnKey";
+            // 
+            // ColumnValue
+            // 
+            this.ColumnValue.HeaderText = "Value";
+            this.ColumnValue.Name = "ColumnValue";
             // 
             // Workspace
             // 
@@ -544,11 +570,12 @@
             this.tabPage1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
+            this.tabPageParams.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPageCredentials.ResumeLayout(false);
             this.tabPageCredentials.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -598,6 +625,9 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox tbXmlObject;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPageParams;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnKey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
     }
 }

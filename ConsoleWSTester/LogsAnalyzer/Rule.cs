@@ -1,25 +1,24 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleTester.LogsAnalyzer
 {
-   
 
     [JsonObject(IsReference = false)]
     public class Rule
     {
+        public Rule()
+        {
+            this.Keywords = new List<string>();
+            this.ChildKeywords = new List<string>();
+            this.Results = new List<Result>();
+        }
+
         [JsonProperty]
         public List<string> Keywords { get; set; }
 
         [JsonProperty]
-        public List<string> ChildKeywords { get; set; }
-
-        [JsonProperty]
-        public string Options { get; set; }
+        public List<string> ChildKeywords { get; set; }        
 
         [JsonProperty]
         public List<Result> Results { get; set; }
@@ -27,7 +26,7 @@ namespace ConsoleTester.LogsAnalyzer
         [JsonProperty]
         public string Name { get; set; }
 
-        public string GetKey()
+        public string ProcessName()
         {
             return string.Join("-", Keywords.ToArray());
         }
@@ -37,6 +36,10 @@ namespace ConsoleTester.LogsAnalyzer
 
         [JsonProperty]
         public bool MatchWholeWord { get; set; }
+
+        [JsonProperty]
+        public bool Disabled { get; set; }
+
 
     }
 }

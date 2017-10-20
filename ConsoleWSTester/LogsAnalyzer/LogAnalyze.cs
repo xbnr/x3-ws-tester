@@ -29,9 +29,14 @@ namespace ConsoleTester.LogsAnalyzer
 
         internal static string GetResultRulesFilename(FileInfo file)
         {
-            string subdirectory = Path.Combine(Program.GetWorkspaceDirectory(), DateTime.Now.ToString("yyyyMMddHHmm"));
+            string subdirectory = GetResultDirTarget();
             Directory.CreateDirectory(subdirectory);
             return Path.Combine(subdirectory, GetResultRulesShortFilename(file));
+        }
+
+        internal static string GetResultDirTarget()
+        {
+            return Path.Combine(Program.GetWorkspaceDirectory(), DateTime.Now.ToString("yyyyMMddHHmm"));
         }
 
         internal static string GetRulesShortFilename()
@@ -60,47 +65,51 @@ namespace ConsoleTester.LogsAnalyzer
                 return null;
             }
             return JsonConvert.DeserializeObject<Rules>(File.ReadAllText(fileName));
-       }
+        }
 
-        private Rules CreateConfig()
+        private Rules CreateDefaultConfig()
         {
             var rules = new Rules();
             rules.RulesList = new List<Rule>();
 
-            var rule0 = new Rule();
-            rule0.Keywords = new List<string>();
-            rule0.Keywords.Add("Error");
-            rule0.Name = rule0.GetKey();
-            rule0.MatchCase = true;
-            rule0.MatchWholeWord = true;
-            rule0.Results = new List<Result>();
-            rules.RulesList.Add(rule0);
+            var rule = new Rule();
+            rule.Keywords = new List<string>();
+            rule.Keywords.Add("Error");
+            rule.Name = rule.ProcessName();
+            rule.MatchCase = true;
+            rule.MatchWholeWord = false;
+            rules.RulesList.Add(rule);
 
             var rule1 = new Rule();
             rule1.Keywords = new List<string>();
-            rule1.Keywords.Add("SYRACUSE REQUEST");
-            rule1.Keywords.Add("trackingId={guid}");
-            rule1.ChildKeywords = new List<string>();
-            rule1.ChildKeywords.Add("SYRACUSE RESPONSE");
-            rule1.ChildKeywords.Add("trackingId={guid}");
-            rule1.Name = rule1.GetKey();
+            rule1.Keywords.Add("Memory limit reached");
+            rule1.Name = rule1.ProcessName();
             rule1.MatchCase = true;
             rule1.MatchWholeWord = true;
-            rule1.Results = new List<Result>();
             rules.RulesList.Add(rule1);
+
+            var rule2 = new Rule();
+            rule2.Keywords.Add("SYRACUSE REQUEST");
+            rule2.Keywords.Add("trackingId={guid}");
+            rule2.ChildKeywords.Add("SYRACUSE RESPONSE");
+            rule2.ChildKeywords.Add("trackingId={guid}");
+            rule2.Name = rule2.ProcessName();
+            rule2.MatchCase = true;
+            rule2.MatchWholeWord = true;
+            rules.RulesList.Add(rule2);
 
             return rules;
         }
 
+        private int NbTotalResult = 0;
+
         internal void LaunchAnalyze()
         {
+            this.NbTotalResult = 0;
             this.rules = LoadRules();
-            if (this.rules == null )
+            if (this.rules == null)
             {
-                string destination = GetRulesFilename();
-                this.logger.Log($"Create ConfigFile: {destination}" );
-                this.rules = CreateConfig();
-                SaveResults(this.rules, new FileInfo(destination));
+                CreateDefaultConfigFile();
             }
             var list = GetAllFiles(this.folder, this.filter, this.recurseSubFolder);
             this.logger.Log($"Start analyze: {list.Count()} files in {this.folder}. Filter: {this.filter}");
@@ -108,15 +117,23 @@ namespace ConsoleTester.LogsAnalyzer
             {
                 AnalyzeFile(fileName);
             }
-            this.logger.Log($"Analyze finished");
+            this.logger.Log($"Analyze finished: {this.NbTotalResult} results.");
 
 
+        }
+
+        private void CreateDefaultConfigFile()
+        {
+            string destination = GetRulesFilename();
+            this.logger.Log($"Create ConfigFile: {destination}");
+            this.rules = CreateDefaultConfig();
+            SaveResults(this.rules, new FileInfo(destination));
         }
 
         private FileInfo[] GetAllFiles(string folder, string searchPattern, bool recurseDir)
         {
             DirectoryInfo dir = new DirectoryInfo(folder);
-            if (! dir.Exists )
+            if (!dir.Exists)
             {
                 throw new IOException($"Directory {dir.FullName} doesnt exist");
             }
@@ -125,16 +142,22 @@ namespace ConsoleTester.LogsAnalyzer
 
         private void AnalyzeFile(FileInfo file)
         {
-            var streamReader = File.OpenText(file.FullName);
-            string line = null;
-            int index = 0;
-            while ((line = streamReader.ReadLine()) != null)
+            using (var streamReader = File.OpenText(file.FullName))
             {
-                CheckAllRules(line, index, this.rules);
-                index++;
+                string line = null;
+                int index = 0;
+                while ((line = streamReader.ReadLine()) != null)
+                {
+                    CheckAllRules(line, index, this.rules);
+                    index++;
+                }
             }
-
-            SaveResults(this.rules, file);
+            int nbResult = this.rules.CountResults();
+            if (nbResult > 0)
+            {
+                this.NbTotalResult += nbResult;
+                SaveResults(this.rules, file);
+            }
             ClearResults(rules);
         }
 
@@ -142,8 +165,9 @@ namespace ConsoleTester.LogsAnalyzer
         {
             string wsDirectory = Program.GetWorkspaceDirectory();
             if (!Directory.Exists(wsDirectory))
+            {
                 Directory.CreateDirectory(wsDirectory);
-
+            }
             string filename = GetResultRulesFilename(file);
             rules.File = file.FullName;
 
@@ -152,7 +176,7 @@ namespace ConsoleTester.LogsAnalyzer
                 Converters = new List<JsonConverter> { new StringEnumConverter() },
                 NullValueHandling = NullValueHandling.Ignore,
                 Formatting = Formatting.Indented,
-                DefaultValueHandling = DefaultValueHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Include,
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
@@ -162,8 +186,8 @@ namespace ConsoleTester.LogsAnalyzer
             string suffix = "";
             foreach (var rule in rules?.RulesList)
             {
-                suffix += $"{rule.Name}: {rule.Results.Count} results  ";
-                nbResults += rule.Results.Count;
+                suffix += $"{rule.Name}: {rule.Results?.Count} results  ";
+                nbResults += rule.Results == null ? 0 : rule.Results.Count;
             }
             this.logger.Log($"Save result in {filename}. {suffix} Total results: {nbResults}", nbResults > 0);
             File.WriteAllText(filename, json, Encoding.UTF8);
@@ -173,18 +197,30 @@ namespace ConsoleTester.LogsAnalyzer
         {
             foreach (var rule in rules.RulesList)
             {
-                rule.Results.Clear();
+                rule.Results?.Clear();
             }
         }
 
         private void CheckAllRules(string line, int index, Rules rules)
         {
+            if (string.IsNullOrEmpty(line))
+            {
+                return;
+            }
             foreach (var rule in rules.RulesList)
             {
+                if (rule.Disabled)
+                {
+                    continue;
+                }
                 Result result = GetResult(line, index, rule, rule.Keywords);
                 if (result != null)
                 {
-                    rule.Results.Add(result);
+                    if (rule.Results == null)
+                    {
+                        rule.Results = new List<Result>();
+                    }
+                    rule.Results?.Add(result);
                 }
                 // Options to manage
                 if (rule.ChildKeywords?.Count > 0)
@@ -192,6 +228,10 @@ namespace ConsoleTester.LogsAnalyzer
                     result = GetResult(line, index, rule, rule.ChildKeywords);
                     if (result != null)
                     {
+                        if (rule.Results == null)
+                        {
+                            rule.Results = new List<Result>();
+                        }
                         var resultWithTemplate = SearchRuleWithTemplate(result.TemplateValue, rule);
 
                         if (string.IsNullOrEmpty(result.TemplateValue))
@@ -204,7 +244,6 @@ namespace ConsoleTester.LogsAnalyzer
                         }
                     }
                 }
-
             }
         }
 
@@ -231,10 +270,9 @@ namespace ConsoleTester.LogsAnalyzer
 
                 if (!rule.MatchCase)
                 {
-                    expression += "/i";
+                    expression = "(?i)" + expression;
                 }
                 var reg = new Regex(expression);
-                // bool match = Regex.IsMatch(line, expression, rule.MatchCase ? RegexOptions.CultureInvariant : RegexOptions.IgnoreCase);
                 if (!reg.Match(line).Success)
                 {
                     found = false;

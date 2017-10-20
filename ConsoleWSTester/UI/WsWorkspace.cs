@@ -22,7 +22,7 @@ namespace ConsoleTester
         private void FillComboBox()
         {
             cbMode.DataSource = Enum.GetNames(typeof(WebServiceCall.OperationMode));
-            cbListSize.DataSource = Enumerable.Range(0, 100).ToArray(); // new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            cbListSize.DataSource = Enumerable.Range(0, 100).ToArray();
         }
 
         private string filename;
