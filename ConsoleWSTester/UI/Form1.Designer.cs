@@ -30,9 +30,9 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this._dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.webServiceSOAPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,10 +49,17 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem});
+            this.openToolStripMenuItem,
+            this.webServiceSOAPToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.openToolStripMenuItem.Text = "Log analyzer";
             // 
             // _dockPanel
             // 
@@ -73,11 +80,11 @@
             this._dockPanel.SupportDeeplyNestedContent = true;
             this._dockPanel.TabIndex = 133;
             // 
-            // openToolStripMenuItem
+            // webServiceSOAPToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.webServiceSOAPToolStripMenuItem.Name = "webServiceSOAPToolStripMenuItem";
+            this.webServiceSOAPToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.webServiceSOAPToolStripMenuItem.Text = "WebService SOAP";
             // 
             // Form1
             // 
@@ -88,7 +95,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Main";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -101,7 +108,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private WeifenLuo.WinFormsUI.Docking.DockPanel _dockPanel;
+        private System.Windows.Forms.ToolStripMenuItem webServiceSOAPToolStripMenuItem;
     }
 }

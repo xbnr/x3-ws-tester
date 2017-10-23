@@ -45,10 +45,7 @@
             this.cbLanguage = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tbRequestConfiguration = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbKey = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbValue = new System.Windows.Forms.TextBox();
+            this.labelParameters = new System.Windows.Forms.Label();
             this.panelXmlFile = new System.Windows.Forms.Panel();
             this.cbListSize = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -70,8 +67,9 @@
             this.tbXmlObject = new System.Windows.Forms.TextBox();
             this.tabPageParams = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btAddParam = new System.Windows.Forms.Button();
+            this.dgKeyValue = new System.Windows.Forms.DataGridView();
             this.tabPageCredentials = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.ColumnKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelXmlFile.SuspendLayout();
@@ -81,8 +79,8 @@
             this.tabPage3.SuspendLayout();
             this.tabPageParams.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
             this.tabPageCredentials.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -254,37 +252,14 @@
             this.tbRequestConfiguration.TabIndex = 18;
             this.tbRequestConfiguration.Text = "adxwss.optreturn=XML&adxwss.beautify=true";
             // 
-            // label5
+            // labelParameters
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(31, 11);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(25, 13);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Key";
-            // 
-            // tbKey
-            // 
-            this.tbKey.Location = new System.Drawing.Point(62, 7);
-            this.tbKey.Name = "tbKey";
-            this.tbKey.Size = new System.Drawing.Size(144, 20);
-            this.tbKey.TabIndex = 20;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(257, 11);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(34, 13);
-            this.label6.TabIndex = 23;
-            this.label6.Text = "Value";
-            // 
-            // tbValue
-            // 
-            this.tbValue.Location = new System.Drawing.Point(300, 7);
-            this.tbValue.Name = "tbValue";
-            this.tbValue.Size = new System.Drawing.Size(141, 20);
-            this.tbValue.TabIndex = 22;
+            this.labelParameters.AutoSize = true;
+            this.labelParameters.Location = new System.Drawing.Point(31, 11);
+            this.labelParameters.Name = "labelParameters";
+            this.labelParameters.Size = new System.Drawing.Size(60, 13);
+            this.labelParameters.TabIndex = 21;
+            this.labelParameters.Text = "Parameters";
             // 
             // panelXmlFile
             // 
@@ -505,15 +480,33 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.dataGridView2);
-            this.panel1.Controls.Add(this.tbKey);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.tbValue);
-            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.btAddParam);
+            this.panel1.Controls.Add(this.dgKeyValue);
+            this.panel1.Controls.Add(this.labelParameters);
             this.panel1.Location = new System.Drawing.Point(3, 80);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(653, 156);
             this.panel1.TabIndex = 37;
+            // 
+            // btAddParam
+            // 
+            this.btAddParam.Location = new System.Drawing.Point(463, 33);
+            this.btAddParam.Name = "btAddParam";
+            this.btAddParam.Size = new System.Drawing.Size(25, 23);
+            this.btAddParam.TabIndex = 40;
+            this.btAddParam.Text = "+";
+            this.btAddParam.UseVisualStyleBackColor = true;
+            this.btAddParam.Click += new System.EventHandler(this.btAddParam_Click);
+            // 
+            // dgKeyValue
+            // 
+            this.dgKeyValue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnKey,
+            this.ColumnValue});
+            this.dgKeyValue.Location = new System.Drawing.Point(62, 33);
+            this.dgKeyValue.Name = "dgKeyValue";
+            this.dgKeyValue.Size = new System.Drawing.Size(380, 113);
+            this.dgKeyValue.TabIndex = 39;
             // 
             // tabPageCredentials
             // 
@@ -529,26 +522,19 @@
             this.tabPageCredentials.Text = "Credentials";
             this.tabPageCredentials.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnKey,
-            this.ColumnValue});
-            this.dataGridView2.Location = new System.Drawing.Point(62, 33);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(380, 113);
-            this.dataGridView2.TabIndex = 39;
-            // 
             // ColumnKey
             // 
+            this.ColumnKey.DataPropertyName = "key";
             this.ColumnKey.HeaderText = "Key";
             this.ColumnKey.Name = "ColumnKey";
+            this.ColumnKey.Width = 160;
             // 
             // ColumnValue
             // 
+            this.ColumnValue.DataPropertyName = "value";
             this.ColumnValue.HeaderText = "Value";
             this.ColumnValue.Name = "ColumnValue";
+            this.ColumnValue.Width = 160;
             // 
             // Workspace
             // 
@@ -573,9 +559,9 @@
             this.tabPageParams.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).EndInit();
             this.tabPageCredentials.ResumeLayout(false);
             this.tabPageCredentials.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -600,10 +586,7 @@
         private System.Windows.Forms.ComboBox cbLanguage;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbRequestConfiguration;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tbKey;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tbValue;
+        private System.Windows.Forms.Label labelParameters;
         private System.Windows.Forms.Panel panelXmlFile;
         private System.Windows.Forms.ComboBox cbListSize;
         private System.Windows.Forms.Label label7;
@@ -626,7 +609,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox tbXmlObject;
         private System.Windows.Forms.TabPage tabPageParams;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgKeyValue;
+        private System.Windows.Forms.Button btAddParam;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnKey;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
     }

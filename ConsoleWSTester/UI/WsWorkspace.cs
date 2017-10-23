@@ -13,6 +13,10 @@ namespace ConsoleTester
 {
     public partial class Workspace : UserControl
     {
+        private string filename;
+        private List<CAWebService.CAdxParamKeyValue> parametersDS = new List<CAWebService.CAdxParamKeyValue>();
+
+
         public Workspace()
         {
             InitializeComponent();
@@ -24,8 +28,6 @@ namespace ConsoleTester
             cbMode.DataSource = Enum.GetNames(typeof(WebServiceCall.OperationMode));
             cbListSize.DataSource = Enumerable.Range(0, 100).ToArray();
         }
-
-        private string filename;
 
         internal void SaveWorkspace()
         {
@@ -51,6 +53,7 @@ namespace ConsoleTester
 
             File.WriteAllText(this.filename, json, Encoding.UTF8);
         }
+
         internal void LoadConfigFromJSON(string filename)
         {
             this.filename = filename;
@@ -68,11 +71,8 @@ namespace ConsoleTester
 
             if (config.ObjectKeys != null)
             {
-                foreach (var item in config.ObjectKeys)
-                {
-                    SetTextFromSettings(item.key, this.tbKey);
-                    SetTextFromSettings(item.value, this.tbValue);
-                }
+                parametersDS.AddRange(config.ObjectKeys);
+                dgKeyValue.DataSource = parametersDS;                
             }
 
             SetTextFromSettings(config.BlocKey, this.tbBlocKey);
@@ -93,16 +93,13 @@ namespace ConsoleTester
             this.tbXmlObject.ReadOnly = true;
         }
 
+
         private WorkspaceConfig GetConfigFromUI()
         {
             CAWebService.CAdxParamKeyValue[] objectKeys = null;
-            if (!string.IsNullOrEmpty(tbKey.Text))
-            {
-                objectKeys = new CAWebService.CAdxParamKeyValue[1];
-                objectKeys[0] = new CAWebService.CAdxParamKeyValue();
-                objectKeys[0].key = tbKey.Text;
-                objectKeys[0].value = tbValue.Text;
-            }
+
+            objectKeys = new CAWebService.CAdxParamKeyValue[this.parametersDS.Count];
+            this.parametersDS.CopyTo(objectKeys);
 
             WorkspaceConfig conf = new WorkspaceConfig();
             string opStringVal = string.IsNullOrEmpty(cbMode.Text) ? WebServiceCall.OperationMode.Query.ToString() : cbMode.Text;
@@ -117,7 +114,9 @@ namespace ConsoleTester
             conf.PoolAlias = tbPoolAlias.Text;
             conf.Language = cbLanguage.Text;
             conf.PublicName = cbPublicName.Text;
-            conf.ListSize = int.Parse(cbListSize.Text);
+            int listSize = 10;
+            int.TryParse(cbListSize.Text, out listSize);
+            conf.ListSize = listSize;
             conf.ObjectKeys = objectKeys;
             conf.RequestConfiguration = tbRequestConfiguration.Text;
             conf.XmlFilename = tbXmlFilename.Text;
@@ -210,6 +209,16 @@ namespace ConsoleTester
         private void cbMode_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btAddParam_Click(object sender, EventArgs e)
+        {
+            var keyValue = new CAWebService.CAdxParamKeyValue();
+            keyValue.key = "Key" + this.parametersDS.Count;
+            keyValue.value = "value";
+            this.parametersDS.Add(keyValue);
+            dgKeyValue.DataSource = null;
+            dgKeyValue.DataSource = this.parametersDS;
         }
     }
 }
