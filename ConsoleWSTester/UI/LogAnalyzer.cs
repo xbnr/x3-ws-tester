@@ -3,10 +3,11 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace ConsoleTester
 {
-    public partial class LogAnalyzer : Form
+    public partial class LogAnalyzer : DockContent
     {
         public LogAnalyzer()
         {

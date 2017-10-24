@@ -6,10 +6,10 @@ using Newtonsoft.Json.Converters;
 namespace ConsoleTester
 {
     [JsonObject(IsReference = false)]
-    public class WorkspaceConfig
+    public class SOAPConfig
     {
         private const int MaxListSize = 4;
-        public const string WsConfig = "WorkspaceConfig";
+        public const string SOAPConfigName = "SOAPConfig";
 
 
         [JsonProperty]
@@ -65,7 +65,7 @@ namespace ConsoleTester
 
         internal static string GetWorkspaceShortFilename()
         {
-            return $"{WsConfig}.json";
+            return $"{SOAPConfigName}.json";
         }
 
         internal static string GetWorkspaceFilename()

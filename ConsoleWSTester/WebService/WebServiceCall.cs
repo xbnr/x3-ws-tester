@@ -9,7 +9,7 @@ namespace ConsoleTester
     public class WebServiceCall
     {
         private ILogger logger;
-        private WorkspaceConfig conf;
+        private SOAPConfig conf;
 
         public enum OperationMode
         {
@@ -22,7 +22,7 @@ namespace ConsoleTester
             InsertLines
         }
 
-        public WebServiceCall(WorkspaceConfig config, ILogger logger)
+        public WebServiceCall(SOAPConfig config, ILogger logger)
         {
             this.conf = config;
             this.logger = logger;

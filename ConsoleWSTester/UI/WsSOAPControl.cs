@@ -38,7 +38,7 @@ namespace ConsoleTester
 
             if (string.IsNullOrEmpty(this.filename))
             {
-                this.filename = WorkspaceConfig.GetWorkspaceFilename();
+                this.filename = SOAPConfig.GetWorkspaceFilename();
             }
             string json = JsonConvert.SerializeObject(config, Formatting.Indented, new JsonSerializerSettings
             {
@@ -57,7 +57,7 @@ namespace ConsoleTester
         internal void LoadConfigFromJSON(string filename)
         {
             this.filename = filename;
-            WorkspaceConfig config = JsonConvert.DeserializeObject<WorkspaceConfig>(File.ReadAllText(filename));
+            SOAPConfig config = JsonConvert.DeserializeObject<SOAPConfig>(File.ReadAllText(filename));
             SetTextFromSettings(config.HostUrl, this.tbHost);
             SetTextFromSettings(config.Path, this.cbPath);
             SetTextFromSettings(config.PoolAlias, this.tbPoolAlias);
@@ -94,14 +94,14 @@ namespace ConsoleTester
         }
 
 
-        private WorkspaceConfig GetConfigFromUI()
+        private SOAPConfig GetConfigFromUI()
         {
             CAWebService.CAdxParamKeyValue[] objectKeys = null;
 
             objectKeys = new CAWebService.CAdxParamKeyValue[this.parametersDS.Count];
             this.parametersDS.CopyTo(objectKeys);
 
-            WorkspaceConfig conf = new WorkspaceConfig();
+            SOAPConfig conf = new SOAPConfig();
             string opStringVal = string.IsNullOrEmpty(cbMode.Text) ? WebServiceCall.OperationMode.Query.ToString() : cbMode.Text;
             WebServiceCall.OperationMode opEnum = WebServiceCall.OperationMode.Query;
             if (!Enum.TryParse(opStringVal, out opEnum))
@@ -151,7 +151,7 @@ namespace ConsoleTester
         private void launch_Click(object sender, EventArgs e)
         {
             Logger logger = new Logger(tbLogs);
-            WorkspaceConfig conf = GetConfigFromUI();
+            SOAPConfig conf = GetConfigFromUI();
 
             var ws = new WebServiceCall(conf, logger);
             WebServiceCall.OperationMode action = GetAction();

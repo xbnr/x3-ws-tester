@@ -14,8 +14,9 @@ namespace ConsoleTester
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Main());
-            }catch(Exception e)
+                Application.Run(new ConsoleTester.UI.MainForm());
+            }
+            catch(Exception e)
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(e.StackTrace);
