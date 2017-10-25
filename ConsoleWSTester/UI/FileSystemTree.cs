@@ -29,6 +29,7 @@ namespace ConsoleTester.UI
         {
             var treeNode = new TreeNode(file.Name);
             treeNode.Tag = file;
+            treeNode.ToolTipText = file.FullName;
             tvFileSystem.TopNode.Nodes.Add(treeNode);
         }
 
@@ -71,7 +72,7 @@ namespace ConsoleTester.UI
 
         private void openWithToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Program.OpenJson(SelectedFile.FullName);
         }
 
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)

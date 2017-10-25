@@ -21,11 +21,9 @@ namespace ConsoleTester.UI
 
         private void Init()
         {
+            this.Text = Program.GetAppliVersion(true) + " - " + Program.GetAppliVersion(false);
             var treeView = new FileSystemTree();
             treeView.Show(dockPanelMain, WeifenLuo.WinFormsUI.Docking.DockState.DockLeft);
-            //var wsSoapTester = new WsSOAPTester();
-            //wsSoapTester.Show(dockPanelMain, WeifenLuo.WinFormsUI.Docking.DockState.Document);
-
             MainDockPanel = dockPanelMain;
         }
 

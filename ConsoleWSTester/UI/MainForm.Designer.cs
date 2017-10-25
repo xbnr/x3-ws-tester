@@ -92,7 +92,7 @@
             this.dockPanelMain.Location = new System.Drawing.Point(0, 27);
             this.dockPanelMain.Name = "dockPanelMain";
             this.dockPanelMain.RightToLeftLayout = true;
-            this.dockPanelMain.Size = new System.Drawing.Size(952, 499);
+            this.dockPanelMain.Size = new System.Drawing.Size(952, 530);
             this.dockPanelMain.SupportDeeplyNestedContent = true;
             this.dockPanelMain.TabIndex = 133;
             // 
@@ -100,7 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 527);
+            this.ClientSize = new System.Drawing.Size(952, 558);
             this.Controls.Add(this.dockPanelMain);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;

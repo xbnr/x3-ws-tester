@@ -46,30 +46,7 @@ namespace ConsoleTester
         private void llOpenConfigurationFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string configFilename = LogAnalyze.GetRulesFilename();
-
-            if (!OpenConfigWith(@"C:\Program Files (x86)\Microsoft VS Code\Code.exe", configFilename))
-            {
-                if (!OpenConfigWith("notepad++.exe", configFilename))
-                {
-                    if (!OpenConfigWith("notepad2.exe", configFilename))
-                    {
-                        OpenConfigWith("notepad.exe", configFilename);
-                    }
-                }
-            }
-        }
-
-        private static bool OpenConfigWith(string exeProgramName, string arguments)
-        {
-            try
-            {
-                Process.Start(exeProgramName, arguments);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            Program.OpenJson(configFilename);
         }
 
         private void LogAnalyzer_FormClosing(object sender, FormClosingEventArgs e)

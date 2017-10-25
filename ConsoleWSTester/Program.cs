@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -16,7 +18,7 @@ namespace ConsoleTester
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new ConsoleTester.UI.MainForm());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(e.StackTrace);
@@ -43,5 +45,36 @@ namespace ConsoleTester
 
             return assn.Version.ToString();
         }
+
+        internal static void OpenJson(string configFilename)
+        {
+            List<string> preferences = new List<string>();
+            preferences.Add(@"C:\Program Files (x86)\Microsoft VS Code\Code.exe");
+            preferences.Add(@"notepad++.exe");
+            preferences.Add(@"notepad2.exe");
+            preferences.Add(@"notepad.exe");
+
+            foreach (var item in preferences)
+            {
+                if (OpenConfigWith(item, configFilename))
+                    break;
+
+            }
+        }
+        private static bool OpenConfigWith(string exeProgramName, string arguments)
+        {
+            try
+            {
+                Process.Start(exeProgramName, arguments);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+
     }
 }

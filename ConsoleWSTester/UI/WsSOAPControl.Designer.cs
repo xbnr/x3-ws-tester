@@ -471,7 +471,7 @@
             this.ColumnValue});
             this.dgKeyValue.Location = new System.Drawing.Point(3, 3);
             this.dgKeyValue.Name = "dgKeyValue";
-            this.dgKeyValue.Size = new System.Drawing.Size(380, 113);
+            this.dgKeyValue.Size = new System.Drawing.Size(380, 90);
             this.dgKeyValue.TabIndex = 39;
             // 
             // ColumnKey
@@ -495,7 +495,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(652, 270);
+            this.tabPage3.Size = new System.Drawing.Size(652, 253);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Data: XmlObject";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -519,7 +519,7 @@
             this.tabPageParams.Location = new System.Drawing.Point(4, 22);
             this.tabPageParams.Name = "tabPageParams";
             this.tabPageParams.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageParams.Size = new System.Drawing.Size(652, 270);
+            this.tabPageParams.Size = new System.Drawing.Size(652, 253);
             this.tabPageParams.TabIndex = 3;
             this.tabPageParams.Text = "Parameters";
             this.tabPageParams.UseVisualStyleBackColor = true;
@@ -540,7 +540,7 @@
             this.tabPageCredentials.Location = new System.Drawing.Point(4, 22);
             this.tabPageCredentials.Name = "tabPageCredentials";
             this.tabPageCredentials.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCredentials.Size = new System.Drawing.Size(652, 270);
+            this.tabPageCredentials.Size = new System.Drawing.Size(652, 253);
             this.tabPageCredentials.TabIndex = 1;
             this.tabPageCredentials.Text = "Credentials";
             this.tabPageCredentials.UseVisualStyleBackColor = true;
