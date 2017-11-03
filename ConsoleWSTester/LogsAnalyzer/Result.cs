@@ -18,6 +18,9 @@ namespace ConsoleTester.LogsAnalyzer
 
         [JsonProperty]
         public string Content { get; set; }
+
+        [JsonProperty]
+        public string File { get; set; }
     }
 
 }

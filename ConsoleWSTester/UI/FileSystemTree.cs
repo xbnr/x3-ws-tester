@@ -77,9 +77,22 @@ namespace ConsoleTester.UI
 
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SelectedFile.CopyTo(SelectedFile.DirectoryName + SelectedFile.Name + "2" + SelectedFile.Extension);
+            string newName = GetNewName(SelectedFile);
+            SelectedFile.CopyTo(newName);
             BuildTreeView();
         }
+
+        private string GetNewName(FileInfo fileToDuplicate)
+        {
+            int i = 2;
+            string result =  Path.Combine( fileToDuplicate.DirectoryName,  Path.GetFileNameWithoutExtension(fileToDuplicate.Name) + i.ToString("00") + fileToDuplicate.Extension);
+            while (File.Exists(result))
+            {
+                result = Path.Combine(fileToDuplicate.DirectoryName, Path.GetFileNameWithoutExtension(fileToDuplicate.Name) + (i++).ToString("00") + fileToDuplicate.Extension);
+            }
+            return result;
+        }
+
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -103,6 +116,11 @@ namespace ConsoleTester.UI
             }
 
             tvFileSystem.TopNode.Expand();
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BuildTreeView();
         }
     }
 }

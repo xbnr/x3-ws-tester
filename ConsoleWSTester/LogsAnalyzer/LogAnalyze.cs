@@ -34,9 +34,14 @@ namespace ConsoleTester.LogsAnalyzer
             return Path.Combine(subdirectory, GetResultRulesShortFilename(file));
         }
 
+        private static string resultDirectoryTarget = null;
         internal static string GetResultDirTarget()
         {
-            return Path.Combine(Program.GetWorkspaceDirectory(), DateTime.Now.ToString("yyyyMMddHHmm"));
+            if (string.IsNullOrEmpty( resultDirectoryTarget))
+            {
+                resultDirectoryTarget = Path.Combine(Program.GetWorkspaceDirectory(), DateTime.Now.ToString("yyyyMMddHHmm"));
+            }
+            return resultDirectoryTarget;
         }
 
         internal static string GetRulesShortFilename()
@@ -105,21 +110,23 @@ namespace ConsoleTester.LogsAnalyzer
 
         internal void LaunchAnalyze()
         {
+            resultDirectoryTarget = null;
             this.NbTotalResult = 0;
             this.rules = LoadRules();
             if (this.rules == null)
             {
                 CreateDefaultConfigFile();
             }
-            var list = GetAllFiles(this.folder, this.filter, this.recurseSubFolder);
-            this.logger.Log($"Start analyze: {list.Count()} files in {this.folder}. Filter: {this.filter}");
-            foreach (var fileName in list)
+            var logFilesToAnalyze = GetAllFiles(this.folder, this.filter, this.recurseSubFolder);
+            this.logger.Log($"Start analyze: {logFilesToAnalyze.Count()} files in {this.folder}. Filter: {this.filter}");
+            foreach (var fileName in logFilesToAnalyze)
             {
                 AnalyzeFile(fileName);
             }
+
+            AggregateResults();
+
             this.logger.Log($"Analyze finished: {this.NbTotalResult} results.");
-
-
         }
 
         private void CreateDefaultConfigFile()
@@ -135,7 +142,7 @@ namespace ConsoleTester.LogsAnalyzer
             DirectoryInfo dir = new DirectoryInfo(folder);
             if (!dir.Exists)
             {
-                throw new IOException($"Directory {dir.FullName} doesnt exist");
+                throw new IOException($"Directory {dir.FullName} doesn't exist");
             }
             return dir.GetFiles(searchPattern, recurseDir ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
         }
@@ -191,6 +198,53 @@ namespace ConsoleTester.LogsAnalyzer
             }
             this.logger.Log($"Save result in {filename}. {suffix} Total results: {nbResults}", nbResults > 0);
             File.WriteAllText(filename, json, Encoding.UTF8);
+        }
+
+
+        private void AggregateResults()
+        {
+            string directoryTarget = GetResultDirTarget();
+            var filesResult = GetAllFiles(directoryTarget, "*.json", false);
+            var resultDic = new Dictionary<string, List<Result>>();
+
+            foreach (var fileName in filesResult)
+            {
+                var rules = JsonConvert.DeserializeObject<Rules>(File.ReadAllText(fileName.FullName));
+                foreach (var rule in rules.RulesList)
+                {
+                    if (rule.Results != null)
+                        foreach (var result in rule.Results)
+                        {
+                            result.File = rules.File;
+                            if (!resultDic.ContainsKey(result.Content))
+                            {
+                                resultDic[result.Content] = new List<Result>();
+                            }
+
+                            resultDic[result.Content].Add(result);
+                        }
+                }
+            }
+
+            SaveExcerpt(directoryTarget, resultDic);
+        }
+
+        private void SaveExcerpt(string directoryTarget, Dictionary<string, List<Result>> resultDic)
+        {
+            string json = JsonConvert.SerializeObject(resultDic, Formatting.Indented, new JsonSerializerSettings
+            {
+                Converters = new List<JsonConverter> { new StringEnumConverter() },
+                NullValueHandling = NullValueHandling.Ignore,
+                Formatting = Formatting.Indented,
+                DefaultValueHandling = DefaultValueHandling.Include,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            });
+
+            string excerptFileName = Path.Combine(directoryTarget, "excerpt.json");
+            this.logger.Log($"Save excerpt in {excerptFileName}.");
+            File.WriteAllText(excerptFileName, json, Encoding.UTF8);
         }
 
         private static void ClearResults(Rules rules)
