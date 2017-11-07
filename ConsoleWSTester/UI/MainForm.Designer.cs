@@ -34,6 +34,7 @@
             this.tsmiNewLogAnalyzer = new System.Windows.Forms.ToolStripMenuItem();
             this.soapTesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dockPanelMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.dockPanelLogs = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,6 +77,7 @@
             this.soapTesterToolStripMenuItem.Name = "soapTesterToolStripMenuItem";
             this.soapTesterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.soapTesterToolStripMenuItem.Text = "Soap tester";
+            this.soapTesterToolStripMenuItem.Click += new System.EventHandler(this.soapTesterToolStripMenuItem_Click);
             // 
             // dockPanelMain
             // 
@@ -95,6 +97,13 @@
             this.dockPanelMain.Size = new System.Drawing.Size(952, 530);
             this.dockPanelMain.SupportDeeplyNestedContent = true;
             this.dockPanelMain.TabIndex = 133;
+            // 
+            // dockPanelLogs
+            // 
+            this.dockPanelLogs.Location = new System.Drawing.Point(0, 0);
+            this.dockPanelLogs.Name = "dockPanelLogs";
+            this.dockPanelLogs.Size = new System.Drawing.Size(200, 100);
+            this.dockPanelLogs.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -120,6 +129,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanelMain;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanelLogs;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiNewLogAnalyzer;
         private System.Windows.Forms.ToolStripMenuItem soapTesterToolStripMenuItem;

@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace ConsoleTester
+namespace ConsoleTester.UI
 {
     public partial class LogAnalyzer : DockContent
     {
@@ -71,6 +71,12 @@ namespace ConsoleTester
             tbFolder.Text = Settings.Default.XmlFilename;
             tbFilter.Text = Settings.Default.Filter;
             cbRecurseDir.Checked = Settings.Default.SubFolders;
+        }
+
+        private void llExcerptResult_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var browser = new Browser();
+            browser.Show(MainForm.MainDockPanel, DockState.Document);
         }
     }
 }

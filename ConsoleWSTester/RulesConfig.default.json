@@ -1,0 +1,55 @@
+﻿{
+    "rulesList": [{
+            "keywords": [
+                "Error"
+            ],
+            "matchCase": true,
+            "matchWholeWord": false,
+            "disabled": false
+        }, {
+            "keywords": [
+                "no_clean"
+            ],
+            "matchCase": false,
+            "matchWholeWord": false,
+            "disabled": false
+        }, {
+            "keywords": [
+                "Memory survey"
+            ],
+            "matchCase": false,
+            "matchWholeWord": false,
+            "disabled": false
+        },
+        {
+            "keywords": [
+                "system shutdown"
+            ],
+            "matchCase": false,
+            "matchWholeWord": false,
+            "disabled": false
+        },
+        {
+            "keywords": [
+                "Memory limit reached"
+            ],
+            "matchCase": true,
+            "matchWholeWord": false,
+            "disabled": false
+        },
+        {
+            "keywords": [
+                "SYRACUSE REQUEST",
+                "trackingId={guid}"
+            ],
+            "childKeywords": [
+                "SYRACUSE RESPONSE",
+                "trackingId={guid}"
+            ],
+            "name": "SYRACUSE REQUEST-trackingId={guid}",
+            "matchCase": true,
+            "matchWholeWord": false,
+            "disabled": false
+        }
+    ]
+}

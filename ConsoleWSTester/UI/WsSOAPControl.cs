@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ConsoleTester.CAWebService;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -85,6 +86,7 @@ namespace ConsoleTester
             {
                 ShowFileText(config.XmlFilename);
             }
+            ShowPanels();
         }
 
         private void ShowFileText(string xmlFile)
@@ -208,7 +210,14 @@ namespace ConsoleTester
 
         private void cbMode_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ShowPanels();
 
+        }
+
+        private void ShowPanels()
+        {
+            panelDeleteLines.Visible = GetAction() == WebServiceCall.OperationMode.DeleteLines;
+            panelParameters.Visible = GetAction() == WebServiceCall.OperationMode.Read;
         }
 
         private void btAddParam_Click(object sender, EventArgs e)
@@ -219,6 +228,21 @@ namespace ConsoleTester
             this.parametersDS.Add(keyValue);
             dgKeyValue.DataSource = null;
             dgKeyValue.DataSource = this.parametersDS;
+        }
+
+        private void btDelete_Click(object sender, EventArgs e)
+        {
+            if (dgKeyValue.SelectedRows.Count>0)
+            {
+                var selectedObj = dgKeyValue.SelectedRows[0];
+                CAdxParamKeyValue selectedValue = selectedObj.DataBoundItem as CAdxParamKeyValue;
+                if (selectedValue != null)
+                {
+                    this.parametersDS.Remove(selectedValue);
+                    dgKeyValue.DataSource = null;
+                    dgKeyValue.DataSource = this.parametersDS;
+                }
+            }
         }
     }
 }

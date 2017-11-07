@@ -63,24 +63,22 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelParameters = new System.Windows.Forms.Panel();
+            this.btDelete = new System.Windows.Forms.Button();
             this.btAddParam = new System.Windows.Forms.Button();
             this.dgKeyValue = new System.Windows.Forms.DataGridView();
             this.ColumnKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPageXmlObject = new System.Windows.Forms.TabPage();
             this.tbXmlObject = new System.Windows.Forms.TextBox();
-            this.tabPageParams = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.tabPageCredentials = new System.Windows.Forms.TabPage();
             this.panelXmlFile.SuspendLayout();
             this.panelDeleteLines.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.panelParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            this.tabPageParams.SuspendLayout();
+            this.tabPageXmlObject.SuspendLayout();
             this.tabPageCredentials.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -382,7 +380,7 @@
             this.panelDeleteLines.Controls.Add(this.label9);
             this.panelDeleteLines.Controls.Add(this.tbBlocKey);
             this.panelDeleteLines.Controls.Add(this.label8);
-            this.panelDeleteLines.Location = new System.Drawing.Point(3, 28);
+            this.panelDeleteLines.Location = new System.Drawing.Point(6, 155);
             this.panelDeleteLines.Name = "panelDeleteLines";
             this.panelDeleteLines.Size = new System.Drawing.Size(649, 29);
             this.panelDeleteLines.TabIndex = 36;
@@ -408,8 +406,7 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPageParams);
+            this.tabControl1.Controls.Add(this.tabPageXmlObject);
             this.tabControl1.Controls.Add(this.tabPageCredentials);
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
@@ -419,7 +416,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Controls.Add(this.panelDeleteLines);
+            this.tabPage1.Controls.Add(this.panelParameters);
             this.tabPage1.Controls.Add(this.labelHost);
             this.tabPage1.Controls.Add(this.tbPoolAlias);
             this.tabPage1.Controls.Add(this.labelParameters);
@@ -445,14 +443,25 @@
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // panel2
+            // panelParameters
             // 
-            this.panel2.Controls.Add(this.btAddParam);
-            this.panel2.Controls.Add(this.dgKeyValue);
-            this.panel2.Location = new System.Drawing.Point(124, 152);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(509, 93);
-            this.panel2.TabIndex = 34;
+            this.panelParameters.Controls.Add(this.btDelete);
+            this.panelParameters.Controls.Add(this.btAddParam);
+            this.panelParameters.Controls.Add(this.dgKeyValue);
+            this.panelParameters.Location = new System.Drawing.Point(124, 152);
+            this.panelParameters.Name = "panelParameters";
+            this.panelParameters.Size = new System.Drawing.Size(509, 101);
+            this.panelParameters.TabIndex = 34;
+            // 
+            // btDelete
+            // 
+            this.btDelete.Location = new System.Drawing.Point(404, 32);
+            this.btDelete.Name = "btDelete";
+            this.btDelete.Size = new System.Drawing.Size(25, 23);
+            this.btDelete.TabIndex = 41;
+            this.btDelete.Text = "-";
+            this.btDelete.UseVisualStyleBackColor = true;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
             // 
             // btAddParam
             // 
@@ -471,7 +480,7 @@
             this.ColumnValue});
             this.dgKeyValue.Location = new System.Drawing.Point(3, 3);
             this.dgKeyValue.Name = "dgKeyValue";
-            this.dgKeyValue.Size = new System.Drawing.Size(380, 90);
+            this.dgKeyValue.Size = new System.Drawing.Size(380, 98);
             this.dgKeyValue.TabIndex = 39;
             // 
             // ColumnKey
@@ -488,17 +497,17 @@
             this.ColumnValue.Name = "ColumnValue";
             this.ColumnValue.Width = 160;
             // 
-            // tabPage3
+            // tabPageXmlObject
             // 
-            this.tabPage3.Controls.Add(this.tbXmlObject);
-            this.tabPage3.Controls.Add(this.panelXmlFile);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(652, 253);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Data: XmlObject";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPageXmlObject.Controls.Add(this.tbXmlObject);
+            this.tabPageXmlObject.Controls.Add(this.panelXmlFile);
+            this.tabPageXmlObject.Location = new System.Drawing.Point(4, 22);
+            this.tabPageXmlObject.Name = "tabPageXmlObject";
+            this.tabPageXmlObject.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageXmlObject.Size = new System.Drawing.Size(652, 253);
+            this.tabPageXmlObject.TabIndex = 2;
+            this.tabPageXmlObject.Text = "Data: XmlObject";
+            this.tabPageXmlObject.UseVisualStyleBackColor = true;
             // 
             // tbXmlObject
             // 
@@ -511,25 +520,6 @@
             this.tbXmlObject.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbXmlObject.Size = new System.Drawing.Size(641, 174);
             this.tbXmlObject.TabIndex = 38;
-            // 
-            // tabPageParams
-            // 
-            this.tabPageParams.Controls.Add(this.panel1);
-            this.tabPageParams.Controls.Add(this.panelDeleteLines);
-            this.tabPageParams.Location = new System.Drawing.Point(4, 22);
-            this.tabPageParams.Name = "tabPageParams";
-            this.tabPageParams.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageParams.Size = new System.Drawing.Size(652, 253);
-            this.tabPageParams.TabIndex = 3;
-            this.tabPageParams.Text = "Parameters";
-            this.tabPageParams.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(3, 80);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(653, 156);
-            this.panel1.TabIndex = 37;
             // 
             // tabPageCredentials
             // 
@@ -563,11 +553,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.panel2.ResumeLayout(false);
+            this.panelParameters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.tabPageParams.ResumeLayout(false);
+            this.tabPageXmlObject.ResumeLayout(false);
+            this.tabPageXmlObject.PerformLayout();
             this.tabPageCredentials.ResumeLayout(false);
             this.tabPageCredentials.PerformLayout();
             this.ResumeLayout(false);
@@ -613,14 +602,13 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPageCredentials;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TabPage tabPageXmlObject;
         private System.Windows.Forms.TextBox tbXmlObject;
-        private System.Windows.Forms.TabPage tabPageParams;
         private System.Windows.Forms.DataGridView dgKeyValue;
         private System.Windows.Forms.Button btAddParam;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnKey;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelParameters;
+        private System.Windows.Forms.Button btDelete;
     }
 }

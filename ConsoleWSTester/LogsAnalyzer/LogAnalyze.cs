@@ -37,7 +37,7 @@ namespace ConsoleTester.LogsAnalyzer
         private static string resultDirectoryTarget = null;
         internal static string GetResultDirTarget()
         {
-            if (string.IsNullOrEmpty( resultDirectoryTarget))
+            if (string.IsNullOrEmpty(resultDirectoryTarget))
             {
                 resultDirectoryTarget = Path.Combine(Program.GetWorkspaceDirectory(), DateTime.Now.ToString("yyyyMMddHHmm"));
             }
@@ -190,13 +190,16 @@ namespace ConsoleTester.LogsAnalyzer
             });
 
             int nbResults = 0;
-            string suffix = "";
+            string resultsTitle = "";
             foreach (var rule in rules?.RulesList)
             {
-                suffix += $"{rule.Name}: {rule.Results?.Count} results  ";
-                nbResults += rule.Results == null ? 0 : rule.Results.Count;
+                if (rule.Results?.Count > 0)
+                {
+                    resultsTitle += $"{rule.GetName()}: {rule.Results?.Count} results  ";
+                    nbResults += rule.Results == null ? 0 : rule.Results.Count;
+                }
             }
-            this.logger.Log($"Save result in {filename}. {suffix} Total results: {nbResults}", nbResults > 0);
+            this.logger.Log($"Save result in {filename}. {resultsTitle} Total results: {nbResults}", nbResults > 0);
             File.WriteAllText(filename, json, Encoding.UTF8);
         }
 
@@ -205,7 +208,7 @@ namespace ConsoleTester.LogsAnalyzer
         {
             string directoryTarget = GetResultDirTarget();
             var filesResult = GetAllFiles(directoryTarget, "*.json", false);
-            var resultDic = new Dictionary<string, List<Result>>();
+            var resultDictionary = new Dictionary<string, List<Result>>();
 
             foreach (var fileName in filesResult)
             {
@@ -216,17 +219,17 @@ namespace ConsoleTester.LogsAnalyzer
                         foreach (var result in rule.Results)
                         {
                             result.File = rules.File;
-                            if (!resultDic.ContainsKey(result.Content))
+                            if (!resultDictionary.ContainsKey(result.Content))
                             {
-                                resultDic[result.Content] = new List<Result>();
+                                resultDictionary[result.Content] = new List<Result>();
                             }
 
-                            resultDic[result.Content].Add(result);
+                            resultDictionary[result.Content].Add(result);
                         }
                 }
             }
 
-            SaveExcerpt(directoryTarget, resultDic);
+            SaveExcerpt(directoryTarget, resultDictionary);
         }
 
         private void SaveExcerpt(string directoryTarget, Dictionary<string, List<Result>> resultDic)
@@ -242,7 +245,7 @@ namespace ConsoleTester.LogsAnalyzer
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             });
 
-            string excerptFileName = Path.Combine(directoryTarget, "excerpt.json");
+            string excerptFileName = Path.Combine(directoryTarget, "excerptResults.json");
             this.logger.Log($"Save excerpt in {excerptFileName}.");
             File.WriteAllText(excerptFileName, json, Encoding.UTF8);
         }
@@ -317,8 +320,6 @@ namespace ConsoleTester.LogsAnalyzer
                 string expression = @"(" + keyw + ")";
                 if (rule.MatchWholeWord)
                 {
-                    // expression = @"/\b(" + keyw + ")\b/i"; // @"(?<=\W |^)("+ keyw + @")(?=\W |$)"; // @"\b" + keyw + "\b";
-                    // expression = @"^"+ keyw + "$"; // @"(?<=\W |^)("+ keyw + @")(?=\W |$)"; // @"\b" + keyw + "\b";
                     expression = @"(^|\\W)" + keyw + "($|\\W)";
                 }
 

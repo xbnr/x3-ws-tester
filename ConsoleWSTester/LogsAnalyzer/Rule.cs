@@ -18,7 +18,7 @@ namespace ConsoleTester.LogsAnalyzer
         public List<string> Keywords { get; set; }
 
         [JsonProperty]
-        public List<string> ChildKeywords { get; set; }        
+        public List<string> ChildKeywords { get; set; }
 
         [JsonProperty]
         public List<Result> Results { get; set; }
@@ -29,6 +29,15 @@ namespace ConsoleTester.LogsAnalyzer
         public string ProcessName()
         {
             return string.Join("-", Keywords.ToArray());
+        }
+
+        public string GetName()
+        {
+            if (string.IsNullOrEmpty(Name))
+            {
+                return ProcessName();
+            }
+            return Name;
         }
 
         [JsonProperty]

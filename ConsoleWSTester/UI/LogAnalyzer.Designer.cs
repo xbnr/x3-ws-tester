@@ -1,4 +1,4 @@
-﻿namespace ConsoleTester
+﻿namespace ConsoleTester.UI
 {
     partial class LogAnalyzer
     {
@@ -30,6 +30,7 @@
         {
             this.tbLogs = new System.Windows.Forms.TextBox();
             this.panelXmlFile = new System.Windows.Forms.Panel();
+            this.llOpenConfigurationFile = new System.Windows.Forms.LinkLabel();
             this.tbFilter = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbRecurseDir = new System.Windows.Forms.CheckBox();
@@ -39,7 +40,7 @@
             this.btAnalyze = new System.Windows.Forms.Button();
             this.llOpenFolder = new System.Windows.Forms.LinkLabel();
             this.llClearLogs = new System.Windows.Forms.LinkLabel();
-            this.llOpenConfigurationFile = new System.Windows.Forms.LinkLabel();
+            this.llExcerptResult = new System.Windows.Forms.LinkLabel();
             this.panelXmlFile.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,6 +73,17 @@
             this.panelXmlFile.Size = new System.Drawing.Size(794, 53);
             this.panelXmlFile.TabIndex = 25;
             // 
+            // llOpenConfigurationFile
+            // 
+            this.llOpenConfigurationFile.AutoSize = true;
+            this.llOpenConfigurationFile.Location = new System.Drawing.Point(397, 34);
+            this.llOpenConfigurationFile.Name = "llOpenConfigurationFile";
+            this.llOpenConfigurationFile.Size = new System.Drawing.Size(113, 13);
+            this.llOpenConfigurationFile.TabIndex = 28;
+            this.llOpenConfigurationFile.TabStop = true;
+            this.llOpenConfigurationFile.Text = "Open configuration file";
+            this.llOpenConfigurationFile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llOpenConfigurationFile_LinkClicked);
+            // 
             // tbFilter
             // 
             this.tbFilter.Location = new System.Drawing.Point(61, 31);
@@ -91,11 +103,10 @@
             // 
             // cbRecurseDir
             // 
-            this.cbRecurseDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbRecurseDir.AutoSize = true;
             this.cbRecurseDir.Checked = true;
             this.cbRecurseDir.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbRecurseDir.Location = new System.Drawing.Point(655, 33);
+            this.cbRecurseDir.Location = new System.Drawing.Point(582, 33);
             this.cbRecurseDir.Name = "cbRecurseDir";
             this.cbRecurseDir.Size = new System.Drawing.Size(91, 17);
             this.cbRecurseDir.TabIndex = 17;
@@ -169,23 +180,24 @@
             this.llClearLogs.Text = "Clear logs";
             this.llClearLogs.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llClearLogs_LinkClicked);
             // 
-            // llOpenConfigurationFile
+            // llExcerptResult
             // 
-            this.llOpenConfigurationFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.llOpenConfigurationFile.AutoSize = true;
-            this.llOpenConfigurationFile.Location = new System.Drawing.Point(470, 34);
-            this.llOpenConfigurationFile.Name = "llOpenConfigurationFile";
-            this.llOpenConfigurationFile.Size = new System.Drawing.Size(113, 13);
-            this.llOpenConfigurationFile.TabIndex = 28;
-            this.llOpenConfigurationFile.TabStop = true;
-            this.llOpenConfigurationFile.Text = "Open configuration file";
-            this.llOpenConfigurationFile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llOpenConfigurationFile_LinkClicked);
+            this.llExcerptResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.llExcerptResult.AutoSize = true;
+            this.llExcerptResult.Location = new System.Drawing.Point(215, 354);
+            this.llExcerptResult.Name = "llExcerptResult";
+            this.llExcerptResult.Size = new System.Drawing.Size(100, 13);
+            this.llExcerptResult.TabIndex = 28;
+            this.llExcerptResult.TabStop = true;
+            this.llExcerptResult.Text = "Open Excerp result ";
+            this.llExcerptResult.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llExcerptResult_LinkClicked);
             // 
             // LogAnalyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(818, 374);
+            this.Controls.Add(this.llExcerptResult);
             this.Controls.Add(this.llClearLogs);
             this.Controls.Add(this.llOpenFolder);
             this.Controls.Add(this.btAnalyze);
@@ -216,5 +228,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel llClearLogs;
         private System.Windows.Forms.LinkLabel llOpenConfigurationFile;
+        private System.Windows.Forms.LinkLabel llExcerptResult;
     }
 }
