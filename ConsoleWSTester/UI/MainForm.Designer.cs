@@ -44,7 +44,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(952, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1038, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -62,20 +62,20 @@
             this.tsmiNewLogAnalyzer,
             this.soapTesterToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // tsmiNewLogAnalyzer
             // 
             this.tsmiNewLogAnalyzer.Name = "tsmiNewLogAnalyzer";
-            this.tsmiNewLogAnalyzer.Size = new System.Drawing.Size(152, 22);
+            this.tsmiNewLogAnalyzer.Size = new System.Drawing.Size(140, 22);
             this.tsmiNewLogAnalyzer.Text = "Log analyzer";
             this.tsmiNewLogAnalyzer.Click += new System.EventHandler(this.tsmiNewLogAnalayzer_Click);
             // 
             // soapTesterToolStripMenuItem
             // 
             this.soapTesterToolStripMenuItem.Name = "soapTesterToolStripMenuItem";
-            this.soapTesterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.soapTesterToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.soapTesterToolStripMenuItem.Text = "Soap tester";
             this.soapTesterToolStripMenuItem.Click += new System.EventHandler(this.soapTesterToolStripMenuItem_Click);
             // 
@@ -94,7 +94,7 @@
             this.dockPanelMain.Location = new System.Drawing.Point(0, 27);
             this.dockPanelMain.Name = "dockPanelMain";
             this.dockPanelMain.RightToLeftLayout = true;
-            this.dockPanelMain.Size = new System.Drawing.Size(952, 530);
+            this.dockPanelMain.Size = new System.Drawing.Size(1038, 552);
             this.dockPanelMain.SupportDeeplyNestedContent = true;
             this.dockPanelMain.TabIndex = 133;
             // 
@@ -109,7 +109,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 558);
+            this.ClientSize = new System.Drawing.Size(1038, 580);
             this.Controls.Add(this.dockPanelMain);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;

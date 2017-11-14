@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.workspace1 = new ConsoleTester.Workspace();
+            this.workspace1 = new Workspace();
             this.SuspendLayout();
             // 
             // workspace1

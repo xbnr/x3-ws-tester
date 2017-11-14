@@ -15,7 +15,8 @@ namespace ConsoleTester.UI
     {
         public static DockPanel MainDockPanel { get; private set; }
 
-        public static DockPanel LogsDockPanel { get; private set; }
+        public static TextBox LogControl { get; private set; }
+
 
         public MainForm()
         {
@@ -26,11 +27,11 @@ namespace ConsoleTester.UI
         {
             this.Text = Program.GetAppliVersion(true) + " - " + Program.GetAppliVersion(false);
             var treeView = new FileSystemTree();
-            treeView.Show(dockPanelMain, WeifenLuo.WinFormsUI.Docking.DockState.DockLeft);
+            treeView.Show(dockPanelMain, DockState.DockLeft);
             var logs = new Logs();
-            logs.Show(dockPanelLogs, WeifenLuo.WinFormsUI.Docking.DockState.DockBottom);
+            LogControl = logs.LogControl;
+            logs.Show(dockPanelMain, DockState.DockBottom);
             MainDockPanel = dockPanelMain;
-            LogsDockPanel = dockPanelLogs;
         }
 
         private void MainForm_Load(object sender, EventArgs e)

@@ -28,7 +28,7 @@ namespace ConsoleTester.UI
 
         private void btAnalyze_Click(object sender, EventArgs e)
         {
-            var logger = new LoggerToFile(Path.Combine( LogAnalyze.GetResultDirTarget(), "Report.txt"), this.tbLogs);
+            var logger = new LoggerToFile(Path.Combine(LogAnalyze.GetResultDirTarget(), "Report.txt"), MainForm.LogControl);
             var analyzer = new LogAnalyze(tbFolder.Text, tbFilter.Text, cbRecurseDir.Checked, logger);
             analyzer.LaunchAnalyze();
         }
@@ -40,7 +40,7 @@ namespace ConsoleTester.UI
 
         private void llClearLogs_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            tbLogs.Clear();
+            MainForm.LogControl.Clear();
         }
 
         private void llOpenConfigurationFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

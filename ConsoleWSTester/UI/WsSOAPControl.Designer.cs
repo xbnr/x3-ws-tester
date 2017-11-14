@@ -1,4 +1,4 @@
-﻿namespace ConsoleTester
+﻿namespace ConsoleTester.UI
 {
     partial class Workspace
     {
@@ -30,7 +30,6 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.tbPoolAlias = new System.Windows.Forms.TextBox();
-            this.tbLogs = new System.Windows.Forms.TextBox();
             this.labelPoolAlias = new System.Windows.Forms.Label();
             this.labelLanguage = new System.Windows.Forms.Label();
             this.labelPublicName = new System.Windows.Forms.Label();
@@ -53,7 +52,6 @@
             this.tbLogin = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
-            this.llClearConsole = new System.Windows.Forms.LinkLabel();
             this.cbPath = new System.Windows.Forms.ComboBox();
             this.labelPath = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -86,7 +84,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(0, 503);
+            this.button1.Location = new System.Drawing.Point(3, 288);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(663, 38);
             this.button1.TabIndex = 0;
@@ -101,18 +99,6 @@
             this.tbPoolAlias.Size = new System.Drawing.Size(211, 20);
             this.tbPoolAlias.TabIndex = 2;
             this.tbPoolAlias.Text = "MYPOOL1";
-            // 
-            // tbLogs
-            // 
-            this.tbLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLogs.Location = new System.Drawing.Point(0, 288);
-            this.tbLogs.Multiline = true;
-            this.tbLogs.Name = "tbLogs";
-            this.tbLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbLogs.Size = new System.Drawing.Size(663, 195);
-            this.tbLogs.TabIndex = 3;
             // 
             // labelPoolAlias
             // 
@@ -325,18 +311,6 @@
             this.tbPassword.TabIndex = 29;
             this.tbPassword.Text = "admin";
             // 
-            // llClearConsole
-            // 
-            this.llClearConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.llClearConsole.AutoSize = true;
-            this.llClearConsole.Location = new System.Drawing.Point(15, 484);
-            this.llClearConsole.Name = "llClearConsole";
-            this.llClearConsole.Size = new System.Drawing.Size(71, 13);
-            this.llClearConsole.TabIndex = 31;
-            this.llClearConsole.TabStop = true;
-            this.llClearConsole.Text = "Clear console";
-            this.llClearConsole.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llClearConsole_LinkClicked);
-            // 
             // cbPath
             // 
             this.cbPath.FormattingEnabled = true;
@@ -403,7 +377,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPageXmlObject);
@@ -540,11 +515,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.llClearConsole);
-            this.Controls.Add(this.tbLogs);
             this.Controls.Add(this.button1);
             this.Name = "Workspace";
-            this.Size = new System.Drawing.Size(675, 549);
+            this.Size = new System.Drawing.Size(675, 333);
             this.Load += new System.EventHandler(this.Workspace_Load);
             this.panelXmlFile.ResumeLayout(false);
             this.panelXmlFile.PerformLayout();
@@ -560,7 +533,6 @@
             this.tabPageCredentials.ResumeLayout(false);
             this.tabPageCredentials.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -568,7 +540,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox tbPoolAlias;
-        private System.Windows.Forms.TextBox tbLogs;
         private System.Windows.Forms.Label labelPoolAlias;
         private System.Windows.Forms.Label labelLanguage;
         private System.Windows.Forms.Label labelPublicName;
@@ -591,7 +562,6 @@
         private System.Windows.Forms.TextBox tbLogin;
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.TextBox tbPassword;
-        private System.Windows.Forms.LinkLabel llClearConsole;
         private System.Windows.Forms.ComboBox cbPath;
         private System.Windows.Forms.Label labelPath;
         private System.Windows.Forms.Label label8;

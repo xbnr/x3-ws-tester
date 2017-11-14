@@ -20,10 +20,20 @@ namespace ConsoleTester.UI
             InitializeComponent();
         }
 
+        public TextBox LogControl => tbLogs;
+
         private void Logs_Load(object sender, EventArgs e)
         {
-           
         }
-        
+
+        private void clearLogsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LogControl.Clear();
+        }
+
+        private void copyAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(LogControl.Text);
+        }
     }
 }

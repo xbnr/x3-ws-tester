@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbLogs = new System.Windows.Forms.TextBox();
             this.panelXmlFile = new System.Windows.Forms.Panel();
             this.llOpenConfigurationFile = new System.Windows.Forms.LinkLabel();
             this.tbFilter = new System.Windows.Forms.TextBox();
@@ -43,19 +42,6 @@
             this.llExcerptResult = new System.Windows.Forms.LinkLabel();
             this.panelXmlFile.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tbLogs
-            // 
-            this.tbLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLogs.Location = new System.Drawing.Point(12, 110);
-            this.tbLogs.Multiline = true;
-            this.tbLogs.Name = "tbLogs";
-            this.tbLogs.ReadOnly = true;
-            this.tbLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbLogs.Size = new System.Drawing.Size(794, 241);
-            this.tbLogs.TabIndex = 4;
             // 
             // panelXmlFile
             // 
@@ -146,8 +132,6 @@
             // 
             // btAnalyze
             // 
-            this.btAnalyze.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btAnalyze.Location = new System.Drawing.Point(12, 71);
             this.btAnalyze.Name = "btAnalyze";
             this.btAnalyze.Size = new System.Drawing.Size(371, 33);
@@ -202,7 +186,6 @@
             this.Controls.Add(this.llOpenFolder);
             this.Controls.Add(this.btAnalyze);
             this.Controls.Add(this.panelXmlFile);
-            this.Controls.Add(this.tbLogs);
             this.Name = "LogAnalyzer";
             this.Text = "LogAnalyzer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogAnalyzer_FormClosing);
@@ -215,8 +198,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox tbLogs;
         private System.Windows.Forms.Panel panelXmlFile;
         private System.Windows.Forms.Button btBrowseFile;
         private System.Windows.Forms.TextBox tbFolder;

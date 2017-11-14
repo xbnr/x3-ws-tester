@@ -8,9 +8,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using static System.Environment;
 
-namespace ConsoleTester
+namespace ConsoleTester.UI
 {
     public partial class Workspace : UserControl
     {
@@ -152,7 +151,7 @@ namespace ConsoleTester
 
         private void launch_Click(object sender, EventArgs e)
         {
-            Logger logger = new Logger(tbLogs);
+            Logger logger = new Logger(MainForm.LogControl);
             SOAPConfig conf = GetConfigFromUI();
 
             var ws = new WebServiceCall(conf, logger);
@@ -191,7 +190,7 @@ namespace ConsoleTester
         {
             var folder = new OpenFileDialog();
             folder.Multiselect = false;
-            folder.InitialDirectory = Environment.GetFolderPath(SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
+            folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
             var result = folder.ShowDialog();
 
             tbXmlFilename.Text = folder.FileName;
@@ -205,7 +204,7 @@ namespace ConsoleTester
 
         private void llClearConsole_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            tbLogs.Clear();
+            MainForm.LogControl.Clear();
         }
 
         private void cbMode_SelectedIndexChanged(object sender, EventArgs e)
