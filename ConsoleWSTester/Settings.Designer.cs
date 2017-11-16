@@ -58,5 +58,17 @@ namespace ConsoleTester {
                 this["SubFolders"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastSelectedDirectory {
+            get {
+                return ((string)(this["LastSelectedDirectory"]));
+            }
+            set {
+                this["LastSelectedDirectory"] = value;
+            }
+        }
     }
 }

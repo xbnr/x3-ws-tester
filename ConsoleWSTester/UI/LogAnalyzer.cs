@@ -59,6 +59,7 @@ namespace ConsoleTester.UI
             Settings.Default.XmlFilename = tbFolder.Text;
             Settings.Default.Filter = tbFilter.Text;
             Settings.Default.SubFolders = cbRecurseDir.Checked;
+            Settings.Default.Save();
         }
 
         private void LogAnalyzer_Load(object sender, EventArgs e)
