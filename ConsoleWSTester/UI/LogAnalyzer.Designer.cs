@@ -38,7 +38,6 @@
             this.lbFolder = new System.Windows.Forms.Label();
             this.btAnalyze = new System.Windows.Forms.Button();
             this.llOpenFolder = new System.Windows.Forms.LinkLabel();
-            this.llClearLogs = new System.Windows.Forms.LinkLabel();
             this.llExcerptResult = new System.Windows.Forms.LinkLabel();
             this.panelXmlFile.SuspendLayout();
             this.SuspendLayout();
@@ -152,18 +151,6 @@
             this.llOpenFolder.Text = "Open result folder";
             this.llOpenFolder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llOpenFolder_LinkClicked);
             // 
-            // llClearLogs
-            // 
-            this.llClearLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.llClearLogs.AutoSize = true;
-            this.llClearLogs.Location = new System.Drawing.Point(136, 354);
-            this.llClearLogs.Name = "llClearLogs";
-            this.llClearLogs.Size = new System.Drawing.Size(53, 13);
-            this.llClearLogs.TabIndex = 27;
-            this.llClearLogs.TabStop = true;
-            this.llClearLogs.Text = "Clear logs";
-            this.llClearLogs.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llClearLogs_LinkClicked);
-            // 
             // llExcerptResult
             // 
             this.llExcerptResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -182,7 +169,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(818, 374);
             this.Controls.Add(this.llExcerptResult);
-            this.Controls.Add(this.llClearLogs);
             this.Controls.Add(this.llOpenFolder);
             this.Controls.Add(this.btAnalyze);
             this.Controls.Add(this.panelXmlFile);
@@ -207,7 +193,6 @@
         private System.Windows.Forms.CheckBox cbRecurseDir;
         private System.Windows.Forms.TextBox tbFilter;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel llClearLogs;
         private System.Windows.Forms.LinkLabel llOpenConfigurationFile;
         private System.Windows.Forms.LinkLabel llExcerptResult;
     }
