@@ -30,7 +30,17 @@ namespace ConsoleTester
             return System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Sage", "X3WsTester");
         }
 
-        internal static string GetAppliVersion(bool applicationNameOrVersion)
+        internal static string GetApplicationName()
+        {
+            return GetAppliVersion(true);
+        }
+
+        internal static string GetApplicationVersion()
+        {
+            return GetAppliVersion(false);
+        }
+
+        private static string GetAppliVersion(bool applicationNameOrVersion)
         {
             Assembly ass = System.Reflection.Assembly.GetEntryAssembly();
             if (ass == null)

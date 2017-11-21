@@ -13,6 +13,8 @@ namespace ConsoleTester.UI
 {
     public partial class MainForm : Form
     {
+
+        public static MainForm Instance { get; private set; }
         public static DockPanel MainDockPanel { get; private set; }
 
         public static TextBox LogControl { get; private set; }
@@ -25,7 +27,8 @@ namespace ConsoleTester.UI
 
         private void Init()
         {
-            this.Text = Program.GetAppliVersion(true) + " - " + Program.GetAppliVersion(false);
+            this.Text = Program.GetApplicationName() + " - " + Program.GetApplicationVersion();
+            Instance = this;
             var treeView = new FileSystemTree();
             treeView.Show(dockPanelMain, DockState.DockLeft);
             var logs = new Logs();
@@ -49,6 +52,12 @@ namespace ConsoleTester.UI
         {
             var soapTester = new WsSOAPTester();
             soapTester.Show(dockPanelMain, DockState.Document);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var about = new AboutForm();
+            about.ShowDialog();
         }
     }
 }

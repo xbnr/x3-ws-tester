@@ -21,6 +21,9 @@ namespace ConsoleTester.LogsAnalyzer
         public List<string> ChildKeywords { get; set; }
 
         [JsonProperty]
+        public List<string> Options { get; set; }
+
+        [JsonProperty]
         public List<Result> Results { get; set; }
 
         [JsonProperty]

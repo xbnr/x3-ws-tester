@@ -17,6 +17,10 @@ namespace ConsoleTester.LogsAnalyzer
         public string TemplateValue { get; set; }
 
         [JsonProperty]
+        public double? Monitoring { get; set; }
+
+
+        [JsonProperty]
         public string Content { get; set; }
 
         [JsonProperty]

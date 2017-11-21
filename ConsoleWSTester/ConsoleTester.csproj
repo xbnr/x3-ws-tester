@@ -102,6 +102,12 @@
     <Compile Include="LogsAnalyzer\LogAnalyze.cs" />
     <Compile Include="LogsAnalyzer\Result.cs" />
     <Compile Include="LogsAnalyzer\Rules.cs" />
+    <Compile Include="UI\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Browser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,8 @@
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
     </Compile>
     <Compile Include="LogsAnalyzer\Rule.cs" />
+    <Compile Include="UI\Updater.cs" />
+    <Compile Include="UI\VersionInformation.cs" />
     <Compile Include="UI\WsSOAPTester.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +201,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UI\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Browser.resx">
       <DependentUpon>Browser.cs</DependentUpon>
     </EmbeddedResource>

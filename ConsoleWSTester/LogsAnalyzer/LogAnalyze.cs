@@ -159,6 +159,9 @@ namespace ConsoleTester.LogsAnalyzer
                     index++;
                 }
             }
+
+            ProcessMonitoring(this.rules, file);
+
             int nbResult = this.rules.CountResults();
             if (nbResult > 0)
             {
@@ -167,6 +170,57 @@ namespace ConsoleTester.LogsAnalyzer
             }
             ClearResults(rules);
         }
+
+        private void ProcessMonitoring(Rules rules, FileInfo file)
+        {
+            List<double> results = new List<double>();
+            foreach (var item in rules.RulesList.Where(p => p.Options != null))
+            {
+                foreach (var r in item.Results.Where(p => p.Monitoring.HasValue))
+                {
+                    results.Add(r.Monitoring.Value);
+                }
+                item.Results.RemoveAll(p => p.Monitoring.HasValue);
+            }
+
+            double sum = 0;
+            double min = double.MaxValue;
+            double max = 0;
+            foreach (var result in results)
+            {
+                sum += result;
+                if ( result < min)
+                {
+                    min = result;
+                }
+                if (result > max)
+                {
+                    max = result;
+                }
+            }
+
+
+            double average = 0;
+            if (results.Count > 0)
+            {
+                average = sum / results.Count;
+
+                string frienlyMesg = $"average: {Math.Round(average, 0)}, min: {Math.Round(min)}, max: {Math.Round(max)}, count: {results.Count} ";
+                this.logger.Log(frienlyMesg);
+
+                var rule = rules.RulesList.FirstOrDefault(p => p.Options != null);
+                if (rule != null)
+                {
+                    rule.Results.Add(
+                        new Result() {
+                        File = file.FullName,
+                        Content = frienlyMesg
+                    });
+
+                }
+            }
+        }
+
 
         internal void SaveResults(Rules rules, FileInfo file)
         {
@@ -279,6 +333,7 @@ namespace ConsoleTester.LogsAnalyzer
                     }
                     rule.Results?.Add(result);
                 }
+
                 // Options to manage
                 if (rule.ChildKeywords?.Count > 0)
                 {
@@ -313,6 +368,7 @@ namespace ConsoleTester.LogsAnalyzer
         {
             bool found = true;
             string templateValue = null;
+            double? monitoring = null;
             foreach (var keyword in keywords)
             {
                 string keyw = GetKeyword(keyword);
@@ -337,6 +393,10 @@ namespace ConsoleTester.LogsAnalyzer
                 {
                     templateValue = GetTemplateValue(keyword, line);
                 }
+                else if (rule.Options?.Count > 0)
+                {
+                    monitoring = GetOptionValue(keyword, line);
+                }
             }
 
             if (found)
@@ -345,6 +405,8 @@ namespace ConsoleTester.LogsAnalyzer
                 result.Line = index;
                 result.Content = line;
                 result.TemplateValue = templateValue;
+                if (monitoring != null)
+                    result.Monitoring = monitoring.Value;
                 return result;
             }
             return null;
@@ -357,6 +419,11 @@ namespace ConsoleTester.LogsAnalyzer
             if (indexGuid >= 0)
             {
                 keyw = keyword.Substring(0, indexGuid);
+            }
+            int indexValue = keyword.IndexOf("{value}");
+            if (indexValue >= 0)
+            {
+                keyw = keyword.Substring(0, indexValue);
             }
 
             return keyw;
@@ -391,6 +458,34 @@ namespace ConsoleTester.LogsAnalyzer
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// "rss":408518656
+        /// "rss":{value}
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        private static double? GetOptionValue(string template, string line)
+        {
+            double? result = null;
+            string keyw = GetKeyword(template);
+            int i = line.IndexOf(keyw);
+            if (i >= 0)
+            {
+                string templateValue = line.Substring(i + keyw.Length);
+                string[] templateValueArray = templateValue.Split(new char[] { ',', '}', ' ', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                if (templateValueArray.Count() > 0)
+                {
+                    double r = 0;
+                    if (double.TryParse(templateValueArray[0], out r))
+                    {
+                        result = r;
+                    }
+                }
+            }
+            return result;
         }
 
     }

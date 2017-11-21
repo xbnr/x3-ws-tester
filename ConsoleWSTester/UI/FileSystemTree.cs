@@ -108,6 +108,10 @@ namespace ConsoleTester.UI
             tvFileSystem.TopNode.Nodes.Clear();
 
             var dir = new DirectoryInfo(Program.GetWorkspaceDirectory());
+            if (! dir.Exists)
+            {
+                return;
+            }
             var files = dir.GetFiles();
 
             foreach (var item in files)
