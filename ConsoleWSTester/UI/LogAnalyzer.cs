@@ -1,4 +1,5 @@
 ﻿using ConsoleTester.LogsAnalyzer;
+using CustomControls.Controls;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -17,6 +18,7 @@ namespace ConsoleTester.UI
         private void btBrowseFile_Click(object sender, EventArgs e)
         {
             var folderDialog = new FolderBrowserDialog();
+            folderDialog.ShowNewFolderButton = true;
             folderDialog.RootFolder = Environment.SpecialFolder.UserProfile;
             folderDialog.SelectedPath = !string.IsNullOrEmpty(tbFolder.Text) ? tbFolder.Text : Program.GetWorkspaceDirectory();
             var result = folderDialog.ShowDialog();
@@ -45,7 +47,7 @@ namespace ConsoleTester.UI
 
         private void llOpenConfigurationFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string configFilename = LogAnalyze.GetRulesFilename();
+            string configFilename = LogAnalyze.GetConfigFilename();
             Program.OpenJson(configFilename);
         }
 
@@ -59,6 +61,7 @@ namespace ConsoleTester.UI
             Settings.Default.XmlFilename = tbFolder.Text;
             Settings.Default.Filter = tbFilter.Text;
             Settings.Default.SubFolders = cbRecurseDir.Checked;
+            Settings.Default.UnZipFiles = unzipFiles.Checked;
             Settings.Default.Save();
         }
 
@@ -71,6 +74,7 @@ namespace ConsoleTester.UI
         {
             tbFolder.Text = Settings.Default.XmlFilename;
             tbFilter.Text = Settings.Default.Filter;
+            unzipFiles.Checked = Settings.Default.UnZipFiles;
             cbRecurseDir.Checked = Settings.Default.SubFolders;
         }
 

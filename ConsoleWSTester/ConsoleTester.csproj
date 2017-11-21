@@ -102,6 +102,11 @@
     <Compile Include="LogsAnalyzer\LogAnalyze.cs" />
     <Compile Include="LogsAnalyzer\Result.cs" />
     <Compile Include="LogsAnalyzer\Rules.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="UI\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +119,7 @@
     <Compile Include="UI\Browser.Designer.cs">
       <DependentUpon>Browser.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Enums.cs" />
     <Compile Include="UI\Logs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,8 +145,16 @@
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
     </Compile>
     <Compile Include="LogsAnalyzer\Rule.cs" />
+    <Compile Include="UI\OpenFileDialogEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\OpenFileDialogEx.Designer.cs">
+      <DependentUpon>OpenFileDialogEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\structs.cs" />
     <Compile Include="UI\Updater.cs" />
     <Compile Include="UI\VersionInformation.cs" />
+    <Compile Include="UI\Win32.cs" />
     <Compile Include="UI\WsSOAPTester.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +215,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -218,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LogAnalyzer.resx">
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\OpenFileDialogEx.resx">
+      <DependentUpon>OpenFileDialogEx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\WsSOAPTester.resx">
       <DependentUpon>WsSOAPTester.cs</DependentUpon>

@@ -39,6 +39,7 @@
             this.btAnalyze = new System.Windows.Forms.Button();
             this.llOpenFolder = new System.Windows.Forms.LinkLabel();
             this.llExcerptResult = new System.Windows.Forms.LinkLabel();
+            this.unzipFiles = new System.Windows.Forms.CheckBox();
             this.panelXmlFile.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +47,7 @@
             // 
             this.panelXmlFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelXmlFile.Controls.Add(this.unzipFiles);
             this.panelXmlFile.Controls.Add(this.llOpenConfigurationFile);
             this.panelXmlFile.Controls.Add(this.tbFilter);
             this.panelXmlFile.Controls.Add(this.label1);
@@ -55,7 +57,7 @@
             this.panelXmlFile.Controls.Add(this.lbFolder);
             this.panelXmlFile.Location = new System.Drawing.Point(12, 12);
             this.panelXmlFile.Name = "panelXmlFile";
-            this.panelXmlFile.Size = new System.Drawing.Size(794, 53);
+            this.panelXmlFile.Size = new System.Drawing.Size(794, 77);
             this.panelXmlFile.TabIndex = 25;
             // 
             // llOpenConfigurationFile
@@ -131,7 +133,7 @@
             // 
             // btAnalyze
             // 
-            this.btAnalyze.Location = new System.Drawing.Point(12, 71);
+            this.btAnalyze.Location = new System.Drawing.Point(12, 91);
             this.btAnalyze.Name = "btAnalyze";
             this.btAnalyze.Size = new System.Drawing.Size(371, 33);
             this.btAnalyze.TabIndex = 17;
@@ -162,6 +164,18 @@
             this.llExcerptResult.TabStop = true;
             this.llExcerptResult.Text = "Open Excerp result ";
             this.llExcerptResult.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llExcerptResult_LinkClicked);
+            // 
+            // unzipFiles
+            // 
+            this.unzipFiles.AutoSize = true;
+            this.unzipFiles.Checked = true;
+            this.unzipFiles.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.unzipFiles.Location = new System.Drawing.Point(61, 57);
+            this.unzipFiles.Name = "unzipFiles";
+            this.unzipFiles.Size = new System.Drawing.Size(118, 17);
+            this.unzipFiles.TabIndex = 29;
+            this.unzipFiles.Text = "Unzip ZIPpped files";
+            this.unzipFiles.UseVisualStyleBackColor = true;
             // 
             // LogAnalyzer
             // 
@@ -195,5 +209,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel llOpenConfigurationFile;
         private System.Windows.Forms.LinkLabel llExcerptResult;
+        private System.Windows.Forms.CheckBox unzipFiles;
     }
 }

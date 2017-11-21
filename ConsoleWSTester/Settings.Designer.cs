@@ -61,13 +61,13 @@ namespace ConsoleTester {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LastSelectedDirectory {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UnZipFiles {
             get {
-                return ((string)(this["LastSelectedDirectory"]));
+                return ((bool)(this["UnZipFiles"]));
             }
             set {
-                this["LastSelectedDirectory"] = value;
+                this["UnZipFiles"] = value;
             }
         }
     }

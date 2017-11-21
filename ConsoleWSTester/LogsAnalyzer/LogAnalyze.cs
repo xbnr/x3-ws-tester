@@ -19,8 +19,8 @@ namespace ConsoleTester.LogsAnalyzer
         private ILogger logger;
         private Rules rules;
 
-        internal static readonly string ResultRulesShortName = "RulesResult";
-        internal static readonly string RulesShortName = "RulesConfig";
+        internal static readonly string ResultRulesShortName = "Result";
+        internal static readonly string RulesShortName = "LogAnalysisConfig";
 
         internal static string GetResultRulesShortFilename(FileInfo file)
         {
@@ -44,14 +44,14 @@ namespace ConsoleTester.LogsAnalyzer
             return resultDirectoryTarget;
         }
 
-        internal static string GetRulesShortFilename()
+        internal static string GetConfigShortFilename()
         {
             return $"{RulesShortName}.json";
         }
 
-        internal static string GetRulesFilename()
+        internal static string GetConfigFilename()
         {
-            return Path.Combine(Program.GetWorkspaceDirectory(), GetRulesShortFilename());
+            return Path.Combine(Program.GetWorkspaceDirectory(), GetConfigShortFilename());
         }
 
         internal LogAnalyze(string folderToAnalyze, string filter, bool recurseSubFolder, ILogger logger)
@@ -64,7 +64,7 @@ namespace ConsoleTester.LogsAnalyzer
 
         private Rules LoadRules()
         {
-            string fileName = GetRulesFilename();
+            string fileName = GetConfigFilename();
             if (!File.Exists(fileName))
             {
                 return null;
@@ -131,11 +131,19 @@ namespace ConsoleTester.LogsAnalyzer
 
         private void CreateDefaultConfigFile()
         {
-            string destination = GetRulesFilename();
-            this.logger.Log($"Create ConfigFile: {destination}");
+            string fileName = GetConfigFilename();
+            this.logger.Log($"Create ConfigFile: {fileName}");
             this.rules = CreateDefaultConfig();
-            SaveResults(this.rules, new FileInfo(destination));
+
+            string wsDirectory = Program.GetWorkspaceDirectory();
+            if (!Directory.Exists(wsDirectory))
+            {
+                Directory.CreateDirectory(wsDirectory);
+            }
+            string json = JsonConvert.SerializeObject(rules, Formatting.Indented, this.JsonSerializerSettings);
+            File.WriteAllText(fileName, json, Encoding.UTF8);
         }
+
 
         private FileInfo[] GetAllFiles(string folder, string searchPattern, bool recurseDir)
         {
@@ -189,7 +197,7 @@ namespace ConsoleTester.LogsAnalyzer
             foreach (var result in results)
             {
                 sum += result;
-                if ( result < min)
+                if (result < min)
                 {
                     min = result;
                 }
@@ -205,21 +213,24 @@ namespace ConsoleTester.LogsAnalyzer
             {
                 average = sum / results.Count;
 
-                string frienlyMesg = $"average: {Math.Round(average, 0)}, min: {Math.Round(min)}, max: {Math.Round(max)}, count: {results.Count} ";
+                string frienlyMesg = $"{file.Name} average: {Math.Round(average, 0)}, min: {Math.Round(min)}, max: {Math.Round(max)}, count: {results.Count} ";
                 this.logger.Log(frienlyMesg);
 
                 var rule = rules.RulesList.FirstOrDefault(p => p.Options != null);
                 if (rule != null)
                 {
                     rule.Results.Add(
-                        new Result() {
-                        File = file.FullName,
-                        Content = frienlyMesg
-                    });
+                        new Result()
+                        {
+                            File = file.FullName,
+                            Content = frienlyMesg
+                        });
 
                 }
             }
         }
+
+       
 
 
         internal void SaveResults(Rules rules, FileInfo file)
@@ -232,16 +243,7 @@ namespace ConsoleTester.LogsAnalyzer
             string filename = GetResultRulesFilename(file);
             rules.File = file.FullName;
 
-            string json = JsonConvert.SerializeObject(rules, Formatting.Indented, new JsonSerializerSettings
-            {
-                Converters = new List<JsonConverter> { new StringEnumConverter() },
-                NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.Indented,
-                DefaultValueHandling = DefaultValueHandling.Include,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
+            string json = JsonConvert.SerializeObject(rules, Formatting.Indented, this.JsonSerializerSettings);
 
             int nbResults = 0;
             string resultsTitle = "";
@@ -256,6 +258,17 @@ namespace ConsoleTester.LogsAnalyzer
             this.logger.Log($"Save result in {filename}. {resultsTitle} Total results: {nbResults}", nbResults > 0);
             File.WriteAllText(filename, json, Encoding.UTF8);
         }
+
+        private JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
+        {
+            Converters = new List<JsonConverter> { new StringEnumConverter() },
+            NullValueHandling = NullValueHandling.Ignore,
+            Formatting = Formatting.Indented,
+            DefaultValueHandling = DefaultValueHandling.Include,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        };
 
 
         private void AggregateResults()
@@ -288,17 +301,7 @@ namespace ConsoleTester.LogsAnalyzer
 
         private void SaveExcerpt(string directoryTarget, Dictionary<string, List<Result>> resultDic)
         {
-            string json = JsonConvert.SerializeObject(resultDic, Formatting.Indented, new JsonSerializerSettings
-            {
-                Converters = new List<JsonConverter> { new StringEnumConverter() },
-                NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.Indented,
-                DefaultValueHandling = DefaultValueHandling.Include,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
-
+            string json = JsonConvert.SerializeObject(resultDic, Formatting.Indented, this.JsonSerializerSettings);
             string excerptFileName = Path.Combine(directoryTarget, "excerptResults.json");
             this.logger.Log($"Save excerpt in {excerptFileName}.");
             File.WriteAllText(excerptFileName, json, Encoding.UTF8);

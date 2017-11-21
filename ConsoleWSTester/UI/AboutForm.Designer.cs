@@ -145,7 +145,7 @@ namespace ConsoleTester.UI
             this._labelInformation.Name = "_labelInformation";
             this._labelInformation.ReadOnly = true;
             // 
-            // MdAboutForm
+            // AboutForm
             // 
             resources.ApplyResources(this, "$this");
             this.CancelButton = this._OKButton;
@@ -163,7 +163,7 @@ namespace ConsoleTester.UI
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "MdAboutForm";
+            this.Name = "AboutForm";
             this.ShowInTaskbar = false;
             this.ResumeLayout(false);
             this.PerformLayout();
