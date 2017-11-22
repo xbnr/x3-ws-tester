@@ -59,5 +59,10 @@ namespace ConsoleTester.UI
             var about = new AboutForm();
             about.ShowDialog();
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

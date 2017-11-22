@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
@@ -71,7 +72,8 @@ namespace ConsoleTester.UI
             {
                 return OnLineVersion;
             }
-            string urlInformation = "";// ConfigurationManager.AppSettings["Application.UrlUpdateInformation"];
+            string urlInformation = ConfigurationManager.AppSettings["Application.UrlUpdateInformation"];
+            urlInformation = WebUtility.UrlDecode(urlInformation);
             List<VersionInformation> versions = new List<VersionInformation>();
             if (!string.IsNullOrEmpty(urlInformation))
             {
@@ -79,8 +81,8 @@ namespace ConsoleTester.UI
                 {
                     versions = DownloadJsonFiles(urlInformation);
                 }
-                else if (urlInformation.StartsWith("http://"))
-                {
+                else if (urlInformation.StartsWith("http://") || urlInformation.StartsWith("https://"))
+                {                    
                     versions = DownloadJsonHttp(urlInformation);
                 }
             }
