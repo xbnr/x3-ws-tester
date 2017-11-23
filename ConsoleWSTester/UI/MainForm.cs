@@ -64,5 +64,10 @@ namespace ConsoleTester.UI
         {
             this.Close();
         }
+
+        private void rESTTesterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

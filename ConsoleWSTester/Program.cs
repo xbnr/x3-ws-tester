@@ -58,15 +58,22 @@ namespace ConsoleTester
 
         internal static void OpenJson(string configFilename)
         {
+            OpenJson(configFilename, null);
+        }
+
+        internal static void OpenJson(string configFilename, int? lineNumber)
+        {
             List<string> preferences = new List<string>();
-            preferences.Add(@"C:\Program Files (x86)\Microsoft VS Code\Code.exe");
+            // https://stackoverflow.com/questions/30169715/how-do-i-open-a-file-from-a-prompt-with-vs-code-and-go-to-a-specific-line-number
+            // code -g file1:<line>:<column?> file2:<line>:<column?> file3:<line>:<column?>
+            // preferences.Add(@"C:\Program Files (x86)\Microsoft VS Code\Code.exe"); :
             preferences.Add(@"notepad++.exe");
             preferences.Add(@"notepad2.exe");
             preferences.Add(@"notepad.exe");
 
             foreach (var item in preferences)
             {
-                if (OpenConfigWith(item, configFilename))
+                if (OpenConfigWith(item, "\"" + configFilename + "\""  + (lineNumber != null ? " -n" + lineNumber : "")))
                     break;
 
             }

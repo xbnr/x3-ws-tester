@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.IO.Compression;
 using System.Text.RegularExpressions;
 
 namespace ConsoleTester.LogsAnalyzer
@@ -125,7 +126,6 @@ namespace ConsoleTester.LogsAnalyzer
             }
 
             AggregateResults();
-
             this.logger.Log($"Analyze finished: {this.NbTotalResult} results.");
         }
 
@@ -230,8 +230,34 @@ namespace ConsoleTester.LogsAnalyzer
             }
         }
 
-       
 
+        internal string[] UnZipArchives()
+        {
+            List<string> result = new List<string>();
+
+            return result.ToArray();
+        }
+
+        private void Unzip(string zipArchiveFile)
+        {
+            string destDir = Path.Combine(Path.GetDirectoryName(zipArchiveFile), Path.GetFileNameWithoutExtension(zipArchiveFile));
+            Directory.CreateDirectory(destDir);
+
+            using (var file = File.OpenRead(zipArchiveFile))
+            {
+                using (ZipArchive archive = new ZipArchive(file, ZipArchiveMode.Read))
+                {
+                    foreach (var entry in archive.Entries)
+                    {
+                        entry.ExtractToFile(destDir);
+                        //using (var stream = entry.Open())
+                        //{
+
+                        //}
+                    }
+                }
+            }
+        }
 
         internal void SaveResults(Rules rules, FileInfo file)
         {
@@ -273,6 +299,7 @@ namespace ConsoleTester.LogsAnalyzer
 
         private void AggregateResults()
         {
+
             string directoryTarget = GetResultDirTarget();
             var filesResult = GetAllFiles(directoryTarget, "*.json", false);
             var resultDictionary = new Dictionary<string, List<Result>>();
@@ -280,7 +307,7 @@ namespace ConsoleTester.LogsAnalyzer
             foreach (var fileName in filesResult)
             {
                 var rules = JsonConvert.DeserializeObject<Rules>(File.ReadAllText(fileName.FullName));
-                foreach (var rule in rules.RulesList)
+                foreach (var rule in rules?.RulesList)
                 {
                     if (rule.Results != null)
                         foreach (var result in rule.Results)
@@ -305,6 +332,13 @@ namespace ConsoleTester.LogsAnalyzer
             string excerptFileName = Path.Combine(directoryTarget, "excerptResults.json");
             this.logger.Log($"Save excerpt in {excerptFileName}.");
             File.WriteAllText(excerptFileName, json, Encoding.UTF8);
+        }
+
+        internal void ShowExcerpt(System.Windows.Forms.TreeView treeview)
+        {
+            string excerptFileName = Path.Combine(GetResultDirTarget(), "excerptResults.json");
+            WebService.JsonTreeView.JsonTreeViewLoader.LoadJsonToTreeView(treeview, File.ReadAllText(excerptFileName));
+            treeview.TopNode?.Expand();
         }
 
         private static void ClearResults(Rules rules)
@@ -405,7 +439,7 @@ namespace ConsoleTester.LogsAnalyzer
             if (found)
             {
                 var result = new Result();
-                result.Line = index;
+                result.Line = index +1;
                 result.Content = line;
                 result.TemplateValue = templateValue;
                 if (monitoring != null)

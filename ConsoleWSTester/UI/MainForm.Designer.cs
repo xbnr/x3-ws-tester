@@ -33,12 +33,13 @@
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewLogAnalyzer = new System.Windows.Forms.ToolStripMenuItem();
             this.soapTesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dockPanelMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.dockPanelLogs = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rESTTesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +68,8 @@
             // 
             this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiNewLogAnalyzer,
-            this.soapTesterToolStripMenuItem});
+            this.soapTesterToolStripMenuItem,
+            this.rESTTesterToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.newToolStripMenuItem.Text = "New";
@@ -75,16 +77,29 @@
             // tsmiNewLogAnalyzer
             // 
             this.tsmiNewLogAnalyzer.Name = "tsmiNewLogAnalyzer";
-            this.tsmiNewLogAnalyzer.Size = new System.Drawing.Size(140, 22);
+            this.tsmiNewLogAnalyzer.Size = new System.Drawing.Size(152, 22);
             this.tsmiNewLogAnalyzer.Text = "Log analyzer";
             this.tsmiNewLogAnalyzer.Click += new System.EventHandler(this.tsmiNewLogAnalayzer_Click);
             // 
             // soapTesterToolStripMenuItem
             // 
             this.soapTesterToolStripMenuItem.Name = "soapTesterToolStripMenuItem";
-            this.soapTesterToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.soapTesterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.soapTesterToolStripMenuItem.Text = "Soap tester";
             this.soapTesterToolStripMenuItem.Click += new System.EventHandler(this.soapTesterToolStripMenuItem_Click);
+            // 
+            // checkForUpdatesToolStripMenuItem
+            // 
+            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.checkForUpdatesToolStripMenuItem.Text = "Check for updates";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -127,18 +142,12 @@
             this.dockPanelLogs.Size = new System.Drawing.Size(200, 100);
             this.dockPanelLogs.TabIndex = 0;
             // 
-            // exitToolStripMenuItem
+            // rESTTesterToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // checkForUpdatesToolStripMenuItem
-            // 
-            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.checkForUpdatesToolStripMenuItem.Text = "Check for updates";
+            this.rESTTesterToolStripMenuItem.Name = "rESTTesterToolStripMenuItem";
+            this.rESTTesterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rESTTesterToolStripMenuItem.Text = "REST tester";
+            this.rESTTesterToolStripMenuItem.Click += new System.EventHandler(this.rESTTesterToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -172,5 +181,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rESTTesterToolStripMenuItem;
     }
 }

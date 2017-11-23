@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelXmlFile = new System.Windows.Forms.Panel();
+            this.unzipFiles = new System.Windows.Forms.CheckBox();
             this.llOpenConfigurationFile = new System.Windows.Forms.LinkLabel();
             this.tbFilter = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,8 +41,11 @@
             this.btAnalyze = new System.Windows.Forms.Button();
             this.llOpenFolder = new System.Windows.Forms.LinkLabel();
             this.llExcerptResult = new System.Windows.Forms.LinkLabel();
-            this.unzipFiles = new System.Windows.Forms.CheckBox();
+            this.treeViewResult = new System.Windows.Forms.TreeView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelXmlFile.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelXmlFile
@@ -59,6 +64,18 @@
             this.panelXmlFile.Name = "panelXmlFile";
             this.panelXmlFile.Size = new System.Drawing.Size(794, 77);
             this.panelXmlFile.TabIndex = 25;
+            // 
+            // unzipFiles
+            // 
+            this.unzipFiles.AutoSize = true;
+            this.unzipFiles.Checked = true;
+            this.unzipFiles.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.unzipFiles.Location = new System.Drawing.Point(61, 57);
+            this.unzipFiles.Name = "unzipFiles";
+            this.unzipFiles.Size = new System.Drawing.Size(118, 17);
+            this.unzipFiles.TabIndex = 29;
+            this.unzipFiles.Text = "Unzip ZIPpped files";
+            this.unzipFiles.UseVisualStyleBackColor = true;
             // 
             // llOpenConfigurationFile
             // 
@@ -165,23 +182,38 @@
             this.llExcerptResult.Text = "Open Excerp result ";
             this.llExcerptResult.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llExcerptResult_LinkClicked);
             // 
-            // unzipFiles
+            // treeViewResult
             // 
-            this.unzipFiles.AutoSize = true;
-            this.unzipFiles.Checked = true;
-            this.unzipFiles.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.unzipFiles.Location = new System.Drawing.Point(61, 57);
-            this.unzipFiles.Name = "unzipFiles";
-            this.unzipFiles.Size = new System.Drawing.Size(118, 17);
-            this.unzipFiles.TabIndex = 29;
-            this.unzipFiles.Text = "Unzip ZIPpped files";
-            this.unzipFiles.UseVisualStyleBackColor = true;
+            this.treeViewResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeViewResult.ContextMenuStrip = this.contextMenuStrip1;
+            this.treeViewResult.Location = new System.Drawing.Point(12, 130);
+            this.treeViewResult.Name = "treeViewResult";
+            this.treeViewResult.Size = new System.Drawing.Size(794, 221);
+            this.treeViewResult.TabIndex = 29;
+            this.treeViewResult.DoubleClick += new System.EventHandler(this.treeViewResult_DoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openFileToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 26);
+            // 
+            // openFileToolStripMenuItem
+            // 
+            this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openFileToolStripMenuItem.Text = "Open file";
+            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
             // 
             // LogAnalyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(818, 374);
+            this.Controls.Add(this.treeViewResult);
             this.Controls.Add(this.llExcerptResult);
             this.Controls.Add(this.llOpenFolder);
             this.Controls.Add(this.btAnalyze);
@@ -192,6 +224,7 @@
             this.Load += new System.EventHandler(this.LogAnalyzer_Load);
             this.panelXmlFile.ResumeLayout(false);
             this.panelXmlFile.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,5 +243,8 @@
         private System.Windows.Forms.LinkLabel llOpenConfigurationFile;
         private System.Windows.Forms.LinkLabel llExcerptResult;
         private System.Windows.Forms.CheckBox unzipFiles;
+        private System.Windows.Forms.TreeView treeViewResult;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
     }
 }

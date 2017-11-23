@@ -1,5 +1,4 @@
 ﻿using ConsoleTester.LogsAnalyzer;
-using CustomControls.Controls;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -32,7 +31,12 @@ namespace ConsoleTester.UI
         {
             var logger = new LoggerToFile(Path.Combine(LogAnalyze.GetResultDirTarget(), "Report.txt"), MainForm.LogControl);
             var analyzer = new LogAnalyze(tbFolder.Text, tbFilter.Text, cbRecurseDir.Checked, logger);
+            if (unzipFiles.Checked)
+            {
+                analyzer.UnZipArchives();
+            }
             analyzer.LaunchAnalyze();
+            analyzer.ShowExcerpt(treeViewResult);
         }
 
         private void llOpenFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -82,6 +86,27 @@ namespace ConsoleTester.UI
         {
             var browser = new Browser();
             browser.Show(MainForm.MainDockPanel, DockState.Document);
+        }
+
+        private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (treeViewResult.SelectedNode != null)
+            {                
+                Program.OpenJson(treeViewResult.SelectedNode.Text);
+            }
+        }
+
+        private void treeViewResult_DoubleClick(object sender, EventArgs e)
+        {
+            string path = treeViewResult.SelectedNode.Text;
+            if (path.IndexOf("file: ")>=0)
+            {
+                path = path.Substring("file: ".Length);
+                string line = treeViewResult.SelectedNode.Parent.Nodes[0].Text.Substring("line: ".Length);
+                int lineNumber = int.Parse(line, System.Globalization.NumberStyles.Number);
+                Program.OpenJson(path, lineNumber);
+            }
+
         }
     }
 }

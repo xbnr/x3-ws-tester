@@ -8,14 +8,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace ConsoleTester.UI
 {
-    public partial class WsRESTControl : UserControl
+    public partial class WsRESTControl : DockContent
     {
         private string filename;
-        private List<CAWebService.CAdxParamKeyValue> parametersDS = new List<CAWebService.CAdxParamKeyValue>();
-
 
         public WsRESTControl()
         {
@@ -37,7 +36,7 @@ namespace ConsoleTester.UI
 
             if (string.IsNullOrEmpty(this.filename))
             {
-                this.filename = SOAPConfig.GetWorkspaceFilename();
+                this.filename = RESTConfig.GetWorkspaceFilename();
             }
             string json = JsonConvert.SerializeObject(config, Formatting.Indented, new JsonSerializerSettings
             {
@@ -56,21 +55,13 @@ namespace ConsoleTester.UI
         internal void LoadConfigFromJSON(string filename)
         {
             this.filename = filename;
-            SOAPConfig config = JsonConvert.DeserializeObject<SOAPConfig>(File.ReadAllText(filename));
+            RESTConfig config = JsonConvert.DeserializeObject<RESTConfig>(File.ReadAllText(filename));
             SetTextFromSettings(config.HostUrl, this.tbHost);
             SetTextFromSettings(config.Path, this.cbPath);
-            SetTextFromSettings(config.PoolAlias, this.tbPoolAlias);
            
             this.cbMode.SelectedIndex = (int)config.OperatMode;
             SetTextFromSettings(config.Login, this.tbLogin);
             SetTextFromSettings(config.Password, this.tbPassword);
-            SetTextFromSettings(config.RequestConfiguration, this.tbRequestConfiguration);
-
-            if (config.ObjectKeys != null)
-            {
-                parametersDS.AddRange(config.ObjectKeys);
-                dgKeyValue.DataSource = parametersDS;                
-            }
 
             ShowPanels();
         }
@@ -84,11 +75,6 @@ namespace ConsoleTester.UI
 
         private SOAPConfig GetConfigFromUI()
         {
-            CAWebService.CAdxParamKeyValue[] objectKeys = null;
-
-            objectKeys = new CAWebService.CAdxParamKeyValue[this.parametersDS.Count];
-            this.parametersDS.CopyTo(objectKeys);
-
             SOAPConfig conf = new SOAPConfig();
             string opStringVal = string.IsNullOrEmpty(cbMode.Text) ? WebServiceCall.OperationMode.Query.ToString() : cbMode.Text;
             WebServiceCall.OperationMode opEnum = WebServiceCall.OperationMode.Query;
@@ -102,8 +88,6 @@ namespace ConsoleTester.UI
             conf.PoolAlias = tbPoolAlias.Text;
             int listSize = 10;
             conf.ListSize = listSize;
-            conf.ObjectKeys = objectKeys;
-            conf.RequestConfiguration = tbRequestConfiguration.Text;
 
             conf.Login = tbLogin.Text;
             conf.Password = tbPassword.Text;
@@ -157,24 +141,9 @@ namespace ConsoleTester.UI
             return (WebServiceCall.OperationMode)Enum.Parse(typeof(WebServiceCall.OperationMode), cbMode.Text);
         }
 
-        private void btBrowse_Click(object sender, EventArgs e)
-        {
-            var folder = new OpenFileDialog();
-            folder.Multiselect = false;
-            folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
-            var result = folder.ShowDialog();
-
-            ShowFileText(folder.FileName);
-        }
-
         private void Workspace_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void llClearConsole_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            MainForm.LogControl.Clear();
         }
 
         private void cbMode_SelectedIndexChanged(object sender, EventArgs e)
@@ -191,11 +160,8 @@ namespace ConsoleTester.UI
         private void btAddParam_Click(object sender, EventArgs e)
         {
             var keyValue = new CAWebService.CAdxParamKeyValue();
-            keyValue.key = "Key" + this.parametersDS.Count;
             keyValue.value = "value";
-            this.parametersDS.Add(keyValue);
             dgKeyValue.DataSource = null;
-            dgKeyValue.DataSource = this.parametersDS;
         }
 
         private void btDelete_Click(object sender, EventArgs e)
@@ -206,9 +172,7 @@ namespace ConsoleTester.UI
                 CAdxParamKeyValue selectedValue = selectedObj.DataBoundItem as CAdxParamKeyValue;
                 if (selectedValue != null)
                 {
-                    this.parametersDS.Remove(selectedValue);
                     dgKeyValue.DataSource = null;
-                    dgKeyValue.DataSource = this.parametersDS;
                 }
             }
         }

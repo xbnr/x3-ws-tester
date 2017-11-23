@@ -85,7 +85,7 @@ namespace ConsoleTester.UI
         private string GetNewName(FileInfo fileToDuplicate)
         {
             int i = 2;
-            string result =  Path.Combine( fileToDuplicate.DirectoryName,  Path.GetFileNameWithoutExtension(fileToDuplicate.Name) + i.ToString("00") + fileToDuplicate.Extension);
+            string result = Path.Combine(fileToDuplicate.DirectoryName, Path.GetFileNameWithoutExtension(fileToDuplicate.Name) + i.ToString("00") + fileToDuplicate.Extension);
             while (File.Exists(result))
             {
                 result = Path.Combine(fileToDuplicate.DirectoryName, Path.GetFileNameWithoutExtension(fileToDuplicate.Name) + (i++).ToString("00") + fileToDuplicate.Extension);
@@ -96,7 +96,7 @@ namespace ConsoleTester.UI
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show($"Delete {SelectedFile.FullName} ?", "", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (SelectedFile != null && MessageBox.Show($"Delete {SelectedFile?.FullName} ?", "", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 SelectedFile.Delete();
                 BuildTreeView();
@@ -108,7 +108,7 @@ namespace ConsoleTester.UI
             tvFileSystem.TopNode.Nodes.Clear();
 
             var dir = new DirectoryInfo(Program.GetWorkspaceDirectory());
-            if (! dir.Exists)
+            if (!dir.Exists)
             {
                 return;
             }

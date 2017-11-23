@@ -85,6 +85,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
@@ -120,7 +122,6 @@
     <Compile Include="UI\Browser.Designer.cs">
       <DependentUpon>Browser.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Enums.cs" />
     <Compile Include="UI\Logs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,27 +147,13 @@
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
     </Compile>
     <Compile Include="LogsAnalyzer\Rule.cs" />
-    <Compile Include="UI\OpenFileDialogEx.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\OpenFileDialogEx.Designer.cs">
-      <DependentUpon>OpenFileDialogEx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\structs.cs" />
     <Compile Include="UI\Updater.cs" />
     <Compile Include="UI\VersionInformation.cs" />
-    <Compile Include="UI\Win32.cs" />
     <Compile Include="UI\WsRESTControl.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\WsRESTControl.Designer.cs">
       <DependentUpon>WsRESTControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\WsRESTTester.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\WsRESTTester.Designer.cs">
-      <DependentUpon>WsRESTTester.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\WsSOAPTester.cs">
       <SubType>Form</SubType>
@@ -174,6 +161,8 @@
     <Compile Include="UI\WsSOAPTester.Designer.cs">
       <DependentUpon>WsSOAPTester.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\JsonTreeView.cs" />
+    <Compile Include="WebService\RESTConfig.cs" />
     <Compile Include="WebService\SOAPConfig.cs" />
     <Compile Include="Connected Services\CAWebService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -198,7 +187,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\CAWebService\CAdxWebServiceXmlCC11.wsdl" />
     <None Include="Connected Services\CAWebService\ConsoleTester.CAWebService.CAdxResultXml.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -250,14 +241,8 @@
     <EmbeddedResource Include="UI\LogAnalyzer.resx">
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\OpenFileDialogEx.resx">
-      <DependentUpon>OpenFileDialogEx.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\WsRESTControl.resx">
       <DependentUpon>WsRESTControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\WsRESTTester.resx">
-      <DependentUpon>WsRESTTester.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\WsSOAPTester.resx">
       <DependentUpon>WsSOAPTester.cs</DependentUpon>

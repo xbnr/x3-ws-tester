@@ -122,7 +122,7 @@ if ((test-path $wixFileObj) -eq $false)
    exit 1;    
 }
 
-$setupName = ".\Setup\Tester.msi";
+$setupName = ".\Setup\WsTester.msi";
 $light = "C:\Program Files (x86)\WiX Toolset v4.0\bin\light.exe"
 &$light ($wixFileObj, $wixHeatFileObj, '-cultures:en-US', '-ext', 'WixUIExtension.dll', '-spdb', '-b', 'Release', '-o', $setupName)
 

@@ -35,8 +35,6 @@
             this.tbHost = new System.Windows.Forms.TextBox();
             this.cbMode = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbRequestConfiguration = new System.Windows.Forms.TextBox();
             this.labelParameters = new System.Windows.Forms.Label();
             this.labelLogin = new System.Windows.Forms.Label();
             this.tbLogin = new System.Windows.Forms.TextBox();
@@ -64,7 +62,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(3, 288);
+            this.button1.Location = new System.Drawing.Point(3, 348);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(663, 38);
             this.button1.TabIndex = 0;
@@ -102,7 +100,7 @@
             // 
             this.tbHost.Location = new System.Drawing.Point(124, 12);
             this.tbHost.Name = "tbHost";
-            this.tbHost.Size = new System.Drawing.Size(211, 20);
+            this.tbHost.Size = new System.Drawing.Size(509, 20);
             this.tbHost.TabIndex = 9;
             this.tbHost.Text = "http://localhost:8126";
             // 
@@ -129,23 +127,6 @@
             this.label3.Size = new System.Drawing.Size(85, 13);
             this.label3.TabIndex = 15;
             this.label3.Text = "Operation mode:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 129);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(114, 13);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Request configuration:";
-            // 
-            // tbRequestConfiguration
-            // 
-            this.tbRequestConfiguration.Location = new System.Drawing.Point(124, 126);
-            this.tbRequestConfiguration.Name = "tbRequestConfiguration";
-            this.tbRequestConfiguration.Size = new System.Drawing.Size(509, 20);
-            this.tbRequestConfiguration.TabIndex = 18;
-            this.tbRequestConfiguration.Text = "adxwss.optreturn=XML&adxwss.beautify=true";
             // 
             // labelParameters
             // 
@@ -199,7 +180,7 @@
             "/adxwsvc/services/CAdxWebServiceXmlCC"});
             this.cbPath.Location = new System.Drawing.Point(124, 37);
             this.cbPath.Name = "cbPath";
-            this.cbPath.Size = new System.Drawing.Size(211, 21);
+            this.cbPath.Size = new System.Drawing.Size(509, 21);
             this.cbPath.TabIndex = 33;
             this.cbPath.Text = "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC";
             // 
@@ -222,7 +203,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(660, 279);
+            this.tabControl1.Size = new System.Drawing.Size(660, 339);
             this.tabControl1.TabIndex = 37;
             // 
             // tabPage1
@@ -234,15 +215,13 @@
             this.tabPage1.Controls.Add(this.cbPath);
             this.tabPage1.Controls.Add(this.labelPoolAlias);
             this.tabPage1.Controls.Add(this.labelPath);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.tbRequestConfiguration);
             this.tabPage1.Controls.Add(this.tbHost);
             this.tabPage1.Controls.Add(this.cbMode);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(652, 253);
+            this.tabPage1.Size = new System.Drawing.Size(652, 313);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -310,7 +289,7 @@
             this.tabPageCredentials.Location = new System.Drawing.Point(4, 22);
             this.tabPageCredentials.Name = "tabPageCredentials";
             this.tabPageCredentials.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCredentials.Size = new System.Drawing.Size(652, 253);
+            this.tabPageCredentials.Size = new System.Drawing.Size(652, 313);
             this.tabPageCredentials.TabIndex = 1;
             this.tabPageCredentials.Text = "Credentials";
             this.tabPageCredentials.UseVisualStyleBackColor = true;
@@ -319,10 +298,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(659, 355);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button1);
             this.Name = "WsRESTControl";
-            this.Size = new System.Drawing.Size(675, 333);
             this.Load += new System.EventHandler(this.Workspace_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -344,8 +323,6 @@
         private System.Windows.Forms.TextBox tbHost;
         private System.Windows.Forms.ComboBox cbMode;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tbRequestConfiguration;
         private System.Windows.Forms.Label labelParameters;
         private System.Windows.Forms.Label labelLogin;
         private System.Windows.Forms.TextBox tbLogin;
