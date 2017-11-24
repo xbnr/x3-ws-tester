@@ -13,7 +13,7 @@ namespace ConsoleTester.WebService
     {
         public static class JsonTreeViewLoader
         {
-            public static void LoadJsonToTreeView(this TreeView treeView, string json)
+            public static void LoadJsonToTreeView(this TreeView treeView, string json, string rootTitle)
             {
                 if (string.IsNullOrWhiteSpace(json))
                 {
@@ -21,7 +21,7 @@ namespace ConsoleTester.WebService
                 }
 
                 var @object = JObject.Parse(json);
-                AddObjectNodes(@object, "JSON", treeView.Nodes);
+                AddObjectNodes(@object, string.IsNullOrEmpty(rootTitle) ? "JSON" : rootTitle, treeView.Nodes);
             }
 
             public static void AddObjectNodes(JObject @object, string name, TreeNodeCollection parent)

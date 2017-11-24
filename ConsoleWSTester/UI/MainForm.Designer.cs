@@ -33,13 +33,13 @@
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewLogAnalyzer = new System.Windows.Forms.ToolStripMenuItem();
             this.soapTesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rESTTesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dockPanelMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.dockPanelLogs = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.rESTTesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,16 +77,23 @@
             // tsmiNewLogAnalyzer
             // 
             this.tsmiNewLogAnalyzer.Name = "tsmiNewLogAnalyzer";
-            this.tsmiNewLogAnalyzer.Size = new System.Drawing.Size(152, 22);
+            this.tsmiNewLogAnalyzer.Size = new System.Drawing.Size(140, 22);
             this.tsmiNewLogAnalyzer.Text = "Log analyzer";
             this.tsmiNewLogAnalyzer.Click += new System.EventHandler(this.tsmiNewLogAnalayzer_Click);
             // 
             // soapTesterToolStripMenuItem
             // 
             this.soapTesterToolStripMenuItem.Name = "soapTesterToolStripMenuItem";
-            this.soapTesterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.soapTesterToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.soapTesterToolStripMenuItem.Text = "Soap tester";
             this.soapTesterToolStripMenuItem.Click += new System.EventHandler(this.soapTesterToolStripMenuItem_Click);
+            // 
+            // rESTTesterToolStripMenuItem
+            // 
+            this.rESTTesterToolStripMenuItem.Name = "rESTTesterToolStripMenuItem";
+            this.rESTTesterToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.rESTTesterToolStripMenuItem.Text = "REST tester";
+            this.rESTTesterToolStripMenuItem.Click += new System.EventHandler(this.rESTTesterToolStripMenuItem_Click);
             // 
             // checkForUpdatesToolStripMenuItem
             // 
@@ -131,7 +138,7 @@
             this.dockPanelMain.Location = new System.Drawing.Point(0, 27);
             this.dockPanelMain.Name = "dockPanelMain";
             this.dockPanelMain.RightToLeftLayout = true;
-            this.dockPanelMain.Size = new System.Drawing.Size(1038, 552);
+            this.dockPanelMain.Size = new System.Drawing.Size(1038, 638);
             this.dockPanelMain.SupportDeeplyNestedContent = true;
             this.dockPanelMain.TabIndex = 133;
             // 
@@ -142,18 +149,11 @@
             this.dockPanelLogs.Size = new System.Drawing.Size(200, 100);
             this.dockPanelLogs.TabIndex = 0;
             // 
-            // rESTTesterToolStripMenuItem
-            // 
-            this.rESTTesterToolStripMenuItem.Name = "rESTTesterToolStripMenuItem";
-            this.rESTTesterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rESTTesterToolStripMenuItem.Text = "REST tester";
-            this.rESTTesterToolStripMenuItem.Click += new System.EventHandler(this.rESTTesterToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1038, 580);
+            this.ClientSize = new System.Drawing.Size(1038, 666);
             this.Controls.Add(this.dockPanelMain);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;

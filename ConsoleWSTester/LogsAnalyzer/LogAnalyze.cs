@@ -307,6 +307,9 @@ namespace ConsoleTester.LogsAnalyzer
             foreach (var fileName in filesResult)
             {
                 var rules = JsonConvert.DeserializeObject<Rules>(File.ReadAllText(fileName.FullName));
+                if (rules == null)
+                    continue;
+
                 foreach (var rule in rules?.RulesList)
                 {
                     if (rule.Results != null)
@@ -337,7 +340,7 @@ namespace ConsoleTester.LogsAnalyzer
         internal void ShowExcerpt(System.Windows.Forms.TreeView treeview)
         {
             string excerptFileName = Path.Combine(GetResultDirTarget(), "excerptResults.json");
-            WebService.JsonTreeView.JsonTreeViewLoader.LoadJsonToTreeView(treeview, File.ReadAllText(excerptFileName));
+            WebService.JsonTreeView.JsonTreeViewLoader.LoadJsonToTreeView(treeview, File.ReadAllText(excerptFileName), excerptFileName);
             treeview.TopNode?.Expand();
         }
 
