@@ -31,15 +31,20 @@ namespace ConsoleTester.UI
 
         private void _linkLabelUpdate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            CheckLastUpdate();
+        }
+
+        internal void CheckLastUpdate()
+        {
             Updater updater = new Updater();
 
             if (updater.UpTodate())
             {
-                _labelMessageUpToDate.Text = "Parfait: Votre version est à jour !";
+                _labelMessageUpToDate.Text = "Perfect: your version is up to date !";
             }
             else
             {
-                _labelMessageUpToDate.Text = $"Une version plus récente est disponible: {updater.OnLineVersion?.Version}";
+                _labelMessageUpToDate.Text = $"A newer version is available: {updater.OnLineVersion?.Version}";
                 if (updater.OnLineVersion != null)
                 {
                     _urlDownload = updater.OnLineVersion.DownloadUrl;

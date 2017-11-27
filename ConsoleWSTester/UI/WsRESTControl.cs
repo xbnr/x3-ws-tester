@@ -24,7 +24,7 @@ namespace ConsoleTester.UI
 
         private void FillComboBox()
         {
-            cbMode.DataSource = Enum.GetNames(typeof(WebServiceCall.OperationMode));
+            // cbMode.DataSource = Enum.GetNames(typeof(WebServiceCall.OperationMode));
         }
 
         internal void SaveWorkspace()
@@ -58,34 +58,27 @@ namespace ConsoleTester.UI
             RESTConfig config = JsonConvert.DeserializeObject<RESTConfig>(File.ReadAllText(filename));
             SetTextFromSettings(config.HostUrl, this.tbHost);
             SetTextFromSettings(config.Path, this.cbPath);
-           
-            this.cbMode.SelectedIndex = (int)config.OperatMode;
+
+            // this.cbMode.SelectedIndex = (int)config.OperatMode;
             SetTextFromSettings(config.Login, this.tbLogin);
             SetTextFromSettings(config.Password, this.tbPassword);
 
             ShowPanels();
         }
 
-        private void ShowFileText(string xmlFile)
-        {
-            //this.tbXmlObject.Text = File.ReadAllText(xmlFile);
-            //this.tbXmlObject.ReadOnly = true;
-        }
-
-
+       
         private SOAPConfig GetConfigFromUI()
         {
             SOAPConfig conf = new SOAPConfig();
-            string opStringVal = string.IsNullOrEmpty(cbMode.Text) ? WebServiceCall.OperationMode.Query.ToString() : cbMode.Text;
-            WebServiceCall.OperationMode opEnum = WebServiceCall.OperationMode.Query;
-            if (!Enum.TryParse(opStringVal, out opEnum))
-            {
-                Console.WriteLine("Enum.Parse(" + opStringVal + ") failed");
-            }
-            conf.OperatMode = opEnum;
+            //string opStringVal = string.IsNullOrEmpty(cbMode.Text) ? WebServiceCall.OperationMode.Query.ToString() : cbMode.Text;
+            //WebServiceCall.OperationMode opEnum = WebServiceCall.OperationMode.Query;
+            //if (!Enum.TryParse(opStringVal, out opEnum))
+            //{
+            //    Console.WriteLine("Enum.Parse(" + opStringVal + ") failed");
+            //}
+            // conf.OperatMode = opEnum;
             conf.HostUrl = tbHost.Text;
             conf.Path = cbPath.Text;
-            conf.PoolAlias = tbPoolAlias.Text;
             int listSize = 10;
             conf.ListSize = listSize;
 
@@ -138,7 +131,7 @@ namespace ConsoleTester.UI
 
         private WebServiceCall.OperationMode GetAction()
         {
-            return (WebServiceCall.OperationMode)Enum.Parse(typeof(WebServiceCall.OperationMode), cbMode.Text);
+           return (WebServiceCall.OperationMode)Enum.Parse(typeof(WebServiceCall.OperationMode), "");
         }
 
         private void Workspace_Load(object sender, EventArgs e)
@@ -146,11 +139,6 @@ namespace ConsoleTester.UI
 
         }
 
-        private void cbMode_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ShowPanels();
-
-        }
 
         private void ShowPanels()
         {
@@ -166,7 +154,7 @@ namespace ConsoleTester.UI
 
         private void btDelete_Click(object sender, EventArgs e)
         {
-            if (dgKeyValue.SelectedRows.Count>0)
+            if (dgKeyValue.SelectedRows.Count > 0)
             {
                 var selectedObj = dgKeyValue.SelectedRows[0];
                 CAdxParamKeyValue selectedValue = selectedObj.DataBoundItem as CAdxParamKeyValue;

@@ -12,7 +12,6 @@ namespace ConsoleTester.UI
 	internal sealed partial class AboutForm
 	{
 	    private TextBox _labelProductName;
-		private Label _labelCopyright;
 		private TextBox _labelVersion;
 		private Label _labelInternalUse;
 		private Button _systemButton;
@@ -42,7 +41,6 @@ namespace ConsoleTester.UI
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this._labelProductName = new System.Windows.Forms.TextBox();
-            this._labelCopyright = new System.Windows.Forms.Label();
             this._labelVersion = new System.Windows.Forms.TextBox();
             this._labelInternalUse = new System.Windows.Forms.Label();
             this._systemButton = new System.Windows.Forms.Button();
@@ -62,13 +60,6 @@ namespace ConsoleTester.UI
             this._labelProductName.ForeColor = System.Drawing.Color.White;
             this._labelProductName.Name = "_labelProductName";
             this._labelProductName.ReadOnly = true;
-            // 
-            // _labelCopyright
-            // 
-            this._labelCopyright.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this._labelCopyright, "_labelCopyright");
-            this._labelCopyright.ForeColor = System.Drawing.Color.White;
-            this._labelCopyright.Name = "_labelCopyright";
             // 
             // _labelVersion
             // 
@@ -158,7 +149,6 @@ namespace ConsoleTester.UI
             this.Controls.Add(this._systemButton);
             this.Controls.Add(this._labelInternalUse);
             this.Controls.Add(this._labelProductName);
-            this.Controls.Add(this._labelCopyright);
             this.Controls.Add(this._labelVersion);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;

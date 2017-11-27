@@ -18,15 +18,8 @@ namespace ConsoleTester
         [JsonProperty]
         public string Path { get; set; }
 
-
         [JsonProperty]
         public string Language { get; set; }
-
-        [JsonProperty]
-        public string PublicName { get; set; }
-
-        [JsonProperty]
-        public string RequestConfiguration { get; set; }
 
         [JsonProperty]
         public string XmlObject { get; set; }
@@ -40,9 +33,6 @@ namespace ConsoleTester
 
         [JsonProperty]
         public CAWebService.CAdxParamKeyValue[] ObjectKeys { get; set; }
-
-        [JsonProperty]
-        public int ListSize { get; set; }
 
         [JsonProperty]
         public string Login { get; set; }

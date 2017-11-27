@@ -29,12 +29,8 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.tbPoolAlias = new System.Windows.Forms.TextBox();
-            this.labelPoolAlias = new System.Windows.Forms.Label();
             this.labelHost = new System.Windows.Forms.Label();
             this.tbHost = new System.Windows.Forms.TextBox();
-            this.cbMode = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.labelParameters = new System.Windows.Forms.Label();
             this.labelLogin = new System.Windows.Forms.Label();
             this.tbLogin = new System.Windows.Forms.TextBox();
@@ -62,30 +58,13 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(3, 348);
+            this.button1.Location = new System.Drawing.Point(0, 255);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(663, 38);
+            this.button1.Size = new System.Drawing.Size(664, 38);
             this.button1.TabIndex = 0;
             this.button1.Text = "Send";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.launch_Click);
-            // 
-            // tbPoolAlias
-            // 
-            this.tbPoolAlias.Location = new System.Drawing.Point(124, 59);
-            this.tbPoolAlias.Name = "tbPoolAlias";
-            this.tbPoolAlias.Size = new System.Drawing.Size(211, 20);
-            this.tbPoolAlias.TabIndex = 2;
-            this.tbPoolAlias.Text = "MYPOOL1";
-            // 
-            // labelPoolAlias
-            // 
-            this.labelPoolAlias.AutoSize = true;
-            this.labelPoolAlias.Location = new System.Drawing.Point(57, 62);
-            this.labelPoolAlias.Name = "labelPoolAlias";
-            this.labelPoolAlias.Size = new System.Drawing.Size(56, 13);
-            this.labelPoolAlias.TabIndex = 4;
-            this.labelPoolAlias.Text = "Pool Alias:";
             // 
             // labelHost
             // 
@@ -104,34 +83,10 @@
             this.tbHost.TabIndex = 9;
             this.tbHost.Text = "http://localhost:8126";
             // 
-            // cbMode
-            // 
-            this.cbMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMode.FormattingEnabled = true;
-            this.cbMode.Items.AddRange(new object[] {
-            "query",
-            "read",
-            "modify",
-            "save"});
-            this.cbMode.Location = new System.Drawing.Point(124, 85);
-            this.cbMode.Name = "cbMode";
-            this.cbMode.Size = new System.Drawing.Size(211, 21);
-            this.cbMode.TabIndex = 11;
-            this.cbMode.SelectedIndexChanged += new System.EventHandler(this.cbMode_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 88);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 13);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Operation mode:";
-            // 
             // labelParameters
             // 
             this.labelParameters.AutoSize = true;
-            this.labelParameters.Location = new System.Drawing.Point(53, 152);
+            this.labelParameters.Location = new System.Drawing.Point(53, 108);
             this.labelParameters.Name = "labelParameters";
             this.labelParameters.Size = new System.Drawing.Size(60, 13);
             this.labelParameters.TabIndex = 21;
@@ -203,25 +158,21 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(660, 339);
+            this.tabControl1.Size = new System.Drawing.Size(661, 238);
             this.tabControl1.TabIndex = 37;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.panelParameters);
             this.tabPage1.Controls.Add(this.labelHost);
-            this.tabPage1.Controls.Add(this.tbPoolAlias);
             this.tabPage1.Controls.Add(this.labelParameters);
             this.tabPage1.Controls.Add(this.cbPath);
-            this.tabPage1.Controls.Add(this.labelPoolAlias);
             this.tabPage1.Controls.Add(this.labelPath);
             this.tabPage1.Controls.Add(this.tbHost);
-            this.tabPage1.Controls.Add(this.cbMode);
-            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(652, 313);
+            this.tabPage1.Size = new System.Drawing.Size(653, 212);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -231,7 +182,7 @@
             this.panelParameters.Controls.Add(this.btDelete);
             this.panelParameters.Controls.Add(this.btAddParam);
             this.panelParameters.Controls.Add(this.dgKeyValue);
-            this.panelParameters.Location = new System.Drawing.Point(124, 152);
+            this.panelParameters.Location = new System.Drawing.Point(124, 108);
             this.panelParameters.Name = "panelParameters";
             this.panelParameters.Size = new System.Drawing.Size(509, 101);
             this.panelParameters.TabIndex = 34;
@@ -298,7 +249,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 355);
+            this.ClientSize = new System.Drawing.Size(664, 306);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button1);
             this.Name = "WsRESTControl";
@@ -317,12 +268,8 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox tbPoolAlias;
-        private System.Windows.Forms.Label labelPoolAlias;
         private System.Windows.Forms.Label labelHost;
         private System.Windows.Forms.TextBox tbHost;
-        private System.Windows.Forms.ComboBox cbMode;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelParameters;
         private System.Windows.Forms.Label labelLogin;
         private System.Windows.Forms.TextBox tbLogin;

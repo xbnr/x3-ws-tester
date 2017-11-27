@@ -150,36 +150,6 @@
   <data name="&gt;&gt;_labelProductName.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="_labelCopyright.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="_labelCopyright.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="_labelCopyright.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 247</value>
-  </data>
-  <data name="_labelCopyright.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 71</value>
-  </data>
-  <data name="_labelCopyright.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="_labelCopyright.Text" xml:space="preserve">
-    <value>Warning : This software is protected by copyright, international treaties and intellectual property laws. Any partial or total reproduction or distribution, in whatsoever form, is strictly prohibited. Any person disregarding these conditions will be guilty of copyright infringement, and liable to application of the penalties provided for by law.</value>
-  </data>
-  <data name="&gt;&gt;_labelCopyright.Name" xml:space="preserve">
-    <value>_labelCopyright</value>
-  </data>
-  <data name="&gt;&gt;_labelCopyright.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_labelCopyright.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;_labelCopyright.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="_labelVersion.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 9pt</value>
   </data>
@@ -208,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_labelVersion.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="_labelInternalUse.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
@@ -471,7 +441,7 @@
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAeAAAAGQCAYAAAB29rNUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfhCxYKKCfmrsXC
+        YQUAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfhCxYKKCfmrsXC
         AAD/gElEQVR4Xuz9V7Bl1bm2CabwkIn3TiBAAiRkEQIkkANJyCKDLPLCk5Dee++9996SCSTeg5COjnSO
         /q7qv+qv+qMiKqKjqyqiOzr6pju6+nL0+3xmzrHW3imdqIvOm3nxxjfcnGvl3jvXs95vmDnk5s/+sHTq
         1KlTp06d/v+rDsCdOnXq1KnTCVAH4E6dOnXq1OkEqANwp06dOnXqdALUAbhTp06dOnU6AeoA3KlTp06d

@@ -67,7 +67,15 @@ namespace ConsoleTester.UI
 
         private void rESTTesterToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var restTester = new WsRESTControl();
+            restTester.Show(dockPanelMain, DockState.Document);
+        }
 
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var about = new AboutForm();
+            about.Show();
+            about.CheckLastUpdate();
         }
     }
 }
