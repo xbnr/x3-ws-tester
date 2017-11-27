@@ -101,7 +101,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LoggerToFIle.cs" />
     <Compile Include="LogsAnalyzer\LogAnalyze.cs" />
     <Compile Include="LogsAnalyzer\Result.cs" />
     <Compile Include="LogsAnalyzer\Rules.cs" />
@@ -147,8 +146,14 @@
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
     </Compile>
     <Compile Include="LogsAnalyzer\Rule.cs" />
-    <Compile Include="UI\Updater.cs" />
-    <Compile Include="UI\VersionInformation.cs" />
+    <Compile Include="UI\OutputResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OutputResult.Designer.cs">
+      <DependentUpon>OutputResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Updater.cs" />
+    <Compile Include="Common\VersionInformation.cs" />
     <Compile Include="UI\WsRESTControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +167,7 @@
       <DependentUpon>WsSOAPTester.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\JsonTreeView.cs" />
+    <Compile Include="Common\IConfigService.cs" />
     <Compile Include="WebService\RESTConfig.cs" />
     <Compile Include="WebService\SOAPConfig.cs" />
     <Compile Include="Connected Services\CAWebService\Reference.cs">
@@ -175,15 +181,15 @@
     <Compile Include="UI\WsSOAPControl.Designer.cs">
       <DependentUpon>WsSOAPControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ILogger.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="Common\ILogger.cs" />
+    <Compile Include="Common\Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="WebService\WebServiceCall.cs" />
+    <Compile Include="WebService\SOAPWebServiceCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +246,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LogAnalyzer.resx">
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\OutputResult.resx">
+      <DependentUpon>OutputResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\WsRESTControl.resx">
       <DependentUpon>WsRESTControl.cs</DependentUpon>

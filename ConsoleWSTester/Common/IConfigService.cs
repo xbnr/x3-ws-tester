@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleTester
+namespace ConsoleTester.Common
 {
-    public interface ILogger
+    interface IConfigService
     {
-        void Log(string message);
+        string GetTitle();
 
-        void Log(string message, bool error);
+        string GetConfigName();
     }
 }

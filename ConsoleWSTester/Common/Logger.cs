@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ConsoleTester
+namespace ConsoleTester.Common
 {
     public class Logger : ILogger
     {
@@ -44,6 +44,12 @@ namespace ConsoleTester
                 control.ForeColor = Color.FromArgb(argbColorTextBox);
                 Console.ForegroundColor = ConsoleColor.White;
             }
+        }
+
+    
+        void ILogger.Log(string message, object tag)
+        {
+            throw new NotImplementedException();
         }
     }
 }

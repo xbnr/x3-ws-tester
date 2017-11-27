@@ -40,10 +40,11 @@
             this.lbFolder = new System.Windows.Forms.Label();
             this.btAnalyze = new System.Windows.Forms.Button();
             this.llOpenFolder = new System.Windows.Forms.LinkLabel();
-            this.llExcerptResult = new System.Windows.Forms.LinkLabel();
             this.treeViewResult = new System.Windows.Forms.TreeView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelXmlFile.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -170,18 +171,6 @@
             this.llOpenFolder.Text = "Open result folder";
             this.llOpenFolder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llOpenFolder_LinkClicked);
             // 
-            // llExcerptResult
-            // 
-            this.llExcerptResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.llExcerptResult.AutoSize = true;
-            this.llExcerptResult.Location = new System.Drawing.Point(215, 354);
-            this.llExcerptResult.Name = "llExcerptResult";
-            this.llExcerptResult.Size = new System.Drawing.Size(100, 13);
-            this.llExcerptResult.TabIndex = 28;
-            this.llExcerptResult.TabStop = true;
-            this.llExcerptResult.Text = "Open Excerp result ";
-            this.llExcerptResult.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llExcerptResult_LinkClicked);
-            // 
             // treeViewResult
             // 
             this.treeViewResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -197,16 +186,32 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openFileToolStripMenuItem});
+            this.openFileToolStripMenuItem,
+            this.copyToolStripMenuItem,
+            this.clearToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
             // 
             // openFileToolStripMenuItem
             // 
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.openFileToolStripMenuItem.Text = "Open file";
             this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearToolStripMenuItem.Text = "Clear";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // LogAnalyzer
             // 
@@ -214,7 +219,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(818, 374);
             this.Controls.Add(this.treeViewResult);
-            this.Controls.Add(this.llExcerptResult);
             this.Controls.Add(this.llOpenFolder);
             this.Controls.Add(this.btAnalyze);
             this.Controls.Add(this.panelXmlFile);
@@ -241,10 +245,11 @@
         private System.Windows.Forms.TextBox tbFilter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel llOpenConfigurationFile;
-        private System.Windows.Forms.LinkLabel llExcerptResult;
         private System.Windows.Forms.CheckBox unzipFiles;
         private System.Windows.Forms.TreeView treeViewResult;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
     }
 }

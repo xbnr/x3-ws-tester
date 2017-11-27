@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using ConsoleTester.Common;
+using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace ConsoleTester
+namespace ConsoleTester.WebService
 {
-    public class WebServiceCall
+    public class SOAPWebServiceCall
     {
         private ILogger logger;
         private SOAPConfig conf;
@@ -22,7 +23,7 @@ namespace ConsoleTester
             InsertLines
         }
 
-        public WebServiceCall(SOAPConfig config, ILogger logger)
+        public SOAPWebServiceCall(SOAPConfig config, ILogger logger)
         {
             this.conf = config;
             this.logger = logger;

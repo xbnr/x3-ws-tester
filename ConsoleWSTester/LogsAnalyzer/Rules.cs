@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using ConsoleTester.Common;
+using ConsoleTester.WebService;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +10,18 @@ using System.Threading.Tasks;
 namespace ConsoleTester.LogsAnalyzer
 {
     [JsonObject(IsReference = false)]
-    public class Rules
+    public class Rules : IConfigService
     {
+        public string GetConfigName()
+        {
+            return "LogAnalysis";
+        }
+
+        public string GetTitle()
+        {
+            return "Log analysis";
+        }
+
         [JsonProperty]
         public List<Rule> RulesList { get; set; }
 
@@ -29,5 +41,6 @@ namespace ConsoleTester.LogsAnalyzer
             return nbResults;
         }
 
-}
+       
+    }
 }

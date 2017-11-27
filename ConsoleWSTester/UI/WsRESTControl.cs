@@ -1,4 +1,6 @@
 ﻿using ConsoleTester.CAWebService;
+using ConsoleTester.Common;
+using ConsoleTester.WebService;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -111,27 +113,27 @@ namespace ConsoleTester.UI
             Logger logger = new Logger(MainForm.LogControl);
             SOAPConfig conf = GetConfigFromUI();
 
-            var ws = new WebServiceCall(conf, logger);
-            WebServiceCall.OperationMode action = GetAction();
+            var ws = new SOAPWebServiceCall(conf, logger);
+            SOAPWebServiceCall.OperationMode action = GetAction();
             switch (action)
             {
                 default:
-                case WebServiceCall.OperationMode.Query:
+                case SOAPWebServiceCall.OperationMode.Query:
                     ws.Query();
                     break;
-                case WebServiceCall.OperationMode.Read:
+                case SOAPWebServiceCall.OperationMode.Read:
                     ws.Read();
                     break;
-                case WebServiceCall.OperationMode.GetDescription:
+                case SOAPWebServiceCall.OperationMode.GetDescription:
                     ws.GetDescription();
                     break;
             }
         }
 
 
-        private WebServiceCall.OperationMode GetAction()
+        private SOAPWebServiceCall.OperationMode GetAction()
         {
-           return (WebServiceCall.OperationMode)Enum.Parse(typeof(WebServiceCall.OperationMode), "");
+           return (SOAPWebServiceCall.OperationMode)Enum.Parse(typeof(SOAPWebServiceCall.OperationMode), "");
         }
 
         private void Workspace_Load(object sender, EventArgs e)
@@ -142,7 +144,7 @@ namespace ConsoleTester.UI
 
         private void ShowPanels()
         {
-            panelParameters.Visible = GetAction() == WebServiceCall.OperationMode.Read;
+            panelParameters.Visible = GetAction() == SOAPWebServiceCall.OperationMode.Read;
         }
 
         private void btAddParam_Click(object sender, EventArgs e)

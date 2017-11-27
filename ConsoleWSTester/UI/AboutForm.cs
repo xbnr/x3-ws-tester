@@ -2,6 +2,7 @@
 // © The Sage Group plc 2000   All Rights Reserved.
 //------------------------------------------------------------------------
 
+using ConsoleTester.Common;
 using System;
 using System.Diagnostics;
 using System.IO;

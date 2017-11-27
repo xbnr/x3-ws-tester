@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace ConsoleTester.UI
+namespace ConsoleTester.Common
 {
     internal class Updater
     {

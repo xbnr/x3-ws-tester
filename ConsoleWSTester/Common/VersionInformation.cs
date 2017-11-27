@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace ConsoleTester.UI
+namespace ConsoleTester.Common
 {
     internal sealed class VersionInformation
     {

@@ -2,15 +2,26 @@
 using Newtonsoft.Json;
 using System.IO;
 using Newtonsoft.Json.Converters;
+using ConsoleTester.WebService;
+using ConsoleTester.Common;
 
-namespace ConsoleTester
+namespace ConsoleTester.WebService
 {
     [JsonObject(IsReference = false)]
-    public class RESTConfig
+    public class RESTConfig : IConfigService
     {
         private const int MaxListSize = 4;
-        public const string SOAPConfigName = "RESTConfig";
+        public const string RESTConfigName = "RESTConfig";
 
+        public string GetTitle()
+        {
+            return "REST tester";
+        }
+
+        public string GetConfigName()
+        {
+            return RESTConfigName;
+        }
 
         [JsonProperty]
         public string HostUrl { get; set; }
@@ -28,7 +39,7 @@ namespace ConsoleTester
         public string XmlFilename { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public WebServiceCall.OperationMode OperatMode { get; set; }
+        public SOAPWebServiceCall.OperationMode OperatMode { get; set; }
 
 
         [JsonProperty]
@@ -46,7 +57,7 @@ namespace ConsoleTester
 
         internal static string GetWorkspaceShortFilename()
         {
-            return $"{SOAPConfigName}.json";
+            return $"{RESTConfigName}.json";
         }
 
         internal static string GetWorkspaceFilename()
@@ -54,5 +65,6 @@ namespace ConsoleTester
             return System.IO.Path.Combine(Program.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
 
+        
     }
 }

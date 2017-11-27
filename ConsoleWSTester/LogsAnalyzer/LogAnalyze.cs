@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.IO.Compression;
 using System.Text.RegularExpressions;
+using ConsoleTester.Common;
 
 namespace ConsoleTester.LogsAnalyzer
 {
@@ -307,7 +308,7 @@ namespace ConsoleTester.LogsAnalyzer
             foreach (var fileName in filesResult)
             {
                 var rules = JsonConvert.DeserializeObject<Rules>(File.ReadAllText(fileName.FullName));
-                if (rules == null)
+                if (rules == null || rules.RulesList== null)
                     continue;
 
                 foreach (var rule in rules?.RulesList)

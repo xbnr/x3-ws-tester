@@ -34,6 +34,8 @@ namespace ConsoleTester.UI
             var logs = new Logs();
             LogControl = logs.LogControl;
             logs.Show(dockPanelMain, DockState.DockBottom);
+            var outputResult = new OutputResult();
+            outputResult.Show(dockPanelMain, DockState.DockBottom);
             MainDockPanel = dockPanelMain;
         }
 

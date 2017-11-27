@@ -1,4 +1,6 @@
 ﻿using ConsoleTester.CAWebService;
+using ConsoleTester.Common;
+using ConsoleTester.WebService;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -25,7 +27,7 @@ namespace ConsoleTester.UI
 
         private void FillComboBox()
         {
-            cbMode.DataSource = Enum.GetNames(typeof(WebServiceCall.OperationMode));
+            cbMode.DataSource = Enum.GetNames(typeof(SOAPWebServiceCall.OperationMode));
             cbListSize.DataSource = Enumerable.Range(0, 100).ToArray();
         }
 
@@ -103,8 +105,8 @@ namespace ConsoleTester.UI
             this.parametersDS.CopyTo(objectKeys);
 
             SOAPConfig conf = new SOAPConfig();
-            string opStringVal = string.IsNullOrEmpty(cbMode.Text) ? WebServiceCall.OperationMode.Query.ToString() : cbMode.Text;
-            WebServiceCall.OperationMode opEnum = WebServiceCall.OperationMode.Query;
+            string opStringVal = string.IsNullOrEmpty(cbMode.Text) ? SOAPWebServiceCall.OperationMode.Query.ToString() : cbMode.Text;
+            SOAPWebServiceCall.OperationMode opEnum = SOAPWebServiceCall.OperationMode.Query;
             if (!Enum.TryParse(opStringVal, out opEnum))
             {
                 Console.WriteLine("Enum.Parse(" + opStringVal + ") failed");
@@ -154,36 +156,36 @@ namespace ConsoleTester.UI
             Logger logger = new Logger(MainForm.LogControl);
             SOAPConfig conf = GetConfigFromUI();
 
-            var ws = new WebServiceCall(conf, logger);
-            WebServiceCall.OperationMode action = GetAction();
+            var ws = new SOAPWebServiceCall(conf, logger);
+            SOAPWebServiceCall.OperationMode action = GetAction();
             switch (action)
             {
                 default:
-                case WebServiceCall.OperationMode.Query:
+                case SOAPWebServiceCall.OperationMode.Query:
                     ws.Query();
                     break;
-                case WebServiceCall.OperationMode.Read:
+                case SOAPWebServiceCall.OperationMode.Read:
                     ws.Read();
                     break;
-                case WebServiceCall.OperationMode.GetDescription:
+                case SOAPWebServiceCall.OperationMode.GetDescription:
                     ws.GetDescription();
                     break;
-                case WebServiceCall.OperationMode.Modify:
+                case SOAPWebServiceCall.OperationMode.Modify:
                     ws.Modify(tbXmlFilename.Text);
                     break;
-                case WebServiceCall.OperationMode.DeleteLines:
+                case SOAPWebServiceCall.OperationMode.DeleteLines:
                     ws.Modify(tbXmlFilename.Text);
                     break;
-                case WebServiceCall.OperationMode.Save:
+                case SOAPWebServiceCall.OperationMode.Save:
                     ws.Save(tbXmlFilename.Text);
                     break;
             }
         }
 
 
-        private WebServiceCall.OperationMode GetAction()
+        private SOAPWebServiceCall.OperationMode GetAction()
         {
-            return (WebServiceCall.OperationMode)Enum.Parse(typeof(WebServiceCall.OperationMode), cbMode.Text);
+            return (SOAPWebServiceCall.OperationMode)Enum.Parse(typeof(SOAPWebServiceCall.OperationMode), cbMode.Text);
         }
 
         private void btBrowse_Click(object sender, EventArgs e)
@@ -215,8 +217,8 @@ namespace ConsoleTester.UI
 
         private void ShowPanels()
         {
-            panelDeleteLines.Visible = GetAction() == WebServiceCall.OperationMode.DeleteLines;
-            panelParameters.Visible = GetAction() == WebServiceCall.OperationMode.Read;
+            panelDeleteLines.Visible = GetAction() == SOAPWebServiceCall.OperationMode.DeleteLines;
+            panelParameters.Visible = GetAction() == SOAPWebServiceCall.OperationMode.Read;
         }
 
         private void btAddParam_Click(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using ConsoleTester.LogsAnalyzer;
+﻿using ConsoleTester.Common;
+using ConsoleTester.LogsAnalyzer;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -29,7 +30,7 @@ namespace ConsoleTester.UI
 
         private void btAnalyze_Click(object sender, EventArgs e)
         {
-            var logger = new LoggerToFile(Path.Combine(LogAnalyze.GetResultDirTarget(), "Report.txt"), MainForm.LogControl);
+            var logger = new Logger( MainForm.LogControl);
             var analyzer = new LogAnalyze(tbFolder.Text, tbFilter.Text, cbRecurseDir.Checked, logger);
             if (unzipFiles.Checked)
             {
@@ -42,11 +43,6 @@ namespace ConsoleTester.UI
         private void llOpenFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("explorer.exe", Program.GetWorkspaceDirectory());
-        }
-
-        private void llClearLogs_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            MainForm.LogControl.Clear();
         }
 
         private void llOpenConfigurationFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -82,11 +78,11 @@ namespace ConsoleTester.UI
             cbRecurseDir.Checked = Settings.Default.SubFolders;
         }
 
-        private void llExcerptResult_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var browser = new Browser();
-            browser.Show(MainForm.MainDockPanel, DockState.Document);
-        }
+        //private void llExcerptResult_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        //{
+        //    var browser = new Browser();
+        //    browser.Show(MainForm.MainDockPanel, DockState.Document);
+        //}
 
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -107,6 +103,16 @@ namespace ConsoleTester.UI
                 Program.OpenJson(path, lineNumber);
             }
 
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(treeViewResult.SelectedNode.Text);
+        }
+
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            treeViewResult.TopNode?.Remove();
         }
     }
 }
