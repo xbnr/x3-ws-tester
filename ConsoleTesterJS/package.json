@@ -17,6 +17,7 @@
     "dependencies": {
         "babel": "^6.23.0",
         "crashreporter": "^1.1.0",
+        "mergexml": "^1.1.2",
         "react": "^16.0.0",
         "react-desktop": "^0.3.2",
         "react-dom": "^16.0.0",

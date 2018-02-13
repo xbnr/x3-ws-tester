@@ -123,6 +123,10 @@ namespace ConsoleTester.UI
             conf.ObjectKeys = objectKeys;
             conf.RequestConfiguration = tbRequestConfiguration.Text;
             conf.XmlFilename = tbXmlFilename.Text;
+            if (string.IsNullOrEmpty(tbXmlFilename.Text))
+            {
+                conf.XmlObject = tbXmlObject.Text;
+            }
             // DeleteLines
             conf.BlocKey = tbBlocKey.Text;
             conf.LineKeys = this.tbLineKeys.Text.Split(new char[] { ',', ';', ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -178,6 +182,9 @@ namespace ConsoleTester.UI
                     break;
                 case SOAPWebServiceCall.OperationMode.Save:
                     ws.Save(tbXmlFilename.Text);
+                    break;
+                case SOAPWebServiceCall.OperationMode.Run:
+                    ws.Run(tbXmlFilename.Text);
                     break;
             }
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleTester.Common;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -44,7 +45,9 @@ namespace ConsoleTester
         {
             Assembly ass = System.Reflection.Assembly.GetEntryAssembly();
             if (ass == null)
+            {
                 ass = Assembly.GetExecutingAssembly();
+            }
             AssemblyName assn = ass.GetName();
             if (applicationNameOrVersion)
             {
@@ -54,6 +57,12 @@ namespace ConsoleTester
             }
 
             return assn.Version.ToString();
+        }
+
+        internal static List<System.Type> GetConfigs()
+        {
+            var ass = Assembly.GetExecutingAssembly();
+            return  ass.GetTypes().Where(p => typeof(IConfigService).IsAssignableFrom(p) && p.IsClass && !p.IsAbstract).ToList();
         }
 
         internal static void OpenJson(string configFilename)
@@ -73,7 +82,7 @@ namespace ConsoleTester
 
             foreach (var item in preferences)
             {
-                if (OpenConfigWith(item, "\"" + configFilename + "\""  + (lineNumber != null ? " -n" + lineNumber : "")))
+                if (OpenConfigWith(item, "\"" + configFilename + "\"" + (lineNumber != null ? " -n" + lineNumber : "")))
                     break;
 
             }

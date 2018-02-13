@@ -14,6 +14,7 @@ namespace ConsoleTester.WebService
 
         public enum OperationMode
         {
+            Run,
             Query,
             Modify,
             Read,
@@ -56,6 +57,11 @@ namespace ConsoleTester.WebService
         {
             conf.XmlObject = File.ReadAllText(xmlFileName);
             LaunchWSCall(OperationMode.Save);
+        }
+        public void Run(string xmlContains)
+        {
+            // this.conf.XmlObject = File.ReadAllText(xmlFileName);
+            LaunchWSCall(OperationMode.Run);
         }
 
 
@@ -132,6 +138,9 @@ namespace ConsoleTester.WebService
                             break;
                         case OperationMode.DeleteLines:
                             result = caWebService.deleteLines(context, conf.PublicName, conf.ObjectKeys, conf.BlocKey, conf.LineKeys);
+                            break;
+                        case OperationMode.Run:
+                            result = caWebService.run(context, conf.PublicName, conf.XmlObject);
                             break;
                     }
 

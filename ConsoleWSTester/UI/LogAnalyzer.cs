@@ -3,6 +3,7 @@ using ConsoleTester.LogsAnalyzer;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -113,6 +114,17 @@ namespace ConsoleTester.UI
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             treeViewResult.TopNode?.Remove();
+        }
+
+        private void copyHeadersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var r = new StringBuilder();
+            foreach (TreeNode node in treeViewResult.TopNode.Nodes)
+            {
+                r.Append(node.Text + "\r\n");
+            }
+            Clipboard.SetText(r.ToString());
+
         }
     }
 }
