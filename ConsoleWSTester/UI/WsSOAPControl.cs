@@ -74,7 +74,7 @@ namespace ConsoleTester.UI
             if (config.ObjectKeys != null)
             {
                 parametersDS.AddRange(config.ObjectKeys);
-                dgKeyValue.DataSource = parametersDS;                
+                dgKeyValue.DataSource = parametersDS;
             }
 
             SetTextFromSettings(config.BlocKey, this.tbBlocKey);
@@ -162,6 +162,13 @@ namespace ConsoleTester.UI
 
             var ws = new SOAPWebServiceCall(conf, logger);
             SOAPWebServiceCall.OperationMode action = GetAction();
+
+            string xml = tbXmlObject.Text;
+            if (!string.IsNullOrEmpty(tbXmlFilename.Text) && File.Exists(tbXmlFilename.Text))
+            {
+                xml = File.ReadAllText(tbXmlFilename.Text);
+            }
+
             switch (action)
             {
                 default:
@@ -175,16 +182,17 @@ namespace ConsoleTester.UI
                     ws.GetDescription();
                     break;
                 case SOAPWebServiceCall.OperationMode.Modify:
-                    ws.Modify(tbXmlFilename.Text);
+                    ws.Modify(xml);
                     break;
                 case SOAPWebServiceCall.OperationMode.DeleteLines:
-                    ws.Modify(tbXmlFilename.Text);
+                    ws.Modify(xml);
                     break;
                 case SOAPWebServiceCall.OperationMode.Save:
-                    ws.Save(tbXmlFilename.Text);
+                    ws.Save(xml);
                     break;
                 case SOAPWebServiceCall.OperationMode.Run:
-                    ws.Run(tbXmlFilename.Text);
+
+                    ws.Run(xml);
                     break;
             }
         }
@@ -240,7 +248,7 @@ namespace ConsoleTester.UI
 
         private void btDelete_Click(object sender, EventArgs e)
         {
-            if (dgKeyValue.SelectedRows.Count>0)
+            if (dgKeyValue.SelectedRows.Count > 0)
             {
                 var selectedObj = dgKeyValue.SelectedRows[0];
                 CAdxParamKeyValue selectedValue = selectedObj.DataBoundItem as CAdxParamKeyValue;

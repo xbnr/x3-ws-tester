@@ -36,9 +36,9 @@ namespace ConsoleTester.WebService
             LaunchWSCall(OperationMode.Query);
         }
 
-        public void Modify(string xmlFileName)
+        public void Modify(string xml)
         {
-            this.conf.XmlObject = File.ReadAllText(xmlFileName);
+            this.conf.XmlObject = xml;
             LaunchWSCall(OperationMode.Modify);
         }
         public void DeleteLines(string xmlFileName)
@@ -53,14 +53,14 @@ namespace ConsoleTester.WebService
         {
             LaunchWSCall(OperationMode.GetDescription);
         }
-        public void Save(string xmlFileName)
+        public void Save(string xmlContains)
         {
-            conf.XmlObject = File.ReadAllText(xmlFileName);
+            this.conf.XmlObject = xmlContains;
             LaunchWSCall(OperationMode.Save);
         }
         public void Run(string xmlContains)
         {
-            // this.conf.XmlObject = File.ReadAllText(xmlFileName);
+            this.conf.XmlObject = xmlContains;
             LaunchWSCall(OperationMode.Run);
         }
 
@@ -106,7 +106,7 @@ namespace ConsoleTester.WebService
                         string keysStrings = $"ObjectKeys: ";
                         foreach (var item in conf.ObjectKeys)
                         {
-                            keysStrings += $"{item.key}: {item.value}, "; 
+                            keysStrings += $"{item.key}: {item.value}, ";
                         }
                         logger.Log(keysStrings);
 
