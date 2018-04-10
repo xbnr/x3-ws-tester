@@ -44,18 +44,30 @@ namespace ConsoleTester.UI
             if (file != null)
             {
                 DockContent content = null;
-                if (file.Name.StartsWith(LogAnalyze.RulesShortName))
+                foreach (var item in MainForm.MainDockPanel.Contents)
                 {
-                    content = new LogAnalyzer();
+                    if (((DockContent)item).Tag?.ToString() == file.FullName)
+                    {
+                        content = ((DockContent)item);
+                        break;
+                    }
                 }
-                else
+                if (content == null)
                 {
-                    content = new WsSOAPTester();
-                    ((WsSOAPTester)content).CreateWS(file);
+                    if (file.Name.StartsWith(LogAnalyze.RulesShortName))
+                    {
+                        content = new LogAnalyzer();
+                    }
+                    else
+                    {
+                        content = new WsSOAPTester();
+                        ((WsSOAPTester)content).CreateWS(file);
+                    }
+                    content.Tag = file.FullName;
+                    content.Text = file.Name;
                 }
                 if (content != null)
                 {
-                    content.Text = file.Name;
                     content.Show(MainForm.MainDockPanel, WeifenLuo.WinFormsUI.Docking.DockState.Document);
                 }
             }

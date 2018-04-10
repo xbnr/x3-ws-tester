@@ -219,10 +219,6 @@ namespace ConsoleTester.UI
 
         }
 
-        private void llClearConsole_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            MainForm.LogControl.Clear();
-        }
 
         private void cbMode_SelectedIndexChanged(object sender, EventArgs e)
         {
