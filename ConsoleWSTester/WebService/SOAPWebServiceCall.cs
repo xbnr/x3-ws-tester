@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Threading;
 
 namespace ConsoleTester.WebService
 {
@@ -33,7 +34,7 @@ namespace ConsoleTester.WebService
 
         public void Query()
         {
-            LaunchWSCall(OperationMode.Query);
+            LaunchWSCallInBackGround(OperationMode.Query);
         }
 
         public void Modify(string xml)
@@ -47,11 +48,11 @@ namespace ConsoleTester.WebService
         }
         public void Read()
         {
-            LaunchWSCall(OperationMode.Read);
+            LaunchWSCallInBackGround(OperationMode.Read);
         }
         public void GetDescription()
         {
-            LaunchWSCall(OperationMode.GetDescription);
+            LaunchWSCallInBackGround(OperationMode.GetDescription);
         }
         public void Save(string xmlContains)
         {
@@ -61,7 +62,7 @@ namespace ConsoleTester.WebService
         public void Run(string xmlContains)
         {
             this.conf.XmlObject = xmlContains;
-            LaunchWSCall(OperationMode.Run);
+            LaunchWSCallInBackGround(OperationMode.Run);
         }
 
 
@@ -71,8 +72,16 @@ namespace ConsoleTester.WebService
             return Convert.ToBase64String(plainTextBytes);
         }
 
-        private void LaunchWSCall(OperationMode mode)
+        private void LaunchWSCallInBackGround(OperationMode mode)
         {
+            Thread t = new Thread(new ParameterizedThreadStart(LaunchWSCall));
+            t.Start(mode);
+        }
+
+        private void LaunchWSCall(object modeOp)
+        {
+            OperationMode mode = (OperationMode)modeOp;
+
             var caWebService = new CAWebService.CAdxWebServiceXmlCCClient();
             var context = new CAWebService.CAdxCallContext();
             context.poolAlias = conf.PoolAlias;
