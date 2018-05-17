@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleTester.WebService
+namespace ConsoleTester.Controls
 {
     using System.Windows.Forms;
     using Newtonsoft.Json.Linq;

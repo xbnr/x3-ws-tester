@@ -2,25 +2,25 @@
 using Newtonsoft.Json;
 using System.IO;
 using Newtonsoft.Json.Converters;
-using ConsoleTester.WebService;
 using ConsoleTester.Common;
+using ConsoleTester.UI;
 
-namespace ConsoleTester.WebService
+namespace ConsoleTester.Plugins
 {
     [JsonObject(IsReference = false)]
-    public class RESTConfig : IConfigService
+    public class SOAPConfig : IConfigService
     {
         private const int MaxListSize = 4;
-        public const string RESTConfigName = "RESTConfig";
+        public const string SOAPConfigName = "SOAPConfig";
 
         public string GetTitle()
         {
-            return "REST tester";
+            return "SOAP tester";
         }
 
-        public string GetConfigName()
+        public string GetFormFullName()
         {
-            return RESTConfigName;
+            return typeof(WsSOAPTester).FullName;
         }
 
         [JsonProperty]
@@ -29,8 +29,18 @@ namespace ConsoleTester.WebService
         [JsonProperty]
         public string Path { get; set; }
 
+
+        [JsonProperty]
+        public string PoolAlias { get; set; }
+
         [JsonProperty]
         public string Language { get; set; }
+
+        [JsonProperty]
+        public string PublicName { get; set; }
+
+        [JsonProperty]
+        public string RequestConfiguration { get; set; }
 
         [JsonProperty]
         public string XmlObject { get; set; }
@@ -46,6 +56,15 @@ namespace ConsoleTester.WebService
         public CAWebService.CAdxParamKeyValue[] ObjectKeys { get; set; }
 
         [JsonProperty]
+        public string BlocKey { get; set; }
+
+        [JsonProperty]
+        public string[] LineKeys { get; set; }
+
+        [JsonProperty]
+        public int ListSize { get; set; }
+
+        [JsonProperty]
         public string Login { get; set; }
 
         [JsonProperty]
@@ -54,10 +73,10 @@ namespace ConsoleTester.WebService
         [JsonProperty]
         public string Name { get; set; }
 
-
+        
         internal static string GetWorkspaceShortFilename()
         {
-            return $"{RESTConfigName}.json";
+            return $"{SOAPConfigName}.json";
         }
 
         internal static string GetWorkspaceFilename()
@@ -65,6 +84,5 @@ namespace ConsoleTester.WebService
             return System.IO.Path.Combine(Program.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
 
-        
     }
 }

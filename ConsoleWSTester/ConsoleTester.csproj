@@ -154,6 +154,12 @@
     </Compile>
     <Compile Include="Common\Updater.cs" />
     <Compile Include="Common\VersionInformation.cs" />
+    <Compile Include="UI\XsdValidatorControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\XsdValidatorControl.Designer.cs">
+      <DependentUpon>XsdValidatorControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\WsRESTControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,8 +174,9 @@
     </Compile>
     <Compile Include="Controls\JsonTreeView.cs" />
     <Compile Include="Common\IConfigService.cs" />
-    <Compile Include="WebService\RESTConfig.cs" />
-    <Compile Include="WebService\SOAPConfig.cs" />
+    <Compile Include="Plugins\XsdValidatorConfig.cs" />
+    <Compile Include="Plugins\RESTConfig.cs" />
+    <Compile Include="Plugins\SOAPConfig.cs" />
     <Compile Include="Connected Services\CAWebService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -189,7 +196,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="WebService\SOAPWebServiceCall.cs" />
+    <Compile Include="Plugins\SOAPWebServiceCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\OutputResult.resx">
       <DependentUpon>OutputResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\XsdValidatorControl.resx">
+      <DependentUpon>XsdValidatorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\WsRESTControl.resx">
       <DependentUpon>WsRESTControl.cs</DependentUpon>

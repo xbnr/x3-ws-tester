@@ -341,7 +341,7 @@ namespace ConsoleTester.LogsAnalyzer
         internal void ShowExcerpt(System.Windows.Forms.TreeView treeview)
         {
             string excerptFileName = Path.Combine(GetResultDirTarget(), "excerptResults.json");
-            WebService.JsonTreeView.JsonTreeViewLoader.LoadJsonToTreeView(treeview, File.ReadAllText(excerptFileName), excerptFileName);
+            Controls.JsonTreeView.JsonTreeViewLoader.LoadJsonToTreeView(treeview, File.ReadAllText(excerptFileName), excerptFileName);
             treeview.TopNode?.Expand();
         }
 

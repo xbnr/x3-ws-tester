@@ -31,9 +31,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiNewLogAnalyzer = new System.Windows.Forms.ToolStripMenuItem();
-            this.soapTesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rESTTesterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,46 +63,21 @@
             // 
             // newToolStripMenuItem
             // 
-            this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNewLogAnalyzer,
-            this.soapTesterToolStripMenuItem,
-            this.rESTTesterToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newToolStripMenuItem.Text = "New";
-            // 
-            // tsmiNewLogAnalyzer
-            // 
-            this.tsmiNewLogAnalyzer.Name = "tsmiNewLogAnalyzer";
-            this.tsmiNewLogAnalyzer.Size = new System.Drawing.Size(140, 22);
-            this.tsmiNewLogAnalyzer.Text = "Log analyzer";
-            this.tsmiNewLogAnalyzer.Click += new System.EventHandler(this.tsmiNewLogAnalayzer_Click);
-            // 
-            // soapTesterToolStripMenuItem
-            // 
-            this.soapTesterToolStripMenuItem.Name = "soapTesterToolStripMenuItem";
-            this.soapTesterToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.soapTesterToolStripMenuItem.Text = "Soap tester";
-            this.soapTesterToolStripMenuItem.Click += new System.EventHandler(this.soapTesterToolStripMenuItem_Click);
-            // 
-            // rESTTesterToolStripMenuItem
-            // 
-            this.rESTTesterToolStripMenuItem.Name = "rESTTesterToolStripMenuItem";
-            this.rESTTesterToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.rESTTesterToolStripMenuItem.Text = "REST tester";
-            this.rESTTesterToolStripMenuItem.Click += new System.EventHandler(this.rESTTesterToolStripMenuItem_Click);
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "Check for updates";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -176,12 +148,9 @@
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanelMain;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanelLogs;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tsmiNewLogAnalyzer;
-        private System.Windows.Forms.ToolStripMenuItem soapTesterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rESTTesterToolStripMenuItem;
     }
 }

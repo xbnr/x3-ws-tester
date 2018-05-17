@@ -175,7 +175,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string codeLang
         {
-            get => this.codeLangField;
+            get
+            {
+                return this.codeLangField;
+            }
             set
             {
                 this.codeLangField = value;
@@ -187,7 +190,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string codeUser
         {
-            get => this.codeUserField;
+            get
+            {
+                return this.codeUserField;
+            }
             set
             {
                 this.codeUserField = value;
@@ -199,7 +205,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string password
         {
-            get => this.passwordField;
+            get
+            {
+                return this.passwordField;
+            }
             set
             {
                 this.passwordField = value;
@@ -211,7 +220,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string poolAlias
         {
-            get => this.poolAliasField;
+            get
+            {
+                return this.poolAliasField;
+            }
             set
             {
                 this.poolAliasField = value;
@@ -223,7 +235,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string poolId
         {
-            get => this.poolIdField;
+            get
+            {
+                return this.poolIdField;
+            }
             set
             {
                 this.poolIdField = value;
@@ -235,7 +250,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string requestConfig
         {
-            get => this.requestConfigField;
+            get
+            {
+                return this.requestConfigField;
+            }
             set
             {
                 this.requestConfigField = value;
@@ -272,7 +290,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string key
         {
-            get => this.keyField;
+            get
+            {
+                return this.keyField;
+            }
             set
             {
                 this.keyField = value;
@@ -284,7 +305,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string value
         {
-            get => this.valueField;
+            get
+            {
+                return this.valueField;
+            }
             set
             {
                 this.valueField = value;
@@ -354,7 +378,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public bool busy
         {
-            get => this.busyField;
+            get
+            {
+                return this.busyField;
+            }
             set
             {
                 this.busyField = value;
@@ -365,7 +392,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public bool changeLanguage
         {
-            get => this.changeLanguageField;
+            get
+            {
+                return this.changeLanguageField;
+            }
             set
             {
                 this.changeLanguageField = value;
@@ -376,7 +406,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public bool changeUserId
         {
-            get => this.changeUserIdField;
+            get
+            {
+                return this.changeUserIdField;
+            }
             set
             {
                 this.changeUserIdField = value;
@@ -387,7 +420,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public bool flushAdx
         {
-            get => this.flushAdxField;
+            get
+            {
+                return this.flushAdxField;
+            }
             set
             {
                 this.flushAdxField = value;
@@ -398,7 +434,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public double loadWebsDuration
         {
-            get => this.loadWebsDurationField;
+            get
+            {
+                return this.loadWebsDurationField;
+            }
             set
             {
                 this.loadWebsDurationField = value;
@@ -409,7 +448,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public int nbDistributionCycle
         {
-            get => this.nbDistributionCycleField;
+            get
+            {
+                return this.nbDistributionCycleField;
+            }
             set
             {
                 this.nbDistributionCycleField = value;
@@ -420,7 +462,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public double poolDistribDuration
         {
-            get => this.poolDistribDurationField;
+            get
+            {
+                return this.poolDistribDurationField;
+            }
             set
             {
                 this.poolDistribDurationField = value;
@@ -431,7 +476,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public int poolEntryIdx
         {
-            get => this.poolEntryIdxField;
+            get
+            {
+                return this.poolEntryIdxField;
+            }
             set
             {
                 this.poolEntryIdxField = value;
@@ -442,7 +490,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public double poolExecDuration
         {
-            get => this.poolExecDurationField;
+            get
+            {
+                return this.poolExecDurationField;
+            }
             set
             {
                 this.poolExecDurationField = value;
@@ -453,7 +504,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public double poolRequestDuration
         {
-            get => this.poolRequestDurationField;
+            get
+            {
+                return this.poolRequestDurationField;
+            }
             set
             {
                 this.poolRequestDurationField = value;
@@ -464,7 +518,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public double poolWaitDuration
         {
-            get => this.poolWaitDurationField;
+            get
+            {
+                return this.poolWaitDurationField;
+            }
             set
             {
                 this.poolWaitDurationField = value;
@@ -476,7 +533,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string processReport
         {
-            get => this.processReportField;
+            get
+            {
+                return this.processReportField;
+            }
             set
             {
                 this.processReportField = value;
@@ -487,7 +547,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public int processReportSize
         {
-            get => this.processReportSizeField;
+            get
+            {
+                return this.processReportSizeField;
+            }
             set
             {
                 this.processReportSizeField = value;
@@ -498,7 +561,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public bool reloadWebs
         {
-            get => this.reloadWebsField;
+            get
+            {
+                return this.reloadWebsField;
+            }
             set
             {
                 this.reloadWebsField = value;
@@ -509,7 +575,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public bool resumitAfterDBOpen
         {
-            get => this.resumitAfterDBOpenField;
+            get
+            {
+                return this.resumitAfterDBOpenField;
+            }
             set
             {
                 this.resumitAfterDBOpenField = value;
@@ -520,7 +589,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public int rowInDistribStack
         {
-            get => this.rowInDistribStackField;
+            get
+            {
+                return this.rowInDistribStackField;
+            }
             set
             {
                 this.rowInDistribStackField = value;
@@ -531,7 +603,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public double totalDuration
         {
-            get => this.totalDurationField;
+            get
+            {
+                return this.totalDurationField;
+            }
             set
             {
                 this.totalDurationField = value;
@@ -543,7 +618,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string traceRequest
         {
-            get => this.traceRequestField;
+            get
+            {
+                return this.traceRequestField;
+            }
             set
             {
                 this.traceRequestField = value;
@@ -554,7 +632,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public int traceRequestSize
         {
-            get => this.traceRequestSizeField;
+            get
+            {
+                return this.traceRequestSizeField;
+            }
             set
             {
                 this.traceRequestSizeField = value;
@@ -591,7 +672,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string message
         {
-            get => this.messageField;
+            get
+            {
+                return this.messageField;
+            }
             set
             {
                 this.messageField = value;
@@ -603,7 +687,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string type
         {
-            get => this.typeField;
+            get
+            {
+                return this.typeField;
+            }
             set
             {
                 this.typeField = value;
@@ -644,7 +731,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public CAdxMessage[] messages
         {
-            get => this.messagesField;
+            get
+            {
+                return this.messagesField;
+            }
             set
             {
                 this.messagesField = value;
@@ -656,7 +746,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public string resultXml
         {
-            get => this.resultXmlField;
+            get
+            {
+                return this.resultXmlField;
+            }
             set
             {
                 this.resultXmlField = value;
@@ -667,7 +760,10 @@ namespace ConsoleTester.CAWebService
         /// <remarks/>
         public int status
         {
-            get => this.statusField;
+            get
+            {
+                return this.statusField;
+            }
             set
             {
                 this.statusField = value;
@@ -679,7 +775,10 @@ namespace ConsoleTester.CAWebService
         [System.Xml.Serialization.SoapElementAttribute(IsNullable = true)]
         public CAdxTechnicalInfos technicalInfos
         {
-            get => this.technicalInfosField;
+            get
+            {
+                return this.technicalInfosField;
+            }
             set
             {
                 this.technicalInfosField = value;
@@ -733,52 +832,124 @@ namespace ConsoleTester.CAWebService
         {
         }
 
-        public ConsoleTester.CAWebService.CAdxResultXml run(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string inputXml) => base.Channel.run(callContext, publicName, inputXml);
+        public ConsoleTester.CAWebService.CAdxResultXml run(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string inputXml)
+        {
+            return base.Channel.run(callContext, publicName, inputXml);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> runAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string inputXml) => base.Channel.runAsync(callContext, publicName, inputXml);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> runAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string inputXml)
+        {
+            return base.Channel.runAsync(callContext, publicName, inputXml);
+        }
 
-        public ConsoleTester.CAWebService.CAdxResultXml save(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string objectXml) => base.Channel.save(callContext, publicName, objectXml);
+        public ConsoleTester.CAWebService.CAdxResultXml save(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string objectXml)
+        {
+            return base.Channel.save(callContext, publicName, objectXml);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> saveAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string objectXml) => base.Channel.saveAsync(callContext, publicName, objectXml);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> saveAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string objectXml)
+        {
+            return base.Channel.saveAsync(callContext, publicName, objectXml);
+        }
 
-        public ConsoleTester.CAWebService.CAdxResultXml delete(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys) => base.Channel.delete(callContext, publicName, objectKeys);
+        public ConsoleTester.CAWebService.CAdxResultXml delete(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys)
+        {
+            return base.Channel.delete(callContext, publicName, objectKeys);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> deleteAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys) => base.Channel.deleteAsync(callContext, publicName, objectKeys);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> deleteAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys)
+        {
+            return base.Channel.deleteAsync(callContext, publicName, objectKeys);
+        }
 
-        public ConsoleTester.CAWebService.CAdxResultXml read(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys) => base.Channel.read(callContext, publicName, objectKeys);
+        public ConsoleTester.CAWebService.CAdxResultXml read(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys)
+        {
+            return base.Channel.read(callContext, publicName, objectKeys);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> readAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys) => base.Channel.readAsync(callContext, publicName, objectKeys);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> readAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys)
+        {
+            return base.Channel.readAsync(callContext, publicName, objectKeys);
+        }
 
-        public ConsoleTester.CAWebService.CAdxResultXml query(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, int listSize) => base.Channel.query(callContext, publicName, objectKeys, listSize);
+        public ConsoleTester.CAWebService.CAdxResultXml query(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, int listSize)
+        {
+            return base.Channel.query(callContext, publicName, objectKeys, listSize);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> queryAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, int listSize) => base.Channel.queryAsync(callContext, publicName, objectKeys, listSize);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> queryAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, int listSize)
+        {
+            return base.Channel.queryAsync(callContext, publicName, objectKeys, listSize);
+        }
 
-        public ConsoleTester.CAWebService.CAdxResultXml getDescription(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName) => base.Channel.getDescription(callContext, publicName);
+        public ConsoleTester.CAWebService.CAdxResultXml getDescription(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName)
+        {
+            return base.Channel.getDescription(callContext, publicName);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> getDescriptionAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName) => base.Channel.getDescriptionAsync(callContext, publicName);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> getDescriptionAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName)
+        {
+            return base.Channel.getDescriptionAsync(callContext, publicName);
+        }
 
-        public ConsoleTester.CAWebService.CAdxResultXml actionObjectKeys(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys) => base.Channel.actionObjectKeys(callContext, publicName, actionCode, objectKeys);
+        public ConsoleTester.CAWebService.CAdxResultXml actionObjectKeys(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys)
+        {
+            return base.Channel.actionObjectKeys(callContext, publicName, actionCode, objectKeys);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> actionObjectKeysAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys) => base.Channel.actionObjectKeysAsync(callContext, publicName, actionCode, objectKeys);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> actionObjectKeysAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys)
+        {
+            return base.Channel.actionObjectKeysAsync(callContext, publicName, actionCode, objectKeys);
+        }
 
-        public ConsoleTester.CAWebService.CAdxResultXml modify(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml) => base.Channel.modify(callContext, publicName, objectKeys, objectXml);
+        public ConsoleTester.CAWebService.CAdxResultXml modify(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml)
+        {
+            return base.Channel.modify(callContext, publicName, objectKeys, objectXml);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> modifyAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml) => base.Channel.modifyAsync(callContext, publicName, objectKeys, objectXml);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> modifyAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string objectXml)
+        {
+            return base.Channel.modifyAsync(callContext, publicName, objectKeys, objectXml);
+        }
 
-        public ConsoleTester.CAWebService.CAdxResultXml deleteLines(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys) => base.Channel.deleteLines(callContext, publicName, objectKeys, blocKey, lineKeys);
+        public ConsoleTester.CAWebService.CAdxResultXml deleteLines(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys)
+        {
+            return base.Channel.deleteLines(callContext, publicName, objectKeys, blocKey, lineKeys);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> deleteLinesAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys) => base.Channel.deleteLinesAsync(callContext, publicName, objectKeys, blocKey, lineKeys);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> deleteLinesAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string[] lineKeys)
+        {
+            return base.Channel.deleteLinesAsync(callContext, publicName, objectKeys, blocKey, lineKeys);
+        }
 
-        public ConsoleTester.CAWebService.CAdxResultXml insertLines(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string lineKey, string lineXml) => base.Channel.insertLines(callContext, publicName, objectKeys, blocKey, lineKey, lineXml);
+        public ConsoleTester.CAWebService.CAdxResultXml insertLines(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string lineKey, string lineXml)
+        {
+            return base.Channel.insertLines(callContext, publicName, objectKeys, blocKey, lineKey, lineXml);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> insertLinesAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string lineKey, string lineXml) => base.Channel.insertLinesAsync(callContext, publicName, objectKeys, blocKey, lineKey, lineXml);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> insertLinesAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, ConsoleTester.CAWebService.CAdxParamKeyValue[] objectKeys, string blocKey, string lineKey, string lineXml)
+        {
+            return base.Channel.insertLinesAsync(callContext, publicName, objectKeys, blocKey, lineKey, lineXml);
+        }
 
-        public ConsoleTester.CAWebService.CAdxResultXml getDataXmlSchema(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName) => base.Channel.getDataXmlSchema(callContext, publicName);
+        public ConsoleTester.CAWebService.CAdxResultXml getDataXmlSchema(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName)
+        {
+            return base.Channel.getDataXmlSchema(callContext, publicName);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> getDataXmlSchemaAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName) => base.Channel.getDataXmlSchemaAsync(callContext, publicName);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> getDataXmlSchemaAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName)
+        {
+            return base.Channel.getDataXmlSchemaAsync(callContext, publicName);
+        }
 
-        public ConsoleTester.CAWebService.CAdxResultXml actionObject(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml) => base.Channel.actionObject(callContext, publicName, actionCode, objectXml);
+        public ConsoleTester.CAWebService.CAdxResultXml actionObject(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml)
+        {
+            return base.Channel.actionObject(callContext, publicName, actionCode, objectXml);
+        }
 
-        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> actionObjectAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml) => base.Channel.actionObjectAsync(callContext, publicName, actionCode, objectXml);
+        public System.Threading.Tasks.Task<ConsoleTester.CAWebService.CAdxResultXml> actionObjectAsync(ConsoleTester.CAWebService.CAdxCallContext callContext, string publicName, string actionCode, string objectXml)
+        {
+            return base.Channel.actionObjectAsync(callContext, publicName, actionCode, objectXml);
+        }
     }
 }

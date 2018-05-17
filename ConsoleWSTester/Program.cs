@@ -62,7 +62,8 @@ namespace ConsoleTester
         internal static List<System.Type> GetConfigs()
         {
             var ass = Assembly.GetExecutingAssembly();
-            return  ass.GetTypes().Where(p => typeof(IConfigService).IsAssignableFrom(p) && p.IsClass && !p.IsAbstract).ToList();
+            return ass.GetTypes().Where(p => typeof(IConfigService).IsAssignableFrom(p) && p.IsClass && !p.IsAbstract).ToList();
+            // .Cast<IConfigService>().ToList(); // .ConvertAll(item => item as IConfigService);
         }
 
         internal static void OpenJson(string configFilename)

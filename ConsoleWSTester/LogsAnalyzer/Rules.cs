@@ -1,5 +1,5 @@
 ﻿using ConsoleTester.Common;
-using ConsoleTester.WebService;
+using ConsoleTester.Plugins;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,9 +12,9 @@ namespace ConsoleTester.LogsAnalyzer
     [JsonObject(IsReference = false)]
     public class Rules : IConfigService
     {
-        public string GetConfigName()
+        public string GetFormFullName()
         {
-            return "LogAnalysis";
+            return typeof(ConsoleTester.UI.LogAnalyzer).FullName;
         }
 
         public string GetTitle()

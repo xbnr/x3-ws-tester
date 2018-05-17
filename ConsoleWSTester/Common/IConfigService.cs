@@ -10,6 +10,6 @@ namespace ConsoleTester.Common
     {
         string GetTitle();
 
-        string GetConfigName();
+        string GetFormFullName();
     }
 }

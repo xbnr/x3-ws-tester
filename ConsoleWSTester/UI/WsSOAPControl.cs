@@ -1,6 +1,6 @@
 ﻿using ConsoleTester.CAWebService;
 using ConsoleTester.Common;
-using ConsoleTester.WebService;
+using ConsoleTester.Plugins;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;

@@ -1,9 +1,12 @@
-﻿using System;
+﻿using ConsoleTester.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -38,12 +41,25 @@ namespace ConsoleTester.UI
             logs.Show(dockPanelMain, DockState.DockBottom);
             MainDockPanel = dockPanelMain;
 
-            var configs = Program.GetConfigs();
-            foreach(var item in configs)
+            foreach(var item in Program.GetConfigs())
             {
-
+                Type serviceType = Type.GetType(item.ToString());
+                IConfigService configService = Activator.CreateInstance(serviceType) as IConfigService;
+                var toolTrip = newToolStripMenuItem.DropDownItems.Add(configService.GetTitle());
+                toolTrip.Tag = configService;
+                toolTrip.Click += new EventHandler(tsmiNewForm_Click);
             }
+        }
 
+        private void tsmiNewForm_Click(object sender, EventArgs e)
+        {
+            // https://msdn.microsoft.com/en-us/library/wc8csdkz(v=vs.71).aspx
+            var se = sender as ToolStripItem;
+            var configService = se.Tag as IConfigService;
+
+            Type formType = Type.GetType(configService.GetFormFullName());
+            DockContent dockContent = Activator.CreateInstance(formType) as DockContent;
+            dockContent.Show(dockPanelMain, DockState.Document);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
