@@ -9,6 +9,7 @@ using System.Text;
 using System.IO.Compression;
 using System.Text.RegularExpressions;
 using ConsoleTester.Common;
+using ConsoleTester.Plugins;
 
 namespace ConsoleTester.LogsAnalyzer
 {
@@ -22,7 +23,6 @@ namespace ConsoleTester.LogsAnalyzer
         private Rules rules;
 
         internal static readonly string ResultRulesShortName = "Result";
-        internal static readonly string RulesShortName = "LogAnalysisConfig";
 
         internal static string GetResultRulesShortFilename(FileInfo file)
         {
@@ -48,7 +48,7 @@ namespace ConsoleTester.LogsAnalyzer
 
         internal static string GetConfigShortFilename()
         {
-            return $"{RulesShortName}.json";
+            return $"{Rules.RulesShortName}.json";
         }
 
         internal static string GetConfigFilename()

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ConsoleTester.Common
 {
-    interface IConfigService
+    public interface IConfigService
     {
         string GetTitle();
 
         string GetFormFullName();
+
+        string GetConfigPrefixFilename();
     }
 }

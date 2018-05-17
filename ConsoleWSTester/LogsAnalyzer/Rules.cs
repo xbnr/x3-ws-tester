@@ -12,6 +12,8 @@ namespace ConsoleTester.LogsAnalyzer
     [JsonObject(IsReference = false)]
     public class Rules : IConfigService
     {
+        internal const string RulesShortName = "LogAnalysisConfig";
+
         public string GetFormFullName()
         {
             return typeof(ConsoleTester.UI.LogAnalyzer).FullName;
@@ -41,6 +43,9 @@ namespace ConsoleTester.LogsAnalyzer
             return nbResults;
         }
 
-       
+        public string GetConfigPrefixFilename()
+        {
+            return RulesShortName;
+        }
     }
 }

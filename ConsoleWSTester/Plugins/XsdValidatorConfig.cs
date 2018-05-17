@@ -5,6 +5,7 @@ using Newtonsoft.Json.Converters;
 using ConsoleTester.Plugins;
 using ConsoleTester.Common;
 using ConsoleTester.UI;
+using System.Collections.Generic;
 
 namespace ConsoleTester.Plugins
 {
@@ -23,6 +24,13 @@ namespace ConsoleTester.Plugins
             return typeof(XsdValidatorControl).FullName;
         }
 
+        [JsonProperty]
+        public string XMLFilename { get; set; }
+
+        [JsonProperty]
+        public List<string> XSDFiles { get; set; }
+
+
         internal static string GetWorkspaceShortFilename()
         {
             return $"{XsdValidatorConfigName}.json";
@@ -32,6 +40,10 @@ namespace ConsoleTester.Plugins
         {
             return System.IO.Path.Combine(Program.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
-        
+
+        public string GetConfigPrefixFilename()
+        {
+            return XsdValidatorConfigName;
+        }
     }
 }

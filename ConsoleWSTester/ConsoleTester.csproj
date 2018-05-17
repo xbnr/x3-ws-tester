@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Helper.cs" />
     <Compile Include="LogsAnalyzer\LogAnalyze.cs" />
     <Compile Include="LogsAnalyzer\Result.cs" />
     <Compile Include="LogsAnalyzer\Rules.cs" />
@@ -120,6 +121,9 @@
     </Compile>
     <Compile Include="UI\Browser.Designer.cs">
       <DependentUpon>Browser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ControlConfig.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Logs.cs">
       <SubType>Form</SubType>

@@ -518,7 +518,6 @@
             this.Controls.Add(this.button1);
             this.Name = "Workspace";
             this.Size = new System.Drawing.Size(675, 333);
-            this.Load += new System.EventHandler(this.Workspace_Load);
             this.panelXmlFile.ResumeLayout(false);
             this.panelXmlFile.PerformLayout();
             this.panelDeleteLines.ResumeLayout(false);

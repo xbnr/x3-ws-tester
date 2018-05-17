@@ -53,13 +53,15 @@ namespace ConsoleTester.UI
 
         private void tsmiNewForm_Click(object sender, EventArgs e)
         {
-            // https://msdn.microsoft.com/en-us/library/wc8csdkz(v=vs.71).aspx
             var se = sender as ToolStripItem;
             var configService = se.Tag as IConfigService;
+            var UIControl = Helper.GetUIControl(configService);
+            UIControl.Show(dockPanelMain, DockState.Document);
 
-            Type formType = Type.GetType(configService.GetFormFullName());
-            DockContent dockContent = Activator.CreateInstance(formType) as DockContent;
-            dockContent.Show(dockPanelMain, DockState.Document);
+            //Type formType = Type.GetType(configService.GetFormFullName());
+            //DockContent dockContent = Activator.CreateInstance(formType) as DockContent;
+            //dockContent.Show(dockPanelMain, DockState.Document);
+            // dockContent.Show( GetUIControl
         }
 
         private void MainForm_Load(object sender, EventArgs e)

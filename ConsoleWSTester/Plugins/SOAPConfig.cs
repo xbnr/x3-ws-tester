@@ -11,7 +11,8 @@ namespace ConsoleTester.Plugins
     public class SOAPConfig : IConfigService
     {
         private const int MaxListSize = 4;
-        public const string SOAPConfigName = "SOAPConfig";
+        internal const string SOAPConfigName = "SOAPConfig";
+        
 
         public string GetTitle()
         {
@@ -21,6 +22,11 @@ namespace ConsoleTester.Plugins
         public string GetFormFullName()
         {
             return typeof(WsSOAPTester).FullName;
+        }
+
+        public string GetConfigPrefixFilename()
+        {
+            return SOAPConfigName;
         }
 
         [JsonProperty]

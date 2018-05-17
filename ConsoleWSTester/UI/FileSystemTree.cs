@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 using ConsoleTester.LogsAnalyzer;
+using ConsoleTester.Common;
 
 namespace ConsoleTester.UI
 {
@@ -43,31 +44,34 @@ namespace ConsoleTester.UI
             FileInfo file = SelectedFile;
             if (file != null)
             {
-                DockContent content = null;
+                ControlConfig content = null;
                 foreach (var item in MainForm.MainDockPanel.Contents)
                 {
                     if (((DockContent)item).Tag?.ToString() == file.FullName)
                     {
-                        content = ((DockContent)item);
+                        content = ((ControlConfig)item);
                         break;
                     }
                 }
                 if (content == null)
                 {
-                    if (file.Name.StartsWith(LogAnalyze.RulesShortName))
+                    foreach (var item in Program.GetConfigs())
                     {
-                        content = new LogAnalyzer();
+                        Type serviceType = Type.GetType(item.ToString());
+                        IConfigService configService = Activator.CreateInstance(serviceType) as IConfigService;
+                        if (Path.GetFileNameWithoutExtension(file.Name).IndexOf(configService.GetConfigPrefixFilename()) >= 0)
+                        {
+                            Type formType = Type.GetType(configService.GetFormFullName());
+                            content = Activator.CreateInstance(formType) as ControlConfig;
+                            break;
+                        }
                     }
-                    else
-                    {
-                        content = new WsSOAPTester();
-                        ((WsSOAPTester)content).CreateWS(file);
-                    }
-                    content.Tag = file.FullName;
-                    content.Text = file.Name;
                 }
                 if (content != null)
                 {
+                    content.CreateWS(file);
+                    content.Tag = file.FullName;
+                    content.Text = file.Name;
                     content.Show(MainForm.MainDockPanel, WeifenLuo.WinFormsUI.Docking.DockState.Document);
                 }
             }

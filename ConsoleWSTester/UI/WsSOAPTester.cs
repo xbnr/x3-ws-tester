@@ -12,14 +12,14 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace ConsoleTester.UI
 {
-    public partial class WsSOAPTester : DockContent
+    public partial class WsSOAPTester : ControlConfig
     {
         public WsSOAPTester()
         {
             InitializeComponent();
         }
 
-        public void CreateWS(FileInfo item)
+        public override void CreateWS(FileInfo item)
         {
             Workspace ws = this.workspace1;
             if (item != null)

@@ -65,6 +65,9 @@ namespace ConsoleTester.Plugins
             return System.IO.Path.Combine(Program.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
 
-        
+        public string GetConfigPrefixFilename()
+        {
+            return RESTConfigName;
+        }
     }
 }

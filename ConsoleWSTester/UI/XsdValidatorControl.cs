@@ -14,7 +14,10 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace ConsoleTester.UI
 {
-    public partial class XsdValidatorControl : DockContent
+    /// <summary>
+    /// https://msdn.microsoft.com/en-us/library/wc8csdkz(v=vs.71).aspx
+    /// </summary>
+    public partial class XsdValidatorControl : ControlConfig
     {
         private string filename;
 
@@ -31,113 +34,50 @@ namespace ConsoleTester.UI
 
         internal void SaveWorkspace()
         {
-            var config = GetConfigFromUI();
-            string wsDirectory = Program.GetWorkspaceDirectory();
-            if (!Directory.Exists(wsDirectory))
-                Directory.CreateDirectory(wsDirectory);
-
             if (string.IsNullOrEmpty(this.filename))
             {
-                this.filename = RESTConfig.GetWorkspaceFilename();
+                this.filename = XsdValidatorConfig.GetWorkspaceFilename();
             }
-            string json = JsonConvert.SerializeObject(config, Formatting.Indented, new JsonSerializerSettings
-            {
-                Converters = new List<JsonConverter> { new StringEnumConverter() },
-                NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.Indented,
-                DefaultValueHandling = DefaultValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
-
-            File.WriteAllText(this.filename, json, Encoding.UTF8);
+            Helper.SaveWorkspace(this.filename, GetConfigFromUI());
         }
 
         internal void LoadConfigFromJSON(string filename)
         {
             this.filename = filename;
-            RESTConfig config = JsonConvert.DeserializeObject<RESTConfig>(File.ReadAllText(filename));
-            // SetTextFromSettings(config.HostUrl, this.tbHost);
-            SetTextFromSettings(config.Path, this.cbPath);
-
-            SetTextFromSettings(config.Login, this.tbLogin);
-            SetTextFromSettings(config.Password, this.tbPassword);
-
-            ShowPanels();
+            XsdValidatorConfig config = JsonConvert.DeserializeObject<XsdValidatorConfig>(File.ReadAllText(filename));
+            Helper.SetTextFromSettings(config.XMLFilename, this.cbPath);
+            if (config.XSDFiles != null)
+            {
+                List<FileInfo> list = new List<FileInfo>();
+                foreach (var fullfilename in config.XSDFiles)
+                {
+                    list.Add(new FileInfo(fullfilename));
+                }
+                dgKeyValue.DataSource = list;
+            }
         }
 
-       
-        private SOAPConfig GetConfigFromUI()
+
+        private XsdValidatorConfig GetConfigFromUI()
         {
-            SOAPConfig conf = new SOAPConfig();
+            XsdValidatorConfig conf = new XsdValidatorConfig();
 
-            // conf.HostUrl = tbHost.Text;
-            conf.Path = cbPath.Text;
-            int listSize = 10;
-            conf.ListSize = listSize;
-
-            conf.Login = tbLogin.Text;
-            conf.Password = tbPassword.Text;
+            conf.XMLFilename = cbPath.Text;
+            if (dgKeyValue.DataSource != null)
+            {
+                var fileList = dgKeyValue.DataSource as List<FileInfo>;
+                conf.XSDFiles = fileList.ConvertAll(p => p.FullName);
+            }
             return conf;
         }
-
-
-        private void SetTextFromSettings(string settingValue, TextBox textBox)
-        {
-            if (!string.IsNullOrEmpty(settingValue))
-            {
-                textBox.Text = settingValue;
-            }
-        }
-
-        private void SetTextFromSettings(string settingValue, ComboBox controlBox)
-        {
-            if (!string.IsNullOrEmpty(settingValue))
-            {
-                controlBox.Items.Add(settingValue);
-                controlBox.SelectedItem = settingValue;
-            }
-        }
-
 
         private void launch_Click(object sender, EventArgs e)
         {
             Logger logger = new Logger(MainForm.LogControl);
-            SOAPConfig conf = GetConfigFromUI();
+            var conf = GetConfigFromUI();
 
-            var ws = new SOAPWebServiceCall(conf, logger);
-            SOAPWebServiceCall.OperationMode action = GetAction();
-            switch (action)
-            {
-                default:
-                case SOAPWebServiceCall.OperationMode.Query:
-                    ws.Query();
-                    break;
-                case SOAPWebServiceCall.OperationMode.Read:
-                    ws.Read();
-                    break;
-                case SOAPWebServiceCall.OperationMode.GetDescription:
-                    ws.GetDescription();
-                    break;
-            }
-        }
+            
 
-
-        private SOAPWebServiceCall.OperationMode GetAction()
-        {
-           return (SOAPWebServiceCall.OperationMode)Enum.Parse(typeof(SOAPWebServiceCall.OperationMode), "");
-        }
-
-        private void Workspace_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void ShowPanels()
-        {
-            panelParameters.Visible = GetAction() == SOAPWebServiceCall.OperationMode.Read;
         }
 
         private void btAddParam_Click(object sender, EventArgs e)
@@ -160,9 +100,39 @@ namespace ConsoleTester.UI
             }
         }
 
+        private void btBrowseXML_Click(object sender, EventArgs e)
+        {
+            var folder = new OpenFileDialog();
+            folder.Multiselect = false;
+            folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
+            var result = folder.ShowDialog();
+
+            cbPath.Text = folder.FileName;
+        }
+
         private void btBrowse_Click(object sender, EventArgs e)
         {
+            var folder = new OpenFileDialog();
+            folder.Multiselect = true;
+            folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
+            var result = folder.ShowDialog();
 
+            List<FileInfo> fileList = new List<FileInfo>();
+            foreach (var filename in folder.FileNames)
+            {
+                fileList.Add(new FileInfo(filename));
+            }
+            dgKeyValue.DataSource = fileList;
+        }
+
+        private void XsdValidatorControl_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveWorkspace();
+        }
+
+        public override void CreateWS(FileInfo item)
+        {
+            LoadConfigFromJSON(item.FullName);
         }
     }
 }

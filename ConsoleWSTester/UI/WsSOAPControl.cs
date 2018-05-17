@@ -33,43 +33,28 @@ namespace ConsoleTester.UI
 
         internal void SaveWorkspace()
         {
-            var config = GetConfigFromUI();
-            string wsDirectory = Program.GetWorkspaceDirectory();
-            if (!Directory.Exists(wsDirectory))
-                Directory.CreateDirectory(wsDirectory);
-
             if (string.IsNullOrEmpty(this.filename))
             {
                 this.filename = SOAPConfig.GetWorkspaceFilename();
             }
-            string json = JsonConvert.SerializeObject(config, Formatting.Indented, new JsonSerializerSettings
-            {
-                Converters = new List<JsonConverter> { new StringEnumConverter() },
-                NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.Indented,
-                DefaultValueHandling = DefaultValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
+            Helper.SaveWorkspace(this.filename, GetConfigFromUI());
 
-            File.WriteAllText(this.filename, json, Encoding.UTF8);
         }
 
         internal void LoadConfigFromJSON(string filename)
         {
             this.filename = filename;
             SOAPConfig config = JsonConvert.DeserializeObject<SOAPConfig>(File.ReadAllText(filename));
-            SetTextFromSettings(config.HostUrl, this.tbHost);
-            SetTextFromSettings(config.Path, this.cbPath);
-            SetTextFromSettings(config.PoolAlias, this.tbPoolAlias);
-            SetTextFromSettings(config.Language, this.cbLanguage);
-            SetTextFromSettings(config.PublicName, this.cbPublicName);
+            Helper.SetTextFromSettings(config.HostUrl, this.tbHost);
+            Helper.SetTextFromSettings(config.Path, this.cbPath);
+            Helper.SetTextFromSettings(config.PoolAlias, this.tbPoolAlias);
+            Helper.SetTextFromSettings(config.Language, this.cbLanguage);
+            Helper.SetTextFromSettings(config.PublicName, this.cbPublicName);
             this.cbListSize.SelectedIndex = (int)config.ListSize - 1;
             this.cbMode.SelectedIndex = (int)config.OperatMode;
-            SetTextFromSettings(config.Login, this.tbLogin);
-            SetTextFromSettings(config.Password, this.tbPassword);
-            SetTextFromSettings(config.RequestConfiguration, this.tbRequestConfiguration);
+            Helper.SetTextFromSettings(config.Login, this.tbLogin);
+            Helper.SetTextFromSettings(config.Password, this.tbPassword);
+            Helper.SetTextFromSettings(config.RequestConfiguration, this.tbRequestConfiguration);
 
             if (config.ObjectKeys != null)
             {
@@ -77,12 +62,12 @@ namespace ConsoleTester.UI
                 dgKeyValue.DataSource = parametersDS;
             }
 
-            SetTextFromSettings(config.BlocKey, this.tbBlocKey);
+            Helper.SetTextFromSettings(config.BlocKey, this.tbBlocKey);
             if (config.LineKeys != null)
             {
                 this.tbLineKeys.Text = string.Join(",", config.LineKeys);
             }
-            SetTextFromSettings(config.XmlFilename, this.tbXmlFilename);
+            Helper.SetTextFromSettings(config.XmlFilename, this.tbXmlFilename);
             if (!string.IsNullOrEmpty(config.XmlFilename) && File.Exists(config.XmlFilename))
             {
                 ShowFileText(config.XmlFilename);
@@ -134,24 +119,6 @@ namespace ConsoleTester.UI
             conf.Login = tbLogin.Text;
             conf.Password = tbPassword.Text;
             return conf;
-        }
-
-
-        private void SetTextFromSettings(string settingValue, TextBox textBox)
-        {
-            if (!string.IsNullOrEmpty(settingValue))
-            {
-                textBox.Text = settingValue;
-            }
-        }
-
-        private void SetTextFromSettings(string settingValue, ComboBox controlBox)
-        {
-            if (!string.IsNullOrEmpty(settingValue))
-            {
-                controlBox.Items.Add(settingValue);
-                controlBox.SelectedItem = settingValue;
-            }
         }
 
 
@@ -213,12 +180,6 @@ namespace ConsoleTester.UI
             tbXmlFilename.Text = folder.FileName;
             ShowFileText(folder.FileName);
         }
-
-        private void Workspace_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void cbMode_SelectedIndexChanged(object sender, EventArgs e)
         {
