@@ -158,38 +158,38 @@
     </Compile>
     <Compile Include="Common\Updater.cs" />
     <Compile Include="Common\VersionInformation.cs" />
-    <Compile Include="UI\XsdValidatorControl.cs">
+    <Compile Include="Plugins\XsdValidator\XsdValidatorControl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\XsdValidatorControl.Designer.cs">
+    <Compile Include="Plugins\XsdValidator\XsdValidatorControl.Designer.cs">
       <DependentUpon>XsdValidatorControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\WsRESTControl.cs">
+    <Compile Include="Plugins\Rest\WsRESTControl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\WsRESTControl.Designer.cs">
+    <Compile Include="Plugins\Rest\WsRESTControl.Designer.cs">
       <DependentUpon>WsRESTControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\WsSOAPTester.cs">
+    <Compile Include="Plugins\Soap\WsSOAPTester.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\WsSOAPTester.Designer.cs">
+    <Compile Include="Plugins\Soap\WsSOAPTester.Designer.cs">
       <DependentUpon>WsSOAPTester.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\JsonTreeView.cs" />
     <Compile Include="Common\IConfigService.cs" />
-    <Compile Include="Plugins\XsdValidatorConfig.cs" />
-    <Compile Include="Plugins\RESTConfig.cs" />
-    <Compile Include="Plugins\SOAPConfig.cs" />
+    <Compile Include="Plugins\XsdValidator\XsdValidatorConfig.cs" />
+    <Compile Include="Plugins\Rest\RESTConfig.cs" />
+    <Compile Include="Plugins\Soap\SOAPConfig.cs" />
     <Compile Include="Connected Services\CAWebService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="UI\WsSOAPControl.cs">
+    <Compile Include="Plugins\Soap\WsSOAPControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\WsSOAPControl.Designer.cs">
+    <Compile Include="Plugins\Soap\WsSOAPControl.Designer.cs">
       <DependentUpon>WsSOAPControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\ILogger.cs" />
@@ -200,7 +200,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\SOAPWebServiceCall.cs" />
+    <Compile Include="Plugins\Soap\SOAPWebServiceCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -261,16 +261,16 @@
     <EmbeddedResource Include="UI\OutputResult.resx">
       <DependentUpon>OutputResult.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\XsdValidatorControl.resx">
+    <EmbeddedResource Include="Plugins\XsdValidator\XsdValidatorControl.resx">
       <DependentUpon>XsdValidatorControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\WsRESTControl.resx">
+    <EmbeddedResource Include="Plugins\Rest\WsRESTControl.resx">
       <DependentUpon>WsRESTControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\WsSOAPTester.resx">
+    <EmbeddedResource Include="Plugins\Soap\WsSOAPTester.resx">
       <DependentUpon>WsSOAPTester.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\WsSOAPControl.resx">
+    <EmbeddedResource Include="Plugins\Soap\WsSOAPControl.resx">
       <DependentUpon>WsSOAPControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

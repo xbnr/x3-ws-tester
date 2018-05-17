@@ -76,7 +76,7 @@ namespace ConsoleTester.UI
             Logger logger = new Logger(MainForm.LogControl);
             var conf = GetConfigFromUI();
 
-            
+
 
         }
 
