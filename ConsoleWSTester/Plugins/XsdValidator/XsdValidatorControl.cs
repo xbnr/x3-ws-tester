@@ -1,6 +1,7 @@
 ﻿using ConsoleTester.CAWebService;
 using ConsoleTester.Common;
 using ConsoleTester.Plugins;
+using ConsoleTester.UI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -12,11 +13,8 @@ using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace ConsoleTester.UI
+namespace ConsoleTester.Plugins.XsdValidator
 {
-    /// <summary>
-    /// https://msdn.microsoft.com/en-us/library/wc8csdkz(v=vs.71).aspx
-    /// </summary>
     public partial class XsdValidatorControl : ControlConfig
     {
         private string filename;
@@ -75,9 +73,10 @@ namespace ConsoleTester.UI
         {
             Logger logger = new Logger(MainForm.LogControl);
             var conf = GetConfigFromUI();
-
-
-
+            Validation val = new Validation(logger);
+            val.SetXML(conf.XMLFilename);
+            val.AddXsd(conf.XSDFiles);
+            val.Validate();
         }
 
         private void btAddParam_Click(object sender, EventArgs e)

@@ -31,7 +31,7 @@ namespace ConsoleTester.UI
 
         private void btAnalyze_Click(object sender, EventArgs e)
         {
-            var logger = new Logger( MainForm.LogControl);
+            var logger = new Logger(MainForm.LogControl);
             var analyzer = new LogAnalyze(tbFolder.Text, tbFilter.Text, cbRecurseDir.Checked, logger);
             if (unzipFiles.Checked)
             {
@@ -79,16 +79,11 @@ namespace ConsoleTester.UI
             cbRecurseDir.Checked = Settings.Default.SubFolders;
         }
 
-        //private void llExcerptResult_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        //{
-        //    var browser = new Browser();
-        //    browser.Show(MainForm.MainDockPanel, DockState.Document);
-        //}
 
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (treeViewResult.SelectedNode != null)
-            {                
+            {
                 Program.OpenJson(treeViewResult.SelectedNode.Text);
             }
         }
@@ -96,7 +91,7 @@ namespace ConsoleTester.UI
         private void treeViewResult_DoubleClick(object sender, EventArgs e)
         {
             string path = treeViewResult.SelectedNode.Text;
-            if (path.IndexOf("file: ")>=0)
+            if (path.IndexOf("file: ") >= 0)
             {
                 path = path.Substring("file: ".Length);
                 string line = treeViewResult.SelectedNode.Parent.Nodes[0].Text.Substring("line: ".Length);

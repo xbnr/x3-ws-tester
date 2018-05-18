@@ -7,7 +7,7 @@ using ConsoleTester.Common;
 using ConsoleTester.UI;
 using System.Collections.Generic;
 
-namespace ConsoleTester.Plugins
+namespace ConsoleTester.Plugins.XsdValidator
 {
     [JsonObject(IsReference = false)]
     public class XsdValidatorConfig : IConfigService

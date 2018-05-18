@@ -1,4 +1,4 @@
-﻿namespace ConsoleTester.UI
+﻿namespace ConsoleTester.Plugins.XsdValidator
 {
     partial class XsdValidatorControl
     {
