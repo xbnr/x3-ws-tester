@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define ProductName = "WSTester"?>
-<?define ProductVersion = "1.1.2"?>
+<?define ProductVersion = "1.0.9"?>
 <?define ProductUpgradeCode = "12345678-1234-1234-1234-111111111111"?>
 <?define Manufacturer = "SAGE"?>
 <?define About = "http://www.sage.com"?>
@@ -8,6 +8,7 @@
 <?define MyBinSource = "Release"?>
 <?define LicenseRtf = "License.rtf"?>
    <?define ProgramFilesFolder = "ProgramFilesFolder" ?>
+
 
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Product Id="*" UpgradeCode="$(var.ProductUpgradeCode)"
@@ -42,7 +43,8 @@
                       Target="[INSTALLDIR]Release\ConsoleTester.exe" WorkingDirectory="INSTALLDIR"/>
             <RegistryValue Root="HKCU" Key="Software\Sage\WSTester"
                       Name="installed" Type="integer" Value="1" KeyPath="yes"/>
-            <RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
+											<!-- RemoveFolder install, uninstall, both -->
+            <RemoveFolder Id="Release" On="both"/>
           </Component>
         </Directory>
       </Directory>
