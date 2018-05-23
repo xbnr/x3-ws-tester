@@ -18,6 +18,7 @@ namespace ConsoleTester.UI
     {
 
         public static MainForm Instance { get; private set; }
+
         public static DockPanel MainDockPanel { get; private set; }
 
         public static TextBox LogControl { get; private set; }
@@ -30,6 +31,8 @@ namespace ConsoleTester.UI
 
         private void Init()
         {
+            this.Size = new Size(Settings.Default.MainFormWidth, Settings.Default.MainFormHeight);
+
             this.Text = Program.GetApplicationName() + " - " + Program.GetApplicationVersion();
             Instance = this;
             var treeView = new FileSystemTree();
@@ -57,11 +60,6 @@ namespace ConsoleTester.UI
             var configService = se.Tag as IConfigService;
             var UIControl = Helper.GetUIControl(configService);
             UIControl.Show(dockPanelMain, DockState.Document);
-
-            //Type formType = Type.GetType(configService.GetFormFullName());
-            //DockContent dockContent = Activator.CreateInstance(formType) as DockContent;
-            //dockContent.Show(dockPanelMain, DockState.Document);
-            // dockContent.Show( GetUIControl
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -69,17 +67,6 @@ namespace ConsoleTester.UI
             Init();
         }
 
-        private void tsmiNewLogAnalayzer_Click(object sender, EventArgs e)
-        {
-            var logAnalyzer = new LogAnalyzer();
-            logAnalyzer.Show(dockPanelMain, DockState.Document);
-        }
-
-        private void soapTesterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var soapTester = new WsSOAPTester();
-            soapTester.Show(dockPanelMain, DockState.Document);
-        }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -92,17 +79,23 @@ namespace ConsoleTester.UI
             this.Close();
         }
 
-        private void rESTTesterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var restTester = new WsRESTControl();
-            restTester.Show(dockPanelMain, DockState.Document);
-        }
-
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var about = new AboutForm();
             about.Show();
             about.CheckLastUpdate();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSettings();
+        }
+
+        private void SaveSettings()
+        {
+            Settings.Default.MainFormWidth = this.Size.Width;
+            Settings.Default.MainFormHeight = this.Size.Height;
+            Settings.Default.Save();
         }
     }
 }

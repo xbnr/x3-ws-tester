@@ -18,16 +18,11 @@ namespace ConsoleTester.Plugins.XsdValidator
     public partial class XsdValidatorControl : ControlConfig
     {
         private string filename;
+        Logger logger = new Logger(MainForm.LogControl);
 
         public XsdValidatorControl()
         {
             InitializeComponent();
-            FillComboBox();
-        }
-
-        private void FillComboBox()
-        {
-            // cbMode.DataSource = Enum.GetNames(typeof(WebServiceCall.OperationMode));
         }
 
         internal void SaveWorkspace()
@@ -46,15 +41,55 @@ namespace ConsoleTester.Plugins.XsdValidator
             Helper.SetTextFromSettings(config.XMLFilename, this.cbPath);
             if (config.XSDFiles != null)
             {
+                InitGridView();
+
                 List<FileInfo> list = new List<FileInfo>();
                 foreach (var fullfilename in config.XSDFiles)
                 {
-                    list.Add(new FileInfo(fullfilename));
+                    if (File.Exists(fullfilename))
+                    {
+                        list.Add(new FileInfo(fullfilename));
+                    } else
+                    {
+                        logger.Log($"{fullfilename} doesn't exist");
+                    }
                 }
                 dgKeyValue.DataSource = list;
             }
+            this.cbShowWarnings.Checked = config.ShowWarnings;
         }
 
+        private void InitGridView()
+        {
+            dgKeyValue.AutoGenerateColumns = false;
+            dgKeyValue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            DataGridViewCell cell = new DataGridViewTextBoxCell();
+            DataGridViewTextBoxColumn colFileName = new DataGridViewTextBoxColumn()
+            {
+                CellTemplate = cell,
+                HeaderText = "Name",
+                Name = "Name",
+                DataPropertyName = "Name" // Tell the column which property of FileName it should use
+            };
+            DataGridViewTextBoxColumn colFileDir = new DataGridViewTextBoxColumn()
+            {
+                CellTemplate = cell,
+                HeaderText = "Directory",
+                Name = "Directory",
+                DataPropertyName = "Directory"
+            };
+            DataGridViewTextBoxColumn colFileLength = new DataGridViewTextBoxColumn()
+            {
+                CellTemplate = cell,
+                HeaderText = "Length",
+                Name = "Length",
+                DataPropertyName = "Length"
+            };
+
+            dgKeyValue.Columns.Add(colFileName);
+            dgKeyValue.Columns.Add(colFileDir);
+            dgKeyValue.Columns.Add(colFileLength);
+        }
 
         private XsdValidatorConfig GetConfigFromUI()
         {
@@ -66,17 +101,18 @@ namespace ConsoleTester.Plugins.XsdValidator
                 var fileList = dgKeyValue.DataSource as List<FileInfo>;
                 conf.XSDFiles = fileList.ConvertAll(p => p.FullName);
             }
+            conf.ShowWarnings = cbShowWarnings.Checked;
             return conf;
         }
 
         private void launch_Click(object sender, EventArgs e)
         {
-            Logger logger = new Logger(MainForm.LogControl);
             var conf = GetConfigFromUI();
-            Validation val = new Validation(logger);
-            val.SetXML(conf.XMLFilename);
-            val.AddXsd(conf.XSDFiles);
-            val.Validate();
+            Validation validation = new Validation(logger);
+            validation.SetXML(conf.XMLFilename);
+            validation.AddXsd(conf.XSDFiles);
+            validation.ShowWarnings = conf.ShowWarnings;
+            validation.Validate();
         }
 
         private void btAddParam_Click(object sender, EventArgs e)
@@ -103,7 +139,7 @@ namespace ConsoleTester.Plugins.XsdValidator
         {
             var folder = new OpenFileDialog();
             folder.Multiselect = false;
-            folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
+            // folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
             var result = folder.ShowDialog();
 
             cbPath.Text = folder.FileName;
@@ -113,7 +149,7 @@ namespace ConsoleTester.Plugins.XsdValidator
         {
             var folder = new OpenFileDialog();
             folder.Multiselect = true;
-            folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
+            // folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
             var result = folder.ShowDialog();
 
             List<FileInfo> fileList = new List<FileInfo>();

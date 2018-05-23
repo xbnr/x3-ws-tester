@@ -30,6 +30,8 @@ namespace ConsoleTester.Plugins.XsdValidator
         [JsonProperty]
         public List<string> XSDFiles { get; set; }
 
+        [JsonProperty]
+        public bool ShowWarnings { get; set; }
 
         internal static string GetWorkspaceShortFilename()
         {

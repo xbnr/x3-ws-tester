@@ -39,35 +39,48 @@ namespace ConsoleTester.Plugins.XsdValidator
             XsdFiles.AddRange(xsdfiles);
         }
 
+        public bool ShowWarnings { get; set; }
+
         public void Validate()
         {
             try
             {
-                XmlSchemaSet schemaSet = new XmlSchemaSet();
-                schemaSet.ValidationEventHandler += new ValidationEventHandler(ValidationHandler);
+                logger.Log($"Launch {XmlFile} validation ... ");
+
+                XmlReaderSettings settings = new XmlReaderSettings
+                {
+                    //Message:Impossible de résoudre l'attribut 'schemaLocation'.
+                    //Error while XML validation: Pour des raisons de sécurité, DTD interdite dans ce document XML. Pour activer le traitement DTD, définissez sur Parse la propriété DtdProcessing sur XmlReaderSettings et transmettez les paramètres à la méthode XmlReader.Create. * ***
+                    DtdProcessing = DtdProcessing.Parse,
+                    MaxCharactersFromEntities = 1024,
+                    ValidationType = ValidationType.Schema
+                };
+
+                settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessInlineSchema;
+                if (ShowWarnings)
+                {
+                    settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
+                }
+
                 foreach (var xsd_file in XsdFiles)
                 {
-                    schemaSet.Add(null, xsd_file);
-                    // ss.Add(null, new XmlTextReader(xsd_file));
-                }
-                if (schemaSet.Count > 0)
-                {
-                    XmlReaderSettings settings = new XmlReaderSettings();
-                    settings.ValidationType = ValidationType.Schema;
-
-                    settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessInlineSchema;
-                    settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
-
-
-                    settings.Schemas.Add(schemaSet);
-                    settings.Schemas.Compile();
-                    settings.ValidationEventHandler += new ValidationEventHandler(ValidationHandler);
-                    XmlTextReader r = new XmlTextReader(this.XmlFile);
-                    using (XmlReader reader = XmlReader.Create(r, settings))
+                    if (File.Exists(xsd_file))
                     {
-                        while (reader.Read())
-                        {
-                        }
+                        settings.Schemas.Add(null, new XmlTextReader(xsd_file));
+                    }
+                    else
+                    {
+                        logger.Log($"{xsd_file} doesn't exist");
+                    }
+                }
+                settings.Schemas.Compile();
+                settings.ValidationEventHandler += new ValidationEventHandler(ValidationHandler);
+                XmlTextReader r = new XmlTextReader(this.XmlFile) { DtdProcessing = DtdProcessing.Parse };
+                using (XmlReader reader = XmlReader.Create(r, settings))
+                {
+                    reader.MoveToContent();
+                    while (reader.Read())
+                    {
                     }
                 }
                 logger.Log($"{XmlFile} Validation finished successfully");

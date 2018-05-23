@@ -93,6 +93,9 @@ namespace ConsoleTester.UI
 
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (SelectedFile == null) {
+                return;
+            }
             string newName = GetNewName(SelectedFile);
             SelectedFile.CopyTo(newName);
             BuildTreeView();
