@@ -57,6 +57,9 @@ namespace ConsoleTester.Plugins.XsdValidator
                 };
 
                 settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessInlineSchema;
+                settings.ValidationFlags |= XmlSchemaValidationFlags.AllowXmlAttributes;
+                // settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessIdentityConstraints;
+                // settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation;
                 if (ShowWarnings)
                 {
                     settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;

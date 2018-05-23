@@ -49,7 +49,8 @@ namespace ConsoleTester.Plugins.XsdValidator
                     if (File.Exists(fullfilename))
                     {
                         list.Add(new FileInfo(fullfilename));
-                    } else
+                    }
+                    else
                     {
                         logger.Log($"{fullfilename} doesn't exist");
                     }
@@ -61,6 +62,7 @@ namespace ConsoleTester.Plugins.XsdValidator
 
         private void InitGridView()
         {
+            dgKeyValue.Columns.Clear();
             dgKeyValue.AutoGenerateColumns = false;
             dgKeyValue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
             DataGridViewCell cell = new DataGridViewTextBoxCell();
@@ -139,6 +141,7 @@ namespace ConsoleTester.Plugins.XsdValidator
         {
             var folder = new OpenFileDialog();
             folder.Multiselect = false;
+            folder.Filter = "*.xml|*.*";
             // folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
             var result = folder.ShowDialog();
 
@@ -149,6 +152,7 @@ namespace ConsoleTester.Plugins.XsdValidator
         {
             var folder = new OpenFileDialog();
             folder.Multiselect = true;
+            folder.Filter = "*.xsd|*.*";
             // folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
             var result = folder.ShowDialog();
 
