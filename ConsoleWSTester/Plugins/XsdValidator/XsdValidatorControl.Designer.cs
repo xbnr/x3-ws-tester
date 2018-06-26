@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -39,6 +40,8 @@
             this.btDelete = new System.Windows.Forms.Button();
             this.btAddParam = new System.Windows.Forms.Button();
             this.dgKeyValue = new System.Windows.Forms.DataGridView();
+            this.gridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.removeSelectedXsdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelParameters = new System.Windows.Forms.Label();
             this.cbPath = new System.Windows.Forms.ComboBox();
             this.labelPath = new System.Windows.Forms.Label();
@@ -48,6 +51,7 @@
             this.tabPage1.SuspendLayout();
             this.panelParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
+            this.gridContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
@@ -153,6 +157,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgKeyValue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgKeyValue.ContextMenuStrip = this.gridContextMenuStrip;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -173,6 +178,21 @@
             this.dgKeyValue.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgKeyValue.Size = new System.Drawing.Size(476, 182);
             this.dgKeyValue.TabIndex = 39;
+            this.dgKeyValue.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgKeyValue_RowPostPaint);
+            // 
+            // gridContextMenuStrip
+            // 
+            this.gridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removeSelectedXsdToolStripMenuItem});
+            this.gridContextMenuStrip.Name = "gridContextMenuStrip";
+            this.gridContextMenuStrip.Size = new System.Drawing.Size(186, 26);
+            // 
+            // removeSelectedXsdToolStripMenuItem
+            // 
+            this.removeSelectedXsdToolStripMenuItem.Name = "removeSelectedXsdToolStripMenuItem";
+            this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.removeSelectedXsdToolStripMenuItem.Text = "Remove selected Xsd";
+            this.removeSelectedXsdToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedXsdToolStripMenuItem_Click);
             // 
             // labelParameters
             // 
@@ -253,6 +273,7 @@
             this.tabPage1.PerformLayout();
             this.panelParameters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).EndInit();
+            this.gridContextMenuStrip.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -276,5 +297,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.CheckBox cbShowWarnings;
+        private System.Windows.Forms.ContextMenuStrip gridContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem removeSelectedXsdToolStripMenuItem;
     }
 }

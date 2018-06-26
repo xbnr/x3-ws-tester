@@ -7,6 +7,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -157,10 +158,20 @@ namespace ConsoleTester.Plugins.XsdValidator
             var result = folder.ShowDialog();
 
             List<FileInfo> fileList = new List<FileInfo>();
+            if (dgKeyValue.DataSource != null)
+            {
+                fileList = dgKeyValue.DataSource as List<FileInfo>;
+            }
+
             foreach (var filename in folder.FileNames)
             {
-                fileList.Add(new FileInfo(filename));
+                if (fileList.Find(p => p.FullName == filename) == null)
+                {
+                    fileList.Add(new FileInfo(filename));
+                }
             }
+
+            dgKeyValue.DataSource = null;
             dgKeyValue.DataSource = fileList;
         }
 
@@ -173,5 +184,42 @@ namespace ConsoleTester.Plugins.XsdValidator
         {
             LoadConfigFromJSON(item.FullName);
         }
+
+        private void removeSelectedXsdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var fileList = dgKeyValue.DataSource as List<FileInfo>;
+
+            foreach (DataGridViewRow row in dgKeyValue.SelectedRows)
+            {
+                var file = row.DataBoundItem as FileInfo;
+                fileList.Remove(file);
+            }
+            dgKeyValue.DataSource = null;
+            dgKeyValue.DataSource = fileList;
+        }
+
+        private void dgKeyValue_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            var rowIdx = (e.RowIndex + 1).ToString();
+
+            var centerFormat = new StringFormat()
+            {
+                // right alignment might actually make more sense for numbers
+                Alignment = StringAlignment.Center,
+
+                LineAlignment = StringAlignment.Center
+            };
+            //get the size of the string
+            Size textSize = TextRenderer.MeasureText(rowIdx, this.Font);
+            //if header width lower then string width then resize
+            if (grid.RowHeadersWidth < textSize.Width + 40)
+            {
+                grid.RowHeadersWidth = textSize.Width + 40;
+            }
+            var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
+            e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
+
     }
 }
