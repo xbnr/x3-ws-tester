@@ -48,6 +48,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cbShowWarnings = new System.Windows.Forms.CheckBox();
+            this.normalizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage1.SuspendLayout();
             this.panelParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
@@ -183,9 +184,10 @@
             // gridContextMenuStrip
             // 
             this.gridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.removeSelectedXsdToolStripMenuItem});
+            this.removeSelectedXsdToolStripMenuItem,
+            this.normalizeToolStripMenuItem});
             this.gridContextMenuStrip.Name = "gridContextMenuStrip";
-            this.gridContextMenuStrip.Size = new System.Drawing.Size(186, 26);
+            this.gridContextMenuStrip.Size = new System.Drawing.Size(186, 70);
             // 
             // removeSelectedXsdToolStripMenuItem
             // 
@@ -260,6 +262,13 @@
             this.cbShowWarnings.Text = "Show warnings";
             this.cbShowWarnings.UseVisualStyleBackColor = true;
             // 
+            // normalizeToolStripMenuItem
+            // 
+            this.normalizeToolStripMenuItem.Name = "normalizeToolStripMenuItem";
+            this.normalizeToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.normalizeToolStripMenuItem.Text = "Normalize";
+            this.normalizeToolStripMenuItem.Click += new System.EventHandler(this.normalizeToolStripMenuItem_Click);
+            // 
             // XsdValidatorControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,5 +308,6 @@
         private System.Windows.Forms.CheckBox cbShowWarnings;
         private System.Windows.Forms.ContextMenuStrip gridContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem removeSelectedXsdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem normalizeToolStripMenuItem;
     }
 }

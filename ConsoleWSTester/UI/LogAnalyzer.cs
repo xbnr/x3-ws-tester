@@ -9,12 +9,16 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace ConsoleTester.UI
 {
-    public partial class LogAnalyzer : DockContent
+    public partial class LogAnalyzer : ControlConfig
     {
         public LogAnalyzer()
         {
             InitializeComponent();
         }
+        //public override void CreateWS(FileInfo item)
+        //{
+        //    LoadConfigFromJSON(item.FullName);
+        //}
 
         private void btBrowseFile_Click(object sender, EventArgs e)
         {

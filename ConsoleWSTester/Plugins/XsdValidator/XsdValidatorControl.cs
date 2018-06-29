@@ -137,6 +137,25 @@ namespace ConsoleTester.Plugins.XsdValidator
                 }
             }
         }
+        private void normalizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgKeyValue.SelectedRows.Count != 1)
+            {
+                MessageBox.Show($"Please, select just one xsd file");
+                // logger.Log();
+                return;
+            }
+
+            var selectedObj = dgKeyValue.SelectedRows[0];
+            FileInfo selectedValue = selectedObj.DataBoundItem as FileInfo;
+            if (selectedValue != null)
+            {
+                XsdSchemaNormalizer normalizer = new XsdSchemaNormalizer();
+                string dest = selectedValue.FullName + ".normalized" + selectedValue.Extension;
+                normalizer.Merge(selectedValue.FullName, dest);
+                logger.Log($"{selectedValue.FullName} Normalized in { dest }");
+            }
+        }
 
         private void btBrowseXML_Click(object sender, EventArgs e)
         {
@@ -220,6 +239,7 @@ namespace ConsoleTester.Plugins.XsdValidator
             var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
             e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
+
 
     }
 }

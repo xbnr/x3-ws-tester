@@ -105,6 +105,7 @@
     <Compile Include="LogsAnalyzer\LogAnalyze.cs" />
     <Compile Include="LogsAnalyzer\Result.cs" />
     <Compile Include="LogsAnalyzer\Rules.cs" />
+    <Compile Include="Plugins\XsdValidator\XsdSchemaNormalizer.cs" />
     <Compile Include="Plugins\XsdValidator\Validation.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
