@@ -127,27 +127,26 @@ namespace ConsoleTester.Plugins.XsdValidator
 
         private void btDelete_Click(object sender, EventArgs e)
         {
-            if (dgKeyValue.SelectedRows.Count > 0)
-            {
-                var selectedObj = dgKeyValue.SelectedRows[0];
-                CAdxParamKeyValue selectedValue = selectedObj.DataBoundItem as CAdxParamKeyValue;
-                if (selectedValue != null)
-                {
-                    dgKeyValue.DataSource = null;
-                }
-            }
+            RemoveSelectedFiles();
         }
-        private void normalizeToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private FileInfo GetSelectedFile()
         {
             if (dgKeyValue.SelectedRows.Count != 1)
             {
-                MessageBox.Show($"Please, select just one xsd file");
-                // logger.Log();
-                return;
+                MessageBox.Show($"Please, select just one xsd file", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
             }
 
             var selectedObj = dgKeyValue.SelectedRows[0];
             FileInfo selectedValue = selectedObj.DataBoundItem as FileInfo;
+            return selectedValue;
+        }
+
+
+        private void normalizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectedValue = GetSelectedFile();
             if (selectedValue != null)
             {
                 XsdSchemaNormalizer normalizer = new XsdSchemaNormalizer();
@@ -206,6 +205,11 @@ namespace ConsoleTester.Plugins.XsdValidator
 
         private void removeSelectedXsdToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            RemoveSelectedFiles();
+        }
+
+        private void RemoveSelectedFiles()
+        {
             var fileList = dgKeyValue.DataSource as List<FileInfo>;
 
             foreach (DataGridViewRow row in dgKeyValue.SelectedRows)
@@ -240,6 +244,22 @@ namespace ConsoleTester.Plugins.XsdValidator
             e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
 
+        private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var file = GetSelectedFile();
+            if (file != null)
+            {
+                Program.OpenJson(file.FullName);
+            }
+        }
 
+        private void copyPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var file = GetSelectedFile();
+            if (file != null)
+            {
+                Clipboard.SetText(file.FullName);
+            }
+        }
     }
 }

@@ -42,13 +42,15 @@
             this.dgKeyValue = new System.Windows.Forms.DataGridView();
             this.gridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeSelectedXsdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelParameters = new System.Windows.Forms.Label();
             this.cbPath = new System.Windows.Forms.ComboBox();
             this.labelPath = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cbShowWarnings = new System.Windows.Forms.CheckBox();
-            this.normalizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage1.SuspendLayout();
             this.panelParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
@@ -130,7 +132,6 @@
             this.btDelete.TabIndex = 41;
             this.btDelete.Text = "-";
             this.btDelete.UseVisualStyleBackColor = true;
-            this.btDelete.Visible = false;
             this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
             // 
             // btAddParam
@@ -185,9 +186,11 @@
             // 
             this.gridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.removeSelectedXsdToolStripMenuItem,
-            this.normalizeToolStripMenuItem});
+            this.normalizeToolStripMenuItem,
+            this.openFileToolStripMenuItem,
+            this.copyPathToolStripMenuItem});
             this.gridContextMenuStrip.Name = "gridContextMenuStrip";
-            this.gridContextMenuStrip.Size = new System.Drawing.Size(186, 70);
+            this.gridContextMenuStrip.Size = new System.Drawing.Size(186, 92);
             // 
             // removeSelectedXsdToolStripMenuItem
             // 
@@ -195,6 +198,27 @@
             this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.removeSelectedXsdToolStripMenuItem.Text = "Remove selected Xsd";
             this.removeSelectedXsdToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedXsdToolStripMenuItem_Click);
+            // 
+            // normalizeToolStripMenuItem
+            // 
+            this.normalizeToolStripMenuItem.Name = "normalizeToolStripMenuItem";
+            this.normalizeToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.normalizeToolStripMenuItem.Text = "Normalize";
+            this.normalizeToolStripMenuItem.Click += new System.EventHandler(this.normalizeToolStripMenuItem_Click);
+            // 
+            // openFileToolStripMenuItem
+            // 
+            this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.openFileToolStripMenuItem.Text = "Open file";
+            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
+            // 
+            // copyPathToolStripMenuItem
+            // 
+            this.copyPathToolStripMenuItem.Name = "copyPathToolStripMenuItem";
+            this.copyPathToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.copyPathToolStripMenuItem.Text = "Copy path";
+            this.copyPathToolStripMenuItem.Click += new System.EventHandler(this.copyPathToolStripMenuItem_Click);
             // 
             // labelParameters
             // 
@@ -262,13 +286,6 @@
             this.cbShowWarnings.Text = "Show warnings";
             this.cbShowWarnings.UseVisualStyleBackColor = true;
             // 
-            // normalizeToolStripMenuItem
-            // 
-            this.normalizeToolStripMenuItem.Name = "normalizeToolStripMenuItem";
-            this.normalizeToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.normalizeToolStripMenuItem.Text = "Normalize";
-            this.normalizeToolStripMenuItem.Click += new System.EventHandler(this.normalizeToolStripMenuItem_Click);
-            // 
             // XsdValidatorControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -309,5 +326,7 @@
         private System.Windows.Forms.ContextMenuStrip gridContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem removeSelectedXsdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem normalizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyPathToolStripMenuItem;
     }
 }

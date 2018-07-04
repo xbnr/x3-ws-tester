@@ -308,7 +308,7 @@ namespace ConsoleTester.LogsAnalyzer
             foreach (var fileName in filesResult)
             {
                 var rules = JsonConvert.DeserializeObject<Rules>(File.ReadAllText(fileName.FullName));
-                if (rules == null || rules.RulesList== null)
+                if (rules == null || rules.RulesList == null)
                     continue;
 
                 foreach (var rule in rules?.RulesList)
@@ -327,15 +327,41 @@ namespace ConsoleTester.LogsAnalyzer
                 }
             }
 
+
             SaveExcerpt(directoryTarget, resultDictionary);
         }
 
         private void SaveExcerpt(string directoryTarget, Dictionary<string, List<Result>> resultDic)
         {
-            string json = JsonConvert.SerializeObject(resultDic, Formatting.Indented, this.JsonSerializerSettings);
             string excerptFileName = Path.Combine(directoryTarget, "excerptResults.json");
+
+            int max = 20000;
+            if (resultDic.Count > max)
+            {
+                this.logger.Log($"{resultDic.Count} is too much results to save excerpt in {excerptFileName}.");
+
+                var keys = resultDic.Keys.ToList();
+                foreach (var key in keys)
+                {
+                    resultDic.Remove(key);
+                    if (resultDic.Count < max)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            // OutOfMemory on big objects:
+            // string json = JsonConvert.SerializeObject(resultDic, Formatting.Indented, this.JsonSerializerSettings);
+            // File.WriteAllText(excerptFileName, json, Encoding.UTF8);
+            using (TextWriter textWriter = File.CreateText(excerptFileName))
+            {
+                var serializer = new JsonSerializer();
+                serializer.Formatting = Formatting.Indented;
+                serializer.NullValueHandling = NullValueHandling.Ignore;
+                serializer.Serialize(textWriter, resultDic);
+            }
             this.logger.Log($"Save excerpt in {excerptFileName}.");
-            File.WriteAllText(excerptFileName, json, Encoding.UTF8);
         }
 
         internal void ShowExcerpt(System.Windows.Forms.TreeView treeview)
@@ -443,7 +469,7 @@ namespace ConsoleTester.LogsAnalyzer
             if (found)
             {
                 var result = new Result();
-                result.Line = index +1;
+                result.Line = index + 1;
                 result.Content = line;
                 result.TemplateValue = templateValue;
                 if (monitoring != null)
