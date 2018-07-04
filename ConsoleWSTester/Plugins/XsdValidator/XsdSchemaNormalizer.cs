@@ -32,8 +32,7 @@ namespace ConsoleTester.Plugins.XsdValidator
                 // Compiling Schema  
                 sch.Compile(null);
 
-                XmlSchema outSch =
-               XmlSchemaIncludeNormalizer.BuildIncludeFreeXmlSchema(sch);
+                XmlSchema outSch = XmlSchemaIncludeNormalizer.BuildIncludeFreeXmlSchema(sch);
 
                 outSch.Write(writer);
             }
@@ -45,49 +44,6 @@ namespace ConsoleTester.Plugins.XsdValidator
             return true;
         }
 
-        //    public static void Main(String[] args)
-        //    {
-        //        if (args.GetLength(0) < 1)
-        //        {
-        //            Usage();
-        //            return;
-        //        }
-        //        int argi = 0;
-        //        bool quiet = false;
-        //        if (args[argi] == "-q")
-        //        {
-        //            quiet = true;
-        //            argi++;
-        //        }
-
-        //        if (argi == args.GetLength(0))
-        //        {
-        //            Usage();
-        //            return;
-        //        }
-
-        //        String url = args[argi];
-
-        //        if (!quiet)
-        //            Console.WriteLine("Loading Schema: " + url);
-
-        //        if (argi < (args.GetLength(0) - 1))
-        //        {
-        //            if (!quiet)
-        //                Console.WriteLine("Outputing to file: " + args[argi + 1]);
-
-        //            StreamWriter output =
-        //           new StreamWriter(new FileStream(args[argi + 1], FileMode.Create));
-
-        //            NormalizeXmlSchema(url, output);
-        //        }
-        //        else
-        //        {
-        //            NormalizeXmlSchema(url, Console.Out);
-        //        }
-
-        //    }
-        //}
 
         // A class to remove all <include> from a Xml Schema  
         //  
