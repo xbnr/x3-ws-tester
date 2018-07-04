@@ -102,9 +102,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Helper.cs" />
-    <Compile Include="LogsAnalyzer\LogAnalyze.cs" />
-    <Compile Include="LogsAnalyzer\Result.cs" />
-    <Compile Include="LogsAnalyzer\Rules.cs" />
+    <Compile Include="Plugins\LogAnalyzer\LogAnalyze.cs" />
+    <Compile Include="Plugins\LogAnalyzer\Result.cs" />
+    <Compile Include="Plugins\LogAnalyzer\Rules.cs" />
     <Compile Include="Plugins\XsdValidator\XsdSchemaNormalizer.cs" />
     <Compile Include="Plugins\XsdValidator\Validation.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -145,13 +145,13 @@
     <Compile Include="UI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\LogAnalyzer.cs">
+    <Compile Include="Plugins\LogAnalyzer\LogAnalyzer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\LogAnalyzer.Designer.cs">
+    <Compile Include="Plugins\LogAnalyzer\LogAnalyzer.Designer.cs">
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogsAnalyzer\Rule.cs" />
+    <Compile Include="Plugins\LogAnalyzer\Rule.cs" />
     <Compile Include="UI\OutputResult.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,7 +257,7 @@
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\LogAnalyzer.resx">
+    <EmbeddedResource Include="Plugins\LogAnalyzer\LogAnalyzer.resx">
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\OutputResult.resx">
