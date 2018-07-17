@@ -88,21 +88,28 @@ namespace ConsoleTester.UI
         {
             if (treeViewResult.SelectedNode != null)
             {
-                Program.OpenJson(treeViewResult.SelectedNode.Text);
+                // Program.OpenJson(treeViewResult.SelectedNode.Text);
+                OpenFile(treeViewResult.SelectedNode.Text);
             }
         }
 
         private void treeViewResult_DoubleClick(object sender, EventArgs e)
         {
             string path = treeViewResult.SelectedNode.Text;
-            if (path.IndexOf("file: ") >= 0)
+            OpenFile(path);
+        }
+
+        private void OpenFile(string path)
+        {
+            int? lineNumber = null;
+            if (path.IndexOf("file: ", StringComparison.CurrentCultureIgnoreCase) >= 0)
             {
                 path = path.Substring("file: ".Length);
                 string line = treeViewResult.SelectedNode.Parent.Nodes[0].Text.Substring("line: ".Length);
-                int lineNumber = int.Parse(line, System.Globalization.NumberStyles.Number);
-                Program.OpenJson(path, lineNumber);
+                if (!string.IsNullOrEmpty(line))
+                    lineNumber = int.Parse(line, System.Globalization.NumberStyles.Number);
             }
-
+            Program.OpenJson(path, lineNumber);
         }
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
