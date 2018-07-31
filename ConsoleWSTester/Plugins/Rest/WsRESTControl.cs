@@ -12,7 +12,7 @@ using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace ConsoleTester.UI
+namespace ConsoleTester.Plugins.Rest
 {
     public partial class WsRESTControl : DockContent
     {
@@ -69,20 +69,14 @@ namespace ConsoleTester.UI
         }
 
        
-        private SOAPConfig GetConfigFromUI()
+        private RESTConfig GetConfigFromUI()
         {
-            SOAPConfig conf = new SOAPConfig();
-            //string opStringVal = string.IsNullOrEmpty(cbMode.Text) ? WebServiceCall.OperationMode.Query.ToString() : cbMode.Text;
-            //WebServiceCall.OperationMode opEnum = WebServiceCall.OperationMode.Query;
-            //if (!Enum.TryParse(opStringVal, out opEnum))
-            //{
-            //    Console.WriteLine("Enum.Parse(" + opStringVal + ") failed");
-            //}
+            RESTConfig conf = new RESTConfig();
             // conf.OperatMode = opEnum;
             conf.HostUrl = tbHost.Text;
             conf.Path = cbPath.Text;
-            int listSize = 10;
-            conf.ListSize = listSize;
+            // int listSize = 10;
+            // conf.ListSize = listSize;
 
             conf.Login = tbLogin.Text;
             conf.Password = tbPassword.Text;
@@ -110,31 +104,26 @@ namespace ConsoleTester.UI
 
         private void launch_Click(object sender, EventArgs e)
         {
-            Logger logger = new Logger(MainForm.LogControl);
-            SOAPConfig conf = GetConfigFromUI();
+            //Logger logger = new Logger(MainForm.LogControl);
+            //SOAPConfig conf = GetConfigFromUI();
 
-            var ws = new SOAPWebServiceCall(conf, logger);
-            SOAPWebServiceCall.OperationMode action = GetAction();
-            switch (action)
-            {
-                default:
-                case SOAPWebServiceCall.OperationMode.Query:
-                    ws.Query();
-                    break;
-                case SOAPWebServiceCall.OperationMode.Read:
-                    ws.Read();
-                    break;
-                case SOAPWebServiceCall.OperationMode.GetDescription:
-                    ws.GetDescription();
-                    break;
-            }
+            //var ws = new SOAPWebServiceCall(conf, logger);
+            //SOAPWebServiceCall.OperationMode action = GetAction();
+            //switch (action)
+            //{
+            //    default:
+            //    case SOAPWebServiceCall.OperationMode.Query:
+            //        ws.Query();
+            //        break;
+            //    case SOAPWebServiceCall.OperationMode.Read:
+            //        ws.Read();
+            //        break;
+            //    case SOAPWebServiceCall.OperationMode.GetDescription:
+            //        ws.GetDescription();
+            //        break;
+            //}
         }
-
-
-        private SOAPWebServiceCall.OperationMode GetAction()
-        {
-           return (SOAPWebServiceCall.OperationMode)Enum.Parse(typeof(SOAPWebServiceCall.OperationMode), "");
-        }
+       
 
         private void Workspace_Load(object sender, EventArgs e)
         {
@@ -144,7 +133,7 @@ namespace ConsoleTester.UI
 
         private void ShowPanels()
         {
-            panelParameters.Visible = GetAction() == SOAPWebServiceCall.OperationMode.Read;
+            //panelParameters.Visible = GetAction() == SOAPWebServiceCall.OperationMode.Read;
         }
 
         private void btAddParam_Click(object sender, EventArgs e)

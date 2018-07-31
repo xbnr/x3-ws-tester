@@ -1,4 +1,4 @@
-﻿namespace ConsoleTester.UI
+﻿namespace ConsoleTester.Plugins.Soap
 {
     partial class Workspace
     {

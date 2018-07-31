@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Threading;
 
-namespace ConsoleTester.Plugins
+namespace ConsoleTester.Plugins.Soap
 {
     public class SOAPWebServiceCall
     {

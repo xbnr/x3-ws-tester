@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 using ConsoleTester.Common;
 using ConsoleTester.UI;
 
-namespace ConsoleTester.Plugins
+namespace ConsoleTester.Plugins.Soap
 {
     [JsonObject(IsReference = false)]
     public class SOAPConfig : IConfigService

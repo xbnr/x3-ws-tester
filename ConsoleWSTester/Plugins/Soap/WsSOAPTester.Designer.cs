@@ -1,4 +1,4 @@
-﻿namespace ConsoleTester.UI
+﻿namespace ConsoleTester.Plugins.Soap
 {
     partial class WsSOAPTester
     {
@@ -33,8 +33,8 @@
             // 
             // workspace1
             // 
-            this.workspace1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.workspace1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.workspace1.Location = new System.Drawing.Point(-1, -3);
             this.workspace1.Name = "workspace1";

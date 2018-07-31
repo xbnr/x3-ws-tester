@@ -15,7 +15,5 @@ namespace ConsoleTester.UI
 
         }
 
-        // GetConfigFromUI
-
     }
 }

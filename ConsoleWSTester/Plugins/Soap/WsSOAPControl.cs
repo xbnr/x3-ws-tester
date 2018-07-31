@@ -1,6 +1,8 @@
 ﻿using ConsoleTester.CAWebService;
 using ConsoleTester.Common;
 using ConsoleTester.Plugins;
+using ConsoleTester.Plugins.Soap;
+using ConsoleTester.UI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -11,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ConsoleTester.UI
+namespace ConsoleTester.Plugins.Soap
 {
     public partial class Workspace : UserControl
     {

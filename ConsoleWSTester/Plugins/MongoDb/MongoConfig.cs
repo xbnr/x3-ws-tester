@@ -5,45 +5,26 @@ using Newtonsoft.Json.Converters;
 using ConsoleTester.Common;
 using ConsoleTester.UI;
 
-namespace ConsoleTester.Plugins.Rest
+namespace ConsoleTester.Plugins.MongoDb
 {
     [JsonObject(IsReference = false)]
-    public class RESTConfig : IConfigService
+    public class MongoConfig : IConfigService
     {
         private const int MaxListSize = 4;
-        public const string RESTConfigName = "RESTConfig";
+        public const string MongoConfigName = "MongoConfig";
 
         public string GetTitle()
         {
-            return "REST tester";
+            return "MongoConfig tester";
         }
 
         public string GetFormFullName()
         {
-            return typeof(WsRESTControl).FullName;
+            return typeof(MongoDbEDI).FullName;
         }
 
         [JsonProperty]
         public string HostUrl { get; set; }
-
-        [JsonProperty]
-        public string Path { get; set; }
-
-        [JsonProperty]
-        public string Language { get; set; }
-
-        [JsonProperty]
-        public string XmlObject { get; set; }
-
-        [JsonProperty]
-        public string XmlFilename { get; set; }
-
-        //[JsonConverter(typeof(StringEnumConverter))]
-        //public SOAPWebServiceCall.OperationMode OperatMode { get; set; }
-
-
-        [JsonProperty]
-        public CAWebService.CAdxParamKeyValue[] ObjectKeys { get; set; }
 
         [JsonProperty]
         public string Login { get; set; }
@@ -57,7 +38,7 @@ namespace ConsoleTester.Plugins.Rest
 
         internal static string GetWorkspaceShortFilename()
         {
-            return $"{RESTConfigName}.json";
+            return $"{MongoConfigName}.json";
         }
 
         internal static string GetWorkspaceFilename()
@@ -67,7 +48,7 @@ namespace ConsoleTester.Plugins.Rest
 
         public string GetConfigPrefixFilename()
         {
-            return RESTConfigName;
+            return MongoConfigName;
         }
     }
 }
