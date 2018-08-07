@@ -178,6 +178,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgKeyValue.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgKeyValue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgKeyValue.Size = new System.Drawing.Size(476, 182);
             this.dgKeyValue.TabIndex = 39;
             this.dgKeyValue.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgKeyValue_RowPostPaint);

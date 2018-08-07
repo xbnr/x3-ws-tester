@@ -27,25 +27,6 @@ namespace ConsoleTester.Common
         protected List<string> Logs => logs;
 
         delegate void UpdateDelegate(string message, bool error);
-        //private void updateMonitor(System.Drawing.Icon pIco, String pstrText)
-        //{
-        //    if (this.InvokeRequired)
-        //    {
-        //        // invocation du délégué
-        //        if (System.Threading.Thread.CurrentThread.ThreadState == System.Threading.ThreadState.Running)
-        //        {
-        //            this.Invoke(new UpdateMonitorDelegate(updateMonitor), new object[] { pIco, pstrText });
-        //        }
-        //    }
-        //    else
-        //    {
-        //        this.SuspendLayout();
-        //        this.Panels[1].Icon = pIco;
-        //        this.Panels[1].Text = pstrText;
-        //        this.ResumeLayout(true);
-        //        this.Invalidate(true);
-        //    }
-        //}
 
         public virtual void Log(string message, bool error)
         {
@@ -60,7 +41,6 @@ namespace ConsoleTester.Common
             }
             if (control.InvokeRequired)
             {
-                //if (System.Threading.Thread.CurrentThread.ThreadState == System.Threading.ThreadState.Running)
                 control.Invoke(new UpdateDelegate(Log), new object[] { message, error });
             }
             else

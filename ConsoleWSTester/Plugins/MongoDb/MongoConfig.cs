@@ -24,18 +24,18 @@ namespace ConsoleTester.Plugins.MongoDb
         }
 
         [JsonProperty]
-        public string HostUrl { get; set; }
+        public string ServerUrl { get; set; }
 
         [JsonProperty]
-        public string Login { get; set; }
+        public string Database { get; set; }
 
         [JsonProperty]
-        public string Password { get; set; }
+        public string Occurence { get; set; }
 
         [JsonProperty]
-        public string Name { get; set; }
+        public string FieldName { get; set; }
 
-
+        
         internal static string GetWorkspaceShortFilename()
         {
             return $"{MongoConfigName}.json";

@@ -16,7 +16,7 @@ namespace ConsoleTester.Plugins.XsdValidator
 
         public string GetTitle()
         {
-            return "XsdValidator tester";
+            return "Xsd validator";
         }
 
         public string GetFormFullName()

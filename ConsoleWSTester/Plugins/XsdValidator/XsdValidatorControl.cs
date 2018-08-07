@@ -86,7 +86,8 @@ namespace ConsoleTester.Plugins.XsdValidator
                 CellTemplate = cell,
                 HeaderText = "Length",
                 Name = "Length",
-                DataPropertyName = "Length"
+                DataPropertyName = "Length",
+               Resizable = DataGridViewTriState.True               
             };
 
             dgKeyValue.Columns.Add(colFileName);

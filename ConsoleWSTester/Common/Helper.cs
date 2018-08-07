@@ -59,5 +59,35 @@ namespace ConsoleTester.Common
             ControlConfig dockContent = Activator.CreateInstance(formType) as ControlConfig;
             return dockContent;
         }
+
+        delegate void UpdateDatasourceDelegate(DataGridView dataGrid, object datasource);
+        public static void SetSafeDatasource(DataGridView dataGrid, object datasource)
+        {
+            if (dataGrid.InvokeRequired)
+            {
+                dataGrid.Invoke(new UpdateDatasourceDelegate(SetSafeDatasource), new object[] { dataGrid, datasource });
+            }
+            else
+            {
+                dataGrid.DataSource = null;
+                dataGrid.DataSource = datasource;
+            }
+        }
+
+
+
+        delegate void UpdateDelegate(Control control, string message);
+
+        public static void SetSafeText(Control control, string text)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new UpdateDelegate(SetSafeText), new object[] { control, text });
+            }
+            else
+            {
+                control.Text = text;
+            }
+        }
     }
 }
