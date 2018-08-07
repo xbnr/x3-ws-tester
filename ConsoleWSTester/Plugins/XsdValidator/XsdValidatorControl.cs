@@ -161,7 +161,6 @@ namespace ConsoleTester.Plugins.XsdValidator
             var folder = new OpenFileDialog();
             folder.Multiselect = false;
             folder.Filter = "*.xml|*.*";
-            // folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
             var result = folder.ShowDialog();
 
             cbPath.Text = folder.FileName;
