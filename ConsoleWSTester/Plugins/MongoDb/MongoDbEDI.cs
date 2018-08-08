@@ -63,8 +63,18 @@ namespace ConsoleTester.Plugins.MongoDb
             return conf;
         }
 
+        private void tbTextToSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == 13)
+                Search();
+        }
 
         private void btSearch_Click(object sender, EventArgs e)
+        {
+            Search();
+        }
+
+        private void Search()
         {
             // var task = Task.Run(Search).GetAwaiter().GetResult();
             // Task.Run(() => Search("files_id", "ObjectId(\"534a811bf8b4aa4d33fdf94d\")"));
@@ -72,7 +82,8 @@ namespace ConsoleTester.Plugins.MongoDb
             // Task.Run(() => Search("filename", "CHORUS~1.2~EF1"));
             // Task.Run(() => Search("md5", "d41d8cd98f00b204e9800998ecf8427e"));
 
-            Task.Run(() => Search(cbFieldName.Text, tbTextToSearch.Text));
+            // Task.Run(() => SearchAsync(cbFieldName.Text, tbTextToSearch.Text));
+            SearchAsync(cbFieldName.Text, tbTextToSearch.Text);
         }
 
         //    { "_id" : ObjectId("5b68310b5aa06d3894786726"), "filename" : "718af082-581b-4edd-831e-8e809a84f8ac", "contentType" : "plain/text", "length" : 426380, "chunkSize" : 261120, "uploadDate" : ISODate("2018-08-06T11:29:1
@@ -124,22 +135,12 @@ namespace ConsoleTester.Plugins.MongoDb
             dgKeyValue.Columns.Add(colUploadDate);
         }
 
-        /*
-         * 
-         db.fs.chunks.find({files_id:ObjectId('534a811bf8b4aa4d33fdf94d')})        
-            NOOK: db.getCollection('fs.files').find({metadata.filename:"CHORUS~1.2~EF1"})
 
-            var filter = Builders<GridFSFileInfo>.Filter.And(
-        Builders<GridFSFileInfo>.Filter.Eq(x => x.Metadata["FileName"], "node-v0.12.7-x64.msi"));
+        private string MongoDatabase => tbDatabase.Text;
 
-           */
+        private string MongoServer => tbServer.Text;
 
-
-        private string Database => tbDatabase.Text;
-
-
-
-        private async Task Search(string fieldName, string fieldvalue)
+        private async Task SearchAsync(string fieldName, string fieldvalue)
         {
             IMongoDatabase database = GetDatabase();
 
@@ -157,10 +158,8 @@ namespace ConsoleTester.Plugins.MongoDb
 
         private IMongoDatabase GetDatabase()
         {
-            string connectionString = tbServer.Text; // "mongodb://localhost/?safe=true";
-            var client = new MongoClient(connectionString);
-            IMongoDatabase database = client?.GetDatabase(Database); // "syracuse");
-            return database;
+            var client = new MongoClient(MongoServer);// "mongodb://localhost/?safe=true";
+            return client?.GetDatabase(MongoDatabase); // "syracuse");
         }
 
         public async Task<List<GridFSFileInfo>> FindFilesAsync(IMongoCollection<GridFSFileInfo> filesCollection, string fieldName, string fieldvalue)
@@ -203,31 +202,53 @@ namespace ConsoleTester.Plugins.MongoDb
 
         private void downloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dgKeyValue.SelectedRows.Count != 1) return;
+            GridFSFileInfo item = GetSelectedItem();
+            if (item == null) return;
+            try
+            {
+                var result = Task.Run(() => DownloadFileAsync(item));                
+            }
+            catch (Exception ex)
+            {
+                logger.Log("***GridFS Error " + ex.Message);
+            }
+        }
 
-            GridFSFileInfo item = dgKeyValue.SelectedRows[0].DataBoundItem as GridFSFileInfo;
+        private async void downloadAndViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GridFSFileInfo item = GetSelectedItem();
+            if (item == null) return;
             try
             {
                 // string fileResult = Task.Run(() => DownloadFileAsync(item)).GetAwaiter().GetResult();
-                string fileResult = "";
-                Task.Run(() => DownloadFileAsync(item));
-                if (!string.IsNullOrEmpty(fileResult) && File.Exists(fileResult))
+                // var result = Task.Run(() => DownloadFileAsync(item));
+                var result = await DownloadFileAsync(item);
+                if (!string.IsNullOrEmpty(result))
                 {
-                    Program.OpenJson(fileResult);
+                    Program.OpenJson(result);
                 }
             }
             catch (Exception ex)
             {
                 logger.Log("***GridFS Error " + ex.Message);
             }
+        }
 
+        private GridFSFileInfo GetSelectedItem()
+        {
+            if (dgKeyValue.SelectedRows.Count == 0)
+            {
+                return null;
+            }
+            return dgKeyValue.SelectedRows[0].DataBoundItem as GridFSFileInfo;
         }
 
         public async Task<string> DownloadFileAsync(GridFSFileInfo file)
         {
             var gridFsBucket = new GridFSBucket(GetDatabase());
             string filename = file.Metadata["fileName"].AsString;
-            string targetDir = Path.Combine(Program.GetWorkspaceDirectory(), DateTime.Now.ToString("yyyyMMddHHmm"));
+            // string targetDir = Path.Combine(Program.GetWorkspaceDirectory(), DateTime.Now.ToString("yyyyMMddHHmm"));
+            string targetDir = Path.Combine(Program.GetWorkspaceDirectory(), MongoConfig.MongoConfigName);
             if (!Directory.Exists(targetDir))
             {
                 Directory.CreateDirectory(targetDir);
@@ -236,9 +257,9 @@ namespace ConsoleTester.Plugins.MongoDb
             string extension = ".bin";
             if (file.ContentType.Equals("plain/text", StringComparison.CurrentCultureIgnoreCase))
             {
-                extension = ".json";
+                extension = ".txt";
             }
-            string targetFilename = Path.Combine(targetDir, filename + extension);
+            string targetFilename = Path.Combine(targetDir, filename + "_" + file.Id.ToString() + extension);
 
             logger.Log($"Saving file to {targetFilename}");
             // using (GridFSDownloadStream<ObjectId> sourceStream = await gridFsBucket.OpenDownloadStreamByNameAsync(filename))
@@ -252,5 +273,9 @@ namespace ConsoleTester.Plugins.MongoDb
             return targetFilename;
         }
 
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(GetSelectedItem()?.BackingDocument.ToString());
+        }
     }
 }
