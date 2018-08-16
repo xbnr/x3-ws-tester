@@ -38,14 +38,15 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.downloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadAndViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cbFieldName = new System.Windows.Forms.ComboBox();
             this.tbServer = new System.Windows.Forms.TextBox();
             this.lbServer = new System.Windows.Forms.Label();
             this.lbDatabase = new System.Windows.Forms.Label();
             this.tbDatabase = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbSearchType = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -54,7 +55,7 @@
             // 
             // btSearch
             // 
-            this.btSearch.Location = new System.Drawing.Point(340, 8);
+            this.btSearch.Location = new System.Drawing.Point(481, 9);
             this.btSearch.Name = "btSearch";
             this.btSearch.Size = new System.Drawing.Size(133, 22);
             this.btSearch.TabIndex = 0;
@@ -64,9 +65,9 @@
             // 
             // tbTextToSearch
             // 
-            this.tbTextToSearch.Location = new System.Drawing.Point(140, 10);
+            this.tbTextToSearch.Location = new System.Drawing.Point(278, 11);
             this.tbTextToSearch.Name = "tbTextToSearch";
-            this.tbTextToSearch.Size = new System.Drawing.Size(183, 20);
+            this.tbTextToSearch.Size = new System.Drawing.Size(195, 20);
             this.tbTextToSearch.TabIndex = 1;
             this.tbTextToSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbTextToSearch_KeyDown);
             // 
@@ -106,6 +107,7 @@
             this.dgKeyValue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgKeyValue.Size = new System.Drawing.Size(763, 326);
             this.dgKeyValue.TabIndex = 40;
+            this.dgKeyValue.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgKeyValue_DataError);
             this.dgKeyValue.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgKeyValue_RowPostPaint);
             // 
             // contextMenuStrip1
@@ -115,21 +117,28 @@
             this.downloadAndViewToolStripMenuItem,
             this.copyToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(180, 70);
             // 
             // downloadToolStripMenuItem
             // 
             this.downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
-            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.downloadToolStripMenuItem.Text = "Download";
             this.downloadToolStripMenuItem.Click += new System.EventHandler(this.downloadToolStripMenuItem_Click);
             // 
             // downloadAndViewToolStripMenuItem
             // 
             this.downloadAndViewToolStripMenuItem.Name = "downloadAndViewToolStripMenuItem";
-            this.downloadAndViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.downloadAndViewToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.downloadAndViewToolStripMenuItem.Text = "Download and View";
             this.downloadAndViewToolStripMenuItem.Click += new System.EventHandler(this.downloadAndViewToolStripMenuItem_Click);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // cbFieldName
             // 
@@ -138,7 +147,7 @@
             "filename",
             "_id",
             "md5"});
-            this.cbFieldName.Location = new System.Drawing.Point(3, 10);
+            this.cbFieldName.Location = new System.Drawing.Point(3, 11);
             this.cbFieldName.Name = "cbFieldName";
             this.cbFieldName.Size = new System.Drawing.Size(121, 21);
             this.cbFieldName.TabIndex = 41;
@@ -179,13 +188,26 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cbSearchType);
             this.panel1.Controls.Add(this.cbFieldName);
             this.panel1.Controls.Add(this.tbTextToSearch);
             this.panel1.Controls.Add(this.btSearch);
             this.panel1.Location = new System.Drawing.Point(25, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(481, 40);
+            this.panel1.Size = new System.Drawing.Size(763, 40);
             this.panel1.TabIndex = 46;
+            // 
+            // cbSearchType
+            // 
+            this.cbSearchType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSearchType.FormattingEnabled = true;
+            this.cbSearchType.Items.AddRange(new object[] {
+            "Contains",
+            "Equals"});
+            this.cbSearchType.Location = new System.Drawing.Point(137, 11);
+            this.cbSearchType.Name = "cbSearchType";
+            this.cbSearchType.Size = new System.Drawing.Size(121, 21);
+            this.cbSearchType.TabIndex = 42;
             // 
             // panel2
             // 
@@ -197,13 +219,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(505, 28);
             this.panel2.TabIndex = 47;
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.copyToolStripMenuItem.Text = "Copy";
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // MongoDbEDI
             // 
@@ -242,5 +257,6 @@
         private System.Windows.Forms.ToolStripMenuItem downloadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadAndViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cbSearchType;
     }
 }

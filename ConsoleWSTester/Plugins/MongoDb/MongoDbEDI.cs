@@ -38,6 +38,7 @@ namespace ConsoleTester.Plugins.MongoDb
             this.filename = filename;
             MongoConfig config = JsonConvert.DeserializeObject<MongoConfig>(File.ReadAllText(filename));
             Helper.SetTextFromSettings(config.FieldName, this.cbFieldName);
+            Helper.SetTextFromSettings(config.SearchType, this.cbSearchType);
             Helper.SetTextFromSettings(config.Occurence, this.tbTextToSearch);
         }
 
@@ -58,6 +59,7 @@ namespace ConsoleTester.Plugins.MongoDb
                 ServerUrl = tbServer.Text,
                 Database = tbDatabase.Text,
                 FieldName = cbFieldName.Text,
+                SearchType = cbSearchType.Text,
                 Occurence = tbTextToSearch.Text
             };
             return conf;
@@ -83,7 +85,7 @@ namespace ConsoleTester.Plugins.MongoDb
             // Task.Run(() => Search("md5", "d41d8cd98f00b204e9800998ecf8427e"));
 
             // Task.Run(() => SearchAsync(cbFieldName.Text, tbTextToSearch.Text));
-            SearchAsync(cbFieldName.Text, tbTextToSearch.Text);
+            SearchAsync(cbFieldName.Text, cbSearchType.Text, tbTextToSearch.Text);
         }
 
         //    { "_id" : ObjectId("5b68310b5aa06d3894786726"), "filename" : "718af082-581b-4edd-831e-8e809a84f8ac", "contentType" : "plain/text", "length" : 426380, "chunkSize" : 261120, "uploadDate" : ISODate("2018-08-06T11:29:1
@@ -140,20 +142,26 @@ namespace ConsoleTester.Plugins.MongoDb
 
         private string MongoServer => tbServer.Text;
 
-        private async Task SearchAsync(string fieldName, string fieldvalue)
+        private async Task SearchAsync(string fieldName, string searchType, string fieldvalue)
         {
-            IMongoDatabase database = GetDatabase();
+            try
+            {
+                IMongoDatabase database = GetDatabase();
 
-            IMongoCollection<GridFSFileInfo> filesCollection = database.GetCollection<GridFSFileInfo>("fs.files");
-            List<GridFSFileInfo> fileInfos;
-            if (string.IsNullOrEmpty(fieldvalue))
-                fileInfos = await GetLastFilesAsync(filesCollection, 100);
-            else
-                fileInfos = await FindFilesAsync(filesCollection, fieldName, fieldvalue);
+                IMongoCollection<GridFSFileInfo> filesCollection = database.GetCollection<GridFSFileInfo>("fs.files");
+                List<GridFSFileInfo> fileInfos;
+                if (string.IsNullOrEmpty(fieldvalue))
+                    fileInfos = await GetLastFilesAsync(filesCollection, 100);
+                else
+                    fileInfos = await FindFilesAsync(filesCollection, fieldName, searchType, fieldvalue);
 
-            logger.Log($"Search fieldName: {fieldName}, value: {fieldvalue}  result(s): {fileInfos.Count}");
+                logger.Log($"Search fieldName: {fieldName}, value: {fieldvalue}  result(s): {fileInfos.Count}");
 
-            Helper.SetSafeDatasource(dgKeyValue, fileInfos);
+                Helper.SetSafeDatasource(dgKeyValue, fileInfos);
+            }catch(Exception ex)
+            {
+                logger.Log(ex.Message);
+            }
         }
 
         private IMongoDatabase GetDatabase()
@@ -162,12 +170,27 @@ namespace ConsoleTester.Plugins.MongoDb
             return client?.GetDatabase(MongoDatabase); // "syracuse");
         }
 
-        public async Task<List<GridFSFileInfo>> FindFilesAsync(IMongoCollection<GridFSFileInfo> filesCollection, string fieldName, string fieldvalue)
+        public async Task<List<GridFSFileInfo>> FindFilesAsync(IMongoCollection<GridFSFileInfo> filesCollection, string fieldName, string searchType, string fieldvalue)
         {
             FilterDefinitionBuilder<GridFSFileInfo> builder = Builders<GridFSFileInfo>.Filter;
             FilterDefinition<GridFSFileInfo> filter = builder.Eq(fieldName, fieldvalue);
             if (fieldName.IndexOf("fileName", StringComparison.CurrentCultureIgnoreCase) >= 0)
-                filter = builder.Eq(x => x.Metadata["fileName"], fieldvalue);
+            {
+                if (!string.IsNullOrEmpty(searchType) && searchType.Equals("Equals", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    filter = builder.Eq(item => item.Metadata["fileName"], fieldvalue);
+                }
+                else
+                {
+                    filter = builder.Eq(item => item.Metadata["fileName"], fieldvalue);
+                    // filter = builder.Where(item => item.Metadata["fileName"]..IndexOf( fieldvalue)>=0) ;
+
+                    //return filesCollection.AsQueryable()
+                    //    .Where(item => item.Metadata != null && item.Metadata.ContainsValue("fileName") 
+                    //    && item.Metadata["fileName"].AsBsonValue.ToString().IndexOf(fieldvalue, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                    //    .OrderByDescending(item => item.UploadDateTime).ToList();
+                }
+            }
             return await filesCollection.Find(filter).SortByDescending(item => item.UploadDateTime).ToListAsync();
         }
 
@@ -206,7 +229,7 @@ namespace ConsoleTester.Plugins.MongoDb
             if (item == null) return;
             try
             {
-                var result = Task.Run(() => DownloadFileAsync(item));                
+                var result = Task.Run(() => DownloadFileAsync(item));
             }
             catch (Exception ex)
             {
@@ -276,6 +299,11 @@ namespace ConsoleTester.Plugins.MongoDb
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(GetSelectedItem()?.BackingDocument.ToString());
+        }
+
+        private void dgKeyValue_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            logger.Log(e.Exception.Message);
         }
     }
 }

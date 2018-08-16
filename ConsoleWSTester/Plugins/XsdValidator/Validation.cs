@@ -1,5 +1,6 @@
 ﻿using ConsoleTester.Common;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -43,18 +44,18 @@ namespace ConsoleTester.Plugins.XsdValidator
 
         public void Validate()
         {
+            logger.Log($"Launch {XmlFile} validation ... ");
+            XmlReaderSettings settings = new XmlReaderSettings
+            {
+                //Message:Impossible de résoudre l'attribut 'schemaLocation'.
+                //Error while XML validation: Pour des raisons de sécurité, DTD interdite dans ce document XML. Pour activer le traitement DTD, définissez sur Parse la propriété DtdProcessing sur XmlReaderSettings et transmettez les paramètres à la méthode XmlReader.Create. * ***
+                DtdProcessing = DtdProcessing.Parse,
+                MaxCharactersFromEntities = 1024,
+                ValidationType = ValidationType.Schema
+            };
+
             try
             {
-                logger.Log($"Launch {XmlFile} validation ... ");
-
-                XmlReaderSettings settings = new XmlReaderSettings
-                {
-                    //Message:Impossible de résoudre l'attribut 'schemaLocation'.
-                    //Error while XML validation: Pour des raisons de sécurité, DTD interdite dans ce document XML. Pour activer le traitement DTD, définissez sur Parse la propriété DtdProcessing sur XmlReaderSettings et transmettez les paramètres à la méthode XmlReader.Create. * ***
-                    DtdProcessing = DtdProcessing.Parse,
-                    MaxCharactersFromEntities = 1024,
-                    ValidationType = ValidationType.Schema
-                };
 
                 settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessInlineSchema;
                 settings.ValidationFlags |= XmlSchemaValidationFlags.AllowXmlAttributes;
@@ -78,12 +79,14 @@ namespace ConsoleTester.Plugins.XsdValidator
                 }
                 settings.Schemas.Compile();
                 settings.ValidationEventHandler += new ValidationEventHandler(ValidationHandler);
-                XmlTextReader r = new XmlTextReader(this.XmlFile) { DtdProcessing = DtdProcessing.Parse };
-                using (XmlReader reader = XmlReader.Create(r, settings))
+                using (XmlTextReader xmltextReader = new XmlTextReader(this.XmlFile) { DtdProcessing = DtdProcessing.Parse })
                 {
-                    reader.MoveToContent();
-                    while (reader.Read())
+                    using (XmlReader reader = XmlReader.Create(xmltextReader, settings))
                     {
+                        reader.MoveToContent();
+                        while (reader.Read())
+                        {
+                        }
                     }
                 }
                 logger.Log($"{XmlFile} Validation finished successfully");
@@ -92,6 +95,23 @@ namespace ConsoleTester.Plugins.XsdValidator
             {
                 logger.Log($"Error while XML validation: {e.Message}", true);
                 logger.Log($"{XmlFile} Validation FAILED");
+            }
+            finally
+            {
+                ArrayList a = new ArrayList();
+                foreach (var item in settings.Schemas.Schemas())
+                {
+                    XmlSchema xmlSchema = item as XmlSchema;
+                    if (xmlSchema != null)
+                        a.Add(xmlSchema);       
+                }
+                for (int i = 0; i < a.Count; i++)
+                {
+                    settings.Schemas.Remove(a[i] as XmlSchema);
+                }
+
+                settings.Schemas = null;
+                settings.CloseInput = true;
             }
         }
 

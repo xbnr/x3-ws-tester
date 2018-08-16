@@ -12,6 +12,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Schema;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace ConsoleTester.Plugins.XsdValidator
@@ -59,6 +61,8 @@ namespace ConsoleTester.Plugins.XsdValidator
                 dgKeyValue.DataSource = list;
             }
             this.cbShowWarnings.Checked = config.ShowWarnings;
+
+            Helper.SetTextFromSettings(config.XMLFilenameForXSD, this.cbXmlFileForXSD);
         }
 
         private void InitGridView()
@@ -87,7 +91,7 @@ namespace ConsoleTester.Plugins.XsdValidator
                 HeaderText = "Length",
                 Name = "Length",
                 DataPropertyName = "Length",
-               Resizable = DataGridViewTriState.True               
+                Resizable = DataGridViewTriState.True
             };
 
             dgKeyValue.Columns.Add(colFileName);
@@ -106,6 +110,10 @@ namespace ConsoleTester.Plugins.XsdValidator
                 conf.XSDFiles = fileList.ConvertAll(p => p.FullName);
             }
             conf.ShowWarnings = cbShowWarnings.Checked;
+
+
+            conf.XMLFilenameForXSD = cbXmlFileForXSD.Text;
+
             return conf;
         }
 
@@ -259,6 +267,41 @@ namespace ConsoleTester.Plugins.XsdValidator
             if (file != null)
             {
                 Clipboard.SetText(file.FullName);
+            }
+        }
+
+        private void btChooseXml_Click(object sender, EventArgs e)
+        {
+            var folder = new OpenFileDialog();
+            folder.Multiselect = false;
+            folder.Filter = "*.xml|*.*";
+            var result = folder.ShowDialog();
+            cbXmlFileForXSD.Text = folder.FileName;
+        }
+
+        private void btGenerateXSD_Click(object sender, EventArgs e)
+        {
+            var file = new FileInfo(cbXmlFileForXSD.Text);
+            GenerateXSD(file);
+        }
+
+        private void GenerateXSD(FileInfo file)
+        {
+            XmlReader reader = XmlReader.Create(file.FullName);
+            XmlSchemaSet schemaSet = new XmlSchemaSet();
+            XmlSchemaInference schema = new XmlSchemaInference();
+
+            schemaSet = schema.InferSchema(reader);
+
+            string dest = Path.Combine(file.DirectoryName, Path.GetFileNameWithoutExtension(file.FullName) + ".xsd");
+            using (var xsdFileDest = File.Create(dest))
+            {
+                logger.Log($"Writing XSD {dest}");
+                foreach (XmlSchema xmlSchema in schemaSet.Schemas())
+                {
+                    xmlSchema.Write(xsdFileDest);
+                }
+                logger.Log($"XSD {dest} written. {xsdFileDest.Length} octets ");
             }
         }
     }

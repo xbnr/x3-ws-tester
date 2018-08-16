@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btValidate = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPageXmlValidator = new System.Windows.Forms.TabPage();
             this.btBrowseXML = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
             this.btBrowse = new System.Windows.Forms.Button();
@@ -49,14 +49,20 @@
             this.cbPath = new System.Windows.Forms.ComboBox();
             this.labelPath = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPageGenerateXsd = new System.Windows.Forms.TabPage();
+            this.btGenerateXSD = new System.Windows.Forms.Button();
+            this.btChooseXML = new System.Windows.Forms.Button();
+            this.cbXmlFileForXSD = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tabPageOptions = new System.Windows.Forms.TabPage();
             this.cbShowWarnings = new System.Windows.Forms.CheckBox();
-            this.tabPage1.SuspendLayout();
+            this.tabPageXmlValidator.SuspendLayout();
             this.panelParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
             this.gridContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPageGenerateXsd.SuspendLayout();
+            this.tabPageOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // btValidate
@@ -64,33 +70,34 @@
             this.btValidate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btValidate.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btValidate.Location = new System.Drawing.Point(0, 291);
+            this.btValidate.Location = new System.Drawing.Point(22, 387);
             this.btValidate.Name = "btValidate";
-            this.btValidate.Size = new System.Drawing.Size(711, 38);
+            this.btValidate.Size = new System.Drawing.Size(745, 38);
             this.btValidate.TabIndex = 0;
             this.btValidate.Text = "Validate XML";
             this.btValidate.UseVisualStyleBackColor = false;
             this.btValidate.Click += new System.EventHandler(this.launch_Click);
             // 
-            // tabPage1
+            // tabPageXmlValidator
             // 
-            this.tabPage1.Controls.Add(this.btBrowseXML);
-            this.tabPage1.Controls.Add(this.panelParameters);
-            this.tabPage1.Controls.Add(this.labelParameters);
-            this.tabPage1.Controls.Add(this.cbPath);
-            this.tabPage1.Controls.Add(this.labelPath);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(700, 248);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Xml validator";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageXmlValidator.Controls.Add(this.btBrowseXML);
+            this.tabPageXmlValidator.Controls.Add(this.panelParameters);
+            this.tabPageXmlValidator.Controls.Add(this.btValidate);
+            this.tabPageXmlValidator.Controls.Add(this.labelParameters);
+            this.tabPageXmlValidator.Controls.Add(this.cbPath);
+            this.tabPageXmlValidator.Controls.Add(this.labelPath);
+            this.tabPageXmlValidator.Location = new System.Drawing.Point(4, 22);
+            this.tabPageXmlValidator.Name = "tabPageXmlValidator";
+            this.tabPageXmlValidator.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageXmlValidator.Size = new System.Drawing.Size(775, 439);
+            this.tabPageXmlValidator.TabIndex = 0;
+            this.tabPageXmlValidator.Text = "Xml validator";
+            this.tabPageXmlValidator.UseVisualStyleBackColor = true;
             // 
             // btBrowseXML
             // 
             this.btBrowseXML.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBrowseXML.Location = new System.Drawing.Point(569, 19);
+            this.btBrowseXML.Location = new System.Drawing.Point(644, 19);
             this.btBrowseXML.Name = "btBrowseXML";
             this.btBrowseXML.Size = new System.Drawing.Size(125, 23);
             this.btBrowseXML.TabIndex = 43;
@@ -109,13 +116,13 @@
             this.panelParameters.Controls.Add(this.dgKeyValue);
             this.panelParameters.Location = new System.Drawing.Point(84, 57);
             this.panelParameters.Name = "panelParameters";
-            this.panelParameters.Size = new System.Drawing.Size(616, 191);
+            this.panelParameters.Size = new System.Drawing.Size(691, 324);
             this.panelParameters.TabIndex = 34;
             // 
             // btBrowse
             // 
             this.btBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBrowse.Location = new System.Drawing.Point(485, 3);
+            this.btBrowse.Location = new System.Drawing.Point(560, 3);
             this.btBrowse.Name = "btBrowse";
             this.btBrowse.Size = new System.Drawing.Size(125, 35);
             this.btBrowse.TabIndex = 42;
@@ -126,7 +133,7 @@
             // btDelete
             // 
             this.btDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDelete.Location = new System.Drawing.Point(485, 127);
+            this.btDelete.Location = new System.Drawing.Point(560, 127);
             this.btDelete.Name = "btDelete";
             this.btDelete.Size = new System.Drawing.Size(25, 23);
             this.btDelete.TabIndex = 41;
@@ -137,7 +144,7 @@
             // btAddParam
             // 
             this.btAddParam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAddParam.Location = new System.Drawing.Point(485, 98);
+            this.btAddParam.Location = new System.Drawing.Point(560, 98);
             this.btAddParam.Name = "btAddParam";
             this.btAddParam.Size = new System.Drawing.Size(25, 23);
             this.btAddParam.TabIndex = 40;
@@ -151,35 +158,35 @@
             this.dgKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgKeyValue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgKeyValue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgKeyValue.ContextMenuStrip = this.gridContextMenuStrip;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgKeyValue.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgKeyValue.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgKeyValue.Location = new System.Drawing.Point(3, 3);
             this.dgKeyValue.Name = "dgKeyValue";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgKeyValue.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgKeyValue.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgKeyValue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgKeyValue.Size = new System.Drawing.Size(476, 182);
+            this.dgKeyValue.Size = new System.Drawing.Size(551, 321);
             this.dgKeyValue.TabIndex = 39;
             this.dgKeyValue.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgKeyValue_RowPostPaint);
             // 
@@ -240,7 +247,7 @@
             "/adxwsvc/services/CAdxWebServiceXmlCC"});
             this.cbPath.Location = new System.Drawing.Point(84, 21);
             this.cbPath.Name = "cbPath";
-            this.cbPath.Size = new System.Drawing.Size(479, 21);
+            this.cbPath.Size = new System.Drawing.Size(554, 21);
             this.cbPath.TabIndex = 33;
             this.cbPath.Text = "C:\\Users\\frdepo\\OneDrive - Sage Software, Inc\\X3\\X3-CHORUS\\00-FSO1100-P24.xml";
             // 
@@ -258,24 +265,86 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPageXmlValidator);
+            this.tabControl1.Controls.Add(this.tabPageGenerateXsd);
+            this.tabControl1.Controls.Add(this.tabPageOptions);
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(708, 274);
+            this.tabControl1.Size = new System.Drawing.Size(783, 465);
             this.tabControl1.TabIndex = 37;
             // 
-            // tabPage2
+            // tabPageGenerateXsd
             // 
-            this.tabPage2.Controls.Add(this.cbShowWarnings);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(700, 248);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Options";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageGenerateXsd.Controls.Add(this.btGenerateXSD);
+            this.tabPageGenerateXsd.Controls.Add(this.btChooseXML);
+            this.tabPageGenerateXsd.Controls.Add(this.cbXmlFileForXSD);
+            this.tabPageGenerateXsd.Controls.Add(this.label1);
+            this.tabPageGenerateXsd.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGenerateXsd.Name = "tabPageGenerateXsd";
+            this.tabPageGenerateXsd.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGenerateXsd.Size = new System.Drawing.Size(775, 439);
+            this.tabPageGenerateXsd.TabIndex = 2;
+            this.tabPageGenerateXsd.Text = "Generate XSD";
+            this.tabPageGenerateXsd.UseVisualStyleBackColor = true;
+            // 
+            // btGenerateXSD
+            // 
+            this.btGenerateXSD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btGenerateXSD.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btGenerateXSD.Location = new System.Drawing.Point(14, 55);
+            this.btGenerateXSD.Name = "btGenerateXSD";
+            this.btGenerateXSD.Size = new System.Drawing.Size(745, 38);
+            this.btGenerateXSD.TabIndex = 47;
+            this.btGenerateXSD.Text = "Generate XSD";
+            this.btGenerateXSD.UseVisualStyleBackColor = false;
+            this.btGenerateXSD.Click += new System.EventHandler(this.btGenerateXSD_Click);
+            // 
+            // btChooseXML
+            // 
+            this.btChooseXML.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btChooseXML.Location = new System.Drawing.Point(636, 26);
+            this.btChooseXML.Name = "btChooseXML";
+            this.btChooseXML.Size = new System.Drawing.Size(125, 23);
+            this.btChooseXML.TabIndex = 46;
+            this.btChooseXML.Text = "Choose Xml file";
+            this.btChooseXML.UseVisualStyleBackColor = true;
+            this.btChooseXML.Click += new System.EventHandler(this.btChooseXml_Click);
+            // 
+            // cbXmlFileForXSD
+            // 
+            this.cbXmlFileForXSD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbXmlFileForXSD.FormattingEnabled = true;
+            this.cbXmlFileForXSD.Items.AddRange(new object[] {
+            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
+            "/adxwsvc/services/CAdxWebServiceXmlCC"});
+            this.cbXmlFileForXSD.Location = new System.Drawing.Point(76, 28);
+            this.cbXmlFileForXSD.Name = "cbXmlFileForXSD";
+            this.cbXmlFileForXSD.Size = new System.Drawing.Size(554, 21);
+            this.cbXmlFileForXSD.TabIndex = 45;
+            this.cbXmlFileForXSD.Text = "C:\\Users\\frdepo\\OneDrive - Sage Software, Inc\\X3\\X3-CHORUS\\00-FSO1100-P24.xml";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 13);
+            this.label1.TabIndex = 44;
+            this.label1.Text = "XML Input:";
+            // 
+            // tabPageOptions
+            // 
+            this.tabPageOptions.Controls.Add(this.cbShowWarnings);
+            this.tabPageOptions.Location = new System.Drawing.Point(4, 22);
+            this.tabPageOptions.Name = "tabPageOptions";
+            this.tabPageOptions.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageOptions.Size = new System.Drawing.Size(775, 439);
+            this.tabPageOptions.TabIndex = 1;
+            this.tabPageOptions.Text = "Options";
+            this.tabPageOptions.UseVisualStyleBackColor = true;
             // 
             // cbShowWarnings
             // 
@@ -291,19 +360,20 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(711, 342);
+            this.ClientSize = new System.Drawing.Size(786, 460);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.btValidate);
             this.Name = "XsdValidatorControl";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XsdValidatorControl_FormClosing);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabPageXmlValidator.ResumeLayout(false);
+            this.tabPageXmlValidator.PerformLayout();
             this.panelParameters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).EndInit();
             this.gridContextMenuStrip.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabPageGenerateXsd.ResumeLayout(false);
+            this.tabPageGenerateXsd.PerformLayout();
+            this.tabPageOptions.ResumeLayout(false);
+            this.tabPageOptions.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -311,7 +381,7 @@
         #endregion
 
         private System.Windows.Forms.Button btValidate;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPageXmlValidator;
         private System.Windows.Forms.Button btBrowseXML;
         private System.Windows.Forms.Panel panelParameters;
         private System.Windows.Forms.Button btBrowse;
@@ -322,12 +392,17 @@
         private System.Windows.Forms.ComboBox cbPath;
         private System.Windows.Forms.Label labelPath;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageOptions;
         private System.Windows.Forms.CheckBox cbShowWarnings;
         private System.Windows.Forms.ContextMenuStrip gridContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem removeSelectedXsdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem normalizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyPathToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPageGenerateXsd;
+        private System.Windows.Forms.Button btChooseXML;
+        private System.Windows.Forms.ComboBox cbXmlFileForXSD;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btGenerateXSD;
     }
 }

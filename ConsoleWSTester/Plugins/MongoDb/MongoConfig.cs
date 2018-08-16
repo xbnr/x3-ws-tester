@@ -10,7 +10,6 @@ namespace ConsoleTester.Plugins.MongoDb
     [JsonObject(IsReference = false)]
     public class MongoConfig : IConfigService
     {
-        private const int MaxListSize = 4;
         public const string MongoConfigName = "MongoConfig";
 
         public string GetTitle()
@@ -28,6 +27,9 @@ namespace ConsoleTester.Plugins.MongoDb
 
         [JsonProperty]
         public string Database { get; set; }
+
+        [JsonProperty]
+        public string SearchType { get; set; }
 
         [JsonProperty]
         public string Occurence { get; set; }
