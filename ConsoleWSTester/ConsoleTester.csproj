@@ -133,6 +133,7 @@
     <Compile Include="Plugins\LogAnalyzer\LogAnalyze.cs" />
     <Compile Include="Plugins\LogAnalyzer\Result.cs" />
     <Compile Include="Plugins\LogAnalyzer\Rules.cs" />
+    <Compile Include="Plugins\MongoDb\EdiProcess.cs" />
     <Compile Include="Plugins\MongoDb\MongoConfig.cs" />
     <Compile Include="Plugins\MongoDb\MongoDbEDI.cs">
       <SubType>Form</SubType>

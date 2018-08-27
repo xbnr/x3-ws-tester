@@ -158,7 +158,8 @@ namespace ConsoleTester.Plugins.MongoDb
                 logger.Log($"Search fieldName: {fieldName}, value: {fieldvalue}  result(s): {fileInfos.Count}");
 
                 Helper.SetSafeDatasource(dgKeyValue, fileInfos);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 logger.Log(ex.Message);
             }
@@ -304,6 +305,41 @@ namespace ConsoleTester.Plugins.MongoDb
         private void dgKeyValue_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             logger.Log(e.Exception.Message);
+        }
+
+        private void btEdiProcessSearch_Click(object sender, EventArgs e)
+        {
+            SearchEDIProcessAsync(cbEDIProcessFieldName.Text, "", tbEdiProcessSearch.Text);
+        }
+
+        private async Task SearchEDIProcessAsync(string fieldName, string searchType, string fieldvalue)
+        {
+            try
+            {
+                IMongoDatabase database = GetDatabase();
+
+                IMongoCollection<EdiProcess> ediProcessCollection = database.GetCollection<EdiProcess>("EdiProcess");
+                List<EdiProcess> fileInfos;
+                //if (string.IsNullOrEmpty(fieldvalue))
+                //    fileInfos = await GetLastFilesAsync(ediProcessCollection, 100);
+                //else
+                fileInfos = await FindCollectionAsync<EdiProcess>(ediProcessCollection, fieldName, searchType, fieldvalue);
+
+                logger.Log($"Search fieldName: {fieldName}, value: {fieldvalue}  result(s): {fileInfos.Count}");
+                Helper.SetSafeDatasource(dgKeyValue, fileInfos);
+            }
+            catch (Exception ex)
+            {
+                logger.Log(ex.Message);
+            }
+        }
+
+        public async Task<List<T>> FindCollectionAsync<T>(IMongoCollection<T> collection, string fieldName, string searchType, string fieldvalue)
+        {
+            FilterDefinitionBuilder<T> builder = Builders<T>.Filter;
+            FilterDefinition<T> filter = builder.Eq(fieldName, fieldvalue);
+
+            return await collection.Find(filter).ToListAsync();
         }
     }
 }
