@@ -33,7 +33,7 @@ namespace ConsoleTester.Plugins.Soap
 
 
         public void Query()
-        {
+        {// int waitInMilliseconds
             LaunchWSCallInBackGround(OperationMode.Query);
         }
 
@@ -72,6 +72,7 @@ namespace ConsoleTester.Plugins.Soap
             return Convert.ToBase64String(plainTextBytes);
         }
 
+        // int waitInMilliseconds
         private void LaunchWSCallInBackGround(OperationMode mode)
         {
             Thread t = new Thread(new ParameterizedThreadStart(LaunchWSCall));
@@ -156,7 +157,7 @@ namespace ConsoleTester.Plugins.Soap
                     logger.Log($"Result: ");
                     logger.Log($"{ (string.IsNullOrEmpty(result.resultXml) ? "NO result returned" : GetParsedResult(result.resultXml)) }");
 
-                    if (result.messages.Length > 0)
+                    if (result.messages?.Length > 0)
                     {
                         logger.Log("Messages:");
                         foreach (var item in result.messages)

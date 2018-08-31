@@ -70,6 +70,11 @@
             this.tabPageXmlObject = new System.Windows.Forms.TabPage();
             this.tbXmlObject = new System.Windows.Forms.TextBox();
             this.tabPageCredentials = new System.Windows.Forms.TabPage();
+            this.domainUpTimes = new System.Windows.Forms.DomainUpDown();
+            this.labelTimes = new System.Windows.Forms.Label();
+            this.panelDomainsUpDown = new System.Windows.Forms.Panel();
+            this.domainUpDelay = new System.Windows.Forms.DomainUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelXmlFile.SuspendLayout();
             this.panelDeleteLines.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -78,13 +83,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
             this.tabPageXmlObject.SuspendLayout();
             this.tabPageCredentials.SuspendLayout();
+            this.panelDomainsUpDown.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(3, 288);
+            this.button1.Location = new System.Drawing.Point(0, 361);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(663, 38);
             this.button1.TabIndex = 0;
@@ -386,7 +392,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(660, 279);
+            this.tabControl1.Size = new System.Drawing.Size(660, 331);
             this.tabControl1.TabIndex = 37;
             // 
             // tabPage1
@@ -413,7 +419,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(652, 253);
+            this.tabPage1.Size = new System.Drawing.Size(652, 305);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -423,7 +429,7 @@
             this.panelParameters.Controls.Add(this.btDelete);
             this.panelParameters.Controls.Add(this.btAddParam);
             this.panelParameters.Controls.Add(this.dgKeyValue);
-            this.panelParameters.Location = new System.Drawing.Point(124, 152);
+            this.panelParameters.Location = new System.Drawing.Point(67, 162);
             this.panelParameters.Name = "panelParameters";
             this.panelParameters.Size = new System.Drawing.Size(509, 101);
             this.panelParameters.TabIndex = 34;
@@ -479,7 +485,7 @@
             this.tabPageXmlObject.Location = new System.Drawing.Point(4, 22);
             this.tabPageXmlObject.Name = "tabPageXmlObject";
             this.tabPageXmlObject.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXmlObject.Size = new System.Drawing.Size(652, 253);
+            this.tabPageXmlObject.Size = new System.Drawing.Size(652, 258);
             this.tabPageXmlObject.TabIndex = 2;
             this.tabPageXmlObject.Text = "Data: XmlObject";
             this.tabPageXmlObject.UseVisualStyleBackColor = true;
@@ -505,19 +511,66 @@
             this.tabPageCredentials.Location = new System.Drawing.Point(4, 22);
             this.tabPageCredentials.Name = "tabPageCredentials";
             this.tabPageCredentials.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCredentials.Size = new System.Drawing.Size(652, 253);
+            this.tabPageCredentials.Size = new System.Drawing.Size(652, 258);
             this.tabPageCredentials.TabIndex = 1;
             this.tabPageCredentials.Text = "Credentials";
             this.tabPageCredentials.UseVisualStyleBackColor = true;
+            // 
+            // domainUpTimes
+            // 
+            this.domainUpTimes.Location = new System.Drawing.Point(3, 3);
+            this.domainUpTimes.Name = "domainUpTimes";
+            this.domainUpTimes.Size = new System.Drawing.Size(65, 20);
+            this.domainUpTimes.TabIndex = 38;
+            this.domainUpTimes.Text = "1";
+            // 
+            // labelTimes
+            // 
+            this.labelTimes.AutoSize = true;
+            this.labelTimes.Location = new System.Drawing.Point(71, 5);
+            this.labelTimes.Name = "labelTimes";
+            this.labelTimes.Size = new System.Drawing.Size(37, 13);
+            this.labelTimes.TabIndex = 37;
+            this.labelTimes.Text = "time(s)";
+            // 
+            // panelDomainsUpDown
+            // 
+            this.panelDomainsUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelDomainsUpDown.Controls.Add(this.domainUpDelay);
+            this.panelDomainsUpDown.Controls.Add(this.label1);
+            this.panelDomainsUpDown.Controls.Add(this.domainUpTimes);
+            this.panelDomainsUpDown.Controls.Add(this.labelTimes);
+            this.panelDomainsUpDown.Location = new System.Drawing.Point(3, 334);
+            this.panelDomainsUpDown.Name = "panelDomainsUpDown";
+            this.panelDomainsUpDown.Size = new System.Drawing.Size(659, 24);
+            this.panelDomainsUpDown.TabIndex = 39;
+            // 
+            // domainUpDelay
+            // 
+            this.domainUpDelay.Location = new System.Drawing.Point(131, 3);
+            this.domainUpDelay.Name = "domainUpDelay";
+            this.domainUpDelay.Size = new System.Drawing.Size(65, 20);
+            this.domainUpDelay.TabIndex = 40;
+            this.domainUpDelay.Text = "0";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(199, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 13);
+            this.label1.TabIndex = 39;
+            this.label1.Text = "second(s) delay";
             // 
             // Workspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panelDomainsUpDown);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button1);
             this.Name = "Workspace";
-            this.Size = new System.Drawing.Size(675, 333);
+            this.Size = new System.Drawing.Size(675, 400);
             this.panelXmlFile.ResumeLayout(false);
             this.panelXmlFile.PerformLayout();
             this.panelDeleteLines.ResumeLayout(false);
@@ -531,6 +584,8 @@
             this.tabPageXmlObject.PerformLayout();
             this.tabPageCredentials.ResumeLayout(false);
             this.tabPageCredentials.PerformLayout();
+            this.panelDomainsUpDown.ResumeLayout(false);
+            this.panelDomainsUpDown.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -579,5 +634,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
         private System.Windows.Forms.Panel panelParameters;
         private System.Windows.Forms.Button btDelete;
+        private System.Windows.Forms.DomainUpDown domainUpTimes;
+        private System.Windows.Forms.Label labelTimes;
+        private System.Windows.Forms.Panel panelDomainsUpDown;
+        private System.Windows.Forms.DomainUpDown domainUpDelay;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -8,9 +8,11 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ConsoleTester.Plugins.Soap
@@ -31,6 +33,8 @@ namespace ConsoleTester.Plugins.Soap
         {
             cbMode.DataSource = Enum.GetNames(typeof(SOAPWebServiceCall.OperationMode));
             cbListSize.DataSource = Enumerable.Range(0, 100).ToArray();
+            domainUpTimes.Items.AddRange(Enumerable.Range(1, 100).ToList());
+            domainUpDelay.Items.AddRange(Enumerable.Range(0, 100).ToList());
         }
 
         internal void SaveWorkspace()
@@ -126,6 +130,11 @@ namespace ConsoleTester.Plugins.Soap
 
         private void launch_Click(object sender, EventArgs e)
         {
+            Launch();
+        }
+
+        private void Launch()
+        {
             Logger logger = new Logger(MainForm.LogControl);
             SOAPConfig conf = GetConfigFromUI();
 
@@ -138,34 +147,54 @@ namespace ConsoleTester.Plugins.Soap
                 xml = File.ReadAllText(tbXmlFilename.Text);
             }
 
-            switch (action)
+            int times = 1;
+            if (!string.IsNullOrEmpty(domainUpTimes.Text))
             {
-                default:
-                case SOAPWebServiceCall.OperationMode.Query:
-                    ws.Query();
-                    break;
-                case SOAPWebServiceCall.OperationMode.Read:
-                    ws.Read();
-                    break;
-                case SOAPWebServiceCall.OperationMode.GetDescription:
-                    ws.GetDescription();
-                    break;
-                case SOAPWebServiceCall.OperationMode.Modify:
-                    ws.Modify(xml);
-                    break;
-                case SOAPWebServiceCall.OperationMode.DeleteLines:
-                    ws.Modify(xml);
-                    break;
-                case SOAPWebServiceCall.OperationMode.Save:
-                    ws.Save(xml);
-                    break;
-                case SOAPWebServiceCall.OperationMode.Run:
+                times = Int32.Parse(domainUpTimes.Text);
+            }
+            float delayInSeconds = 0;
+            if (!string.IsNullOrEmpty(domainUpDelay.Text))
+            {
+                float.TryParse(domainUpDelay.Text, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.GetCultureInfo("en-GB"),  out delayInSeconds);
+            }
 
-                    ws.Run(xml);
-                    break;
+            for (int i = 0; i < times; i++)
+            {
+                if (delayInSeconds > 0)
+                {
+                    Thread.Sleep((int)(delayInSeconds * 1000));
+                }
+
+                switch (action)
+                {
+                    default:
+                    case SOAPWebServiceCall.OperationMode.Query:
+                        ws.Query();
+                        break;
+                    case SOAPWebServiceCall.OperationMode.Read:
+                        ws.Read();
+                        break;
+                    case SOAPWebServiceCall.OperationMode.GetDescription:
+                        ws.GetDescription();
+                        break;
+                    case SOAPWebServiceCall.OperationMode.Modify:
+                        ws.Modify(xml);
+                        break;
+                    case SOAPWebServiceCall.OperationMode.DeleteLines:
+                        ws.Modify(xml);
+                        break;
+                    case SOAPWebServiceCall.OperationMode.Save:
+                        ws.Save(xml);
+                        break;
+                    case SOAPWebServiceCall.OperationMode.Run:
+
+                        ws.Run(xml);
+                        break;
+                }
+
+                
             }
         }
-
 
         private SOAPWebServiceCall.OperationMode GetAction()
         {
