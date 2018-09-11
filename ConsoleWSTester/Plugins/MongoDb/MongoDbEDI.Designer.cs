@@ -42,6 +42,7 @@
             this.downloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadAndViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cbFieldName = new System.Windows.Forms.ComboBox();
             this.tbServer = new System.Windows.Forms.TextBox();
             this.lbServer = new System.Windows.Forms.Label();
@@ -111,7 +112,6 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgKeyValue.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgKeyValue.Location = new System.Drawing.Point(9, 52);
-            this.dgKeyValue.MultiSelect = false;
             this.dgKeyValue.Name = "dgKeyValue";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -132,9 +132,10 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.downloadToolStripMenuItem,
             this.downloadAndViewToolStripMenuItem,
-            this.copyToolStripMenuItem});
+            this.copyToolStripMenuItem,
+            this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(180, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(180, 92);
             // 
             // downloadToolStripMenuItem
             // 
@@ -156,6 +157,13 @@
             this.copyToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // cbFieldName
             // 
@@ -239,6 +247,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(25, 46);
@@ -412,5 +423,6 @@
         private System.Windows.Forms.TextBox tbEdiProcessSearch;
         private System.Windows.Forms.Button btEdiProcessSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

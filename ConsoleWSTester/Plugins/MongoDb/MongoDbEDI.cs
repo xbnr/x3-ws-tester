@@ -238,6 +238,26 @@ namespace ConsoleTester.Plugins.MongoDb
             }
         }
 
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var items = GetSelectedItems();
+            if (items.Count == 0) return;
+            try
+            {
+                var gridFsBucket = new GridFSBucket(GetDatabase());
+                foreach (var item in items)
+                {
+                    gridFsBucket.Delete(item.Id);
+                }
+                Search();
+            }
+            catch (Exception ex)
+            {
+                logger.Log("***GridFS Error " + ex.Message);
+            }
+
+        }
+
         private async void downloadAndViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GridFSFileInfo item = GetSelectedItem();
@@ -256,6 +276,18 @@ namespace ConsoleTester.Plugins.MongoDb
             {
                 logger.Log("***GridFS Error " + ex.Message);
             }
+        }
+
+        private List<GridFSFileInfo> GetSelectedItems()
+        {
+            List<GridFSFileInfo> result = new List<GridFSFileInfo>();
+            foreach (DataGridViewRow item in dgKeyValue.SelectedRows)
+            {
+                var add = item.DataBoundItem as GridFSFileInfo;
+                if (add != null)
+                    result.Add(add);
+            }
+            return result;
         }
 
         private GridFSFileInfo GetSelectedItem()
@@ -341,5 +373,7 @@ namespace ConsoleTester.Plugins.MongoDb
 
             return await collection.Find(filter).ToListAsync();
         }
+
+
     }
 }
