@@ -1,66 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define ProductName = "WSTester"?>
-<?define ProductVersion = "1.0.9"?>
-<?define ProductUpgradeCode = "12345678-1234-1234-1234-111111111111"?>
+<?define ProductVersion = "1.0.11"?>
+<?define ProductUpgradeCode = "12345678-1234-1234-1234-111111111112"?>
 <?define Manufacturer = "SAGE"?>
 <?define About = "http://www.sage.com"?>
 <?define ExeName = "ConsoleTester.exe"?>
 <?define MyBinSource = "Release"?>
 <?define LicenseRtf = "License.rtf"?>
-   <?define ProgramFilesFolder = "ProgramFilesFolder" ?>
+<?define ProgramFilesFolder = "ProgramFilesFolder" ?>
 
 
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Product Id="*" UpgradeCode="$(var.ProductUpgradeCode)"
-           Name="$(var.ProductName)" Language="1033"  Manufacturer="$(var.Manufacturer)"
-           Version="$(var.ProductVersion)">
-    <Icon Id="ProductIcon" SourceFile=".\WSTester.ico"/>
-    <Property Id="ARPPRODUCTICON" Value="ProductIcon"/>
-    <Property Id="ARPURLINFOABOUT" Value="$(var.About)"/>
-<Property Id="INSTALLDESKTOPSHORTCUT" Value="1" />
+	<Product Id="*" UpgradeCode="$(var.ProductUpgradeCode)" Name="$(var.ProductName)" Language="1033" Manufacturer="$(var.Manufacturer)" Version="$(var.ProductVersion)">
+		<Icon Id="ProductIcon" SourceFile=".\WSTester.ico"/>
+		<Property Id="ARPPRODUCTICON" Value="ProductIcon"/>
+		<Property Id="ARPURLINFOABOUT" Value="$(var.About)"/>
+		<Property Id="INSTALLDESKTOPSHORTCUT" Value="1" />
 
-    <!-- MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." /-->
-    <Media Id="1" Cabinet="WSTester.cab" EmbedCab="yes" />
+		<Media Id="1" Cabinet="WSTester.cab" EmbedCab="yes" />
 
 
-    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Comments="Windows Installer Package" />
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Comments="Windows Installer Package" />
 
-<SetDirectory Action="SetInstallDir" Id="INSTALLDIR" Value="[$(var.ProgramFilesFolder)]$(var.Manufacturer)\$(var.ProductName)\">INSTALLDIR=""</SetDirectory>
+		<SetDirectory Action="SetInstallDir" Id="INSTALLDIR" Value="[$(var.ProgramFilesFolder)]$(var.Manufacturer)\$(var.ProductName)\">INSTALLDIR=""</SetDirectory>
 
-<Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFilesFolder">
-      <Directory Id="MySoftware" Name="MySoftware">
-        <Directory Id="INSTALLDIR" Name="$(var.ProductName)" >
-        <Directory Id="Release" Name="Release" />
-        </Directory>
-        </Directory>
-      </Directory>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="MySoftware" Name="MySoftware">
+					<Directory Id="INSTALLDIR" Name="$(var.ProductName)">
+						<Directory Id="Release" Name="Release" />
+					</Directory>
+				</Directory>
+			</Directory>
 
-      <Directory Id="ProgramMenuFolder">
-        <Directory Id="ProgramMenuSubfolder" Name="Sage">
-          <Component Id="ApplicationShortcuts" Guid="12345678-1234-1234-1234-333333333333">
-            <Shortcut Id="ApplicationShortcut1" Name="WSTester" Description="Sage WSTester"
-                      Target="[INSTALLDIR]Release\ConsoleTester.exe" WorkingDirectory="INSTALLDIR"/>
-            <RegistryValue Root="HKCU" Key="Software\Sage\WSTester"
-                      Name="installed" Type="integer" Value="1" KeyPath="yes"/>
-											<!-- RemoveFolder install, uninstall, both -->
-            <RemoveFolder Id="ProgramMenuSubfolder"  On="both"/>
-            <RemoveFolder Id="Release" Directory="Release" On="both"/>
-          </Component>
-        </Directory>
-      </Directory>
- </Directory>
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="ProgramMenuSubfolder" Name="Sage">
+					<Component Id="ApplicationShortcuts" Guid="12345678-1234-1234-1234-333333333333">
+						<Shortcut Id="ApplicationShortcut1" Name="WSTester" Description="Sage WSTester" Target="[INSTALLDIR]Release\ConsoleTester.exe" WorkingDirectory="INSTALLDIR"/>
+						<RegistryValue Root="HKCU" Key="Software\Sage\WSTester" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+						<!-- RemoveFolder install, uninstall, both -->
+						<RemoveFolder Id="ProgramMenuSubfolder" On="both"/>
+						<RemoveFolder Id="Release" Directory="Release" On="both"/>
+					</Component>
+				</Directory>
+			</Directory>
+		</Directory>
 
 
-    <Feature Id="MainApplication" Title="Main Application" Level="1">
-      <ComponentGroupRef Id="WSTesterHeat"/>
-      <ComponentRef Id="ApplicationShortcuts"/>
-    </Feature>
+		<Feature Id="MainApplication" Title="Main Application" Level="1">
+			<ComponentGroupRef Id="WSTesterHeat"/>
+			<ComponentRef Id="ApplicationShortcuts"/>
+		</Feature>
 
-    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR"/>
-    <WixVariable Id="WixUILicenseRtf" Overridable="yes" Value="$(var.LicenseRtf)"/>
-    <UIRef Id="WixUI_InstallDir" />
-     <UIRef Id="WixUI_ErrorProgressText" />
-  </Product>
+		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR"/>
+		<WixVariable Id="WixUILicenseRtf" Overridable="yes" Value="$(var.LicenseRtf)"/>
+		<UIRef Id="WixUI_InstallDir" />
+		<UIRef Id="WixUI_ErrorProgressText" />
+
+    <!-- <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Minimum="1.0.0" IncludeMinimum="yes" OnlyDetect="no"
+                      Maximum="$(var.ProductVersion)" IncludeMaximum="no" Property="PREVIOUSFOUND" />
+    </Upgrade> -->
+		<!-- <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." Schedule="afterInstallInitialize" /> -->
+
+		<InstallExecuteSequence>
+			<RemoveExistingProducts After="InstallInitialize" />
+		</InstallExecuteSequence>
+	</Product>
 
 </Wix>
