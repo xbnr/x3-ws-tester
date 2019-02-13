@@ -3,8 +3,6 @@ using ConsoleTester.Common;
 using ConsoleTester.Plugins;
 using ConsoleTester.UI;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -107,21 +105,14 @@ namespace ConsoleTester.Plugins.XsdValidator
                 conf.XSDFiles = fileList.ConvertAll(p => p.FullName);
             }
             conf.ShowWarnings = cbShowWarnings.Checked;
-
-
-            conf.XMLFilenameForXSD = cbXmlFileForXSD.Text;
-
             return conf;
         }
 
         private void launch_Click(object sender, EventArgs e)
         {
             var conf = GetConfigFromUI();
-            Validation validation = new Validation(logger);
-            validation.SetXML(conf.XMLFilename);
-            validation.AddXsd(conf.XSDFiles);
-            validation.ShowWarnings = conf.ShowWarnings;
-            validation.Validate();
+
+            MessageBox.Show("TODO");
         }
 
         private void btAddParam_Click(object sender, EventArgs e)
@@ -162,43 +153,19 @@ namespace ConsoleTester.Plugins.XsdValidator
             }
         }
 
-        private void btBrowseXML_Click(object sender, EventArgs e)
+        private void btBrowseRpt_Click(object sender, EventArgs e)
         {
             var folder = new OpenFileDialog();
             folder.Multiselect = false;
-            folder.Filter = "*.xml|*.*";
+            folder.Filter = "*.rpt|*.*";
             var result = folder.ShowDialog();
 
             cbPath.Text = folder.FileName;
         }
 
-        private void btBrowse_Click(object sender, EventArgs e)
-        {
-            var folder = new OpenFileDialog();
-            folder.Multiselect = true;
-            folder.Filter = "*.xsd|*.*";
-            // folder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // @"C:\Users\frdepo\OneDrive - Sage Software, Inc\X3\X3-57422-SOAP Web Services - deleting lines on orders and quotes";
-            var result = folder.ShowDialog();
+  
 
-            List<FileInfo> fileList = new List<FileInfo>();
-            if (dgKeyValue.DataSource != null)
-            {
-                fileList = dgKeyValue.DataSource as List<FileInfo>;
-            }
-
-            foreach (var filename in folder.FileNames)
-            {
-                if (fileList.Find(p => p.FullName == filename) == null)
-                {
-                    fileList.Add(new FileInfo(filename));
-                }
-            }
-
-            dgKeyValue.DataSource = null;
-            dgKeyValue.DataSource = fileList;
-        }
-
-        private void XsdValidatorControl_FormClosing(object sender, FormClosingEventArgs e)
+        private void PrintServerControl_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveWorkspace();
         }
@@ -266,42 +233,6 @@ namespace ConsoleTester.Plugins.XsdValidator
                 Clipboard.SetText(file.FullName);
             }
         }
-
-        private void btChooseXml_Click(object sender, EventArgs e)
-        {
-            var folder = new OpenFileDialog();
-            folder.Multiselect = false;
-            folder.Filter = "*.xml|*.*";
-            var result = folder.ShowDialog();
-            cbXmlFileForXSD.Text = folder.FileName;
-        }
-
-        private void btGenerateXSD_Click(object sender, EventArgs e)
-        {
-            var file = new FileInfo(cbXmlFileForXSD.Text);
-            GenerateXSD(file);
-        }
-
-        private void GenerateXSD(FileInfo file)
-        {
-            XmlReader reader = XmlReader.Create(file.FullName);
-            XmlSchemaSet schemaSet = new XmlSchemaSet();
-            XmlSchemaInference schema = new XmlSchemaInference();
-
-            schemaSet = schema.InferSchema(reader);
-
-            string dest = Path.Combine(file.DirectoryName, Path.GetFileNameWithoutExtension(file.FullName) + ".xsd");
-            using (var xsdFileDest = File.Create(dest))
-            {
-                logger.Log($"Writing XSD {dest}");
-                foreach (XmlSchema xmlSchema in schemaSet.Schemas())
-                {
-                    xmlSchema.Write(xsdFileDest);
-                }
-                logger.Log($"XSD {dest} written. {xsdFileDest.Length} octets ");
-            }
-        }
-
      
     }
 }

@@ -35,8 +35,20 @@
             this.btValidate = new System.Windows.Forms.Button();
             this.tabPagePrintServer = new System.Windows.Forms.TabPage();
             this.panelParameters = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbReportName = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbReportDirectory = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btBrowseRpt = new System.Windows.Forms.Button();
-            this.btBrowse = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.btDelete = new System.Windows.Forms.Button();
             this.btAddParam = new System.Windows.Forms.Button();
             this.dgKeyValue = new System.Windows.Forms.DataGridView();
@@ -48,32 +60,13 @@
             this.cbPath = new System.Windows.Forms.ComboBox();
             this.labelPath = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPageGenerateXsd = new System.Windows.Forms.TabPage();
-            this.btGenerateXSD = new System.Windows.Forms.Button();
-            this.btChooseXML = new System.Windows.Forms.Button();
-            this.cbXmlFileForXSD = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabPageOptions = new System.Windows.Forms.TabPage();
             this.cbShowWarnings = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbReportDirectory = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cbReportName = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
             this.gridContextMenuStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPageGenerateXsd.SuspendLayout();
             this.tabPageOptions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,14 +116,137 @@
             this.panelParameters.Controls.Add(this.comboBox1);
             this.panelParameters.Controls.Add(this.btBrowseRpt);
             this.panelParameters.Controls.Add(this.label2);
-            this.panelParameters.Controls.Add(this.btBrowse);
             this.panelParameters.Controls.Add(this.btDelete);
             this.panelParameters.Controls.Add(this.btAddParam);
             this.panelParameters.Controls.Add(this.dgKeyValue);
             this.panelParameters.Location = new System.Drawing.Point(6, 57);
             this.panelParameters.Name = "panelParameters";
             this.panelParameters.Size = new System.Drawing.Size(769, 324);
-            this.panelParameters.TabIndex = 34;
+            this.panelParameters.TabIndex = 2;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 154);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(100, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Report parameters :";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(489, 113);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(143, 21);
+            this.comboBox2.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(388, 116);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(51, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Settings :";
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(108, 113);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(143, 21);
+            this.comboBox4.TabIndex = 10;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 116);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Action :";
+            // 
+            // cbReportName
+            // 
+            this.cbReportName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbReportName.FormattingEnabled = true;
+            this.cbReportName.Items.AddRange(new object[] {
+            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
+            "/adxwsvc/services/CAdxWebServiceXmlCC"});
+            this.cbReportName.Location = new System.Drawing.Point(108, 59);
+            this.cbReportName.Name = "cbReportName";
+            this.cbReportName.Size = new System.Drawing.Size(524, 21);
+            this.cbReportName.TabIndex = 5;
+            this.cbReportName.Text = "TABCOUNTRY_CrDll_X3.rpt";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 62);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(58, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Report file:";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
+            "/adxwsvc/services/CAdxWebServiceXmlCC"});
+            this.comboBox3.Location = new System.Drawing.Point(108, 5);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(524, 21);
+            this.comboBox3.TabIndex = 1;
+            this.comboBox3.Text = "datasource=ADX_2018R6ORA2;userid=X3;password=Gege_3x;basetype=Oracle";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 8);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Connection info :";
+            // 
+            // cbReportDirectory
+            // 
+            this.cbReportDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbReportDirectory.FormattingEnabled = true;
+            this.cbReportDirectory.Items.AddRange(new object[] {
+            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
+            "/adxwsvc/services/CAdxWebServiceXmlCC"});
+            this.cbReportDirectory.Location = new System.Drawing.Point(108, 32);
+            this.cbReportDirectory.Name = "cbReportDirectory";
+            this.cbReportDirectory.Size = new System.Drawing.Size(524, 21);
+            this.cbReportDirectory.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 35);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Report directory : ";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
+            "/adxwsvc/services/CAdxWebServiceXmlCC"});
+            this.comboBox1.Location = new System.Drawing.Point(108, 86);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(524, 21);
+            this.comboBox1.TabIndex = 8;
             // 
             // btBrowseRpt
             // 
@@ -138,21 +254,19 @@
             this.btBrowseRpt.Location = new System.Drawing.Point(638, 57);
             this.btBrowseRpt.Name = "btBrowseRpt";
             this.btBrowseRpt.Size = new System.Drawing.Size(125, 23);
-            this.btBrowseRpt.TabIndex = 43;
+            this.btBrowseRpt.TabIndex = 6;
             this.btBrowseRpt.Text = "Choose Rpt file";
             this.btBrowseRpt.UseVisualStyleBackColor = true;
-            this.btBrowseRpt.Click += new System.EventHandler(this.btBrowseXML_Click);
+            this.btBrowseRpt.Click += new System.EventHandler(this.btBrowseRpt_Click);
             // 
-            // btBrowse
+            // label2
             // 
-            this.btBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBrowse.Location = new System.Drawing.Point(638, 185);
-            this.btBrowse.Name = "btBrowse";
-            this.btBrowse.Size = new System.Drawing.Size(125, 35);
-            this.btBrowse.TabIndex = 42;
-            this.btBrowse.Text = "Choose Xsd file(s)";
-            this.btBrowse.UseVisualStyleBackColor = true;
-            this.btBrowse.Click += new System.EventHandler(this.btBrowse_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 89);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(86, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Export directory :";
             // 
             // btDelete
             // 
@@ -160,7 +274,7 @@
             this.btDelete.Location = new System.Drawing.Point(638, 255);
             this.btDelete.Name = "btDelete";
             this.btDelete.Size = new System.Drawing.Size(25, 23);
-            this.btDelete.TabIndex = 41;
+            this.btDelete.TabIndex = 17;
             this.btDelete.Text = "-";
             this.btDelete.UseVisualStyleBackColor = true;
             this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
@@ -171,7 +285,7 @@
             this.btAddParam.Location = new System.Drawing.Point(638, 226);
             this.btAddParam.Name = "btAddParam";
             this.btAddParam.Size = new System.Drawing.Size(25, 23);
-            this.btAddParam.TabIndex = 40;
+            this.btAddParam.TabIndex = 16;
             this.btAddParam.Text = "+";
             this.btAddParam.UseVisualStyleBackColor = true;
             this.btAddParam.Visible = false;
@@ -211,7 +325,7 @@
             this.dgKeyValue.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgKeyValue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgKeyValue.Size = new System.Drawing.Size(524, 148);
-            this.dgKeyValue.TabIndex = 39;
+            this.dgKeyValue.TabIndex = 14;
             this.dgKeyValue.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgKeyValue_RowPostPaint);
             // 
             // gridContextMenuStrip
@@ -263,7 +377,7 @@
             this.cbPath.Location = new System.Drawing.Point(114, 21);
             this.cbPath.Name = "cbPath";
             this.cbPath.Size = new System.Drawing.Size(524, 21);
-            this.cbPath.TabIndex = 33;
+            this.cbPath.TabIndex = 1;
             // 
             // labelPath
             // 
@@ -271,7 +385,7 @@
             this.labelPath.Location = new System.Drawing.Point(13, 24);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(89, 13);
-            this.labelPath.TabIndex = 32;
+            this.labelPath.TabIndex = 0;
             this.labelPath.Text = "Print Server path:";
             // 
             // tabControl1
@@ -280,74 +394,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPagePrintServer);
-            this.tabControl1.Controls.Add(this.tabPageGenerateXsd);
             this.tabControl1.Controls.Add(this.tabPageOptions);
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(783, 465);
             this.tabControl1.TabIndex = 37;
-            // 
-            // tabPageGenerateXsd
-            // 
-            this.tabPageGenerateXsd.Controls.Add(this.btGenerateXSD);
-            this.tabPageGenerateXsd.Controls.Add(this.btChooseXML);
-            this.tabPageGenerateXsd.Controls.Add(this.cbXmlFileForXSD);
-            this.tabPageGenerateXsd.Controls.Add(this.label1);
-            this.tabPageGenerateXsd.Location = new System.Drawing.Point(4, 22);
-            this.tabPageGenerateXsd.Name = "tabPageGenerateXsd";
-            this.tabPageGenerateXsd.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGenerateXsd.Size = new System.Drawing.Size(775, 439);
-            this.tabPageGenerateXsd.TabIndex = 2;
-            this.tabPageGenerateXsd.Text = "Generate XSD";
-            this.tabPageGenerateXsd.UseVisualStyleBackColor = true;
-            // 
-            // btGenerateXSD
-            // 
-            this.btGenerateXSD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btGenerateXSD.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btGenerateXSD.Location = new System.Drawing.Point(14, 55);
-            this.btGenerateXSD.Name = "btGenerateXSD";
-            this.btGenerateXSD.Size = new System.Drawing.Size(745, 38);
-            this.btGenerateXSD.TabIndex = 47;
-            this.btGenerateXSD.Text = "Generate XSD";
-            this.btGenerateXSD.UseVisualStyleBackColor = false;
-            this.btGenerateXSD.Click += new System.EventHandler(this.btGenerateXSD_Click);
-            // 
-            // btChooseXML
-            // 
-            this.btChooseXML.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btChooseXML.Location = new System.Drawing.Point(636, 26);
-            this.btChooseXML.Name = "btChooseXML";
-            this.btChooseXML.Size = new System.Drawing.Size(125, 23);
-            this.btChooseXML.TabIndex = 46;
-            this.btChooseXML.Text = "Choose Xml file";
-            this.btChooseXML.UseVisualStyleBackColor = true;
-            this.btChooseXML.Click += new System.EventHandler(this.btChooseXml_Click);
-            // 
-            // cbXmlFileForXSD
-            // 
-            this.cbXmlFileForXSD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbXmlFileForXSD.FormattingEnabled = true;
-            this.cbXmlFileForXSD.Items.AddRange(new object[] {
-            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
-            "/adxwsvc/services/CAdxWebServiceXmlCC"});
-            this.cbXmlFileForXSD.Location = new System.Drawing.Point(76, 28);
-            this.cbXmlFileForXSD.Name = "cbXmlFileForXSD";
-            this.cbXmlFileForXSD.Size = new System.Drawing.Size(554, 21);
-            this.cbXmlFileForXSD.TabIndex = 45;
-            this.cbXmlFileForXSD.Text = "C:\\Users\\frdepo\\OneDrive - Sage Software, Inc\\X3\\X3-CHORUS\\00-FSO1100-P24.xml";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 13);
-            this.label1.TabIndex = 44;
-            this.label1.Text = "XML Input:";
             // 
             // tabPageOptions
             // 
@@ -370,149 +422,6 @@
             this.cbShowWarnings.Text = "Show warnings";
             this.cbShowWarnings.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
-            "/adxwsvc/services/CAdxWebServiceXmlCC"});
-            this.comboBox1.Location = new System.Drawing.Point(108, 86);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(524, 21);
-            this.comboBox1.TabIndex = 36;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 89);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 13);
-            this.label2.TabIndex = 35;
-            this.label2.Text = "Export directory :";
-            // 
-            // cbReportDirectory
-            // 
-            this.cbReportDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbReportDirectory.FormattingEnabled = true;
-            this.cbReportDirectory.Items.AddRange(new object[] {
-            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
-            "/adxwsvc/services/CAdxWebServiceXmlCC"});
-            this.cbReportDirectory.Location = new System.Drawing.Point(108, 32);
-            this.cbReportDirectory.Name = "cbReportDirectory";
-            this.cbReportDirectory.Size = new System.Drawing.Size(524, 21);
-            this.cbReportDirectory.TabIndex = 36;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 35);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
-            this.label3.TabIndex = 35;
-            this.label3.Text = "Report directory : ";
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
-            "/adxwsvc/services/CAdxWebServiceXmlCC"});
-            this.comboBox3.Location = new System.Drawing.Point(108, 5);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(524, 21);
-            this.comboBox3.TabIndex = 45;
-            this.comboBox3.Text = "datasource=ADX_2018R6ORA2;userid=X3;password=Gege_3x;basetype=Oracle";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 8);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
-            this.label4.TabIndex = 44;
-            this.label4.Text = "Connection info :";
-            // 
-            // cbReportName
-            // 
-            this.cbReportName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbReportName.FormattingEnabled = true;
-            this.cbReportName.Items.AddRange(new object[] {
-            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
-            "/adxwsvc/services/CAdxWebServiceXmlCC"});
-            this.cbReportName.Location = new System.Drawing.Point(108, 59);
-            this.cbReportName.Name = "cbReportName";
-            this.cbReportName.Size = new System.Drawing.Size(524, 21);
-            this.cbReportName.TabIndex = 47;
-            this.cbReportName.Text = "TABCOUNTRY_CrDll_X3.rpt";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 62);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(58, 13);
-            this.label5.TabIndex = 46;
-            this.label5.Text = "Report file:";
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
-            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
-            "/adxwsvc/services/CAdxWebServiceXmlCC"});
-            this.comboBox4.Location = new System.Drawing.Point(108, 113);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(143, 21);
-            this.comboBox4.TabIndex = 49;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 116);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(43, 13);
-            this.label6.TabIndex = 48;
-            this.label6.Text = "Action :";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
-            "/adxwsvc/services/CAdxWebServiceXmlCC"});
-            this.comboBox2.Location = new System.Drawing.Point(489, 113);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(143, 21);
-            this.comboBox2.TabIndex = 51;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(388, 116);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(51, 13);
-            this.label7.TabIndex = 50;
-            this.label7.Text = "Settings :";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 154);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(100, 13);
-            this.label8.TabIndex = 52;
-            this.label8.Text = "Report parameters :";
-            // 
             // PrintServerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -520,7 +429,7 @@
             this.ClientSize = new System.Drawing.Size(786, 460);
             this.Controls.Add(this.tabControl1);
             this.Name = "PrintServerControl";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XsdValidatorControl_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PrintServerControl_FormClosing);
             this.tabPagePrintServer.ResumeLayout(false);
             this.tabPagePrintServer.PerformLayout();
             this.panelParameters.ResumeLayout(false);
@@ -528,8 +437,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).EndInit();
             this.gridContextMenuStrip.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPageGenerateXsd.ResumeLayout(false);
-            this.tabPageGenerateXsd.PerformLayout();
             this.tabPageOptions.ResumeLayout(false);
             this.tabPageOptions.PerformLayout();
             this.ResumeLayout(false);
@@ -542,7 +449,6 @@
         private System.Windows.Forms.TabPage tabPagePrintServer;
         private System.Windows.Forms.Button btBrowseRpt;
         private System.Windows.Forms.Panel panelParameters;
-        private System.Windows.Forms.Button btBrowse;
         private System.Windows.Forms.Button btDelete;
         private System.Windows.Forms.Button btAddParam;
         private System.Windows.Forms.DataGridView dgKeyValue;
@@ -556,11 +462,6 @@
         private System.Windows.Forms.ToolStripMenuItem normalizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyPathToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabPageGenerateXsd;
-        private System.Windows.Forms.Button btChooseXML;
-        private System.Windows.Forms.ComboBox cbXmlFileForXSD;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btGenerateXSD;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox4;
