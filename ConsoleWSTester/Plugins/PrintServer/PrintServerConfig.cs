@@ -10,34 +10,25 @@ using System.Collections.Generic;
 namespace ConsoleTester.Plugins.XsdValidator
 {
     [JsonObject(IsReference = false)]
-    public class XsdValidatorConfig : IConfigService
+    public class PrintServerConfig : IConfigService
     {
-        public const string ConfigName = "XsdValidatorConfig";
+        internal const string ConfigName = "PrintServerConfigConfig";
 
         public string GetTitle()
         {
-            return "Xsd validator";
+            return "PrintServer tester";
         }
 
         public string GetFormFullName()
         {
-            return typeof(XsdValidatorControl).FullName;
+            return typeof(PrintServerControl).FullName;
         }
 
         [JsonProperty]
-        public string XMLFilename { get; set; }
+        public string RootDirectory { get; set; }
 
         [JsonProperty]
         public List<string> XSDFiles { get; set; }
-
-        [JsonProperty]
-        public bool ShowWarnings { get; set; }
-
-
-
-
-        [JsonProperty]
-        public string XMLFilenameForXSD { get; set; }
 
 
 

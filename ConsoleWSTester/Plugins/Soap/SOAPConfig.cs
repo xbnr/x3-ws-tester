@@ -11,7 +11,7 @@ namespace ConsoleTester.Plugins.Soap
     public class SOAPConfig : IConfigService
     {
         private const int MaxListSize = 4;
-        internal const string SOAPConfigName = "SOAPConfig";
+        internal const string ConfigName = "SOAPConfig";
         
 
         public string GetTitle()
@@ -26,7 +26,7 @@ namespace ConsoleTester.Plugins.Soap
 
         public string GetConfigPrefixFilename()
         {
-            return SOAPConfigName;
+            return ConfigName;
         }
 
         [JsonProperty]
@@ -82,7 +82,7 @@ namespace ConsoleTester.Plugins.Soap
         
         internal static string GetWorkspaceShortFilename()
         {
-            return $"{SOAPConfigName}.json";
+            return $"{ConfigName}.json";
         }
 
         internal static string GetWorkspaceFilename()
