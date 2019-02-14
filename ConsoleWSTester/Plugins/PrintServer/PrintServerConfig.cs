@@ -25,10 +25,28 @@ namespace ConsoleTester.Plugins.XsdValidator
         }
 
         [JsonProperty]
-        public string RootDirectory { get; set; }
+        public string InstallDirectory { get; set; }
 
         [JsonProperty]
-        public List<string> XSDFiles { get; set; }
+        public string Action { get; set; }
+
+        [JsonProperty]
+        public string ConnectionInfo { get; set; }
+
+        [JsonProperty]
+        public string ReportDirectory { get; set; }
+
+        [JsonProperty]
+        public string ReportName { get; set; }
+
+        [JsonProperty]
+        public string ExportDirectory { get; set; }
+
+        [JsonProperty]
+        public string Settings { get; set; }
+
+        [JsonProperty]
+        public List<string> Parameters { get; set; }
 
 
 
