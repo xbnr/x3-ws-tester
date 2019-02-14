@@ -48,6 +48,7 @@ namespace ConsoleTester.Common
         {
             if (!string.IsNullOrEmpty(settingValue))
             {
+                if (controlBox.DataSource == null)
                 controlBox.Items.Add(settingValue);
                 controlBox.SelectedItem = settingValue;
             }

@@ -1,21 +1,14 @@
-﻿using ConsoleTester.CAWebService;
-using ConsoleTester.Common;
-using ConsoleTester.Plugins;
+﻿using ConsoleTester.Common;
 using ConsoleTester.UI;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Schema;
-using WeifenLuo.WinFormsUI.Docking;
 
-namespace ConsoleTester.Plugins.XsdValidator
+namespace ConsoleTester.Plugins.PrintServer
 {
     public partial class PrintServerControl : ControlConfig
     {
@@ -64,6 +57,7 @@ namespace ConsoleTester.Plugins.XsdValidator
         private void InitControls()
         {
             cbActions.DataSource = Enum.GetValues(typeof(ActionAsked));
+            cbOdbcDatasource.DataSource = EnumDsn();
         }
 
         internal void LoadConfigFromJSON(string filename)
@@ -73,7 +67,8 @@ namespace ConsoleTester.Plugins.XsdValidator
             this.filename = filename;
             PrintServerConfig config = JsonConvert.DeserializeObject<PrintServerConfig>(File.ReadAllText(filename));
             Helper.SetTextFromSettings(config.InstallDirectory, this.cbPath);
-            Helper.SetTextFromSettings(config.OdbcDatasource, this.cbOdbcDatasource);
+            this.cbOdbcDatasource.SelectedItem = config.OdbcDatasource;
+            Helper.SetTextFromSettings(config.Basetype, this.cbDatabaseType);
             Helper.SetTextFromSettings(config.ConnectionInfo, this.cbConnectionInfo);
             Helper.SetTextFromSettings(config.ReportDirectory, this.cbReportDirectory);
             Helper.SetTextFromSettings(config.ReportName, this.cbReportName);
@@ -83,7 +78,7 @@ namespace ConsoleTester.Plugins.XsdValidator
 
             if (config.Parameters != null)
             {
-               // InitGridView();
+                // InitGridView();
                 List<string> list = new List<string>();
                 foreach (var fullfilename in config.Parameters)
                 {
@@ -124,6 +119,7 @@ namespace ConsoleTester.Plugins.XsdValidator
             {
                 InstallDirectory = cbPath.Text,
                 OdbcDatasource = cbOdbcDatasource.Text,
+                Basetype = cbDatabaseType.Text,
                 ConnectionInfo = cbConnectionInfo.Text,
                 ReportDirectory = cbReportDirectory.Text,
                 ReportName = cbReportName.Text,
@@ -135,7 +131,7 @@ namespace ConsoleTester.Plugins.XsdValidator
             if (dgKeyValue.DataSource != null)
             {
                 var fileList = dgKeyValue.DataSource as List<string>;
-                conf.Parameters = fileList; 
+                conf.Parameters = fileList;
             }
             return conf;
         }
@@ -160,19 +156,30 @@ namespace ConsoleTester.Plugins.XsdValidator
             //* Set your output and error (asynchronous) handlers
             process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
             process.ErrorDataReceived += new DataReceivedEventHandler(OutputHandler);
+            process.Exited += new EventHandler(Exited);
             //* Start process and handlers
-            //process.Start();
-            //process.BeginOutputReadLine();
-            //process.BeginErrorReadLine();
-            //process.WaitForExit();
-            //logger.Log($"ExitCode={process.ExitCode}");
+            process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+            // process.WaitForExit();
+            // logger.Log($"ExitCode={process.ex ExitCode}");
+        }
+
+        private void Exited(object sendingProcess, EventArgs output)
+        {
+            logger.Log(output.ToString());
+        }
+
+        private void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
+        {
+            logger.Log(outLine.Data);
         }
 
         private void BuildCommand(out string exe, out string arguments)
         {
             var conf = GetConfigFromUI();
             exe = $"{conf.InstallDirectory}\\TestConsolePrintNet.exe";
-            arguments = $" -connectioninfos:\"{ conf.ConnectionInfo}\" ";
+            arguments = $" -connectioninfos:\"datasource={conf.OdbcDatasource};basetype={conf.Basetype}; { conf.ConnectionInfo}\" ";
             if (!string.IsNullOrEmpty(conf.ReportDirectory))
                 arguments += $" -reportdirectory:\"{conf.ReportDirectory}\" ";
             if (!string.IsNullOrEmpty(conf.ReportName))
@@ -195,10 +202,6 @@ namespace ConsoleTester.Plugins.XsdValidator
 
         }
 
-        private void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
-        {
-            logger.Log(outLine.Data);
-        }
 
         private void btAddParam_Click(object sender, EventArgs e)
         {
@@ -282,9 +285,37 @@ namespace ConsoleTester.Plugins.XsdValidator
             }
         }
 
+        private List<string> EnumDsn()
+        {
+            List<string> list = new List<string>();
+            list.AddRange(EnumDsn(Registry.CurrentUser));
+            list.AddRange(EnumDsn(Registry.LocalMachine));
+            return list;
+        }
+
+        private IEnumerable<string> EnumDsn(RegistryKey rootKey)
+        {
+            RegistryKey regKey = rootKey.OpenSubKey(@"Software\ODBC\ODBC.INI\ODBC Data Sources");
+            if (regKey != null)
+            {
+                foreach (string name in regKey.GetValueNames())
+                {
+                    string value = regKey.GetValue(name, "").ToString();
+                    yield return name;
+                }
+            }
+        }
+
         private void btDetectInstall_Click(object sender, EventArgs e)
         {
             MessageBox.Show("TODO");
+        }
+
+        private void btGenerateCommand_Click(object sender, EventArgs e)
+        {
+            string exe, arguments;
+            BuildCommand(out exe, out arguments);
+            logger.Log(exe + arguments);
         }
     }
 }

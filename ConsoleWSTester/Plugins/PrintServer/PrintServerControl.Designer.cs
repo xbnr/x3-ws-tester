@@ -1,4 +1,4 @@
-﻿namespace ConsoleTester.Plugins.XsdValidator
+﻿namespace ConsoleTester.Plugins.PrintServer
 {
     partial class PrintServerControl
     {
@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btValidate = new System.Windows.Forms.Button();
             this.tabPagePrintServer = new System.Windows.Forms.TabPage();
             this.btDetectInstall = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
+            this.cbDatabaseType = new System.Windows.Forms.ComboBox();
+            this.cbOdbcDatasource = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cbSettings = new System.Windows.Forms.ComboBox();
             this.labelSettings = new System.Windows.Forms.Label();
@@ -61,9 +63,12 @@
             this.labelPath = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageOptions = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tbVersion = new System.Windows.Forms.TextBox();
-            this.cbOdbcDatasource = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btGenerateCommand = new System.Windows.Forms.Button();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
@@ -77,16 +82,17 @@
             this.btValidate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btValidate.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btValidate.Location = new System.Drawing.Point(22, 387);
+            this.btValidate.Location = new System.Drawing.Point(392, 387);
             this.btValidate.Name = "btValidate";
-            this.btValidate.Size = new System.Drawing.Size(745, 38);
+            this.btValidate.Size = new System.Drawing.Size(375, 38);
             this.btValidate.TabIndex = 0;
-            this.btValidate.Text = "Test print";
+            this.btValidate.Text = "Launch print";
             this.btValidate.UseVisualStyleBackColor = false;
             this.btValidate.Click += new System.EventHandler(this.launch_Click);
             // 
             // tabPagePrintServer
             // 
+            this.tabPagePrintServer.Controls.Add(this.btGenerateCommand);
             this.tabPagePrintServer.Controls.Add(this.btDetectInstall);
             this.tabPagePrintServer.Controls.Add(this.panelParameters);
             this.tabPagePrintServer.Controls.Add(this.btValidate);
@@ -116,6 +122,7 @@
             this.panelParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelParameters.Controls.Add(this.cbDatabaseType);
             this.panelParameters.Controls.Add(this.cbOdbcDatasource);
             this.panelParameters.Controls.Add(this.label8);
             this.panelParameters.Controls.Add(this.cbSettings);
@@ -138,6 +145,25 @@
             this.panelParameters.Name = "panelParameters";
             this.panelParameters.Size = new System.Drawing.Size(769, 324);
             this.panelParameters.TabIndex = 2;
+            // 
+            // cbDatabaseType
+            // 
+            this.cbDatabaseType.FormattingEnabled = true;
+            this.cbDatabaseType.Items.AddRange(new object[] {
+            "Oracle",
+            "SqlServer"});
+            this.cbDatabaseType.Location = new System.Drawing.Point(249, 5);
+            this.cbDatabaseType.Name = "cbDatabaseType";
+            this.cbDatabaseType.Size = new System.Drawing.Size(131, 21);
+            this.cbDatabaseType.TabIndex = 18;
+            // 
+            // cbOdbcDatasource
+            // 
+            this.cbOdbcDatasource.FormattingEnabled = true;
+            this.cbOdbcDatasource.Location = new System.Drawing.Point(113, 5);
+            this.cbOdbcDatasource.Name = "cbOdbcDatasource";
+            this.cbOdbcDatasource.Size = new System.Drawing.Size(130, 21);
+            this.cbOdbcDatasource.TabIndex = 17;
             // 
             // label8
             // 
@@ -174,7 +200,7 @@
             this.cbActions.FormattingEnabled = true;
             this.cbActions.Location = new System.Drawing.Point(113, 113);
             this.cbActions.Name = "cbActions";
-            this.cbActions.Size = new System.Drawing.Size(143, 21);
+            this.cbActions.Size = new System.Drawing.Size(130, 21);
             this.cbActions.TabIndex = 10;
             // 
             // labelActions
@@ -212,10 +238,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbConnectionInfo.FormattingEnabled = true;
             this.cbConnectionInfo.Items.AddRange(new object[] {
-            "datasource=ADX_2018R6ORA2;userid=X3;password=Gege_3x;basetype=Oracle"});
-            this.cbConnectionInfo.Location = new System.Drawing.Point(291, 5);
+            "userid=X3;password=Gege_3x;"});
+            this.cbConnectionInfo.Location = new System.Drawing.Point(399, 5);
             this.cbConnectionInfo.Name = "cbConnectionInfo";
-            this.cbConnectionInfo.Size = new System.Drawing.Size(341, 21);
+            this.cbConnectionInfo.Size = new System.Drawing.Size(233, 21);
             this.cbConnectionInfo.TabIndex = 1;
             // 
             // label4
@@ -303,35 +329,35 @@
             this.dgKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgKeyValue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgKeyValue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgKeyValue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1});
             this.dgKeyValue.ContextMenuStrip = this.gridContextMenuStrip;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgKeyValue.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgKeyValue.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgKeyValue.Location = new System.Drawing.Point(113, 179);
             this.dgKeyValue.Name = "dgKeyValue";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgKeyValue.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgKeyValue.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgKeyValue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgKeyValue.Size = new System.Drawing.Size(519, 119);
             this.dgKeyValue.TabIndex = 14;
@@ -398,6 +424,9 @@
             // 
             // tabPageOptions
             // 
+            this.tabPageOptions.Controls.Add(this.label5);
+            this.tabPageOptions.Controls.Add(this.label3);
+            this.tabPageOptions.Controls.Add(this.label2);
             this.tabPageOptions.Controls.Add(this.tbVersion);
             this.tabPageOptions.Controls.Add(this.label1);
             this.tabPageOptions.Location = new System.Drawing.Point(4, 22);
@@ -408,6 +437,40 @@
             this.tabPageOptions.Text = "Options";
             this.tabPageOptions.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(29, 195);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 13);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Print Threads :";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(29, 174);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Memory :";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(29, 134);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Monitoring :";
+            // 
+            // tbVersion
+            // 
+            this.tbVersion.Location = new System.Drawing.Point(136, 70);
+            this.tbVersion.Name = "tbVersion";
+            this.tbVersion.Size = new System.Drawing.Size(324, 20);
+            this.tbVersion.TabIndex = 2;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -417,22 +480,17 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Version :";
             // 
-            // tbVersion
+            // btGenerateCommand
             // 
-            this.tbVersion.Location = new System.Drawing.Point(136, 70);
-            this.tbVersion.Name = "tbVersion";
-            this.tbVersion.Size = new System.Drawing.Size(324, 20);
-            this.tbVersion.TabIndex = 2;
-            // 
-            // cbOdbcDatasource
-            // 
-            this.cbOdbcDatasource.FormattingEnabled = true;
-            this.cbOdbcDatasource.Items.AddRange(new object[] {
-            "datasource=ADX_2018R6ORA2;userid=X3;password=Gege_3x;basetype=Oracle"});
-            this.cbOdbcDatasource.Location = new System.Drawing.Point(113, 5);
-            this.cbOdbcDatasource.Name = "cbOdbcDatasource";
-            this.cbOdbcDatasource.Size = new System.Drawing.Size(156, 21);
-            this.cbOdbcDatasource.TabIndex = 17;
+            this.btGenerateCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btGenerateCommand.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btGenerateCommand.Location = new System.Drawing.Point(6, 387);
+            this.btGenerateCommand.Name = "btGenerateCommand";
+            this.btGenerateCommand.Size = new System.Drawing.Size(380, 38);
+            this.btGenerateCommand.TabIndex = 18;
+            this.btGenerateCommand.Text = "Generate command";
+            this.btGenerateCommand.UseVisualStyleBackColor = false;
+            this.btGenerateCommand.Click += new System.EventHandler(this.btGenerateCommand_Click);
             // 
             // PrintServerControl
             // 
@@ -490,5 +548,10 @@
         private System.Windows.Forms.ComboBox cbOdbcDatasource;
         private System.Windows.Forms.TextBox tbVersion;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbDatabaseType;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btGenerateCommand;
     }
 }

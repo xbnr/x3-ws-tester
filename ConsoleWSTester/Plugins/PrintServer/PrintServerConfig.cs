@@ -7,7 +7,7 @@ using ConsoleTester.Common;
 using ConsoleTester.UI;
 using System.Collections.Generic;
 
-namespace ConsoleTester.Plugins.XsdValidator
+namespace ConsoleTester.Plugins.PrintServer
 {
     [JsonObject(IsReference = false)]
     public class PrintServerConfig : IConfigService
@@ -29,6 +29,12 @@ namespace ConsoleTester.Plugins.XsdValidator
 
         [JsonProperty]
         public string Action { get; set; }
+
+        [JsonProperty]
+        public string OdbcDatasource { get; set; }
+
+        [JsonProperty]
+        public string Basetype { get; set; }        
 
         [JsonProperty]
         public string ConnectionInfo { get; set; }
