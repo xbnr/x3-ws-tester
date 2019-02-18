@@ -28,13 +28,13 @@ namespace ConsoleTester.Plugins.XsdValidator
             InitializeComponent();
         }
 
-        internal void SaveWorkspace()
+        public override string GetWorkspaceFilename()
         {
             if (string.IsNullOrEmpty(this.filename))
             {
                 this.filename = XsdValidatorConfig.GetWorkspaceFilename();
             }
-            Helper.SaveWorkspace(this.filename, GetConfigFromUI());
+            return this.filename;
         }
 
         internal void LoadConfigFromJSON(string filename)
@@ -99,7 +99,7 @@ namespace ConsoleTester.Plugins.XsdValidator
             dgKeyValue.Columns.Add(colFileLength);
         }
 
-        private XsdValidatorConfig GetConfigFromUI()
+        public override IConfigService  GetConfigFromUI()
         {
             XsdValidatorConfig conf = new XsdValidatorConfig();
 
@@ -119,7 +119,7 @@ namespace ConsoleTester.Plugins.XsdValidator
 
         private void launch_Click(object sender, EventArgs e)
         {
-            var conf = GetConfigFromUI();
+            var conf = GetConfigFromUI() as XsdValidatorConfig;
             Validation validation = new Validation(logger);
             validation.SetXML(conf.XMLFilename);
             validation.AddXsd(conf.XSDFiles);

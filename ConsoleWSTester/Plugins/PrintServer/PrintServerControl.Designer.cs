@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btValidate = new System.Windows.Forms.Button();
             this.tabPagePrintServer = new System.Windows.Forms.TabPage();
+            this.btGenerateCommand = new System.Windows.Forms.Button();
             this.btDetectInstall = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
             this.cbDatabaseType = new System.Windows.Forms.ComboBox();
@@ -55,7 +56,6 @@
             this.btDelete = new System.Windows.Forms.Button();
             this.btAddParam = new System.Windows.Forms.Button();
             this.dgKeyValue = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeSelectedXsdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +68,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btGenerateCommand = new System.Windows.Forms.Button();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
@@ -105,6 +104,18 @@
             this.tabPagePrintServer.TabIndex = 0;
             this.tabPagePrintServer.Text = "PrintServer";
             this.tabPagePrintServer.UseVisualStyleBackColor = true;
+            // 
+            // btGenerateCommand
+            // 
+            this.btGenerateCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btGenerateCommand.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btGenerateCommand.Location = new System.Drawing.Point(6, 387);
+            this.btGenerateCommand.Name = "btGenerateCommand";
+            this.btGenerateCommand.Size = new System.Drawing.Size(380, 38);
+            this.btGenerateCommand.TabIndex = 18;
+            this.btGenerateCommand.Text = "Generate command";
+            this.btGenerateCommand.UseVisualStyleBackColor = false;
+            this.btGenerateCommand.Click += new System.EventHandler(this.btGenerateCommand_Click);
             // 
             // btDetectInstall
             // 
@@ -148,6 +159,7 @@
             // 
             // cbDatabaseType
             // 
+            this.cbDatabaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDatabaseType.FormattingEnabled = true;
             this.cbDatabaseType.Items.AddRange(new object[] {
             "Oracle",
@@ -159,6 +171,7 @@
             // 
             // cbOdbcDatasource
             // 
+            this.cbOdbcDatasource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOdbcDatasource.FormattingEnabled = true;
             this.cbOdbcDatasource.Location = new System.Drawing.Point(113, 5);
             this.cbOdbcDatasource.Name = "cbOdbcDatasource";
@@ -337,8 +350,6 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgKeyValue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgKeyValue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1});
             this.dgKeyValue.ContextMenuStrip = this.gridContextMenuStrip;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -361,12 +372,6 @@
             this.dgKeyValue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgKeyValue.Size = new System.Drawing.Size(519, 119);
             this.dgKeyValue.TabIndex = 14;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 500;
             // 
             // gridContextMenuStrip
             // 
@@ -480,18 +485,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Version :";
             // 
-            // btGenerateCommand
-            // 
-            this.btGenerateCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btGenerateCommand.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btGenerateCommand.Location = new System.Drawing.Point(6, 387);
-            this.btGenerateCommand.Name = "btGenerateCommand";
-            this.btGenerateCommand.Size = new System.Drawing.Size(380, 38);
-            this.btGenerateCommand.TabIndex = 18;
-            this.btGenerateCommand.Text = "Generate command";
-            this.btGenerateCommand.UseVisualStyleBackColor = false;
-            this.btGenerateCommand.Click += new System.EventHandler(this.btGenerateCommand_Click);
-            // 
             // PrintServerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -543,7 +536,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbSettings;
         private System.Windows.Forms.Label labelSettings;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.Button btDetectInstall;
         private System.Windows.Forms.ComboBox cbOdbcDatasource;
         private System.Windows.Forms.TextBox tbVersion;

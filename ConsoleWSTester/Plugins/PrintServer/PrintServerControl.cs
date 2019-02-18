@@ -25,13 +25,13 @@ namespace ConsoleTester.Plugins.PrintServer
             // InitControls();
         }
 
-        internal void SaveWorkspace()
+        public override string GetWorkspaceFilename()
         {
             if (string.IsNullOrEmpty(this.filename))
             {
                 this.filename = PrintServerConfig.GetWorkspaceFilename();
             }
-            Helper.SaveWorkspace(this.filename, GetConfigFromUI());
+            return this.filename;
         }
 
 
@@ -67,7 +67,7 @@ namespace ConsoleTester.Plugins.PrintServer
             this.filename = filename;
             PrintServerConfig config = JsonConvert.DeserializeObject<PrintServerConfig>(File.ReadAllText(filename));
             Helper.SetTextFromSettings(config.InstallDirectory, this.cbPath);
-            this.cbOdbcDatasource.SelectedItem = config.OdbcDatasource;
+            Helper.SetTextFromSettings(config.OdbcDatasource, this.cbOdbcDatasource);
             Helper.SetTextFromSettings(config.Basetype, this.cbDatabaseType);
             Helper.SetTextFromSettings(config.ConnectionInfo, this.cbConnectionInfo);
             Helper.SetTextFromSettings(config.ReportDirectory, this.cbReportDirectory);
@@ -77,43 +77,13 @@ namespace ConsoleTester.Plugins.PrintServer
             Helper.SetSafeText(this.cbSettings, config.Settings);
 
             if (config.Parameters != null)
-            {
-                // InitGridView();
-                List<string> list = new List<string>();
-                foreach (var fullfilename in config.Parameters)
-                {
-                    list.Add(fullfilename);
-                }
-                dgKeyValue.DataSource = list;
+            {               
+                dgKeyValue.DataSource = config.Parameters;
             }
         }
 
-        private void InitGridView()
-        {
-            dgKeyValue.Columns.Clear();
-            dgKeyValue.AutoGenerateColumns = false;
-            dgKeyValue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-            DataGridViewCell cell = new DataGridViewTextBoxCell();
-            DataGridViewTextBoxColumn colFileName = new DataGridViewTextBoxColumn()
-            {
-                CellTemplate = cell,
-                HeaderText = "Name",
-                Name = "Name",
-                DataPropertyName = "Name" // Tell the column which property of FileName it should use
-            };
-            //DataGridViewTextBoxColumn colFileDir = new DataGridViewTextBoxColumn()
-            //{
-            //    CellTemplate = cell,
-            //    HeaderText = "Directory",
-            //    Name = "Directory",
-            //    DataPropertyName = "Directory"
-            //};
 
-            dgKeyValue.Columns.Add(colFileName);
-            //dgKeyValue.Columns.Add(colFileDir);
-        }
-
-        private PrintServerConfig GetConfigFromUI()
+        public override IConfigService GetConfigFromUI()
         {
             PrintServerConfig conf = new PrintServerConfig
             {
@@ -177,7 +147,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void BuildCommand(out string exe, out string arguments)
         {
-            var conf = GetConfigFromUI();
+            var conf = GetConfigFromUI() as PrintServerConfig;
             exe = $"{conf.InstallDirectory}\\TestConsolePrintNet.exe";
             arguments = $" -connectioninfos:\"datasource={conf.OdbcDatasource};basetype={conf.Basetype}; { conf.ConnectionInfo}\" ";
             if (!string.IsNullOrEmpty(conf.ReportDirectory))
@@ -192,7 +162,7 @@ namespace ConsoleTester.Plugins.PrintServer
                 arguments += $" -settings:\"{conf.Settings}\" ";
             if (conf.Parameters?.Count > 0)
             {
-                arguments += $" -parameters:\"";
+                arguments += $" -reportparameters:\"";
                 foreach (var item in conf.Parameters)
                 {
                     arguments += item + ";";
@@ -205,10 +175,11 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void btAddParam_Click(object sender, EventArgs e)
         {
-            var conf = GetConfigFromUI();
+            var conf = GetConfigFromUI() as PrintServerConfig;
             if (conf.Parameters == null)
+            {
                 conf.Parameters = new List<string>();
-
+            }
             conf.Parameters.Add("NEW");
             // dgKeyValue.row
             dgKeyValue.DataSource = null;
@@ -250,7 +221,7 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             var folder = new OpenFileDialog
             {
-                InitialDirectory = GetConfigFromUI().ReportDirectory,
+                InitialDirectory = (GetConfigFromUI() as PrintServerConfig).ReportDirectory,
                 Multiselect = false,
                 Filter = "*.rpt|*.*"
             };

@@ -78,13 +78,7 @@ namespace ConsoleTester.UI
 
         }
 
-        private FileInfo SelectedFile
-        {
-            get
-            {
-                return tvFileSystem.SelectedNode?.Tag as FileInfo;
-            }
-        }
+        private FileInfo SelectedFile => tvFileSystem.SelectedNode?.Tag as FileInfo;
 
         private void openWithToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -15,10 +15,6 @@ namespace ConsoleTester.UI
         {
             InitializeComponent();
         }
-        //public override void CreateWS(FileInfo item)
-        //{
-        //    LoadConfigFromJSON(item.FullName);
-        //}
 
         private void btBrowseFile_Click(object sender, EventArgs e)
         {

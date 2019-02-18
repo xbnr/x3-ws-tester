@@ -1,6 +1,7 @@
 ﻿using ConsoleTester.CAWebService;
 using ConsoleTester.Common;
 using ConsoleTester.Plugins;
+using ConsoleTester.UI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -14,7 +15,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace ConsoleTester.Plugins.Rest
 {
-    public partial class WsRESTControl : DockContent
+    public partial class WsRESTControl : ControlConfig
     {
         private string filename;
 
@@ -29,13 +30,14 @@ namespace ConsoleTester.Plugins.Rest
             // cbMode.DataSource = Enum.GetNames(typeof(WebServiceCall.OperationMode));
         }
 
-        internal void SaveWorkspace()
+        public override void SaveWorkspace()
         {
             var config = GetConfigFromUI();
             string wsDirectory = Program.GetWorkspaceDirectory();
             if (!Directory.Exists(wsDirectory))
+            {
                 Directory.CreateDirectory(wsDirectory);
-
+            }
             if (string.IsNullOrEmpty(this.filename))
             {
                 this.filename = RESTConfig.GetWorkspaceFilename();
@@ -69,17 +71,19 @@ namespace ConsoleTester.Plugins.Rest
         }
 
        
-        private RESTConfig GetConfigFromUI()
+        public override IConfigService GetConfigFromUI()
         {
-            RESTConfig conf = new RESTConfig();
-            // conf.OperatMode = opEnum;
-            conf.HostUrl = tbHost.Text;
-            conf.Path = cbPath.Text;
-            // int listSize = 10;
-            // conf.ListSize = listSize;
+            RESTConfig conf = new RESTConfig
+            {
+                // conf.OperatMode = opEnum;
+                HostUrl = tbHost.Text,
+                Path = cbPath.Text,
+                // int listSize = 10;
+                // conf.ListSize = listSize;
 
-            conf.Login = tbLogin.Text;
-            conf.Password = tbPassword.Text;
+                Login = tbLogin.Text,
+                Password = tbPassword.Text
+            };
             return conf;
         }
 

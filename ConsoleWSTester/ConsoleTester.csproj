@@ -170,6 +170,7 @@
     <Compile Include="UI\ControlConfig.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\IControlConfig.cs" />
     <Compile Include="UI\Logs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,12 +216,6 @@
     <Compile Include="Plugins\Rest\WsRESTControl.Designer.cs">
       <DependentUpon>WsRESTControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Soap\WsSOAPTester.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Plugins\Soap\WsSOAPTester.Designer.cs">
-      <DependentUpon>WsSOAPTester.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\JsonTreeView.cs" />
     <Compile Include="Common\IConfigService.cs" />
     <Compile Include="Plugins\XsdValidator\XsdValidatorConfig.cs" />
@@ -231,11 +226,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Soap\WsSOAPControl.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Plugins\Soap\WsSOAPTester.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Plugins\Soap\WsSOAPControl.Designer.cs">
-      <DependentUpon>WsSOAPControl.cs</DependentUpon>
+    <Compile Include="Plugins\Soap\WsSOAPTester.Designer.cs">
+      <DependentUpon>WsSOAPTester.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\ILogger.cs" />
     <Compile Include="Common\Logger.cs" />
@@ -320,9 +315,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Plugins\Soap\WsSOAPTester.resx">
       <DependentUpon>WsSOAPTester.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Plugins\Soap\WsSOAPControl.resx">
-      <DependentUpon>WsSOAPControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

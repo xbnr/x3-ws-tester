@@ -52,7 +52,7 @@ namespace ConsoleTester.Plugins.MongoDb
             Helper.SaveWorkspace(this.filename, GetConfigFromUI());
         }
 
-        private MongoConfig GetConfigFromUI()
+        public override IConfigService GetConfigFromUI()
         {
             MongoConfig conf = new MongoConfig
             {

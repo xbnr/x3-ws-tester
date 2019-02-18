@@ -44,7 +44,7 @@ namespace ConsoleTester.UI
             logs.Show(dockPanelMain, DockState.DockBottom);
             MainDockPanel = dockPanelMain;
 
-            foreach(var item in Program.GetConfigs())
+            foreach (var item in Program.GetConfigs())
             {
                 Type serviceType = Type.GetType(item.ToString());
                 IConfigService configService = Activator.CreateInstance(serviceType) as IConfigService;
@@ -96,6 +96,21 @@ namespace ConsoleTester.UI
             Settings.Default.MainFormWidth = this.Size.Width;
             Settings.Default.MainFormHeight = this.Size.Height;
             Settings.Default.Save();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ControlConfig control = MainForm.MainDockPanel.ActiveContent as ControlConfig;
+            control?.SaveWorkspace();
+        }
+
+        private void saveAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var item in MainForm.MainDockPanel.Contents)
+            {
+                ControlConfig control = item as ControlConfig;
+                control?.SaveWorkspace();
+            }
         }
     }
 }

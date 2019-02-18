@@ -35,5 +35,10 @@ namespace ConsoleTester.UI
         {
             Clipboard.SetText(LogControl.Text);
         }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(LogControl.SelectedText);
+        }
     }
 }

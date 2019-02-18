@@ -19,8 +19,9 @@ namespace ConsoleTester.Common
             string wsDirectory = Program.GetWorkspaceDirectory();
 
             if (!Directory.Exists(wsDirectory))
+            {
                 Directory.CreateDirectory(wsDirectory);
-
+            }
 
             string json = JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
             {
@@ -33,7 +34,23 @@ namespace ConsoleTester.Common
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             });
 
-            File.WriteAllText(filename, json, Encoding.UTF8);
+            if (File.Exists(filename))
+            {
+                string oldJson = File.ReadAllText(filename);
+                if (!oldJson.Equals(json))
+                {
+                    DialogResult r = MessageBox.Show($"Data have changed. Do you want to save it to {Path.GetFileName(filename)} ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                    if (r == DialogResult.Yes)
+                    {
+                        File.WriteAllText(filename, json, Encoding.UTF8);
+                    }
+                }
+            }
+            else
+            {
+                File.WriteAllText(filename, json, Encoding.UTF8);
+            }
+
         }
 
         public static void SetTextFromSettings(string settingValue, TextBox textBox)
@@ -49,8 +66,14 @@ namespace ConsoleTester.Common
             if (!string.IsNullOrEmpty(settingValue))
             {
                 if (controlBox.DataSource == null)
-                controlBox.Items.Add(settingValue);
+                {
+                    controlBox.Items.Add(settingValue);
+                }
                 controlBox.SelectedItem = settingValue;
+                //controlBox.SelectionStart = 0;
+                //controlBox.SelectionLength = 0;
+                controlBox.SelectedText = String.Empty;
+                controlBox.SelectionStart = settingValue.Length;
             }
         }
 
