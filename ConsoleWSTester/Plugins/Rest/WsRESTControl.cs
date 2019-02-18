@@ -108,24 +108,8 @@ namespace ConsoleTester.Plugins.Rest
 
         private void launch_Click(object sender, EventArgs e)
         {
-            //Logger logger = new Logger(MainForm.LogControl);
-            //SOAPConfig conf = GetConfigFromUI();
+            
 
-            //var ws = new SOAPWebServiceCall(conf, logger);
-            //SOAPWebServiceCall.OperationMode action = GetAction();
-            //switch (action)
-            //{
-            //    default:
-            //    case SOAPWebServiceCall.OperationMode.Query:
-            //        ws.Query();
-            //        break;
-            //    case SOAPWebServiceCall.OperationMode.Read:
-            //        ws.Read();
-            //        break;
-            //    case SOAPWebServiceCall.OperationMode.GetDescription:
-            //        ws.GetDescription();
-            //        break;
-            //}
         }
        
 

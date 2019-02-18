@@ -22,7 +22,6 @@ namespace ConsoleTester.Plugins.Soap
         private string filename;
         private List<CAWebService.CAdxParamKeyValue> parametersDS = new List<CAWebService.CAdxParamKeyValue>();
 
-
         public WsSOAPTester()
         {
             InitializeComponent();
@@ -138,10 +137,9 @@ namespace ConsoleTester.Plugins.Soap
 
         private void Launch()
         {
-            Logger logger = new Logger(MainForm.LogControl);
             SOAPConfig conf = GetConfigFromUI() as SOAPConfig;
 
-            var ws = new SOAPWebServiceCall(conf, logger);
+            var ws = new SOAPWebServiceCall(conf, Logger);
             SOAPWebServiceCall.OperationMode action = GetAction();
 
             string xml = tbXmlObject.Text;

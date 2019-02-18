@@ -21,7 +21,6 @@ namespace ConsoleTester.Plugins.MongoDb
     public partial class MongoDbEDI : ControlConfig
     {
         private string filename;
-        private Logger logger = new Logger(MainForm.LogControl);
 
         public MongoDbEDI()
         {
@@ -42,16 +41,16 @@ namespace ConsoleTester.Plugins.MongoDb
             Helper.SetTextFromSettings(config.Occurence, this.tbTextToSearch);
         }
 
-
-        private void MongoDbEDI_FormClosing(object sender, FormClosingEventArgs e)
+        public override string GetWorkspaceFilename()
         {
             if (string.IsNullOrEmpty(this.filename))
             {
                 this.filename = MongoConfig.GetWorkspaceFilename();
             }
-            Helper.SaveWorkspace(this.filename, GetConfigFromUI());
+            return this.filename;
         }
 
+     
         public override IConfigService GetConfigFromUI()
         {
             MongoConfig conf = new MongoConfig
@@ -155,13 +154,13 @@ namespace ConsoleTester.Plugins.MongoDb
                 else
                     fileInfos = await FindFilesAsync(filesCollection, fieldName, searchType, fieldvalue);
 
-                logger.Log($"Search fieldName: {fieldName}, value: {fieldvalue}  result(s): {fileInfos.Count}");
+                Logger.Log($"Search fieldName: {fieldName}, value: {fieldvalue}  result(s): {fileInfos.Count}");
 
                 Helper.SetSafeDatasource(dgKeyValue, fileInfos);
             }
             catch (Exception ex)
             {
-                logger.Log(ex.Message);
+                Logger.Log(ex.Message);
             }
         }
 
@@ -234,7 +233,7 @@ namespace ConsoleTester.Plugins.MongoDb
             }
             catch (Exception ex)
             {
-                logger.Log("***GridFS Error " + ex.Message);
+                Logger.Log("***GridFS Error " + ex.Message);
             }
         }
 
@@ -253,7 +252,7 @@ namespace ConsoleTester.Plugins.MongoDb
             }
             catch (Exception ex)
             {
-                logger.Log("***GridFS Error " + ex.Message);
+                Logger.Log("***GridFS Error " + ex.Message);
             }
 
         }
@@ -274,7 +273,7 @@ namespace ConsoleTester.Plugins.MongoDb
             }
             catch (Exception ex)
             {
-                logger.Log("***GridFS Error " + ex.Message);
+                Logger.Log("***GridFS Error " + ex.Message);
             }
         }
 
@@ -317,7 +316,7 @@ namespace ConsoleTester.Plugins.MongoDb
             }
             string targetFilename = Path.Combine(targetDir, filename + "_" + file.Id.ToString() + extension);
 
-            logger.Log($"Saving file to {targetFilename}");
+            Logger.Log($"Saving file to {targetFilename}");
             // using (GridFSDownloadStream<ObjectId> sourceStream = await gridFsBucket.OpenDownloadStreamByNameAsync(filename))
             using (GridFSDownloadStream sourceStream = await gridFsBucket.OpenDownloadStreamAsync(file.Id))
             {
@@ -336,7 +335,7 @@ namespace ConsoleTester.Plugins.MongoDb
 
         private void dgKeyValue_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            logger.Log(e.Exception.Message);
+            Logger.Log(e.Exception.Message);
         }
 
         private void btEdiProcessSearch_Click(object sender, EventArgs e)
@@ -357,12 +356,12 @@ namespace ConsoleTester.Plugins.MongoDb
                 //else
                 fileInfos = await FindCollectionAsync<EdiProcess>(ediProcessCollection, fieldName, searchType, fieldvalue);
 
-                logger.Log($"Search fieldName: {fieldName}, value: {fieldvalue}  result(s): {fileInfos.Count}");
+                Logger.Log($"Search fieldName: {fieldName}, value: {fieldvalue}  result(s): {fileInfos.Count}");
                 Helper.SetSafeDatasource(dgKeyValue, fileInfos);
             }
             catch (Exception ex)
             {
-                logger.Log(ex.Message);
+                Logger.Log(ex.Message);
             }
         }
 

@@ -48,14 +48,14 @@
             this.labelReportFile = new System.Windows.Forms.Label();
             this.cbConnectionInfo = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.cbReportDirectory = new System.Windows.Forms.ComboBox();
-            this.labelReportsDirectory = new System.Windows.Forms.Label();
             this.cbExportDirectory = new System.Windows.Forms.ComboBox();
             this.btBrowseRpt = new System.Windows.Forms.Button();
             this.labelExportDirectory = new System.Windows.Forms.Label();
             this.btDelete = new System.Windows.Forms.Button();
             this.btAddParam = new System.Windows.Forms.Button();
             this.dgKeyValue = new System.Windows.Forms.DataGridView();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeSelectedXsdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,8 +144,6 @@
             this.panelParameters.Controls.Add(this.labelReportFile);
             this.panelParameters.Controls.Add(this.cbConnectionInfo);
             this.panelParameters.Controls.Add(this.label4);
-            this.panelParameters.Controls.Add(this.cbReportDirectory);
-            this.panelParameters.Controls.Add(this.labelReportsDirectory);
             this.panelParameters.Controls.Add(this.cbExportDirectory);
             this.panelParameters.Controls.Add(this.btBrowseRpt);
             this.panelParameters.Controls.Add(this.labelExportDirectory);
@@ -266,25 +264,6 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Connection info :";
             // 
-            // cbReportDirectory
-            // 
-            this.cbReportDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbReportDirectory.FormattingEnabled = true;
-            this.cbReportDirectory.Location = new System.Drawing.Point(113, 32);
-            this.cbReportDirectory.Name = "cbReportDirectory";
-            this.cbReportDirectory.Size = new System.Drawing.Size(519, 21);
-            this.cbReportDirectory.TabIndex = 3;
-            // 
-            // labelReportsDirectory
-            // 
-            this.labelReportsDirectory.AutoSize = true;
-            this.labelReportsDirectory.Location = new System.Drawing.Point(7, 35);
-            this.labelReportsDirectory.Name = "labelReportsDirectory";
-            this.labelReportsDirectory.Size = new System.Drawing.Size(96, 13);
-            this.labelReportsDirectory.TabIndex = 2;
-            this.labelReportsDirectory.Text = "Reports directory : ";
-            // 
             // cbExportDirectory
             // 
             this.cbExportDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -350,6 +329,9 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgKeyValue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgKeyValue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnName,
+            this.ColumnValue});
             this.dgKeyValue.ContextMenuStrip = this.gridContextMenuStrip;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -372,6 +354,22 @@
             this.dgKeyValue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgKeyValue.Size = new System.Drawing.Size(519, 119);
             this.dgKeyValue.TabIndex = 14;
+            this.dgKeyValue.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgKeyValue_CellEndEdit);
+            this.dgKeyValue.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgKeyValue_CellValueChanged);
+            // 
+            // ColumnName
+            // 
+            this.ColumnName.DataPropertyName = "Name";
+            this.ColumnName.HeaderText = "Name";
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.Width = 140;
+            // 
+            // ColumnValue
+            // 
+            this.ColumnValue.DataPropertyName = "Value";
+            this.ColumnValue.HeaderText = "Value";
+            this.ColumnValue.Name = "ColumnValue";
+            this.ColumnValue.Width = 200;
             // 
             // gridContextMenuStrip
             // 
@@ -492,7 +490,6 @@
             this.ClientSize = new System.Drawing.Size(786, 460);
             this.Controls.Add(this.tabControl1);
             this.Name = "PrintServerControl";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PrintServerControl_FormClosing);
             this.Load += new System.EventHandler(this.PrintServerControl_Load);
             this.tabPagePrintServer.ResumeLayout(false);
             this.tabPagePrintServer.PerformLayout();
@@ -531,8 +528,6 @@
         private System.Windows.Forms.Label labelReportFile;
         private System.Windows.Forms.ComboBox cbConnectionInfo;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cbReportDirectory;
-        private System.Windows.Forms.Label labelReportsDirectory;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbSettings;
         private System.Windows.Forms.Label labelSettings;
@@ -545,5 +540,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btGenerateCommand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
     }
 }

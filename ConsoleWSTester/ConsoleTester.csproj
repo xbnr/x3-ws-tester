@@ -292,6 +292,9 @@
     <EmbeddedResource Include="UI\Browser.resx">
       <DependentUpon>Browser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ControlConfig.resx">
+      <DependentUpon>ControlConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Logs.resx">
       <DependentUpon>Logs.cs</DependentUpon>
     </EmbeddedResource>

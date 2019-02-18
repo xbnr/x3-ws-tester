@@ -73,7 +73,10 @@ namespace ConsoleTester.Common
                 //controlBox.SelectionStart = 0;
                 //controlBox.SelectionLength = 0;
                 controlBox.SelectedText = String.Empty;
-                controlBox.SelectionStart = settingValue.Length;
+                //if (settingValue.Length >= 0)
+                //{
+                //    controlBox.SelectionStart = settingValue.Length;
+                //}
             }
         }
 

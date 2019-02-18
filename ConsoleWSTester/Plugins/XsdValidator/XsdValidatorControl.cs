@@ -21,7 +21,6 @@ namespace ConsoleTester.Plugins.XsdValidator
     public partial class XsdValidatorControl : ControlConfig
     {
         private string filename;
-        Logger logger = new Logger(MainForm.LogControl);
 
         public XsdValidatorControl()
         {
@@ -55,7 +54,7 @@ namespace ConsoleTester.Plugins.XsdValidator
                     }
                     else
                     {
-                        logger.Log($"{fullfilename} doesn't exist");
+                        Logger.Log($"{fullfilename} doesn't exist");
                     }
                 }
                 dgKeyValue.DataSource = list;
@@ -120,7 +119,7 @@ namespace ConsoleTester.Plugins.XsdValidator
         private void launch_Click(object sender, EventArgs e)
         {
             var conf = GetConfigFromUI() as XsdValidatorConfig;
-            Validation validation = new Validation(logger);
+            Validation validation = new Validation(Logger);
             validation.SetXML(conf.XMLFilename);
             validation.AddXsd(conf.XSDFiles);
             validation.ShowWarnings = conf.ShowWarnings;
@@ -161,7 +160,7 @@ namespace ConsoleTester.Plugins.XsdValidator
                 XsdSchemaNormalizer normalizer = new XsdSchemaNormalizer();
                 string dest = selectedValue.FullName + ".normalized" + selectedValue.Extension;
                 normalizer.Merge(selectedValue.FullName, dest);
-                logger.Log($"{selectedValue.FullName} Normalized in { dest }");
+                Logger.Log($"{selectedValue.FullName} Normalized in { dest }");
             }
         }
 
@@ -201,10 +200,7 @@ namespace ConsoleTester.Plugins.XsdValidator
             dgKeyValue.DataSource = fileList;
         }
 
-        private void XsdValidatorControl_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SaveWorkspace();
-        }
+     
 
         public override void CreateWS(FileInfo item)
         {
@@ -296,12 +292,12 @@ namespace ConsoleTester.Plugins.XsdValidator
             string dest = Path.Combine(file.DirectoryName, Path.GetFileNameWithoutExtension(file.FullName) + ".xsd");
             using (var xsdFileDest = File.Create(dest))
             {
-                logger.Log($"Writing XSD {dest}");
+                Logger.Log($"Writing XSD {dest}");
                 foreach (XmlSchema xmlSchema in schemaSet.Schemas())
                 {
                     xmlSchema.Write(xsdFileDest);
                 }
-                logger.Log($"XSD {dest} written. {xsdFileDest.Length} octets ");
+                Logger.Log($"XSD {dest} written. {xsdFileDest.Length} octets ");
             }
         }
     }

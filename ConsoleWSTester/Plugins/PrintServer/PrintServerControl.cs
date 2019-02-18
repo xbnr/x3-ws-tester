@@ -13,7 +13,6 @@ namespace ConsoleTester.Plugins.PrintServer
     public partial class PrintServerControl : ControlConfig
     {
         private string filename;
-        Logger logger = new Logger(MainForm.LogControl);
 
         public PrintServerControl()
         {
@@ -22,7 +21,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void PrintServerControl_Load(object sender, EventArgs e)
         {
-            // InitControls();
+
         }
 
         public override string GetWorkspaceFilename()
@@ -70,14 +69,14 @@ namespace ConsoleTester.Plugins.PrintServer
             Helper.SetTextFromSettings(config.OdbcDatasource, this.cbOdbcDatasource);
             Helper.SetTextFromSettings(config.Basetype, this.cbDatabaseType);
             Helper.SetTextFromSettings(config.ConnectionInfo, this.cbConnectionInfo);
-            Helper.SetTextFromSettings(config.ReportDirectory, this.cbReportDirectory);
-            Helper.SetTextFromSettings(config.ReportName, this.cbReportName);
+            // Helper.SetTextFromSettings(config.ReportDirectory, Path.GetPathRoot( this.cbReportName.Text));
+            Helper.SetTextFromSettings(config.ReportName, this.cbReportName); // Path.GetFileName( this.cbReportName.Text));
             Helper.SetTextFromSettings(config.ExportDirectory, this.cbExportDirectory);
             Helper.SetSafeText(this.cbActions, config.Action);
             Helper.SetSafeText(this.cbSettings, config.Settings);
 
             if (config.Parameters != null)
-            {               
+            {
                 dgKeyValue.DataSource = config.Parameters;
             }
         }
@@ -91,7 +90,6 @@ namespace ConsoleTester.Plugins.PrintServer
                 OdbcDatasource = cbOdbcDatasource.Text,
                 Basetype = cbDatabaseType.Text,
                 ConnectionInfo = cbConnectionInfo.Text,
-                ReportDirectory = cbReportDirectory.Text,
                 ReportName = cbReportName.Text,
                 ExportDirectory = cbExportDirectory.Text,
                 Action = cbActions.Text,
@@ -100,7 +98,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
             if (dgKeyValue.DataSource != null)
             {
-                var fileList = dgKeyValue.DataSource as List<string>;
+                var fileList = dgKeyValue.DataSource as PrintServerConfigParameter[];
                 conf.Parameters = fileList;
             }
             return conf;
@@ -110,11 +108,12 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             RunCommand();
         }
+
         private void RunCommand()
         {
             string exe, arguments;
             BuildCommand(out exe, out arguments);
-            logger.Log(exe + arguments);
+            Logger.Log(exe + arguments);
 
             //* Create your Process
             Process process = new Process();
@@ -137,12 +136,12 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void Exited(object sendingProcess, EventArgs output)
         {
-            logger.Log(output.ToString());
+            Logger.Log(output.ToString());
         }
 
         private void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
         {
-            logger.Log(outLine.Data);
+            Logger.Log(outLine.Data);
         }
 
         private void BuildCommand(out string exe, out string arguments)
@@ -150,17 +149,17 @@ namespace ConsoleTester.Plugins.PrintServer
             var conf = GetConfigFromUI() as PrintServerConfig;
             exe = $"{conf.InstallDirectory}\\TestConsolePrintNet.exe";
             arguments = $" -connectioninfos:\"datasource={conf.OdbcDatasource};basetype={conf.Basetype}; { conf.ConnectionInfo}\" ";
-            if (!string.IsNullOrEmpty(conf.ReportDirectory))
-                arguments += $" -reportdirectory:\"{conf.ReportDirectory}\" ";
             if (!string.IsNullOrEmpty(conf.ReportName))
-                arguments += $" -reportname:\"{conf.ReportName}\" ";
+                arguments += $" -reportdirectory:\"{Path.GetDirectoryName(conf.ReportName)}\" ";
+            if (!string.IsNullOrEmpty(conf.ReportName))
+                arguments += $" -reportname:\"{Path.GetFileName(conf.ReportName)}\" ";
             if (!string.IsNullOrEmpty(conf.Action))
                 arguments += $" -action:{conf.Action}";
             if (!string.IsNullOrEmpty(conf.ExportDirectory))
                 arguments += $" -exportdirectory:\"{conf.ExportDirectory}\" ";
             if (!string.IsNullOrEmpty(conf.Settings))
                 arguments += $" -settings:\"{conf.Settings}\" ";
-            if (conf.Parameters?.Count > 0)
+            if (conf.Parameters?.Length > 0)
             {
                 arguments += $" -reportparameters:\"";
                 foreach (var item in conf.Parameters)
@@ -178,10 +177,9 @@ namespace ConsoleTester.Plugins.PrintServer
             var conf = GetConfigFromUI() as PrintServerConfig;
             if (conf.Parameters == null)
             {
-                conf.Parameters = new List<string>();
+                conf.Parameters = new PrintServerConfigParameter[1];// new List<PrintServerConfigParameter>();
             }
-            conf.Parameters.Add("NEW");
-            // dgKeyValue.row
+            conf.Parameters[0] = new PrintServerConfigParameter();
             dgKeyValue.DataSource = null;
             dgKeyValue.DataSource = conf.Parameters;
         }
@@ -216,24 +214,27 @@ namespace ConsoleTester.Plugins.PrintServer
             dgKeyValue.DataSource = null;
             dgKeyValue.DataSource = fileList;
         }
+        private void dgKeyValue_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+          
+        }
+
+        private void dgKeyValue_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            //dgKeyValue.DataSource = null;
+            //dgKeyValue.DataSource = conf.Parameters;
+        }
 
         private void btBrowseRpt_Click(object sender, EventArgs e)
         {
             var folder = new OpenFileDialog
             {
-                InitialDirectory = (GetConfigFromUI() as PrintServerConfig).ReportDirectory,
+                InitialDirectory = Path.GetDirectoryName((GetConfigFromUI() as PrintServerConfig).ReportName),
                 Multiselect = false,
                 Filter = "*.rpt|*.*"
             };
             var result = folder.ShowDialog();
             cbReportName.Text = folder.FileName;
-        }
-
-
-
-        private void PrintServerControl_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SaveWorkspace();
         }
 
         public override void CreateWS(FileInfo item)
@@ -286,7 +287,9 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             string exe, arguments;
             BuildCommand(out exe, out arguments);
-            logger.Log(exe + arguments);
+            Logger.Log(exe + arguments);
         }
+
+       
     }
 }

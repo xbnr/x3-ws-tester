@@ -363,7 +363,6 @@
             this.ClientSize = new System.Drawing.Size(786, 460);
             this.Controls.Add(this.tabControl1);
             this.Name = "XsdValidatorControl";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XsdValidatorControl_FormClosing);
             this.tabPageXmlValidator.ResumeLayout(false);
             this.tabPageXmlValidator.PerformLayout();
             this.panelParameters.ResumeLayout(false);

@@ -380,7 +380,6 @@
             this.Controls.Add(this.panel2);
             this.Name = "MongoDbEDI";
             this.Text = "MongoDbEDI";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MongoDbEDI_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
