@@ -45,13 +45,16 @@ namespace ConsoleTester.Plugins.PrintServer
         public string OdbcDatasource { get; set; }
 
         [JsonProperty]
-        public string Basetype { get; set; }        
+        public string Basetype { get; set; }
 
         [JsonProperty]
-        public string ConnectionInfo { get; set; }
+        public string Login { get; set; }
 
         [JsonProperty]
-        public string ReportName { get; set; }
+        public string Password { get; set; }
+
+        [JsonProperty]
+        public string ReportFilename { get; set; }
 
         [JsonProperty]
         public string ExportDirectory { get; set; }

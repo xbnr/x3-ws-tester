@@ -68,9 +68,9 @@ namespace ConsoleTester.Plugins.PrintServer
             Helper.SetTextFromSettings(config.InstallDirectory, this.cbPath);
             Helper.SetTextFromSettings(config.OdbcDatasource, this.cbOdbcDatasource);
             Helper.SetTextFromSettings(config.Basetype, this.cbDatabaseType);
-            Helper.SetTextFromSettings(config.ConnectionInfo, this.cbConnectionInfo);
-            // Helper.SetTextFromSettings(config.ReportDirectory, Path.GetPathRoot( this.cbReportName.Text));
-            Helper.SetTextFromSettings(config.ReportName, this.cbReportName); // Path.GetFileName( this.cbReportName.Text));
+            Helper.SetTextFromSettings(config.Login, this.tbLogin);
+            Helper.SetTextFromSettings(config.Password, this.tbPassword);
+            Helper.SetTextFromSettings(config.ReportFilename, this.cbReportName); // Path.GetFileName( this.cbReportName.Text));
             Helper.SetTextFromSettings(config.ExportDirectory, this.cbExportDirectory);
             Helper.SetSafeText(this.cbActions, config.Action);
             Helper.SetSafeText(this.cbSettings, config.Settings);
@@ -89,8 +89,9 @@ namespace ConsoleTester.Plugins.PrintServer
                 InstallDirectory = cbPath.Text,
                 OdbcDatasource = cbOdbcDatasource.Text,
                 Basetype = cbDatabaseType.Text,
-                ConnectionInfo = cbConnectionInfo.Text,
-                ReportName = cbReportName.Text,
+                Login = tbLogin.Text,
+                Password = tbPassword.Text,
+                ReportFilename = cbReportName.Text,
                 ExportDirectory = cbExportDirectory.Text,
                 Action = cbActions.Text,
                 Settings = cbSettings.Text
@@ -148,11 +149,11 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             var conf = GetConfigFromUI() as PrintServerConfig;
             exe = $"{conf.InstallDirectory}\\TestConsolePrintNet.exe";
-            arguments = $" -connectioninfos:\"datasource={conf.OdbcDatasource};basetype={conf.Basetype}; { conf.ConnectionInfo}\" ";
-            if (!string.IsNullOrEmpty(conf.ReportName))
-                arguments += $" -reportdirectory:\"{Path.GetDirectoryName(conf.ReportName)}\" ";
-            if (!string.IsNullOrEmpty(conf.ReportName))
-                arguments += $" -reportname:\"{Path.GetFileName(conf.ReportName)}\" ";
+            arguments = $" -connectioninfos:\"datasource={conf.OdbcDatasource};basetype={conf.Basetype};userid={conf.Login};password={conf.Password};\" ";
+            if (!string.IsNullOrEmpty(conf.ReportFilename))
+                arguments += $" -reportdirectory:\"{Path.GetDirectoryName(conf.ReportFilename)}\" ";
+            if (!string.IsNullOrEmpty(conf.ReportFilename))
+                arguments += $" -reportname:\"{Path.GetFileName(conf.ReportFilename)}\" ";
             if (!string.IsNullOrEmpty(conf.Action))
                 arguments += $" -action:{conf.Action}";
             if (!string.IsNullOrEmpty(conf.ExportDirectory))
@@ -164,7 +165,7 @@ namespace ConsoleTester.Plugins.PrintServer
                 arguments += $" -reportparameters:\"";
                 foreach (var item in conf.Parameters)
                 {
-                    arguments += item + ";";
+                    arguments += $"{item.Name}={item.Value};";
                 }
                 arguments += $"\"";
             }
@@ -216,7 +217,7 @@ namespace ConsoleTester.Plugins.PrintServer
         }
         private void dgKeyValue_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-          
+
         }
 
         private void dgKeyValue_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -229,7 +230,7 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             var folder = new OpenFileDialog
             {
-                InitialDirectory = Path.GetDirectoryName((GetConfigFromUI() as PrintServerConfig).ReportName),
+                InitialDirectory = Path.GetDirectoryName((GetConfigFromUI() as PrintServerConfig).ReportFilename),
                 Multiselect = false,
                 Filter = "*.rpt|*.*"
             };
@@ -290,6 +291,9 @@ namespace ConsoleTester.Plugins.PrintServer
             Logger.Log(exe + arguments);
         }
 
-       
+        private void linkOpenExportDirectory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("explorer", cbExportDirectory.Text);
+        }
     }
 }

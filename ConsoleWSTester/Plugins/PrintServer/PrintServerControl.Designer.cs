@@ -37,6 +37,12 @@
             this.btGenerateCommand = new System.Windows.Forms.Button();
             this.btDetectInstall = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
+            this.linkOpenExportDirectory = new System.Windows.Forms.LinkLabel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lbOdbcDatasource = new System.Windows.Forms.Label();
+            this.lbLogin = new System.Windows.Forms.Label();
+            this.lbPassword = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
             this.cbDatabaseType = new System.Windows.Forms.ComboBox();
             this.cbOdbcDatasource = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -46,7 +52,7 @@
             this.labelActions = new System.Windows.Forms.Label();
             this.cbReportName = new System.Windows.Forms.ComboBox();
             this.labelReportFile = new System.Windows.Forms.Label();
-            this.cbConnectionInfo = new System.Windows.Forms.ComboBox();
+            this.tbLogin = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cbExportDirectory = new System.Windows.Forms.ComboBox();
             this.btBrowseRpt = new System.Windows.Forms.Button();
@@ -68,6 +74,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbExportFilename = new System.Windows.Forms.TextBox();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
@@ -133,6 +141,14 @@
             this.panelParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelParameters.Controls.Add(this.tbExportFilename);
+            this.panelParameters.Controls.Add(this.label7);
+            this.panelParameters.Controls.Add(this.linkOpenExportDirectory);
+            this.panelParameters.Controls.Add(this.label6);
+            this.panelParameters.Controls.Add(this.lbOdbcDatasource);
+            this.panelParameters.Controls.Add(this.lbLogin);
+            this.panelParameters.Controls.Add(this.lbPassword);
+            this.panelParameters.Controls.Add(this.tbPassword);
             this.panelParameters.Controls.Add(this.cbDatabaseType);
             this.panelParameters.Controls.Add(this.cbOdbcDatasource);
             this.panelParameters.Controls.Add(this.label8);
@@ -142,7 +158,7 @@
             this.panelParameters.Controls.Add(this.labelActions);
             this.panelParameters.Controls.Add(this.cbReportName);
             this.panelParameters.Controls.Add(this.labelReportFile);
-            this.panelParameters.Controls.Add(this.cbConnectionInfo);
+            this.panelParameters.Controls.Add(this.tbLogin);
             this.panelParameters.Controls.Add(this.label4);
             this.panelParameters.Controls.Add(this.cbExportDirectory);
             this.panelParameters.Controls.Add(this.btBrowseRpt);
@@ -155,6 +171,62 @@
             this.panelParameters.Size = new System.Drawing.Size(769, 324);
             this.panelParameters.TabIndex = 2;
             // 
+            // linkOpenExportDirectory
+            // 
+            this.linkOpenExportDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkOpenExportDirectory.AutoSize = true;
+            this.linkOpenExportDirectory.Location = new System.Drawing.Point(638, 89);
+            this.linkOpenExportDirectory.Name = "linkOpenExportDirectory";
+            this.linkOpenExportDirectory.Size = new System.Drawing.Size(76, 13);
+            this.linkOpenExportDirectory.TabIndex = 25;
+            this.linkOpenExportDirectory.TabStop = true;
+            this.linkOpenExportDirectory.Text = "Open directory";
+            this.linkOpenExportDirectory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkOpenExportDirectory_LinkClicked);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(436, 6);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 13);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "DB type :";
+            // 
+            // lbOdbcDatasource
+            // 
+            this.lbOdbcDatasource.AutoSize = true;
+            this.lbOdbcDatasource.Location = new System.Drawing.Point(142, 6);
+            this.lbOdbcDatasource.Name = "lbOdbcDatasource";
+            this.lbOdbcDatasource.Size = new System.Drawing.Size(101, 13);
+            this.lbOdbcDatasource.TabIndex = 22;
+            this.lbOdbcDatasource.Text = "ODBC Datasource :";
+            // 
+            // lbLogin
+            // 
+            this.lbLogin.AutoSize = true;
+            this.lbLogin.Location = new System.Drawing.Point(204, 36);
+            this.lbLogin.Name = "lbLogin";
+            this.lbLogin.Size = new System.Drawing.Size(39, 13);
+            this.lbLogin.TabIndex = 21;
+            this.lbLogin.Text = "Login :";
+            // 
+            // lbPassword
+            // 
+            this.lbPassword.AutoSize = true;
+            this.lbPassword.Location = new System.Drawing.Point(436, 36);
+            this.lbPassword.Name = "lbPassword";
+            this.lbPassword.Size = new System.Drawing.Size(59, 13);
+            this.lbPassword.TabIndex = 20;
+            this.lbPassword.Text = "Password :";
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Location = new System.Drawing.Point(501, 33);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
+            this.tbPassword.Size = new System.Drawing.Size(131, 20);
+            this.tbPassword.TabIndex = 19;
+            // 
             // cbDatabaseType
             // 
             this.cbDatabaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -162,7 +234,7 @@
             this.cbDatabaseType.Items.AddRange(new object[] {
             "Oracle",
             "SqlServer"});
-            this.cbDatabaseType.Location = new System.Drawing.Point(249, 5);
+            this.cbDatabaseType.Location = new System.Drawing.Point(501, 3);
             this.cbDatabaseType.Name = "cbDatabaseType";
             this.cbDatabaseType.Size = new System.Drawing.Size(131, 21);
             this.cbDatabaseType.TabIndex = 18;
@@ -171,7 +243,7 @@
             // 
             this.cbOdbcDatasource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOdbcDatasource.FormattingEnabled = true;
-            this.cbOdbcDatasource.Location = new System.Drawing.Point(113, 5);
+            this.cbOdbcDatasource.Location = new System.Drawing.Point(249, 3);
             this.cbOdbcDatasource.Name = "cbOdbcDatasource";
             this.cbOdbcDatasource.Size = new System.Drawing.Size(130, 21);
             this.cbOdbcDatasource.TabIndex = 17;
@@ -191,7 +263,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSettings.FormattingEnabled = true;
             this.cbSettings.Items.AddRange(new object[] {
-            "orientation=Portrait; papersize=PaperLetter"});
+            "orientation=Portrait; papersize=PaperLetter;printername=PDFCreator;collate=false;" +
+                "copies=1; duplex=Simplex;"});
             this.cbSettings.Location = new System.Drawing.Point(113, 146);
             this.cbSettings.Name = "cbSettings";
             this.cbSettings.Size = new System.Drawing.Size(519, 21);
@@ -243,22 +316,17 @@
             this.labelReportFile.TabIndex = 4;
             this.labelReportFile.Text = "Report file:";
             // 
-            // cbConnectionInfo
+            // tbLogin
             // 
-            this.cbConnectionInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbConnectionInfo.FormattingEnabled = true;
-            this.cbConnectionInfo.Items.AddRange(new object[] {
-            "userid=X3;password=Gege_3x;"});
-            this.cbConnectionInfo.Location = new System.Drawing.Point(399, 5);
-            this.cbConnectionInfo.Name = "cbConnectionInfo";
-            this.cbConnectionInfo.Size = new System.Drawing.Size(233, 21);
-            this.cbConnectionInfo.TabIndex = 1;
+            this.tbLogin.Location = new System.Drawing.Point(249, 33);
+            this.tbLogin.Name = "tbLogin";
+            this.tbLogin.Size = new System.Drawing.Size(131, 20);
+            this.tbLogin.TabIndex = 1;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 8);
+            this.label4.Location = new System.Drawing.Point(7, 6);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 13);
             this.label4.TabIndex = 0;
@@ -483,6 +551,23 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Version :";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(351, 116);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 13);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Export filename :";
+            // 
+            // tbExportFilename
+            // 
+            this.tbExportFilename.Location = new System.Drawing.Point(442, 113);
+            this.tbExportFilename.Name = "tbExportFilename";
+            this.tbExportFilename.PasswordChar = '*';
+            this.tbExportFilename.Size = new System.Drawing.Size(190, 20);
+            this.tbExportFilename.TabIndex = 27;
+            // 
             // PrintServerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -526,7 +611,7 @@
         private System.Windows.Forms.Label labelActions;
         private System.Windows.Forms.ComboBox cbReportName;
         private System.Windows.Forms.Label labelReportFile;
-        private System.Windows.Forms.ComboBox cbConnectionInfo;
+        private System.Windows.Forms.TextBox tbLogin;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbSettings;
@@ -542,5 +627,13 @@
         private System.Windows.Forms.Button btGenerateCommand;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.Label lbLogin;
+        private System.Windows.Forms.Label lbPassword;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbOdbcDatasource;
+        private System.Windows.Forms.LinkLabel linkOpenExportDirectory;
+        private System.Windows.Forms.TextBox tbExportFilename;
+        private System.Windows.Forms.Label label7;
     }
 }
