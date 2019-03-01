@@ -60,7 +60,7 @@ namespace ConsoleTester.Plugins.PrintServer
         public string ExportDirectory { get; set; }
 
         [JsonProperty]
-        public string Settings { get; set; }
+        public PrintServerConfigParameter[] Settings { get; set; }
 
         [JsonProperty]
         public PrintServerConfigParameter[] Parameters { get; set; }

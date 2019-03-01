@@ -32,11 +32,24 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btValidate = new System.Windows.Forms.Button();
             this.tabPagePrintServer = new System.Windows.Forms.TabPage();
             this.btGenerateCommand = new System.Windows.Forms.Button();
             this.btDetectInstall = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
+            this.btRemoveSetting = new System.Windows.Forms.Button();
+            this.btAddSetting = new System.Windows.Forms.Button();
+            this.dgSettings = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.removeSelectedXsdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbExportFilename = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.linkOpenExportDirectory = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
             this.lbOdbcDatasource = new System.Windows.Forms.Label();
@@ -46,7 +59,6 @@
             this.cbDatabaseType = new System.Windows.Forms.ComboBox();
             this.cbOdbcDatasource = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.cbSettings = new System.Windows.Forms.ComboBox();
             this.labelSettings = new System.Windows.Forms.Label();
             this.cbActions = new System.Windows.Forms.ComboBox();
             this.labelActions = new System.Windows.Forms.Label();
@@ -62,9 +74,6 @@
             this.dgKeyValue = new System.Windows.Forms.DataGridView();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.removeSelectedXsdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cbPath = new System.Windows.Forms.ComboBox();
             this.labelPath = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -74,12 +83,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbExportFilename = new System.Windows.Forms.TextBox();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSettings)).BeginInit();
             this.gridContextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPageOptions.SuspendLayout();
             this.SuspendLayout();
@@ -89,9 +97,9 @@
             this.btValidate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btValidate.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btValidate.Location = new System.Drawing.Point(392, 387);
+            this.btValidate.Location = new System.Drawing.Point(435, 489);
             this.btValidate.Name = "btValidate";
-            this.btValidate.Size = new System.Drawing.Size(375, 38);
+            this.btValidate.Size = new System.Drawing.Size(430, 38);
             this.btValidate.TabIndex = 0;
             this.btValidate.Text = "Launch print";
             this.btValidate.UseVisualStyleBackColor = false;
@@ -108,7 +116,7 @@
             this.tabPagePrintServer.Location = new System.Drawing.Point(4, 22);
             this.tabPagePrintServer.Name = "tabPagePrintServer";
             this.tabPagePrintServer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePrintServer.Size = new System.Drawing.Size(775, 439);
+            this.tabPagePrintServer.Size = new System.Drawing.Size(873, 541);
             this.tabPagePrintServer.TabIndex = 0;
             this.tabPagePrintServer.Text = "PrintServer";
             this.tabPagePrintServer.UseVisualStyleBackColor = true;
@@ -117,9 +125,9 @@
             // 
             this.btGenerateCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btGenerateCommand.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btGenerateCommand.Location = new System.Drawing.Point(6, 387);
+            this.btGenerateCommand.Location = new System.Drawing.Point(6, 489);
             this.btGenerateCommand.Name = "btGenerateCommand";
-            this.btGenerateCommand.Size = new System.Drawing.Size(380, 38);
+            this.btGenerateCommand.Size = new System.Drawing.Size(407, 38);
             this.btGenerateCommand.TabIndex = 18;
             this.btGenerateCommand.Text = "Generate command";
             this.btGenerateCommand.UseVisualStyleBackColor = false;
@@ -128,7 +136,7 @@
             // btDetectInstall
             // 
             this.btDetectInstall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDetectInstall.Location = new System.Drawing.Point(644, 19);
+            this.btDetectInstall.Location = new System.Drawing.Point(742, 19);
             this.btDetectInstall.Name = "btDetectInstall";
             this.btDetectInstall.Size = new System.Drawing.Size(123, 23);
             this.btDetectInstall.TabIndex = 17;
@@ -141,6 +149,9 @@
             this.panelParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelParameters.Controls.Add(this.btRemoveSetting);
+            this.panelParameters.Controls.Add(this.btAddSetting);
+            this.panelParameters.Controls.Add(this.dgSettings);
             this.panelParameters.Controls.Add(this.tbExportFilename);
             this.panelParameters.Controls.Add(this.label7);
             this.panelParameters.Controls.Add(this.linkOpenExportDirectory);
@@ -152,7 +163,6 @@
             this.panelParameters.Controls.Add(this.cbDatabaseType);
             this.panelParameters.Controls.Add(this.cbOdbcDatasource);
             this.panelParameters.Controls.Add(this.label8);
-            this.panelParameters.Controls.Add(this.cbSettings);
             this.panelParameters.Controls.Add(this.labelSettings);
             this.panelParameters.Controls.Add(this.cbActions);
             this.panelParameters.Controls.Add(this.labelActions);
@@ -168,14 +178,123 @@
             this.panelParameters.Controls.Add(this.dgKeyValue);
             this.panelParameters.Location = new System.Drawing.Point(6, 57);
             this.panelParameters.Name = "panelParameters";
-            this.panelParameters.Size = new System.Drawing.Size(769, 324);
+            this.panelParameters.Size = new System.Drawing.Size(867, 426);
             this.panelParameters.TabIndex = 2;
+            // 
+            // btRemoveSetting
+            // 
+            this.btRemoveSetting.Location = new System.Drawing.Point(413, 356);
+            this.btRemoveSetting.Name = "btRemoveSetting";
+            this.btRemoveSetting.Size = new System.Drawing.Size(25, 23);
+            this.btRemoveSetting.TabIndex = 30;
+            this.btRemoveSetting.Text = "-";
+            this.btRemoveSetting.UseVisualStyleBackColor = true;
+            this.btRemoveSetting.Click += new System.EventHandler(this.btRemoveSetting_Click);
+            // 
+            // btAddSetting
+            // 
+            this.btAddSetting.Location = new System.Drawing.Point(413, 327);
+            this.btAddSetting.Name = "btAddSetting";
+            this.btAddSetting.Size = new System.Drawing.Size(25, 23);
+            this.btAddSetting.TabIndex = 29;
+            this.btAddSetting.Text = "+";
+            this.btAddSetting.UseVisualStyleBackColor = true;
+            this.btAddSetting.Click += new System.EventHandler(this.btAddSetting_Click);
+            // 
+            // dgSettings
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgSettings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgSettings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.dgSettings.ContextMenuStrip = this.gridContextMenuStrip;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgSettings.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgSettings.Location = new System.Drawing.Point(113, 168);
+            this.dgSettings.Name = "dgSettings";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgSettings.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgSettings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgSettings.Size = new System.Drawing.Size(294, 245);
+            this.dgSettings.TabIndex = 28;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Value";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Value";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 200;
+            // 
+            // gridContextMenuStrip
+            // 
+            this.gridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removeSelectedXsdToolStripMenuItem,
+            this.copyPathToolStripMenuItem});
+            this.gridContextMenuStrip.Name = "gridContextMenuStrip";
+            this.gridContextMenuStrip.Size = new System.Drawing.Size(186, 48);
+            // 
+            // removeSelectedXsdToolStripMenuItem
+            // 
+            this.removeSelectedXsdToolStripMenuItem.Name = "removeSelectedXsdToolStripMenuItem";
+            this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.removeSelectedXsdToolStripMenuItem.Text = "Remove selected Xsd";
+            this.removeSelectedXsdToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedXsdToolStripMenuItem_Click);
+            // 
+            // copyPathToolStripMenuItem
+            // 
+            this.copyPathToolStripMenuItem.Name = "copyPathToolStripMenuItem";
+            this.copyPathToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.copyPathToolStripMenuItem.Text = "Copy path";
+            this.copyPathToolStripMenuItem.Click += new System.EventHandler(this.copyPathToolStripMenuItem_Click);
+            // 
+            // tbExportFilename
+            // 
+            this.tbExportFilename.Location = new System.Drawing.Point(540, 113);
+            this.tbExportFilename.Name = "tbExportFilename";
+            this.tbExportFilename.PasswordChar = '*';
+            this.tbExportFilename.Size = new System.Drawing.Size(190, 20);
+            this.tbExportFilename.TabIndex = 27;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(454, 116);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 13);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Export filename :";
             // 
             // linkOpenExportDirectory
             // 
             this.linkOpenExportDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkOpenExportDirectory.AutoSize = true;
-            this.linkOpenExportDirectory.Location = new System.Drawing.Point(638, 89);
+            this.linkOpenExportDirectory.Location = new System.Drawing.Point(736, 89);
             this.linkOpenExportDirectory.Name = "linkOpenExportDirectory";
             this.linkOpenExportDirectory.Size = new System.Drawing.Size(76, 13);
             this.linkOpenExportDirectory.TabIndex = 25;
@@ -251,29 +370,16 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 179);
+            this.label8.Location = new System.Drawing.Point(454, 143);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(100, 13);
             this.label8.TabIndex = 13;
             this.label8.Text = "Report parameters :";
             // 
-            // cbSettings
-            // 
-            this.cbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbSettings.FormattingEnabled = true;
-            this.cbSettings.Items.AddRange(new object[] {
-            "orientation=Portrait; papersize=PaperLetter;printername=PDFCreator;collate=false;" +
-                "copies=1; duplex=Simplex;"});
-            this.cbSettings.Location = new System.Drawing.Point(113, 146);
-            this.cbSettings.Name = "cbSettings";
-            this.cbSettings.Size = new System.Drawing.Size(519, 21);
-            this.cbSettings.TabIndex = 12;
-            // 
             // labelSettings
             // 
             this.labelSettings.AutoSize = true;
-            this.labelSettings.Location = new System.Drawing.Point(7, 149);
+            this.labelSettings.Location = new System.Drawing.Point(110, 143);
             this.labelSettings.Name = "labelSettings";
             this.labelSettings.Size = new System.Drawing.Size(51, 13);
             this.labelSettings.TabIndex = 11;
@@ -303,7 +409,7 @@
             this.cbReportName.FormattingEnabled = true;
             this.cbReportName.Location = new System.Drawing.Point(113, 59);
             this.cbReportName.Name = "cbReportName";
-            this.cbReportName.Size = new System.Drawing.Size(519, 21);
+            this.cbReportName.Size = new System.Drawing.Size(617, 21);
             this.cbReportName.TabIndex = 5;
             this.cbReportName.Text = "TABCOUNTRY_CrDll_X3.rpt";
             // 
@@ -339,13 +445,13 @@
             this.cbExportDirectory.FormattingEnabled = true;
             this.cbExportDirectory.Location = new System.Drawing.Point(113, 86);
             this.cbExportDirectory.Name = "cbExportDirectory";
-            this.cbExportDirectory.Size = new System.Drawing.Size(519, 21);
+            this.cbExportDirectory.Size = new System.Drawing.Size(617, 21);
             this.cbExportDirectory.TabIndex = 8;
             // 
             // btBrowseRpt
             // 
             this.btBrowseRpt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBrowseRpt.Location = new System.Drawing.Point(638, 57);
+            this.btBrowseRpt.Location = new System.Drawing.Point(736, 57);
             this.btBrowseRpt.Name = "btBrowseRpt";
             this.btBrowseRpt.Size = new System.Drawing.Size(125, 23);
             this.btBrowseRpt.TabIndex = 6;
@@ -365,7 +471,7 @@
             // btDelete
             // 
             this.btDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDelete.Location = new System.Drawing.Point(665, 250);
+            this.btDelete.Location = new System.Drawing.Point(736, 356);
             this.btDelete.Name = "btDelete";
             this.btDelete.Size = new System.Drawing.Size(25, 23);
             this.btDelete.TabIndex = 16;
@@ -376,7 +482,7 @@
             // btAddParam
             // 
             this.btAddParam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAddParam.Location = new System.Drawing.Point(665, 221);
+            this.btAddParam.Location = new System.Drawing.Point(736, 327);
             this.btAddParam.Name = "btAddParam";
             this.btAddParam.Size = new System.Drawing.Size(25, 23);
             this.btAddParam.TabIndex = 15;
@@ -389,38 +495,38 @@
             this.dgKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgKeyValue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgKeyValue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgKeyValue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnName,
             this.ColumnValue});
             this.dgKeyValue.ContextMenuStrip = this.gridContextMenuStrip;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgKeyValue.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgKeyValue.Location = new System.Drawing.Point(113, 179);
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgKeyValue.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dgKeyValue.Location = new System.Drawing.Point(457, 168);
             this.dgKeyValue.Name = "dgKeyValue";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgKeyValue.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgKeyValue.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgKeyValue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgKeyValue.Size = new System.Drawing.Size(519, 119);
+            this.dgKeyValue.Size = new System.Drawing.Size(273, 245);
             this.dgKeyValue.TabIndex = 14;
             this.dgKeyValue.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgKeyValue_CellEndEdit);
             this.dgKeyValue.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgKeyValue_CellValueChanged);
@@ -430,7 +536,7 @@
             this.ColumnName.DataPropertyName = "Name";
             this.ColumnName.HeaderText = "Name";
             this.ColumnName.Name = "ColumnName";
-            this.ColumnName.Width = 140;
+            this.ColumnName.Width = 120;
             // 
             // ColumnValue
             // 
@@ -439,28 +545,6 @@
             this.ColumnValue.Name = "ColumnValue";
             this.ColumnValue.Width = 200;
             // 
-            // gridContextMenuStrip
-            // 
-            this.gridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.removeSelectedXsdToolStripMenuItem,
-            this.copyPathToolStripMenuItem});
-            this.gridContextMenuStrip.Name = "gridContextMenuStrip";
-            this.gridContextMenuStrip.Size = new System.Drawing.Size(186, 48);
-            // 
-            // removeSelectedXsdToolStripMenuItem
-            // 
-            this.removeSelectedXsdToolStripMenuItem.Name = "removeSelectedXsdToolStripMenuItem";
-            this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.removeSelectedXsdToolStripMenuItem.Text = "Remove selected Xsd";
-            this.removeSelectedXsdToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedXsdToolStripMenuItem_Click);
-            // 
-            // copyPathToolStripMenuItem
-            // 
-            this.copyPathToolStripMenuItem.Name = "copyPathToolStripMenuItem";
-            this.copyPathToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.copyPathToolStripMenuItem.Text = "Copy path";
-            this.copyPathToolStripMenuItem.Click += new System.EventHandler(this.copyPathToolStripMenuItem_Click);
-            // 
             // cbPath
             // 
             this.cbPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -468,7 +552,7 @@
             this.cbPath.FormattingEnabled = true;
             this.cbPath.Location = new System.Drawing.Point(114, 21);
             this.cbPath.Name = "cbPath";
-            this.cbPath.Size = new System.Drawing.Size(524, 21);
+            this.cbPath.Size = new System.Drawing.Size(622, 21);
             this.cbPath.TabIndex = 1;
             // 
             // labelPath
@@ -490,7 +574,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(783, 465);
+            this.tabControl1.Size = new System.Drawing.Size(881, 567);
             this.tabControl1.TabIndex = 37;
             // 
             // tabPageOptions
@@ -503,7 +587,7 @@
             this.tabPageOptions.Location = new System.Drawing.Point(4, 22);
             this.tabPageOptions.Name = "tabPageOptions";
             this.tabPageOptions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageOptions.Size = new System.Drawing.Size(775, 439);
+            this.tabPageOptions.Size = new System.Drawing.Size(873, 541);
             this.tabPageOptions.TabIndex = 1;
             this.tabPageOptions.Text = "Options";
             this.tabPageOptions.UseVisualStyleBackColor = true;
@@ -551,28 +635,11 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Version :";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(351, 116);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(85, 13);
-            this.label7.TabIndex = 26;
-            this.label7.Text = "Export filename :";
-            // 
-            // tbExportFilename
-            // 
-            this.tbExportFilename.Location = new System.Drawing.Point(442, 113);
-            this.tbExportFilename.Name = "tbExportFilename";
-            this.tbExportFilename.PasswordChar = '*';
-            this.tbExportFilename.Size = new System.Drawing.Size(190, 20);
-            this.tbExportFilename.TabIndex = 27;
-            // 
             // PrintServerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 460);
+            this.ClientSize = new System.Drawing.Size(884, 562);
             this.Controls.Add(this.tabControl1);
             this.Name = "PrintServerControl";
             this.Load += new System.EventHandler(this.PrintServerControl_Load);
@@ -580,8 +647,9 @@
             this.tabPagePrintServer.PerformLayout();
             this.panelParameters.ResumeLayout(false);
             this.panelParameters.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSettings)).EndInit();
             this.gridContextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPageOptions.ResumeLayout(false);
             this.tabPageOptions.PerformLayout();
@@ -614,7 +682,6 @@
         private System.Windows.Forms.TextBox tbLogin;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cbSettings;
         private System.Windows.Forms.Label labelSettings;
         private System.Windows.Forms.Button btDetectInstall;
         private System.Windows.Forms.ComboBox cbOdbcDatasource;
@@ -625,8 +692,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btGenerateCommand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label lbLogin;
         private System.Windows.Forms.Label lbPassword;
@@ -635,5 +700,12 @@
         private System.Windows.Forms.LinkLabel linkOpenExportDirectory;
         private System.Windows.Forms.TextBox tbExportFilename;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridView dgSettings;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
+        private System.Windows.Forms.Button btRemoveSetting;
+        private System.Windows.Forms.Button btAddSetting;
     }
 }

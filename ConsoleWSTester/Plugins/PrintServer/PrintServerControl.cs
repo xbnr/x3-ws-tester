@@ -73,7 +73,11 @@ namespace ConsoleTester.Plugins.PrintServer
             Helper.SetTextFromSettings(config.ReportFilename, this.cbReportName); // Path.GetFileName( this.cbReportName.Text));
             Helper.SetTextFromSettings(config.ExportDirectory, this.cbExportDirectory);
             Helper.SetSafeText(this.cbActions, config.Action);
-            Helper.SetSafeText(this.cbSettings, config.Settings);
+            // Helper.SetSafeText(this.cbSettings, config.Settings);
+            if (config.Settings != null)
+            {
+                dgSettings.DataSource = config.Settings;
+            }
 
             if (config.Parameters != null)
             {
@@ -94,8 +98,13 @@ namespace ConsoleTester.Plugins.PrintServer
                 ReportFilename = cbReportName.Text,
                 ExportDirectory = cbExportDirectory.Text,
                 Action = cbActions.Text,
-                Settings = cbSettings.Text
+                // Settings = cbSettings.Text
             };
+            if (dgSettings.DataSource != null)
+            {
+                var fileList = dgSettings.DataSource as PrintServerConfigParameter[];
+                conf.Settings = fileList;
+            }
 
             if (dgKeyValue.DataSource != null)
             {
@@ -158,8 +167,17 @@ namespace ConsoleTester.Plugins.PrintServer
                 arguments += $" -action:{conf.Action}";
             if (!string.IsNullOrEmpty(conf.ExportDirectory))
                 arguments += $" -exportdirectory:\"{conf.ExportDirectory}\" ";
-            if (!string.IsNullOrEmpty(conf.Settings))
-                arguments += $" -settings:\"{conf.Settings}\" ";
+            //if (!string.IsNullOrEmpty(conf.Settings))
+            //    arguments += $" -settings:\"{conf.Settings}\" ";
+            if (conf.Settings?.Length > 0)
+            {
+                arguments += $" -settings:\"";
+                foreach (var item in conf.Settings)
+                {
+                    arguments += $"{item.Name}={item.Value};";
+                }
+                arguments += $"\"";
+            }
             if (conf.Parameters?.Length > 0)
             {
                 arguments += $" -reportparameters:\"";
@@ -294,6 +312,16 @@ namespace ConsoleTester.Plugins.PrintServer
         private void linkOpenExportDirectory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("explorer", cbExportDirectory.Text);
+        }
+
+        private void btAddSetting_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btRemoveSetting_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
