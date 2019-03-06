@@ -4,6 +4,8 @@ using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -67,6 +69,7 @@ namespace ConsoleTester.Plugins.PrintServer
             PrintServerConfig config = JsonConvert.DeserializeObject<PrintServerConfig>(File.ReadAllText(filename));
             Helper.SetTextFromSettings(config.InstallDirectory, this.cbPath);
             Helper.SetTextFromSettings(config.OdbcDatasource, this.cbOdbcDatasource);
+            Helper.SetTextFromSettings(config.DatabaseName, this.tbDbName);
             Helper.SetTextFromSettings(config.Basetype, this.cbDatabaseType);
             Helper.SetTextFromSettings(config.Login, this.tbLogin);
             Helper.SetTextFromSettings(config.Password, this.tbPassword);
@@ -92,13 +95,13 @@ namespace ConsoleTester.Plugins.PrintServer
             {
                 InstallDirectory = cbPath.Text,
                 OdbcDatasource = cbOdbcDatasource.Text,
+                DatabaseName = tbDbName.Text,
                 Basetype = cbDatabaseType.Text,
                 Login = tbLogin.Text,
                 Password = tbPassword.Text,
                 ReportFilename = cbReportName.Text,
                 ExportDirectory = cbExportDirectory.Text,
-                Action = cbActions.Text,
-                // Settings = cbSettings.Text
+                Action = cbActions.Text
             };
             if (dgSettings.DataSource != null)
             {
@@ -158,7 +161,10 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             var conf = GetConfigFromUI() as PrintServerConfig;
             exe = $"{conf.InstallDirectory}\\TestConsolePrintNet.exe";
-            arguments = $" -connectioninfos:\"datasource={conf.OdbcDatasource};basetype={conf.Basetype};userid={conf.Login};password={conf.Password};\" ";
+            arguments = $" -connectioninfos:\"datasource={conf.OdbcDatasource};";
+            if (!string.IsNullOrEmpty(conf.DatabaseName))
+                arguments += $"databasename={conf.DatabaseName};";
+            arguments += $"basetype ={conf.Basetype};userid={conf.Login};password={conf.Password};\" ";
             if (!string.IsNullOrEmpty(conf.ReportFilename))
                 arguments += $" -reportdirectory:\"{Path.GetDirectoryName(conf.ReportFilename)}\" ";
             if (!string.IsNullOrEmpty(conf.ReportFilename))
@@ -316,12 +322,48 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void btAddSetting_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("TODO");
         }
 
         private void btRemoveSetting_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("TODO");
+        }
+
+        private void btTestConnection_Click(object sender, EventArgs e)
+        {
+            string dsn = cbOdbcDatasource.Text;
+            string userid = tbLogin.Text;
+            string password = tbPassword.Text;
+            bool result = IsServerConnected(dsn, userid, password);
+            if (result)
+            {
+                MessageBox.Show($"Connection to {dsn} OK", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show($"Error while connecting to {dsn}", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
+
+        private bool IsServerConnected(string dsn, string userId, string password)
+        {
+            using (OdbcConnection connection = new OdbcConnection($"dsn={dsn};UID={userId};PWD={password};"))
+            {
+                try
+                {
+                    connection.Open();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(ex.Message);
+                    return false;
+                }
+            }
+        }
+
+
     }
 }
