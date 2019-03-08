@@ -23,7 +23,7 @@ namespace ConsoleTester.Plugins.PrintServer
     [JsonObject(IsReference = false)]
     public class PrintServerConfig : IConfigService
     {
-        internal const string ConfigName = "PrintServerConfigConfig";
+        internal const string ConfigName = "PrintServerConfig";
 
         public string GetTitle()
         {

@@ -196,12 +196,6 @@
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\LogAnalyzer\Rule.cs" />
-    <Compile Include="UI\OutputResult.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\OutputResult.Designer.cs">
-      <DependentUpon>OutputResult.cs</DependentUpon>
-    </Compile>
     <Compile Include="Common\Updater.cs" />
     <Compile Include="Common\VersionInformation.cs" />
     <Compile Include="Plugins\XsdValidator\XsdValidatorControl.cs">
@@ -306,9 +300,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Plugins\LogAnalyzer\LogAnalyzer.resx">
       <DependentUpon>LogAnalyzer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\OutputResult.resx">
-      <DependentUpon>OutputResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugins\XsdValidator\XsdValidatorControl.resx">
       <DependentUpon>XsdValidatorControl.cs</DependentUpon>

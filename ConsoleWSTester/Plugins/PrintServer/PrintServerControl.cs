@@ -3,6 +3,7 @@ using ConsoleTester.UI;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Odbc;
 using System.Data.SqlClient;
@@ -59,6 +60,9 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             cbActions.DataSource = Enum.GetValues(typeof(ActionAsked));
             cbOdbcDatasource.DataSource = EnumDsn();
+
+            tbInstallPath.Text = GetPrintServerIntallPath();
+
         }
 
         internal void LoadConfigFromJSON(string filename)
@@ -76,7 +80,6 @@ namespace ConsoleTester.Plugins.PrintServer
             Helper.SetTextFromSettings(config.ReportFilename, this.cbReportName); // Path.GetFileName( this.cbReportName.Text));
             Helper.SetTextFromSettings(config.ExportDirectory, this.cbExportDirectory);
             Helper.SetSafeText(this.cbActions, config.Action);
-            // Helper.SetSafeText(this.cbSettings, config.Settings);
             if (config.Settings != null)
             {
                 dgSettings.DataSource = config.Settings;
@@ -200,18 +203,24 @@ namespace ConsoleTester.Plugins.PrintServer
         private void btAddParam_Click(object sender, EventArgs e)
         {
             var conf = GetConfigFromUI() as PrintServerConfig;
-            if (conf.Parameters == null)
-            {
-                conf.Parameters = new PrintServerConfigParameter[1];// new List<PrintServerConfigParameter>();
-            }
-            conf.Parameters[0] = new PrintServerConfigParameter();
-            dgKeyValue.DataSource = null;
-            dgKeyValue.DataSource = conf.Parameters;
+            AddItem(conf.Parameters, dgKeyValue);
+        }
+
+        private void AddItem(PrintServerConfigParameter[] parameters, DataGridView dataGridView)
+        {
+            ArrayList paramList = new ArrayList();
+            paramList.AddRange(parameters);
+            paramList.Add(new PrintServerConfigParameter());
+            parameters = new PrintServerConfigParameter[paramList.Count];
+            paramList.CopyTo(parameters);
+
+            dataGridView.DataSource = null;
+            dataGridView.DataSource = parameters;
         }
 
         private void btDelete_Click(object sender, EventArgs e)
         {
-            RemoveSelectedFiles();
+            RemoveSelectedItem(dgKeyValue);
         }
 
         private string GetSelectedParameter()
@@ -227,28 +236,23 @@ namespace ConsoleTester.Plugins.PrintServer
             return selectedValue;
         }
 
-        private void RemoveSelectedFiles()
+        private void RemoveSelectedItem(DataGridView dataGridView)
         {
-            var fileList = dgKeyValue.DataSource as List<string>;
-
-            foreach (DataGridViewRow row in dgKeyValue.SelectedRows)
+            var fileList = dataGridView.DataSource as PrintServerConfigParameter[];
+            PrintServerConfigParameter[] parameters = new PrintServerConfigParameter[fileList.Length];
+            foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
-                var file = row.DataBoundItem as string;
-                fileList.Remove(file);
+                var file = row.DataBoundItem as PrintServerConfigParameter;
+                ArrayList paramList = new ArrayList();
+                paramList.AddRange(fileList);
+                paramList.Remove(file);
+                parameters = new PrintServerConfigParameter[paramList.Count];
+                paramList.CopyTo(parameters);
             }
-            dgKeyValue.DataSource = null;
-            dgKeyValue.DataSource = fileList;
-        }
-        private void dgKeyValue_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-
+            dataGridView.DataSource = null;
+            dataGridView.DataSource = parameters;
         }
 
-        private void dgKeyValue_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            //dgKeyValue.DataSource = null;
-            //dgKeyValue.DataSource = conf.Parameters;
-        }
 
         private void btBrowseRpt_Click(object sender, EventArgs e)
         {
@@ -259,7 +263,10 @@ namespace ConsoleTester.Plugins.PrintServer
                 Filter = "*.rpt|*.*"
             };
             var result = folder.ShowDialog();
-            cbReportName.Text = folder.FileName;
+            if (result == DialogResult.OK && folder != null)
+            {
+                cbReportName.Text = folder.FileName;
+            }
         }
 
         public override void CreateWS(FileInfo item)
@@ -269,7 +276,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void removeSelectedXsdToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RemoveSelectedFiles();
+            RemoveSelectedItem(dgKeyValue);
         }
 
 
@@ -305,9 +312,19 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void btDetectInstall_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("TODO");
+            cbPath.Text = GetPrintServerIntallPath();
         }
 
+        private string GetPrintServerIntallPath()
+        {
+            string result = null;
+            RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Adonix\SRVIMP\0,1,5,0\GENERAL");
+            if (regKey != null)
+            {
+                result = (string)regKey.GetValue("Path");
+            }
+            return result;
+        }
         private void btGenerateCommand_Click(object sender, EventArgs e)
         {
             string exe, arguments;
@@ -322,12 +339,13 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void btAddSetting_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("TODO");
+            var conf = GetConfigFromUI() as PrintServerConfig;
+            AddItem(conf.Settings, dgSettings);
         }
 
         private void btRemoveSetting_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("TODO");
+            RemoveSelectedItem(dgSettings);
         }
 
         private void btTestConnection_Click(object sender, EventArgs e)
@@ -344,7 +362,6 @@ namespace ConsoleTester.Plugins.PrintServer
             {
                 MessageBox.Show($"Error while connecting to {dsn}", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private bool IsServerConnected(string dsn, string userId, string password)
@@ -364,6 +381,64 @@ namespace ConsoleTester.Plugins.PrintServer
             }
         }
 
+        private void cbOdbcDatasource_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string dbName = GetDatabaseName(cbOdbcDatasource.Text);
+            if (!string.IsNullOrEmpty(dbName))
+            {
+                tbDbName.Text = dbName;
+            }
+
+            string serverName = GetDbServerName(cbOdbcDatasource.Text);
+            if (!string.IsNullOrEmpty(serverName))
+            {
+                tbDbServer.Text = serverName;
+            }
+        }
+
+        private string GetDatabaseName(string odbcDatasource)
+        {
+            string result = null;
+            RegistryKey regKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\ODBC\ODBC.INI\{odbcDatasource}");
+            if (regKey != null)
+            {
+                result = (string)regKey.GetValue("Database");
+            }
+            return result;
+        }
+
+        private string GetDbServerName(string odbcDatasource)
+        {
+            string result = null;
+            RegistryKey regKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\ODBC\ODBC.INI\{odbcDatasource}");
+            if (regKey != null)
+            {
+                result = (string)regKey.GetValue("Server");
+                if (string.IsNullOrEmpty(result))
+                    result = (string)regKey.GetValue("HostName");
+                if (string.IsNullOrEmpty(result))
+                    result = (string)regKey.GetValue("ServerName");
+            }
+            return result;
+        }
+
+        private void lbDatasourceInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            PrintAllDatasourceInfo(cbOdbcDatasource.Text);
+        }
+
+        private void PrintAllDatasourceInfo(string odbcDatasource)
+        {
+            RegistryKey regKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\ODBC\ODBC.INI\{odbcDatasource}");
+            Logger.Log($"Datasource {odbcDatasource}: ");
+            if (regKey != null)
+            {
+                foreach (var name in regKey.GetValueNames())
+                {
+                   Logger.Log($"{name}: {regKey.GetValue(name)}");
+                }
+            }
+        }
 
     }
 }

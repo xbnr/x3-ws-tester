@@ -37,8 +37,8 @@ namespace ConsoleTester.UI
             Instance = this;
             var treeView = new FileSystemTree();
             treeView.Show(dockPanelMain, DockState.DockLeft);
-            var outputResult = new OutputResult();
-            outputResult.Show(dockPanelMain, DockState.DockBottom);
+            // var outputResult = new OutputResult();
+            // outputResult.Show(dockPanelMain, DockState.DockBottom);
             var logs = new Logs();
             LogControl = logs.LogControl;
             logs.Show(dockPanelMain, DockState.DockBottom);
