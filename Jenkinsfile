@@ -55,7 +55,7 @@ node('ser-rsrcs22') {
 	   	bat '''
 	      set LATEST_FOLDER=%DELIVERY_FOLDER%\\Tester
 	      set  HEAT="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\heat.exe"		  
-	      set destinationSetupDir=%WORKSPACE%\\ConsoleWSTester\\Setup
+	      set destinationSetupDir=.\\ConsoleWSTester\\Setup
 		  cp ".\\ConsoleWSTester\\bin\\x86\\Release" $destinationSetupDir"\\Release" -recurse
 		  set wxsHeatFile=%destinationSetupDir%\\WSTesterHeat.wxs"
 		  set releaseDir=Release
@@ -66,8 +66,8 @@ node('ser-rsrcs22') {
 			set candle="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\candle.exe"
 			%candle% %wxsFile% %wxsHeatFile% -dbuildfolder -v
 
-	        REM set current=%BRANCH_NAME:release/=%
-			set current=1.0
+	        set current=%BRANCH_NAME:release/=%
+			REM set current=1.0
 			set setupName="%WORKSPACE%\\ConsoleWSTester\\Setup\\WsTester.%current%.msi";
 			set light = "C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\light.exe"
 			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %setupName%
@@ -80,8 +80,8 @@ node('ser-rsrcs22') {
 	   
 
     bat '''
-			set current=1.0
-	      REM set current=%BRANCH_NAME:release/=%
+		 REM	set current=1.0
+	      set current=%BRANCH_NAME:release/=%
 	      cd %WORKSPACE%\\ConsoleWSTester\\Setup
 	      if exist %LATEST_FOLDER%\\WsTester.%current%.* del /F /Q %LATEST_FOLDER%\\WsTester.%current%.*
 	      copy /Y WsTester.%current%.* %LATEST_FOLDER%
