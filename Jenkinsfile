@@ -58,7 +58,7 @@ node('ser-rsrcs22') {
 			set destinationSetupDir=.\\ConsoleWSTester\\Setup
 			set wxsHeatFile="WSTesterHeat.wxs"
 			set releaseDir="Release"
-			xcopy /y ".\\ConsoleWSTester\\bin\\x86\\Release" ".\\ConsoleWSTester\\Setup\\Release" 
+			xcopy /y /s ".\\ConsoleWSTester\\bin\\x86\\Release" ".\\ConsoleWSTester\\Setup\\Release" 
 			cd .\\ConsoleWSTester\\Setup
 			%HEAT% dir %releaseDir% -sreg -sfrag -gg -srd -dr %releaseDir% -cg WSTesterHeat -out %wxsHeatFile%
 
@@ -69,6 +69,7 @@ node('ser-rsrcs22') {
 			%candle% %wxsFile% %wxsHeatFile% -dbuildfolder -v
 
 	        set current=%BRANCH_NAME:release/=%
+   set current=%current:/=-%
 			set setupName="WsTester.%current%.msi";
 			set light="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\light.exe"
 			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %setupName%
@@ -80,6 +81,7 @@ node('ser-rsrcs22') {
 	
     bat '''
 	      set current=%BRANCH_NAME:release/=%
+   set current=%current:/=-%
 	      cd %WORKSPACE%\\ConsoleWSTester\\Setup
 	      if exist %LATEST_FOLDER%\\WsTester.%current%.* del /F /Q %LATEST_FOLDER%\\WsTester.%current%.*
 	      copy /Y WsTester.%current%.* %LATEST_FOLDER%
