@@ -96,8 +96,10 @@ node('windows') {
 node('linux') {
     stage('Deliver setup') 
 	{
+		sh '''
 		mkdir "${WORKSPACE}/ConsoleWSTester"
 		mkdir "${WORKSPACE}/ConsoleWSTester/Setup"
+		'''
 		unstash "consoleWSTester"
 		String [] files = [ "${WORKSPACE}/ConsoleWSTester/Setup/${SETUP_NAME}.msi" ];
 		deliverSetup("${SETUP_BASE_NAME}.*",files)
