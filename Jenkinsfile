@@ -1,6 +1,34 @@
 #!groovy
+@Library('jenkins-shared-library') _
+
+    properties([disableConcurrentBuilds()])
+    def tag
+    env.VERSION = "999"
+		def INFO_BRANCH = getInfoFromBranchName("${BRANCH_NAME}","x3-ws-tester")
+		if (INFO_BRANCH.release) {
+			env.PRINTSERVER_VERSION = INFO_BRANCH.version
+		} else {
+			env.PRINTSERVER_VERSION = "9.9"
+		}
+
+    if ("${BRANCH_NAME}" =~ /^release\//)  {
+        tag = "${BRANCH_NAME}".split('/')[1]
+        env.VERSION = "${tag}"
+        env.SETUP_BASE_NAME = "x3-ws-tester-${VERSION}"
+        env.SETUP_NAME = "${SETUP_BASE_NAME}.0.${BUILD_ID}-win"
+    } else {
+        env.SETUP_BASE_NAME = "stage-x3-ws-tester-"
+        env.VERSION = "${BRANCH_NAME}".replaceAll('/','')
+        env.SETUP_NAME = "${SETUP_BASE_NAME}.${VERSION}.${BUILD_ID}-win"
+    }
+    env.DELIVERY_FOLDER = '/var/jenkins_home/userContent'
+
 // This task is restrited to the slave "ser-rsrcs22", the only server able to sign dll
-node('ser-rsrcs22') {
+try {  
+
+
+node('windows') {
+
    stage('Checkout and scan') {
          checkout scm	  
 		
@@ -77,3 +105,11 @@ node('ser-rsrcs22') {
 }
 
 
+    } catch(e) {
+        currentBuild.result = "FAILED"
+        if (tag) {
+            def msg = "Failed: <${env.BUILD_URL}|Build print server ${tag}> [${env.BUILD_NUMBER}]"
+            slackSend(color: '#FF0000', message: msg)
+        }
+        throw e
+    }
