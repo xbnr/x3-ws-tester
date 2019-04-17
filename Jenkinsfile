@@ -15,8 +15,14 @@ node('ser-rsrcs22') {
 			"%SED_HOME%\\sed" -i "s/2\\.999\\.99/%version%/g"  %%G
 			"%SED_HOME%\\sed" -i "s/2\\.999/%current%/g"  %%G
 			)
-	  	set slnConsoleTester="WSTester.sln"
-	  	set msbuild="c:\\program files (x86)\\microsoft visual studio\\2017\\buildtools\\msbuild\\15.0\\bin\\msbuild.exe" 
+
+
+	  	    set slnConsoleTester="WSTester.sln"
+	  	    set msbuild="c:\\program files (x86)\\microsoft visual studio\\2017\\buildtools\\msbuild\\15.0\\bin\\msbuild.exe" 
+
+			set nuget=".nuget\\NuGet.exe"
+			%nuget% restore %slnConsoleTester%
+
 	  	%msbuild% %slnConsoleTester% /p:configuration=Release /t:Clean
 	  	%msbuild% %slnConsoleTester% /p:configuration=Release
 			git checkout .
