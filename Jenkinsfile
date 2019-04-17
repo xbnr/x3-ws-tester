@@ -57,7 +57,7 @@ node('ser-rsrcs22') {
 			set  HEAT="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\heat.exe"		  
 			set destinationSetupDir=.\\ConsoleWSTester\\Setup
 			set wxsHeatFile=".\\ConsoleWSTester\\Setup\\WSTesterHeat.wxs"
-			set releaseDir=".\\ConsoleWSTester\\bin\\x86\\Release"
+			set releaseDir="ConsoleWSTester\\bin\\x86\\Release"
 			%HEAT% dir %releaseDir% -sreg -sfrag -gg -srd -dr %releaseDir% -cg WSTesterHeat -out %wxsHeatFile%
 
 			set wxsFile=".\\ConsoleWSTester\\Setup\\WSTester.wxs"
