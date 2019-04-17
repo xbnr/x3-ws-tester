@@ -15,11 +15,11 @@
         tag = "${BRANCH_NAME}".split('/')[1]
         env.VERSION = "${tag}"
         env.SETUP_BASE_NAME = "x3-ws-tester-${VERSION}"
-        env.SETUP_NAME = "${SETUP_BASE_NAME}.0.${BUILD_ID}-win"
+        env.SETUP_NAME = "${SETUP_BASE_NAME}.0.${BUILD_ID}"
     } else {
         env.SETUP_BASE_NAME = "stage-x3-ws-tester-"
         env.VERSION = "${BRANCH_NAME}".replaceAll('/','')
-        env.SETUP_NAME = "${SETUP_BASE_NAME}.${VERSION}.${BUILD_ID}-win"
+        env.SETUP_NAME = "${SETUP_BASE_NAME}.${VERSION}.${BUILD_ID}"
     }
     env.DELIVERY_FOLDER = '/var/jenkins_home/userContent'
 
@@ -88,7 +88,7 @@ node('windows') {
 			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %SETUP_NAME%.msi
 			cd %WORKSPACE%
 	    '''		 
-		stash name:"consoleWSTester", includes: "ConsoleWSTester/Setup/%SETUP_NAME%.msi"
+		stash name:"consoleWSTester", includes: "ConsoleWSTester/Setup/${SETUP_NAME}.msi"
 
      }
 }
