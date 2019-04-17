@@ -9,6 +9,8 @@ namespace ConsoleTester.UI
 {
     interface IControlConfig
     {
+        bool IsVisibleInReleaseMode();
+
         void CreateWS(FileInfo item);
 
         void SaveWorkspace();

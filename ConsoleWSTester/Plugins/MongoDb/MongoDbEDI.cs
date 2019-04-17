@@ -26,6 +26,16 @@ namespace ConsoleTester.Plugins.MongoDb
         {
             InitializeComponent();
         }
+
+        public override bool IsVisibleInReleaseMode()
+        {
+#if DEBUG
+            return true;
+#else
+            return false;
+#endif
+        }
+
         public override void CreateWS(FileInfo item)
         {
             LoadConfigFromJSON(item.FullName);
@@ -50,7 +60,7 @@ namespace ConsoleTester.Plugins.MongoDb
             return this.filename;
         }
 
-     
+
         public override IConfigService GetConfigFromUI()
         {
             MongoConfig conf = new MongoConfig

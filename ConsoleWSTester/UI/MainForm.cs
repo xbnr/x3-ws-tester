@@ -48,9 +48,13 @@ namespace ConsoleTester.UI
             {
                 Type serviceType = Type.GetType(item.ToString());
                 IConfigService configService = Activator.CreateInstance(serviceType) as IConfigService;
-                var toolTrip = newToolStripMenuItem.DropDownItems.Add(configService.GetTitle());
-                toolTrip.Tag = configService;
-                toolTrip.Click += new EventHandler(tsmiNewForm_Click);
+                var UIControl = Helper.GetUIControl(configService);
+                if (UIControl.IsVisibleInReleaseMode())
+                {
+                    var toolTrip = newToolStripMenuItem.DropDownItems.Add(configService.GetTitle());
+                    toolTrip.Tag = configService;
+                    toolTrip.Click += new EventHandler(tsmiNewForm_Click);
+                } 
             }
         }
 

@@ -27,6 +27,15 @@ namespace ConsoleTester.Plugins.XsdValidator
             InitializeComponent();
         }
 
+        public override bool IsVisibleInReleaseMode()
+        {
+#if DEBUG
+            return true;
+#else
+            return false;
+#endif
+        }
+
         public override string GetWorkspaceFilename()
         {
             if (string.IsNullOrEmpty(this.filename))
