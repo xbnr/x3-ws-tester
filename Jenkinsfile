@@ -94,10 +94,11 @@ node('windows') {
 }
 
 node('linux') {
-    stage('Deliver setup') {
-	unstash "consoleWSTester"
-	String [] files = [ "${WORKSPACE}/ConsoleWSTester/setup/${SETUP_NAME}.msi" ];
-	deliverSetup("${SETUP_BASE_NAME}.*",files)
+    stage('Deliver setup') 
+	{
+		unstash "consoleWSTester"
+		String [] files = [ "${WORKSPACE}/ConsoleWSTester/setup/${SETUP_NAME}.msi" ];
+		deliverSetup("${SETUP_BASE_NAME}.*",files)
 	}
     if (INFO_BRANCH.release) {notifyBuildResult(buildResult:"SUCCESS")}
  }
