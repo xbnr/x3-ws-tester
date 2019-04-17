@@ -52,17 +52,22 @@ node('ser-rsrcs22') {
     }
 	*/
     stage('Build setup') {
-	   			    bat '''
+	   	bat '''
 	      set LATEST_FOLDER=%DELIVERY_FOLDER%\\Tester
-	      set  HEAT=C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\heat.exe		  
+	      set  HEAT="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\heat.exe"		  
 	      set destinationSetupDir=%WORKSPACE%\\ConsoleWSTester\\Setup
 		  cp ".\\ConsoleWSTester\\bin\\x86\\Release" $destinationSetupDir"\\Release" -recurse
 		  set wxsHeatFile=%destinationSetupDir%\\WSTesterHeat.wxs"
-		  set releaseDir = "Release"
-		  "%HEAT%" dir %releaseDir%   -sreg -sfrag -gg -srd -dr %releaseDir% -cg WSTesterHeat -out %wxsHeatFile%
+		  set releaseDir=Release
+		  %HEAT% dir %releaseDir% -sreg -sfrag -gg -srd -dr %releaseDir% -cg WSTesterHeat -out %wxsHeatFile%
+
+			set wixHeatFileObj="%destinationSetupDir%\\WSTesterHeat.wixobj"
+			set wixFileObj=%destinationSetupDir%\\WSTester.wixobj"
+			set candle="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\candle.exe"
 
 	    '''		 
      }
+
     stage('Deliver setup') {
 	   
 
