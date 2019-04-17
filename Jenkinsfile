@@ -56,7 +56,8 @@ node('windows') {
 	 	'''
 		stash name:"binRelease", includes: "ConsoleWSTester/bin/x86/Release/**/*"
 	}
-	
+}
+
 		node('sign') {
 		stage('Sign exe and dlls') {
 			unstash "binRelease"
@@ -65,6 +66,8 @@ node('windows') {
 		}		
 	}
 
+
+node('windows') {
     stage('Build setup') {
 	   	bat '''
 			set  HEAT="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\heat.exe"		  
