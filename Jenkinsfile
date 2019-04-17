@@ -61,17 +61,15 @@ node('ser-rsrcs22') {
 		  set releaseDir=Release
 		  %HEAT% dir %releaseDir% -sreg -sfrag -gg -srd -dr %releaseDir% -cg WSTesterHeat -out %wxsHeatFile%
 
-			set wixHeatFileObj="%destinationSetupDir%\\WSTesterHeat.wixobj"
-			set wixFileObj=%destinationSetupDir%\\WSTester.wixobj"
+			set wixHeatFileObj=".\\ConsoleWSTester\\Setup\\WSTesterHeat.wixobj"
+			set wixFileObj=".\\ConsoleWSTester\\Setup\\WSTester.wixobj"
 			set candle="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\candle.exe"
 			%candle% %wxsFile% %wxsHeatFile% -dbuildfolder -v
 
 	        set current=%BRANCH_NAME:release/=%
-			REM set current=1.0
 			set setupName=".\\ConsoleWSTester\\Setup\\WsTester.%current%.msi";
 			set light = "C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\light.exe"
 			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %setupName%
-
 
 	    '''		 
      }
