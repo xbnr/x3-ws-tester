@@ -28,7 +28,7 @@ node('ser-rsrcs22') {
 		bat '''
 		setlocal EnableDelayedExpansion
 		set SIGNTOOL="C:\\Program Files (x86)\\Windows Kits\\8.1\\bin\\x86\\signtool.exe"
-		set CONSOLE=%WORKSPACE%\\BinRelease\\Console.exe
+		set CONSOLE=%WORKSPACE%\\ConsoleWSTester\\bin\\x86\\Release\\Console.exe
 
 	   %SIGNTOOL% verify /pa "%CONSOLE%"
 			if !ERRORLEVEL! GEQ 1  (
