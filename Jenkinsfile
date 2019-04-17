@@ -24,7 +24,7 @@ node('ser-rsrcs22') {
 			%nuget% restore %slnConsoleTester%
 
 	  	%msbuild% %slnConsoleTester% /p:configuration=Release /t:Clean
-	  	%msbuild% %slnConsoleTester% /p:configuration=Release
+	  	%msbuild% %slnConsoleTester% /p:configuration=Release /p:Platform="x86"
 			git checkout .
 	 	'''
 	}
