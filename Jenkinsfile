@@ -68,15 +68,14 @@ node('ser-rsrcs22') {
 
 	        set current=%BRANCH_NAME:release/=%
 			set setupName=".\\ConsoleWSTester\\Setup\\WsTester.%current%.msi";
-			set light = "C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\light.exe"
+			set light="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\light.exe"
 			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %setupName%
 
 	    '''		 
      }
 
     stage('Deliver setup') {
-	   
-
+	
     bat '''
 	      set current=%BRANCH_NAME:release/=%
 	      cd %WORKSPACE%\\ConsoleWSTester\\Setup
