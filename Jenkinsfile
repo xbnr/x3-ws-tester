@@ -88,7 +88,7 @@ node('windows') {
    			set current=%current:/=-%
 			REM set setupName="WsTester.%current%.msi";
 			set light="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\light.exe"
-			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %SETUP_NAME%
+			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %SETUP_NAME%.msi
 
 	    '''		 
      }
@@ -96,8 +96,8 @@ node('windows') {
     stage('Deliver setup') {
 	
 	String [] files = [
-						"${WORKSPACE}/ConsoleWSTester/setup/${SETUP_NAME}.msi", 
-					];
+						"${WORKSPACE}/ConsoleWSTester/setup/${SETUP_NAME}.msi"
+						];
 					deliverSetup("${SETUP_BASE_NAME}.*",files)
         }
 
