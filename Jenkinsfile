@@ -6,9 +6,9 @@
     env.VERSION = "999"
 		def INFO_BRANCH = getInfoFromBranchName("${BRANCH_NAME}","x3-ws-tester")
 		if (INFO_BRANCH.release) {
-			env.PRINTSERVER_VERSION = INFO_BRANCH.version
+			env.TESTER_VERSION = INFO_BRANCH.version
 		} else {
-			env.PRINTSERVER_VERSION = "9.9"
+			env.TESTER_VERSION = "9.9"
 		}
 
     if ("${BRANCH_NAME}" =~ /^release\//)  {
@@ -36,12 +36,12 @@ node('windows') {
 
    stage('Build solution') {
 		bat '''
-			set current=%BRANCH_NAME:release/=%
-			set version=%current%.%BUILD_ID%
+			set current=%TESTER_VERSION%
+			set version=%current%.%RELEASE%.%BUILD_ID%
 			echo current= %current%  version= %version% 
 			for /R %cd%  %%G IN (AssemblyInfo.*) do (
-			"%SED_HOME%\\sed" -i "s/2\\.999\\.99/%version%/g"  %%G
-			"%SED_HOME%\\sed" -i "s/2\\.999/%current%/g"  %%G
+				"%SED_HOME%\\sed" -i "s/2\\.999\\.99\\.99/%version%/g"  "%%G"
+				"%SED_HOME%\\sed" -i "s/2\\.999/%current%/g"  "%%G"
 			)
 
 	  	    set slnConsoleTester="WSTester.sln"
