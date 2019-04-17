@@ -91,29 +91,21 @@ node('windows') {
 			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %SETUP_NAME%.msi
 
 	    '''		 
+		stash name:"consoleWSTester", includes: "%WORKSPACE%/ConsoleWSTester/Setup/%SETUP_NAME%.msi"
+
      }
-
-    stage('Deliver setup') {
-	
-	String [] files = [
-						"${WORKSPACE}/ConsoleWSTester/setup/${SETUP_NAME}.msi"
-						];
-					deliverSetup("${SETUP_BASE_NAME}.*",files)
-        }
-
-        if (tag) {
-            def msg = "Success: <${env.BUILD_URL}|Build Tester ${tag}> [${env.BUILD_NUMBER}]\n"
-            msg = msg + "<${JENKINS_URL}userContent/Latest/${SETUP_NAME}.jar|${SETUP_NAME}.jar>"
-            slackSend(color: '#00FF00', message: msg)
-        }	
 }
 
+node('linux') {
+    stage('Deliver setup') {
+	unstash "consoleWSTester"
+	String [] files = [ "${WORKSPACE}/ConsoleWSTester/setup/${SETUP_NAME}.msi" ];
+	deliverSetup("${SETUP_BASE_NAME}.*",files)
+	}
+    if (INFO_BRANCH.release) {notifyBuildResult(buildResult:"SUCCESS")}
+ }
 
-    } catch(e) {
-        currentBuild.result = "FAILED"
-        if (tag) {
-            def msg = "Failed: <${env.BUILD_URL}|Build print server ${tag}> [${env.BUILD_NUMBER}]"
-            slackSend(color: '#FF0000', message: msg)
-        }
-        throw e
-    }
+ } catch(e) {
+        if (INFO_BRANCH.release) {notifyBuildResult(buildResult:"FAILED")}
+	    throw e
+ }
