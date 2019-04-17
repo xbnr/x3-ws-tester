@@ -74,7 +74,7 @@ node('windows') {
 			set destinationSetupDir=.\\ConsoleWSTester\\Setup
 			set wxsHeatFile="WSTesterHeat.wxs"
 			set releaseDir="Release"
-			xcopy /y /s ".\\ConsoleWSTester\\bin\\x86\\Release" ".\\ConsoleWSTester\\Setup\\Release" 
+			xcopy /i /y /s ".\\ConsoleWSTester\\bin\\x86\\Release" ".\\ConsoleWSTester\\Setup\\Release" 
 			cd .\\ConsoleWSTester\\Setup
 			%HEAT% dir %releaseDir% -sreg -sfrag -gg -srd -dr %releaseDir% -cg WSTesterHeat -out %wxsHeatFile%
 
