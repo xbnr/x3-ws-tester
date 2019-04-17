@@ -61,7 +61,7 @@ node('windows') {
 		node('sign') {
 		stage('Sign exe and dlls') {
 			unstash "binRelease"
-			signExe("ConsoleWSTester\\bin\\Release\\ConsoleTester.exe")
+			signExe("ConsoleWSTester\\bin\\x86\\Release\\ConsoleTester.exe")
 			stash name:"binRelease", includes: "ConsoleWSTester/bin/x86/Release/**/*"
 		}		
 	}
