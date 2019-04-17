@@ -86,25 +86,26 @@ node('windows') {
 
 	        set current=%BRANCH_NAME:release/=%
    			set current=%current:/=-%
-			set setupName="WsTester.%current%.msi";
+			REM set setupName="WsTester.%current%.msi";
 			set light="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\light.exe"
-			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %setupName%
+			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %SETUP_NAME%
 
 	    '''		 
      }
 
     stage('Deliver setup') {
 	
-    bat '''
-		  set LATEST_FOLDER=%DELIVERY_FOLDER%\\Tester
-	      set current=%BRANCH_NAME:release/=%
-   		  set current=%current:/=-%
-	      cd %WORKSPACE%\\ConsoleWSTester\\Setup
-	      if exist %LATEST_FOLDER%\\WsTester.%current%.* del /F /Q %LATEST_FOLDER%\\WsTester.%current%.*
-	      copy /Y WsTester.%current%.* %LATEST_FOLDER%
-	    '''
-    }
-	
+	String [] files = [
+						"${WORKSPACE}/ConsoleWSTester/setup/${SETUP_NAME}.msi", 
+					];
+					deliverSetup("${SETUP_BASE_NAME}.*",files)
+        }
+
+        if (tag) {
+            def msg = "Success: <${env.BUILD_URL}|Build Tester ${tag}> [${env.BUILD_NUMBER}]\n"
+            msg = msg + "<${JENKINS_URL}userContent/Latest/${SETUP_NAME}.jar|${SETUP_NAME}.jar>"
+            slackSend(color: '#00FF00', message: msg)
+        }	
 }
 
 
