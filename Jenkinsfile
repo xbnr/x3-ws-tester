@@ -56,18 +56,20 @@ node('ser-rsrcs22') {
 			set LATEST_FOLDER=%DELIVERY_FOLDER%\\Tester
 			set  HEAT="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\heat.exe"		  
 			set destinationSetupDir=.\\ConsoleWSTester\\Setup
-			set wxsHeatFile=".\\ConsoleWSTester\\Setup\\WSTesterHeat.wxs"
-			set releaseDir="ConsoleWSTester\\bin\\x86\\Release"
+			set wxsHeatFile="WSTesterHeat.wxs"
+			set releaseDir="Release"
+			xcopy /y ".\\ConsoleWSTester\\bin\\x86\\Release" ".\\ConsoleWSTester\\Setup\\Release" 
+			cd .\\ConsoleWSTester\\Setup
 			%HEAT% dir %releaseDir% -sreg -sfrag -gg -srd -dr %releaseDir% -cg WSTesterHeat -out %wxsHeatFile%
 
-			set wxsFile=".\\ConsoleWSTester\\Setup\\WSTester.wxs"
-			set wixHeatFileObj=".\\ConsoleWSTester\\Setup\\WSTesterHeat.wixobj"
-			set wixFileObj=".\\ConsoleWSTester\\Setup\\WSTester.wixobj"
+			set wxsFile="WSTester.wxs"
+			set wixHeatFileObj="WSTesterHeat.wixobj"
+			set wixFileObj="WSTester.wixobj"
 			set candle="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\candle.exe"
 			%candle% %wxsFile% %wxsHeatFile% -dbuildfolder -v
 
 	        set current=%BRANCH_NAME:release/=%
-			set setupName=".\\ConsoleWSTester\\Setup\\WsTester.%current%.msi";
+			set setupName="WsTester.%current%.msi";
 			set light="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\light.exe"
 			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %setupName%
 
