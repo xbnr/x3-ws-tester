@@ -47,7 +47,6 @@ node('ser-rsrcs22') {
 	*/
     stage('Build setup') {
 	   		
-		} 	
 		 
      }
     stage('Deliver setup') {
