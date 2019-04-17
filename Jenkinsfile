@@ -46,14 +46,22 @@ node('ser-rsrcs22') {
     }
 	*/
     stage('Build setup') {
-	   		
-		 
+	   			    bat '''
+	      set LATEST_FOLDER=%DELIVERY_FOLDER%\\Tester
+	      set  HEAT=C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\heat.exe		  
+	      set destinationSetupDir=%WORKSPACE%\\ConsoleWSTester\\Setup
+		  cp ".\\ConsoleWSTester\\bin\\x86\\Release" $destinationSetupDir"\\Release" -recurse
+		  set wxsHeatFile=%destinationSetupDir%\\WSTesterHeat.wxs"
+		  set releaseDir = "Release"
+		  "%HEAT%" dir %releaseDir%   -sreg -sfrag -gg -srd -dr %releaseDir% -cg WSTesterHeat -out %wxsHeatFile%
+
+	    '''		 
      }
     stage('Deliver setup') {
 	   
+
 	   /*
 	    bat '''
-	      set LATEST_FOLDER=%DELIVERY_FOLDER%\\Console
 	      set current=%BRANCH_NAME:release/=%
 	      cd %WORKSPACE%\\installers\\izpack\\X3Console\\project
 	      if exist %LATEST_FOLDER%\\safex3-console-installer-2.%current%.*.jar del /F /Q %LATEST_FOLDER%\\safex3-console-installer-2.%current%.*.jar
