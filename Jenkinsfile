@@ -84,14 +84,11 @@ node('windows') {
 			set candle="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\candle.exe"
 			%candle% %wxsFile% %wxsHeatFile% -dbuildfolder -v
 
-	        set current=%BRANCH_NAME:release/=%
-   			set current=%current:/=-%
-			REM set setupName="WsTester.%current%.msi";
 			set light="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\light.exe"
 			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %SETUP_NAME%.msi
-
+			cd %WORKSPACE%
 	    '''		 
-		stash name:"consoleWSTester", includes: "%WORKSPACE%/ConsoleWSTester/Setup/%SETUP_NAME%.msi"
+		stash name:"consoleWSTester", includes: "ConsoleWSTester/Setup/%SETUP_NAME%.msi"
 
      }
 }
