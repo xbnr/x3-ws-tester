@@ -97,8 +97,12 @@ node('linux') {
     stage('Deliver setup') 
 	{
 		sh '''
-		[ ! -d "${WORKSPACE}/ConsoleWSTester" ] && mkdir "${WORKSPACE}/ConsoleWSTester"
-		[ ! -d "${WORKSPACE}/ConsoleWSTester/Setup" ] && mkdir "${WORKSPACE}/ConsoleWSTester/Setup"
+		if [ ! -d "${WORKSPACE}/ConsoleWSTester" ] then
+		 mkdir "${WORKSPACE}/ConsoleWSTester"
+		fi
+		if [ ! -d "${WORKSPACE}/ConsoleWSTester/Setup" ] then
+		 mkdir "${WORKSPACE}/ConsoleWSTester/Setup"
+		fi 
 		'''
 		unstash "consoleWSTester"
 		String [] files = [ "${WORKSPACE}/ConsoleWSTester/Setup/${SETUP_NAME}.msi" ];
