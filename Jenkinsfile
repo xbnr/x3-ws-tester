@@ -64,6 +64,13 @@ node('ser-rsrcs22') {
 			set wixHeatFileObj="%destinationSetupDir%\\WSTesterHeat.wixobj"
 			set wixFileObj=%destinationSetupDir%\\WSTester.wixobj"
 			set candle="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\candle.exe"
+			%candle% %wxsFile% %wxsHeatFile% -dbuildfolder -v
+
+	        set current=%BRANCH_NAME:release/=%
+			set setupName="%WORKSPACE%\\ConsoleWSTester\\Setup\\WsTester.%current%.msi";
+			set light = "C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\light.exe"
+			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %setupName%
+
 
 	    '''		 
      }
@@ -71,14 +78,12 @@ node('ser-rsrcs22') {
     stage('Deliver setup') {
 	   
 
-	   /*
-	    bat '''
+    bat '''
 	      set current=%BRANCH_NAME:release/=%
-	      cd %WORKSPACE%\\installers\\izpack\\X3Console\\project
-	      if exist %LATEST_FOLDER%\\safex3-console-installer-2.%current%.*.jar del /F /Q %LATEST_FOLDER%\\safex3-console-installer-2.%current%.*.jar
-	      copy /Y safex3-console-installer-2.%current%.*.jar %LATEST_FOLDER%
+	      cd %WORKSPACE%\\ConsoleWSTester\\Setup
+	      if exist %LATEST_FOLDER%\\WsTester.%current%.* del /F /Q %LATEST_FOLDER%\\WsTester.%current%.*
+	      copy /Y WsTester.%current%.* %LATEST_FOLDER%
 	    '''
-		*/
     }
 	
 }
