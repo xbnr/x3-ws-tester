@@ -45,6 +45,20 @@ node('windows') {
 				"%SED_HOME%\\sed" -i "s/0\\.99/%current%/g"  "%%G"
 			)
 
+			"%SED_HOME%\\sed" -i "s/0\\.99\\.99\\.99/%version%/g"  "Setup\\WSTester.wxs"
+
+			set _guid=%computername%%date%%time%
+			set _guid=%_guid:/=%
+			set _guid=%_guid:.=%
+			set _guid=%_guid: =%
+			set _guid=%_guid:,=%
+			set _guid=%_guid::=%
+			set _guid=%_guid:-=%
+			set %1=%_guid%
+			echo "New UpgradeCodeGuid= %_guid%"
+			"%SED_HOME%\\sed" -i "s/123412341234999999999999/%_guid%/g"  "Setup\\WSTester.wxs"
+
+
 	  	    set slnConsoleTester="WSTester.sln"
 	  	    set msbuild="c:\\program files (x86)\\microsoft visual studio\\2017\\buildtools\\msbuild\\15.0\\bin\\msbuild.exe" 
 
