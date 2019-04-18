@@ -15,10 +15,10 @@
     if ("${BRANCH_NAME}" =~ /^release\//)  {
         tag = "${BRANCH_NAME}".split('/')[1]
         env.VERSION = "${tag}"
-        env.SETUP_BASE_NAME = "x3-ws-tester-${VERSION}"
+        env.SETUP_BASE_NAME = "EM-ws-tester-${VERSION}"
         env.SETUP_NAME = "${SETUP_BASE_NAME}.0.${BUILD_ID}"
     } else {
-        env.SETUP_BASE_NAME = "stage-x3-ws-tester-"
+        env.SETUP_BASE_NAME = "stage-EM-ws-tester-"
         env.VERSION = "${BRANCH_NAME}".replaceAll('/','')
         env.SETUP_NAME = "${SETUP_BASE_NAME}.${VERSION}.${BUILD_ID}"
     }
@@ -41,8 +41,8 @@ node('windows') {
 			set version=%current%.%RELEASE%.%BUILD_ID%
 			echo current= %current%  version= %version% 
 			for /R %cd%  %%G IN (AssemblyInfo.*) do (
-				"%SED_HOME%\\sed" -i "s/2\\.999\\.99\\.99/%version%/g"  "%%G"
-				"%SED_HOME%\\sed" -i "s/2\\.999/%current%/g"  "%%G"
+				"%SED_HOME%\\sed" -i "s/0\\.999\\.99\\.99/%version%/g"  "%%G"
+				"%SED_HOME%\\sed" -i "s/0\\.999/%current%/g"  "%%G"
 			)
 
 	  	    set slnConsoleTester="WSTester.sln"
