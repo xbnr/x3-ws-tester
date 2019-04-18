@@ -8,7 +8,7 @@
 		if (INFO_BRANCH.release) {
 			env.TESTER_VERSION = INFO_BRANCH.version
 		} else {
-			env.TESTER_VERSION = "9.9"
+			env.TESTER_VERSION = "0.9"
 		}
     env.RELEASE = "0"		
 
@@ -72,11 +72,11 @@ node('windows') {
     stage('Build setup') {
 	   	bat '''
 			set  HEAT="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\heat.exe"		  
-			set destinationSetupDir=.\\ConsoleWSTester\\Setup
+			set destinationSetupDir=.\\Setup
 			set wxsHeatFile="WSTesterHeat.wxs"
 			set releaseDir="Release"
-			xcopy /i /y /s ".\\ConsoleWSTester\\bin\\x86\\Release" ".\\ConsoleWSTester\\Setup\\Release" 
-			cd .\\ConsoleWSTester\\Setup
+			xcopy /i /y /s ".\\ConsoleWSTester\\bin\\x86\\Release" ".\\Setup\\Release" 
+			cd .\\Setup
 			%HEAT% dir %releaseDir% -sreg -sfrag -gg -srd -dr %releaseDir% -cg WSTesterHeat -out %wxsHeatFile%
 
 			set wxsFile="WSTester.wxs"
@@ -89,7 +89,7 @@ node('windows') {
 			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %SETUP_NAME%.msi
 			cd %WORKSPACE%
 	    '''		 
-		stash name:"consoleWSTester", includes: "ConsoleWSTester/Setup/${SETUP_NAME}.msi"
+		stash name:"consoleWSTester", includes: "Setup/${SETUP_NAME}.msi"
 
      }
 }
@@ -98,17 +98,13 @@ node('linux') {
     stage('Deliver setup') 
 	{
 		sh '''
-		if [ ! -d "${WORKSPACE}/ConsoleWSTester" ] 
+		if [ ! -d "${WORKSPACE}/Setup" ] 
 		then
-		 mkdir "${WORKSPACE}/ConsoleWSTester"
-		fi
-		if [ ! -d "${WORKSPACE}/ConsoleWSTester/Setup" ] 
-		then
-		 mkdir "${WORKSPACE}/ConsoleWSTester/Setup"
+		 mkdir "${WORKSPACE}/Setup"
 		fi
 		'''
 		unstash "consoleWSTester"
-		String [] files = [ "${WORKSPACE}/ConsoleWSTester/Setup/${SETUP_NAME}.msi" ];
+		String [] files = [ "${WORKSPACE}/Setup/${SETUP_NAME}.msi" ];
 		deliverSetup("${SETUP_BASE_NAME}.*",files)
 	}
     if (INFO_BRANCH.release) {notifyBuildResult(buildResult:"SUCCESS")}
