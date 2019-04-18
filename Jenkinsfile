@@ -41,8 +41,8 @@ node('windows') {
 			set version=%current%.%RELEASE%.%BUILD_ID%
 			echo current= %current%  version= %version% 
 			for /R %cd%  %%G IN (AssemblyInfo.*) do (
-				"%SED_HOME%\\sed" -i "s/0\\.999\\.99\\.99/%version%/g"  "%%G"
-				"%SED_HOME%\\sed" -i "s/0\\.999/%current%/g"  "%%G"
+				"%SED_HOME%\\sed" -i "s/0\\.99\\.99\\.99/%version%/g"  "%%G"
+				"%SED_HOME%\\sed" -i "s/0\\.99/%current%/g"  "%%G"
 			)
 
 	  	    set slnConsoleTester="WSTester.sln"
