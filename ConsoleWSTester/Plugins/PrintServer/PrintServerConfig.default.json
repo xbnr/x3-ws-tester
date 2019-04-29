@@ -1,0 +1,59 @@
+﻿{
+  "installDirectory": "",
+  "action": "OpenPRINTER",
+  "odbcDatasource": "",
+  "databaseName": "",
+  "basetype": "",
+  "login": "",
+  "password": "",
+  "reportFilename": "",
+  "exportDirectory": "",
+  "settings": [
+    {
+      "name": "orientation",
+      "value": "Portrait"
+    },
+    {
+      "name": "papersize",
+      "value": "PaperA4"
+    },
+    {
+      "name": "printername",
+      "value": "PDFCreator"
+    },
+    {
+      "name": "collate",
+      "value": "true"
+    },
+    {
+      "name": "copies",
+      "value": "1"
+    },
+    {
+      "name": "duplex",
+      "value": "Simplex"
+    },
+    {
+      "name": "pagecontentheight",
+      "value": "10"
+    },
+    {
+      "name": "startPage",
+      "value": "1"
+    },
+    {
+      "name": "stopPage",
+      "value": "2"
+    },
+    {
+      "name": "pagecontentwidth",
+      "value": "10"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "impselections",
+      "value": "0"
+    }
+  ]
+}
