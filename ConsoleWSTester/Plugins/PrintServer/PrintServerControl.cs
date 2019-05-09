@@ -61,9 +61,42 @@ namespace ConsoleTester.Plugins.PrintServer
             cbActions.DataSource = Enum.GetValues(typeof(ActionAsked));
             cbOdbcDatasource.DataSource = EnumDsn();
 
-            tbInstallPath.Text = GetPrintServerIntallPath();
-
+            string dirInstallPath = GetPrintServerIntallPath();
+            tbInstallPath.Text = dirInstallPath;
+            string adxSrvImp = Path.Combine(dirInstallPath, "AdxSrvImp.exe");
+            if (Directory.Exists(dirInstallPath) && File.Exists(adxSrvImp))
+            {
+                GetVersion(adxSrvImp, "/v");
+            }
         }
+
+        private void GetVersion(string exe, string arguments)
+        {
+            //* Create your Process
+            Process process = new Process();
+            process.StartInfo.FileName = exe;
+            process.StartInfo.Arguments = arguments;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+            //* Set your output and error (asynchronous) handlers
+            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler2);
+            process.ErrorDataReceived += new DataReceivedEventHandler(OutputHandler2);
+            process.Exited += new EventHandler(Exited);
+            //* Start process and handlers
+            process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+        }
+
+        private string logResult = string.Empty;
+        private void OutputHandler2(object sendingProcess, DataReceivedEventArgs outLine)            
+        {
+            logResult += outLine.Data;
+            Logger.Log(outLine.Data);
+            tbPrintServerVersion.Text = logResult;
+        }
+
 
         internal void LoadConfigFromJSON(string filename)
         {

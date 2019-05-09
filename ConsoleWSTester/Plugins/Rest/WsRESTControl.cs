@@ -25,6 +25,15 @@ namespace ConsoleTester.Plugins.Rest
             FillComboBox();
         }
 
+        public override bool IsVisibleInReleaseMode()
+        {
+#if DEBUG
+            return true;
+#else
+            return false;
+#endif
+        }
+
         private void FillComboBox()
         {
             // cbMode.DataSource = Enum.GetNames(typeof(WebServiceCall.OperationMode));
@@ -70,7 +79,7 @@ namespace ConsoleTester.Plugins.Rest
             ShowPanels();
         }
 
-       
+
         public override IConfigService GetConfigFromUI()
         {
             RESTConfig conf = new RESTConfig
@@ -108,10 +117,10 @@ namespace ConsoleTester.Plugins.Rest
 
         private void launch_Click(object sender, EventArgs e)
         {
-            
+
 
         }
-       
+
 
         private void Workspace_Load(object sender, EventArgs e)
         {

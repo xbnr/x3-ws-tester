@@ -15,6 +15,15 @@ namespace ConsoleTester.UI
         {
             InitializeComponent();
         }
+        public override bool IsVisibleInReleaseMode()
+        {
+#if DEBUG
+            return true;
+#else
+            return false;
+#endif
+        }
+
 
         private void btBrowseFile_Click(object sender, EventArgs e)
         {

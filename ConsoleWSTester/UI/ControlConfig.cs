@@ -13,6 +13,11 @@ namespace ConsoleTester.UI
     {
         public Logger Logger { get; } = new Logger(MainForm.LogControl);
 
+        public virtual bool IsVisibleInReleaseMode()
+        {
+            return true;
+        }
+
         public virtual void CreateWS(FileInfo item)
         {
             // TO IMPLEMENT in each ControlConfig
