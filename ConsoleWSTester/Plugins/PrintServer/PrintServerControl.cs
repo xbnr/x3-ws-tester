@@ -24,7 +24,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         public override void CreateNewWS()
         {
-            string defaultFile = $"Plugins\\PrintServer\\PrintServerConfig.default.json";
+            string defaultFile = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory,  $"Plugins", "PrintServer", "PrintServerConfig.default.json");
             if (File.Exists(defaultFile))
                 LoadConfigFromJSON(defaultFile);
             this.filename = null;
