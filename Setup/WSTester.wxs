@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define ProductName = "WSTester"?>
 <?define ProductVersion = "0.99.99.99"?>
-<?define ProductUpgradeCode = "12345678-123412341234999999999999"?>
+<?define ProductUpgradeCode = "SASAGEX3-A481-453C-8A82-011ED11C9A00"?>
 <?define Manufacturer = "SAGE"?>
 <?define About = "http://www.sage.com"?>
 <?define ExeName = "ConsoleTester.exe"?>
@@ -24,8 +24,7 @@
 		</Upgrade>
 		<!-- <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." Schedule="afterInstallInitialize" /> -->
 
-
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Comments="Windows Installer Package" />
+		<Package InstallerVersion="200" Manufacturer="$(var.Manufacturer)" Compressed="yes" InstallScope="perMachine" Comments="Windows Installer Package" />
 
 		<SetDirectory Action="SetInstallDir" Id="INSTALLDIR" Value="[$(var.ProgramFilesFolder)]$(var.Manufacturer)\$(var.ProductName)\">INSTALLDIR=""</SetDirectory>
 
