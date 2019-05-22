@@ -1,0 +1,17 @@
+﻿{
+  "hostUrl": "http://localhost:8126",
+  "path": "/soap-generic/syracuse/collaboration/syracuse/CAdxWebServiceXmlCC",
+  "poolAlias": "AWS",
+  "language": "ENG",
+  "publicName": "OAUS",
+  "requestConfiguration": "adxwss.optreturn=XML&adxwss.beautify=true",
+  "xmlObject": "",
+  "xmlFilename": "",
+  "operatMode": "Query",
+  "objectKeys": [],
+  "blocKey": "",
+  "lineKeys": [],
+  "listSize": 20,
+  "login": "admin",
+  "password": "admin"
+}

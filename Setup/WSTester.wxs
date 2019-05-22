@@ -19,6 +19,11 @@
 
 		<Media Id="1" Cabinet="WSTester.cab" EmbedCab="yes" />
 
+		<Upgrade Id="$(var.ProductUpgradeCode)">
+			<UpgradeVersion Minimum="1.0.0" IncludeMinimum="yes" OnlyDetect="no" Maximum="$(var.ProductVersion)" IncludeMaximum="no" Property="PREVIOUSFOUND" />
+		</Upgrade>
+		<!-- <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." Schedule="afterInstallInitialize" /> -->
+
 
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Comments="Windows Installer Package" />
 
@@ -35,7 +40,7 @@
 
 			<Directory Id="ProgramMenuFolder">
 				<Directory Id="ProgramMenuSubfolder" Name="Sage">
-					<Component Id="ApplicationShortcuts" Guid="12345678-1234-1234-1234-333333333333">
+					<Component Id="ApplicationShortcuts" Guid="*">
 						<Shortcut Id="ApplicationShortcut1" Name="WSTester" Description="Sage WSTester" Target="[INSTALLDIR]Release\ConsoleTester.exe" WorkingDirectory="INSTALLDIR"/>
 						<RegistryValue Root="HKCU" Key="Software\Sage\WSTester" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
 						<!-- RemoveFolder install, uninstall, both -->
@@ -56,12 +61,6 @@
 		<WixVariable Id="WixUILicenseRtf" Overridable="yes" Value="$(var.LicenseRtf)"/>
 		<UIRef Id="WixUI_InstallDir" />
 		<UIRef Id="WixUI_ErrorProgressText" />
-
-    <!-- <Upgrade Id="$(var.UpgradeCode)">
-      <UpgradeVersion Minimum="1.0.0" IncludeMinimum="yes" OnlyDetect="no"
-                      Maximum="$(var.ProductVersion)" IncludeMaximum="no" Property="PREVIOUSFOUND" />
-    </Upgrade> -->
-		<!-- <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." Schedule="afterInstallInitialize" /> -->
 
 		<InstallExecuteSequence>
 			<RemoveExistingProducts After="InstallInitialize" />

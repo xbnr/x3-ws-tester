@@ -403,6 +403,7 @@
             this.dgSettings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSettings.Size = new System.Drawing.Size(294, 238);
             this.dgSettings.TabIndex = 24;
+            this.dgSettings.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSettings_CellValidated);
             // 
             // dataGridViewTextBoxColumn1
             // 

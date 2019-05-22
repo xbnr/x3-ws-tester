@@ -15,10 +15,10 @@
     if ("${BRANCH_NAME}" =~ /^release\//)  {
         tag = "${BRANCH_NAME}".split('/')[1]
         env.VERSION = "${tag}"
-        env.SETUP_BASE_NAME = "EM-ws-tester-${VERSION}"
+        env.SETUP_BASE_NAME = "X3-ws-tester-${VERSION}"
         env.SETUP_NAME = "${SETUP_BASE_NAME}.0.${BUILD_ID}"
     } else {
-        env.SETUP_BASE_NAME = "stage-EM-ws-tester-"
+        env.SETUP_BASE_NAME = "stage-X3-ws-tester-"
         env.VERSION = "${BRANCH_NAME}".replaceAll('/','')
         env.SETUP_NAME = "${SETUP_BASE_NAME}.${VERSION}.${BUILD_ID}"
     }
@@ -56,7 +56,7 @@ node('windows') {
 			set _guid=%_guid:-=%
 			set %1=%_guid%
 			echo "New UpgradeCodeGuid= %_guid%"
-			"%SED_HOME%\\sed" -i "s/123412341234999999999999/%_guid%/g"  "Setup\\WSTester.wxs"
+			REM "%SED_HOME%\\sed" -i "s/123412341234999999999999/%_guid%/g"  "Setup\\WSTester.wxs"
 
 
 	  	    set slnConsoleTester="WSTester.sln"
@@ -86,7 +86,6 @@ node('windows') {
     stage('Build setup') {
 	   	bat '''
 			set  HEAT="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\heat.exe"		  
-			set destinationSetupDir=.\\Setup
 			set wxsHeatFile="WSTesterHeat.wxs"
 			set releaseDir="Release"
 			xcopy /i /y /s ".\\ConsoleWSTester\\bin\\x86\\Release" ".\\Setup\\Release" 
