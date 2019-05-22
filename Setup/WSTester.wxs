@@ -20,7 +20,7 @@
 		<Media Id="1" Cabinet="WSTester.cab" EmbedCab="yes" />
 
 		<Upgrade Id="$(var.ProductUpgradeCode)">
-			<UpgradeVersion Minimum="0.1" IncludeMinimum="yes" OnlyDetect="no" Maximum="$(var.ProductVersion)" IncludeMaximum="no" Property="PREVIOUSFOUND" />
+			<UpgradeVersion IncludeMinimum="yes" OnlyDetect="no" Maximum="$(var.ProductVersion)" IncludeMaximum="no" Property="PREVIOUSFOUND" />
 		</Upgrade>
 		<!-- <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." Schedule="afterInstallInitialize" /> -->
 
