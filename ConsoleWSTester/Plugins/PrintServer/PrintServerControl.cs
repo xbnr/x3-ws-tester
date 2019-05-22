@@ -22,9 +22,17 @@ namespace ConsoleTester.Plugins.PrintServer
             InitializeComponent();
         }
 
+        public override void CreateNewWS()
+        {
+            string defaultFile = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory,  $"Plugins", "PrintServer", "PrintServerConfig.default.json");
+            if (File.Exists(defaultFile))
+                LoadConfigFromJSON(defaultFile);
+            this.filename = null;
+        }
+
         private void PrintServerControl_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         public override string GetWorkspaceFilename()
@@ -90,7 +98,7 @@ namespace ConsoleTester.Plugins.PrintServer
         }
 
         private string logResult = string.Empty;
-        private void OutputHandler2(object sendingProcess, DataReceivedEventArgs outLine)            
+        private void OutputHandler2(object sendingProcess, DataReceivedEventArgs outLine)
         {
             logResult += outLine.Data;
             Logger.Log(outLine.Data);
@@ -126,7 +134,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
 
         public override IConfigService GetConfigFromUI()
-        {
+        {   
             PrintServerConfig conf = new PrintServerConfig
             {
                 InstallDirectory = cbPath.Text,
@@ -468,10 +476,22 @@ namespace ConsoleTester.Plugins.PrintServer
             {
                 foreach (var name in regKey.GetValueNames())
                 {
-                   Logger.Log($"{name}: {regKey.GetValue(name)}");
+                    Logger.Log($"{name}: {regKey.GetValue(name)}");
                 }
             }
         }
 
+        private void dgSettings_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            //ArrayList paramList = new ArrayList();
+            //PrintServerConfigParameter[] parameters = new PrintServerConfigParameter[dgSettings.RowCount];
+            //for (int i=0; i<dgSettings.RowCount; i++)
+            //{
+
+            //}
+            //dgSettings.DataSource = null;
+            //dgSettings.DataSource = parameters;
+
+        }
     }
 }

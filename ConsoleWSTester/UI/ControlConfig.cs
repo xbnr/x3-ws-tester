@@ -18,6 +18,12 @@ namespace ConsoleTester.UI
             return true;
         }
 
+        public virtual void CreateNewWS()
+        {
+            // TO IMPLEMENT in each ControlConfig
+        }
+
+
         public virtual void CreateWS(FileInfo item)
         {
             // TO IMPLEMENT in each ControlConfig

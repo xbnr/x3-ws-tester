@@ -63,6 +63,7 @@ namespace ConsoleTester.UI
             var se = sender as ToolStripItem;
             var configService = se.Tag as IConfigService;
             var UIControl = Helper.GetUIControl(configService);
+            UIControl.CreateNewWS();
             UIControl.Show(dockPanelMain, DockState.Document);
         }
 
