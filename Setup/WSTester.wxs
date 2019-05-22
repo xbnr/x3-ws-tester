@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define ProductName = "WSTester"?>
 <?define ProductVersion = "0.99.99.99"?>
-<?define ProductUpgradeCode = "SASAGEX3-A481-453C-8A82-011ED11C9A00"?>
+<?define ProductUpgradeCode = "20B0F970-A481-453C-0A82-011ED11C9A00"?>
 <?define Manufacturer = "SAGE"?>
 <?define About = "http://www.sage.com"?>
 <?define ExeName = "ConsoleTester.exe"?>
