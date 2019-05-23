@@ -47,26 +47,14 @@ node('windows') {
 
 			"%SED_HOME%\\sed" -i "s/0\\.99\\.99\\.99/%version%/g"  "Setup\\WSTester.wxs"
 
-			set _guid=%computername%%date%%time%
-			set _guid=%_guid:/=%
-			set _guid=%_guid:.=%
-			set _guid=%_guid: =%
-			set _guid=%_guid:,=%
-			set _guid=%_guid::=%
-			set _guid=%_guid:-=%
-			set %1=%_guid%
-			echo "New UpgradeCodeGuid= %_guid%"
-			REM "%SED_HOME%\\sed" -i "s/123412341234999999999999/%_guid%/g"  "Setup\\WSTester.wxs"
-
-
 	  	    set slnConsoleTester="WSTester.sln"
 	  	    set msbuild="c:\\program files (x86)\\microsoft visual studio\\2017\\buildtools\\msbuild\\15.0\\bin\\msbuild.exe" 
 
 			set nuget=".nuget\\NuGet.exe"
 			%nuget% restore %slnConsoleTester%
 
-	  	%msbuild% %slnConsoleTester% /p:configuration=Release /t:Clean
-	  	%msbuild% %slnConsoleTester% /p:configuration=Release /p:Platform="x86"
+	  	    %msbuild% %slnConsoleTester% /p:configuration=Release /t:Clean
+	  	    %msbuild% %slnConsoleTester% /p:configuration=Release /p:Platform="x86"
 			git checkout .
 	 	'''
 		stash name:"binRelease", includes: "ConsoleWSTester/bin/x86/Release/**/*"
@@ -89,6 +77,8 @@ node('windows') {
 			set wxsHeatFile="WSTesterHeat.wxs"
 			set releaseDir="Release"
 			xcopy /i /y /s ".\\ConsoleWSTester\\bin\\x86\\Release" ".\\Setup\\Release" 
+			copy ".\\Resources\\log4Net-1.2.10\\log4net.dll" ".\\Setup\\Release"
+
 			cd .\\Setup
 			%HEAT% dir %releaseDir% -sreg -sfrag -gg -srd -dr %releaseDir% -cg WSTesterHeat -out %wxsHeatFile%
 
