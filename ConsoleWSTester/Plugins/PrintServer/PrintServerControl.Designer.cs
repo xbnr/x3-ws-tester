@@ -89,12 +89,16 @@
             this.tbService = new System.Windows.Forms.TextBox();
             this.lbService = new System.Windows.Forms.Label();
             this.tbInstallPath = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.labelInstalledPath = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelCrystalReport = new System.Windows.Forms.Label();
             this.tbPrintServerVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tbSapCrystalReport = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbCRRuntime32Version = new System.Windows.Forms.TextBox();
+            this.lbCrystalReportRuntime = new System.Windows.Forms.Label();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
             this.panelAddRemoveParameters.SuspendLayout();
@@ -318,20 +322,20 @@
             this.removeSelectedXsdToolStripMenuItem,
             this.copyPathToolStripMenuItem});
             this.gridContextMenuStrip.Name = "gridContextMenuStrip";
-            this.gridContextMenuStrip.Size = new System.Drawing.Size(186, 48);
+            this.gridContextMenuStrip.Size = new System.Drawing.Size(181, 70);
             // 
             // removeSelectedXsdToolStripMenuItem
             // 
             this.removeSelectedXsdToolStripMenuItem.Name = "removeSelectedXsdToolStripMenuItem";
-            this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.removeSelectedXsdToolStripMenuItem.Text = "Remove selected Xsd";
+            this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeSelectedXsdToolStripMenuItem.Text = "Remove";
             this.removeSelectedXsdToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedXsdToolStripMenuItem_Click);
             // 
             // copyPathToolStripMenuItem
             // 
             this.copyPathToolStripMenuItem.Name = "copyPathToolStripMenuItem";
-            this.copyPathToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.copyPathToolStripMenuItem.Text = "Copy path";
+            this.copyPathToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyPathToolStripMenuItem.Text = "Copy";
             this.copyPathToolStripMenuItem.Click += new System.EventHandler(this.copyPathToolStripMenuItem_Click);
             // 
             // panelAddRemoveSettings
@@ -571,11 +575,12 @@
             // labelActions
             // 
             this.labelActions.AutoSize = true;
-            this.labelActions.Location = new System.Drawing.Point(7, 116);
+            this.labelActions.Location = new System.Drawing.Point(64, 116);
             this.labelActions.Name = "labelActions";
             this.labelActions.Size = new System.Drawing.Size(43, 13);
             this.labelActions.TabIndex = 19;
             this.labelActions.Text = "Action :";
+            this.labelActions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbReportName
             // 
@@ -590,11 +595,12 @@
             // labelReportFile
             // 
             this.labelReportFile.AutoSize = true;
-            this.labelReportFile.Location = new System.Drawing.Point(7, 62);
+            this.labelReportFile.Location = new System.Drawing.Point(49, 63);
             this.labelReportFile.Name = "labelReportFile";
             this.labelReportFile.Size = new System.Drawing.Size(58, 13);
             this.labelReportFile.TabIndex = 12;
             this.labelReportFile.Text = "Report file:";
+            this.labelReportFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbLogin
             // 
@@ -606,11 +612,12 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 6);
+            this.label4.Location = new System.Drawing.Point(20, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "Connection info :";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbExportDirectory
             // 
@@ -635,11 +642,12 @@
             // labelExportDirectory
             // 
             this.labelExportDirectory.AutoSize = true;
-            this.labelExportDirectory.Location = new System.Drawing.Point(7, 89);
+            this.labelExportDirectory.Location = new System.Drawing.Point(21, 90);
             this.labelExportDirectory.Name = "labelExportDirectory";
             this.labelExportDirectory.Size = new System.Drawing.Size(86, 13);
             this.labelExportDirectory.TabIndex = 15;
             this.labelExportDirectory.Text = "Export directory :";
+            this.labelExportDirectory.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbPath
             // 
@@ -653,11 +661,12 @@
             // labelPath
             // 
             this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(13, 24);
+            this.labelPath.Location = new System.Drawing.Point(19, 24);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(89, 13);
             this.labelPath.TabIndex = 0;
             this.labelPath.Text = "Print Server path:";
+            this.labelPath.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tabControl1
             // 
@@ -674,13 +683,17 @@
             // 
             // tabPageOptions
             // 
+            this.tabPageOptions.Controls.Add(this.tbCRRuntime32Version);
+            this.tabPageOptions.Controls.Add(this.lbCrystalReportRuntime);
+            this.tabPageOptions.Controls.Add(this.label11);
+            this.tabPageOptions.Controls.Add(this.tbSapCrystalReport);
             this.tabPageOptions.Controls.Add(this.tbService);
             this.tabPageOptions.Controls.Add(this.lbService);
             this.tabPageOptions.Controls.Add(this.tbInstallPath);
-            this.tabPageOptions.Controls.Add(this.label10);
+            this.tabPageOptions.Controls.Add(this.labelInstalledPath);
             this.tabPageOptions.Controls.Add(this.label5);
             this.tabPageOptions.Controls.Add(this.label3);
-            this.tabPageOptions.Controls.Add(this.label2);
+            this.tabPageOptions.Controls.Add(this.labelCrystalReport);
             this.tabPageOptions.Controls.Add(this.tbPrintServerVersion);
             this.tabPageOptions.Controls.Add(this.label1);
             this.tabPageOptions.Location = new System.Drawing.Point(4, 22);
@@ -688,86 +701,124 @@
             this.tabPageOptions.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageOptions.Size = new System.Drawing.Size(873, 541);
             this.tabPageOptions.TabIndex = 1;
-            this.tabPageOptions.Text = "Options";
+            this.tabPageOptions.Text = "Properties";
             this.tabPageOptions.UseVisualStyleBackColor = true;
             // 
             // tbService
             // 
-            this.tbService.Location = new System.Drawing.Point(136, 96);
+            this.tbService.Location = new System.Drawing.Point(142, 96);
             this.tbService.Name = "tbService";
             this.tbService.ReadOnly = true;
-            this.tbService.Size = new System.Drawing.Size(324, 20);
-            this.tbService.TabIndex = 9;
+            this.tbService.Size = new System.Drawing.Size(693, 20);
+            this.tbService.TabIndex = 5;
             // 
             // lbService
             // 
-            this.lbService.AutoSize = true;
-            this.lbService.Location = new System.Drawing.Point(29, 99);
+            this.lbService.Location = new System.Drawing.Point(82, 99);
             this.lbService.Name = "lbService";
-            this.lbService.Size = new System.Drawing.Size(49, 13);
-            this.lbService.TabIndex = 8;
+            this.lbService.Size = new System.Drawing.Size(59, 13);
+            this.lbService.TabIndex = 4;
             this.lbService.Text = "Service :";
+            this.lbService.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbInstallPath
             // 
-            this.tbInstallPath.Location = new System.Drawing.Point(136, 44);
+            this.tbInstallPath.Location = new System.Drawing.Point(142, 44);
             this.tbInstallPath.Name = "tbInstallPath";
             this.tbInstallPath.ReadOnly = true;
-            this.tbInstallPath.Size = new System.Drawing.Size(324, 20);
-            this.tbInstallPath.TabIndex = 7;
+            this.tbInstallPath.Size = new System.Drawing.Size(693, 20);
+            this.tbInstallPath.TabIndex = 1;
             // 
-            // label10
+            // labelInstalledPath
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(29, 47);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(64, 13);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Install path :";
+            this.labelInstalledPath.Location = new System.Drawing.Point(67, 47);
+            this.labelInstalledPath.Name = "labelInstalledPath";
+            this.labelInstalledPath.Size = new System.Drawing.Size(74, 13);
+            this.labelInstalledPath.TabIndex = 0;
+            this.labelInstalledPath.Text = "Install path :";
+            this.labelInstalledPath.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 195);
+            this.label5.Location = new System.Drawing.Point(17, 281);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(76, 13);
-            this.label5.TabIndex = 5;
+            this.label5.TabIndex = 11;
             this.label5.Text = "Print Threads :";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 174);
+            this.label3.Location = new System.Drawing.Point(17, 260);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 13);
-            this.label3.TabIndex = 4;
+            this.label3.TabIndex = 10;
             this.label3.Text = "Memory :";
             // 
-            // label2
+            // labelCrystalReport
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 134);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Monitoring :";
+            this.labelCrystalReport.Location = new System.Drawing.Point(-2, 154);
+            this.labelCrystalReport.Name = "labelCrystalReport";
+            this.labelCrystalReport.Size = new System.Drawing.Size(143, 24);
+            this.labelCrystalReport.TabIndex = 8;
+            this.labelCrystalReport.Text = "Crystal Report :";
+            this.labelCrystalReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbPrintServerVersion
             // 
-            this.tbPrintServerVersion.Location = new System.Drawing.Point(136, 70);
+            this.tbPrintServerVersion.Location = new System.Drawing.Point(142, 70);
             this.tbPrintServerVersion.Name = "tbPrintServerVersion";
             this.tbPrintServerVersion.ReadOnly = true;
-            this.tbPrintServerVersion.Size = new System.Drawing.Size(324, 20);
-            this.tbPrintServerVersion.TabIndex = 2;
+            this.tbPrintServerVersion.Size = new System.Drawing.Size(693, 20);
+            this.tbPrintServerVersion.TabIndex = 3;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 73);
+            this.label1.Location = new System.Drawing.Point(93, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 13);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 2;
             this.label1.Text = "Version :";
+            // 
+            // tbSapCrystalReport
+            // 
+            this.tbSapCrystalReport.AcceptsReturn = true;
+            this.tbSapCrystalReport.AcceptsTab = true;
+            this.tbSapCrystalReport.HideSelection = false;
+            this.tbSapCrystalReport.Location = new System.Drawing.Point(142, 150);
+            this.tbSapCrystalReport.Multiline = true;
+            this.tbSapCrystalReport.Name = "tbSapCrystalReport";
+            this.tbSapCrystalReport.ReadOnly = true;
+            this.tbSapCrystalReport.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbSapCrystalReport.Size = new System.Drawing.Size(693, 101);
+            this.tbSapCrystalReport.TabIndex = 9;
+            this.tbSapCrystalReport.WordWrap = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(17, 307);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(62, 13);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "Monitoring :";
+            // 
+            // tbCRRuntime32Version
+            // 
+            this.tbCRRuntime32Version.Location = new System.Drawing.Point(142, 124);
+            this.tbCRRuntime32Version.Name = "tbCRRuntime32Version";
+            this.tbCRRuntime32Version.ReadOnly = true;
+            this.tbCRRuntime32Version.Size = new System.Drawing.Size(693, 20);
+            this.tbCRRuntime32Version.TabIndex = 7;
+            // 
+            // lbCrystalReportRuntime
+            // 
+            this.lbCrystalReportRuntime.Location = new System.Drawing.Point(-2, 121);
+            this.lbCrystalReportRuntime.Name = "lbCrystalReportRuntime";
+            this.lbCrystalReportRuntime.Size = new System.Drawing.Size(143, 27);
+            this.lbCrystalReportRuntime.TabIndex = 6;
+            this.lbCrystalReportRuntime.Text = "Crystal Report Runtime :";
+            this.lbCrystalReportRuntime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // PrintServerControl
             // 
@@ -824,7 +875,7 @@
         private System.Windows.Forms.TextBox tbPrintServerVersion;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbDatabaseType;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelCrystalReport;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.LinkLabel btGenerateCommand;
@@ -843,7 +894,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbDbName;
         private System.Windows.Forms.TextBox tbInstallPath;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label labelInstalledPath;
         private System.Windows.Forms.Panel panelAddRemoveParameters;
         private System.Windows.Forms.Panel panelAddRemoveSettings;
         private System.Windows.Forms.TextBox tbService;
@@ -855,5 +906,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox tbSapCrystalReport;
+        private System.Windows.Forms.TextBox tbCRRuntime32Version;
+        private System.Windows.Forms.Label lbCrystalReportRuntime;
     }
 }

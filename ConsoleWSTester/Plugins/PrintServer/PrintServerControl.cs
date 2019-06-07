@@ -24,7 +24,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         public override void CreateNewWS()
         {
-            string defaultFile = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory,  $"Plugins", "PrintServer", "PrintServerConfig.default.json");
+            string defaultFile = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, $"Plugins", "PrintServer", "PrintServerConfig.default.json");
             if (File.Exists(defaultFile))
                 LoadConfigFromJSON(defaultFile);
             this.filename = null;
@@ -32,7 +32,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void PrintServerControl_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         public override string GetWorkspaceFilename()
@@ -76,6 +76,20 @@ namespace ConsoleTester.Plugins.PrintServer
             {
                 GetVersion(adxSrvImp, "/v");
             }
+
+            var subKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Crystal Reports");
+
+            tbCRRuntime32Version.Text = $"{subKey.GetValue("CRRuntime32Version")}";
+
+            foreach (string item in subKey.GetValueNames())
+            {
+                tbSapCrystalReport.Text += $"{item}: {subKey.GetValue(item)} \r\n";
+                Logger.Log($"{item}: {subKey.GetValue(item)}");
+            }
+            foreach (string item in subKey.GetSubKeyNames())
+            {
+                Logger.Log($"{item} \r\n");
+            }
         }
 
         private void GetVersion(string exe, string arguments)
@@ -96,7 +110,32 @@ namespace ConsoleTester.Plugins.PrintServer
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
         }
-
+        /* TODO : Read JSON from TestConsole
+static void Main()
+    {
+        //
+        // Set up the process with the ProcessStartInfo class.
+        //
+        ProcessStartInfo start = new ProcessStartInfo();
+        start.FileName = @"C:\7za.exe"; // Specify exe name.
+        start.UseShellExecute = false;
+        start.RedirectStandardOutput = true;
+        //
+        // Start the process.
+        //
+        using (Process process = Process.Start(start))
+        {
+            //
+            // Read in all the text from the process with the StreamReader.
+            //
+            using (StreamReader reader = process.StandardOutput)
+            {
+                string result = reader.ReadToEnd();
+                Console.Write(result);
+            }
+        }
+    }
+          */
         private string logResult = string.Empty;
         private void OutputHandler2(object sendingProcess, DataReceivedEventArgs outLine)
         {
@@ -134,7 +173,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
 
         public override IConfigService GetConfigFromUI()
-        {   
+        {
             PrintServerConfig conf = new PrintServerConfig
             {
                 InstallDirectory = cbPath.Text,
@@ -375,7 +414,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void linkOpenExportDirectory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("explorer", cbExportDirectory.Text);
+            Process.Start(new ProcessStartInfo("explorer", cbExportDirectory.Text));
         }
 
         private void btAddSetting_Click(object sender, EventArgs e)
