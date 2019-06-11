@@ -7,6 +7,8 @@
 <?define ExeName = "ConsoleTester.exe"?>
 <?define MyBinSource = "Release"?>
 <?define LicenseRtf = "License.rtf"?>
+<?define WixUIBannerBmp = "WixUIBannerBmp.bmp"?>
+<?define WixUIDialogBmp = "WixUIDialogBmp.bmp"?>
 <?define ProgramFilesFolder = "ProgramFilesFolder" ?>
 
 
@@ -16,6 +18,8 @@
 		<Property Id="ARPPRODUCTICON" Value="ProductIcon"/>
 		<Property Id="ARPURLINFOABOUT" Value="$(var.About)"/>
 		<Property Id="INSTALLDESKTOPSHORTCUT" Value="1" />
+		<WixVariable Id="WixUIBannerBmp" Value="$(var.WixUIBannerBmp)" />
+		<WixVariable Id="WixUIDialogBmp" Value="$(var.WixUIDialogBmp)" />
 
 		<Media Id="1" Cabinet="WSTester.cab" EmbedCab="yes" />
 
