@@ -1,4 +1,4 @@
-Powershell.exe -executionpolicy remotesigned -File  .\Setup-ConsoleWSTester.ps1
+Powershell.exe -executionpolicy remotesigned -File  .\Setup.ps1
 @IF %ERRORLEVEL% EQU 0 GOTO NOERROR1
 echo An error occured while building Setup
 pause

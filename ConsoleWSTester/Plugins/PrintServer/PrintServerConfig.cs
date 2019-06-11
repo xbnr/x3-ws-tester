@@ -42,6 +42,9 @@ namespace ConsoleTester.Plugins.PrintServer
         public string Action { get; set; }
 
         [JsonProperty]
+        public string OutputFormat { get; set; }
+
+        [JsonProperty]
         public string OdbcDatasource { get; set; }
 
         [JsonProperty]

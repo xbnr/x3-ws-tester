@@ -44,29 +44,36 @@ namespace ConsoleTester.Plugins.PrintServer
             return this.filename;
         }
 
+        private enum OutputFormatEnum
+        {
+            Default = 0,
+            Json = 1
+        }
 
         private enum ActionAsked
         {
-            OpenPRINTER = 3,
-            OpenPREVIEW = 5,
-            ExportPDF = 6,
-            ExportRPT = 8,
+            OpenPrinter = 3,
+            OpenPreview = 5,
+            ExportPdf = 6,
+            ExportRpt = 8,
             ExportMSWORD = 9,
-            ExportRTF = 11,
-            ExportCSV = 12,
-            ExportCSVTAB = 14,
-            ExportTEXT = 15,
-            ExportEXCEL = 16,
-            ExportEXCELDATAONLY = 17,
-            ExportHTML = 18,
-            TestPrinterSettings = 21,
-            ExportXEXCEL = 24,
+            ExportRtf = 11,
+            ExportCsv = 12,
+            ExportCsvTab = 14,
+            ExportText = 15,
+            ExportExcel = 16,
+            ExportExcelDataOonly = 17,
+            ExportHtml = 18,
+            ExportXExcel = 24,
+            TestPrinterSettings = 25,
+            ParametersFields = 26,
             None = -1
         }
 
         private void InitControls()
         {
             cbActions.DataSource = Enum.GetValues(typeof(ActionAsked));
+            cbOutputFormat.DataSource = Enum.GetValues(typeof(OutputFormatEnum));
             cbOdbcDatasource.DataSource = EnumDsn();
 
             string dirInstallPath = GetPrintServerIntallPath();
@@ -160,6 +167,8 @@ static void Main()
             Helper.SetTextFromSettings(config.ReportFilename, this.cbReportName); // Path.GetFileName( this.cbReportName.Text));
             Helper.SetTextFromSettings(config.ExportDirectory, this.cbExportDirectory);
             Helper.SetSafeText(this.cbActions, config.Action);
+            Helper.SetSafeText(this.cbOutputFormat, config.OutputFormat);
+
             if (config.Settings != null)
             {
                 dgSettings.DataSource = config.Settings;
@@ -184,7 +193,8 @@ static void Main()
                 Password = tbPassword.Text,
                 ReportFilename = cbReportName.Text,
                 ExportDirectory = cbExportDirectory.Text,
-                Action = cbActions.Text
+                Action = cbActions.Text,
+                OutputFormat = cbOutputFormat.Text
             };
             if (dgSettings.DataSource != null)
             {
@@ -256,8 +266,9 @@ static void Main()
                 arguments += $" -action:{conf.Action}";
             if (!string.IsNullOrEmpty(conf.ExportDirectory))
                 arguments += $" -exportdirectory:\"{conf.ExportDirectory}\" ";
-            //if (!string.IsNullOrEmpty(conf.Settings))
-            //    arguments += $" -settings:\"{conf.Settings}\" ";
+            if (!string.IsNullOrEmpty(conf.OutputFormat))
+                arguments += $" -outputformat:\"{conf.OutputFormat}\" ";
+
             if (conf.Settings?.Length > 0)
             {
                 arguments += $" -settings:\"";
@@ -531,6 +542,16 @@ static void Main()
             //dgSettings.DataSource = null;
             //dgSettings.DataSource = parameters;
 
+        }
+
+        private void llFindReportParameters_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void llFindReportParameters_Click(object sender, EventArgs e)
+        {            
+            RunCommand();
         }
     }
 }

@@ -86,6 +86,10 @@
             this.labelPath = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageOptions = new System.Windows.Forms.TabPage();
+            this.tbCRRuntime32Version = new System.Windows.Forms.TextBox();
+            this.lbCrystalReportRuntime = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbSapCrystalReport = new System.Windows.Forms.TextBox();
             this.tbService = new System.Windows.Forms.TextBox();
             this.lbService = new System.Windows.Forms.Label();
             this.tbInstallPath = new System.Windows.Forms.TextBox();
@@ -95,10 +99,8 @@
             this.labelCrystalReport = new System.Windows.Forms.Label();
             this.tbPrintServerVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.tbSapCrystalReport = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbCRRuntime32Version = new System.Windows.Forms.TextBox();
-            this.lbCrystalReportRuntime = new System.Windows.Forms.Label();
+            this.llFindReportParameters = new System.Windows.Forms.LinkLabel();
+            this.cbOutputFormat = new System.Windows.Forms.ComboBox();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
             this.panelAddRemoveParameters.SuspendLayout();
@@ -167,6 +169,8 @@
             this.panelParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelParameters.Controls.Add(this.cbOutputFormat);
+            this.panelParameters.Controls.Add(this.llFindReportParameters);
             this.panelParameters.Controls.Add(this.lbDatasourceInfo);
             this.panelParameters.Controls.Add(this.lbServer);
             this.panelParameters.Controls.Add(this.tbDbServer);
@@ -322,19 +326,19 @@
             this.removeSelectedXsdToolStripMenuItem,
             this.copyPathToolStripMenuItem});
             this.gridContextMenuStrip.Name = "gridContextMenuStrip";
-            this.gridContextMenuStrip.Size = new System.Drawing.Size(181, 70);
+            this.gridContextMenuStrip.Size = new System.Drawing.Size(118, 48);
             // 
             // removeSelectedXsdToolStripMenuItem
             // 
             this.removeSelectedXsdToolStripMenuItem.Name = "removeSelectedXsdToolStripMenuItem";
-            this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.removeSelectedXsdToolStripMenuItem.Text = "Remove";
             this.removeSelectedXsdToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedXsdToolStripMenuItem_Click);
             // 
             // copyPathToolStripMenuItem
             // 
             this.copyPathToolStripMenuItem.Name = "copyPathToolStripMenuItem";
-            this.copyPathToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyPathToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.copyPathToolStripMenuItem.Text = "Copy";
             this.copyPathToolStripMenuItem.Click += new System.EventHandler(this.copyPathToolStripMenuItem_Click);
             // 
@@ -704,6 +708,46 @@
             this.tabPageOptions.Text = "Properties";
             this.tabPageOptions.UseVisualStyleBackColor = true;
             // 
+            // tbCRRuntime32Version
+            // 
+            this.tbCRRuntime32Version.Location = new System.Drawing.Point(142, 124);
+            this.tbCRRuntime32Version.Name = "tbCRRuntime32Version";
+            this.tbCRRuntime32Version.ReadOnly = true;
+            this.tbCRRuntime32Version.Size = new System.Drawing.Size(693, 20);
+            this.tbCRRuntime32Version.TabIndex = 7;
+            // 
+            // lbCrystalReportRuntime
+            // 
+            this.lbCrystalReportRuntime.Location = new System.Drawing.Point(-2, 121);
+            this.lbCrystalReportRuntime.Name = "lbCrystalReportRuntime";
+            this.lbCrystalReportRuntime.Size = new System.Drawing.Size(143, 27);
+            this.lbCrystalReportRuntime.TabIndex = 6;
+            this.lbCrystalReportRuntime.Text = "Crystal Report Runtime :";
+            this.lbCrystalReportRuntime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(17, 307);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(62, 13);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "Monitoring :";
+            // 
+            // tbSapCrystalReport
+            // 
+            this.tbSapCrystalReport.AcceptsReturn = true;
+            this.tbSapCrystalReport.AcceptsTab = true;
+            this.tbSapCrystalReport.HideSelection = false;
+            this.tbSapCrystalReport.Location = new System.Drawing.Point(142, 150);
+            this.tbSapCrystalReport.Multiline = true;
+            this.tbSapCrystalReport.Name = "tbSapCrystalReport";
+            this.tbSapCrystalReport.ReadOnly = true;
+            this.tbSapCrystalReport.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbSapCrystalReport.Size = new System.Drawing.Size(693, 101);
+            this.tbSapCrystalReport.TabIndex = 9;
+            this.tbSapCrystalReport.WordWrap = false;
+            // 
             // tbService
             // 
             this.tbService.Location = new System.Drawing.Point(142, 96);
@@ -780,45 +824,26 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Version :";
             // 
-            // tbSapCrystalReport
+            // llFindReportParameters
             // 
-            this.tbSapCrystalReport.AcceptsReturn = true;
-            this.tbSapCrystalReport.AcceptsTab = true;
-            this.tbSapCrystalReport.HideSelection = false;
-            this.tbSapCrystalReport.Location = new System.Drawing.Point(142, 150);
-            this.tbSapCrystalReport.Multiline = true;
-            this.tbSapCrystalReport.Name = "tbSapCrystalReport";
-            this.tbSapCrystalReport.ReadOnly = true;
-            this.tbSapCrystalReport.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbSapCrystalReport.Size = new System.Drawing.Size(693, 101);
-            this.tbSapCrystalReport.TabIndex = 9;
-            this.tbSapCrystalReport.WordWrap = false;
+            this.llFindReportParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.llFindReportParameters.AutoSize = true;
+            this.llFindReportParameters.Location = new System.Drawing.Point(733, 143);
+            this.llFindReportParameters.Name = "llFindReportParameters";
+            this.llFindReportParameters.Size = new System.Drawing.Size(112, 13);
+            this.llFindReportParameters.TabIndex = 35;
+            this.llFindReportParameters.TabStop = true;
+            this.llFindReportParameters.Text = "Find report parameters";
+            this.llFindReportParameters.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llFindReportParameters_LinkClicked);
+            this.llFindReportParameters.Click += new System.EventHandler(this.llFindReportParameters_Click);
             // 
-            // label11
+            // cbOutputFormat
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(17, 307);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(62, 13);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "Monitoring :";
-            // 
-            // tbCRRuntime32Version
-            // 
-            this.tbCRRuntime32Version.Location = new System.Drawing.Point(142, 124);
-            this.tbCRRuntime32Version.Name = "tbCRRuntime32Version";
-            this.tbCRRuntime32Version.ReadOnly = true;
-            this.tbCRRuntime32Version.Size = new System.Drawing.Size(693, 20);
-            this.tbCRRuntime32Version.TabIndex = 7;
-            // 
-            // lbCrystalReportRuntime
-            // 
-            this.lbCrystalReportRuntime.Location = new System.Drawing.Point(-2, 121);
-            this.lbCrystalReportRuntime.Name = "lbCrystalReportRuntime";
-            this.lbCrystalReportRuntime.Size = new System.Drawing.Size(143, 27);
-            this.lbCrystalReportRuntime.TabIndex = 6;
-            this.lbCrystalReportRuntime.Text = "Crystal Report Runtime :";
-            this.lbCrystalReportRuntime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbOutputFormat.FormattingEnabled = true;
+            this.cbOutputFormat.Location = new System.Drawing.Point(321, 113);
+            this.cbOutputFormat.Name = "cbOutputFormat";
+            this.cbOutputFormat.Size = new System.Drawing.Size(91, 21);
+            this.cbOutputFormat.TabIndex = 36;
             // 
             // PrintServerControl
             // 
@@ -910,5 +935,7 @@
         private System.Windows.Forms.TextBox tbSapCrystalReport;
         private System.Windows.Forms.TextBox tbCRRuntime32Version;
         private System.Windows.Forms.Label lbCrystalReportRuntime;
+        private System.Windows.Forms.LinkLabel llFindReportParameters;
+        private System.Windows.Forms.ComboBox cbOutputFormat;
     }
 }
