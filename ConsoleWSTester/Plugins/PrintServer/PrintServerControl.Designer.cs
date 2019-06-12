@@ -40,13 +40,15 @@
             this.btGenerateCommand = new System.Windows.Forms.LinkLabel();
             this.btDetectInstall = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
+            this.cbOutputFormat = new System.Windows.Forms.ComboBox();
+            this.llFindReportParameters = new System.Windows.Forms.LinkLabel();
             this.lbDatasourceInfo = new System.Windows.Forms.LinkLabel();
             this.lbServer = new System.Windows.Forms.Label();
             this.tbDbServer = new System.Windows.Forms.TextBox();
             this.panelAddRemoveParameters = new System.Windows.Forms.Panel();
             this.btAddParam = new System.Windows.Forms.Button();
             this.btDelete = new System.Windows.Forms.Button();
-            this.dgKeyValue = new System.Windows.Forms.DataGridView();
+            this.reportParametersGridView = new System.Windows.Forms.DataGridView();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -99,12 +101,10 @@
             this.labelCrystalReport = new System.Windows.Forms.Label();
             this.tbPrintServerVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.llFindReportParameters = new System.Windows.Forms.LinkLabel();
-            this.cbOutputFormat = new System.Windows.Forms.ComboBox();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
             this.panelAddRemoveParameters.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reportParametersGridView)).BeginInit();
             this.gridContextMenuStrip.SuspendLayout();
             this.panelAddRemoveSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSettings)).BeginInit();
@@ -205,6 +205,26 @@
             this.panelParameters.Size = new System.Drawing.Size(867, 426);
             this.panelParameters.TabIndex = 3;
             // 
+            // cbOutputFormat
+            // 
+            this.cbOutputFormat.FormattingEnabled = true;
+            this.cbOutputFormat.Location = new System.Drawing.Point(321, 113);
+            this.cbOutputFormat.Name = "cbOutputFormat";
+            this.cbOutputFormat.Size = new System.Drawing.Size(91, 21);
+            this.cbOutputFormat.TabIndex = 36;
+            // 
+            // llFindReportParameters
+            // 
+            this.llFindReportParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.llFindReportParameters.AutoSize = true;
+            this.llFindReportParameters.Location = new System.Drawing.Point(733, 143);
+            this.llFindReportParameters.Name = "llFindReportParameters";
+            this.llFindReportParameters.Size = new System.Drawing.Size(112, 13);
+            this.llFindReportParameters.TabIndex = 35;
+            this.llFindReportParameters.TabStop = true;
+            this.llFindReportParameters.Text = "Find report parameters";
+            this.llFindReportParameters.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llFindReportParameters_LinkClicked);
+            // 
             // lbDatasourceInfo
             // 
             this.lbDatasourceInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -240,7 +260,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panelAddRemoveParameters.Controls.Add(this.btAddParam);
             this.panelAddRemoveParameters.Controls.Add(this.btDelete);
-            this.panelAddRemoveParameters.Controls.Add(this.dgKeyValue);
+            this.panelAddRemoveParameters.Controls.Add(this.reportParametersGridView);
             this.panelAddRemoveParameters.Location = new System.Drawing.Point(457, 168);
             this.panelAddRemoveParameters.Name = "panelAddRemoveParameters";
             this.panelAddRemoveParameters.Size = new System.Drawing.Size(320, 241);
@@ -268,9 +288,9 @@
             this.btDelete.UseVisualStyleBackColor = true;
             this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
             // 
-            // dgKeyValue
+            // reportParametersGridView
             // 
-            this.dgKeyValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.reportParametersGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -279,11 +299,11 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgKeyValue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgKeyValue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.reportParametersGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.reportParametersGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnName,
             this.ColumnValue});
-            this.dgKeyValue.ContextMenuStrip = this.gridContextMenuStrip;
+            this.reportParametersGridView.ContextMenuStrip = this.gridContextMenuStrip;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -291,9 +311,9 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgKeyValue.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgKeyValue.Location = new System.Drawing.Point(3, 3);
-            this.dgKeyValue.Name = "dgKeyValue";
+            this.reportParametersGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            this.reportParametersGridView.Location = new System.Drawing.Point(3, 3);
+            this.reportParametersGridView.Name = "reportParametersGridView";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -301,10 +321,10 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgKeyValue.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgKeyValue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgKeyValue.Size = new System.Drawing.Size(274, 238);
-            this.dgKeyValue.TabIndex = 29;
+            this.reportParametersGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.reportParametersGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.reportParametersGridView.Size = new System.Drawing.Size(274, 238);
+            this.reportParametersGridView.TabIndex = 29;
             // 
             // ColumnName
             // 
@@ -326,19 +346,20 @@
             this.removeSelectedXsdToolStripMenuItem,
             this.copyPathToolStripMenuItem});
             this.gridContextMenuStrip.Name = "gridContextMenuStrip";
-            this.gridContextMenuStrip.Size = new System.Drawing.Size(118, 48);
+            this.gridContextMenuStrip.Size = new System.Drawing.Size(181, 70);
             // 
             // removeSelectedXsdToolStripMenuItem
             // 
             this.removeSelectedXsdToolStripMenuItem.Name = "removeSelectedXsdToolStripMenuItem";
-            this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.removeSelectedXsdToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.removeSelectedXsdToolStripMenuItem.Text = "Remove";
             this.removeSelectedXsdToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedXsdToolStripMenuItem_Click);
             // 
             // copyPathToolStripMenuItem
             // 
             this.copyPathToolStripMenuItem.Name = "copyPathToolStripMenuItem";
-            this.copyPathToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.copyPathToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.copyPathToolStripMenuItem.Text = "Copy";
             this.copyPathToolStripMenuItem.Click += new System.EventHandler(this.copyPathToolStripMenuItem_Click);
             // 
@@ -824,27 +845,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Version :";
             // 
-            // llFindReportParameters
-            // 
-            this.llFindReportParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.llFindReportParameters.AutoSize = true;
-            this.llFindReportParameters.Location = new System.Drawing.Point(733, 143);
-            this.llFindReportParameters.Name = "llFindReportParameters";
-            this.llFindReportParameters.Size = new System.Drawing.Size(112, 13);
-            this.llFindReportParameters.TabIndex = 35;
-            this.llFindReportParameters.TabStop = true;
-            this.llFindReportParameters.Text = "Find report parameters";
-            this.llFindReportParameters.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llFindReportParameters_LinkClicked);
-            this.llFindReportParameters.Click += new System.EventHandler(this.llFindReportParameters_Click);
-            // 
-            // cbOutputFormat
-            // 
-            this.cbOutputFormat.FormattingEnabled = true;
-            this.cbOutputFormat.Location = new System.Drawing.Point(321, 113);
-            this.cbOutputFormat.Name = "cbOutputFormat";
-            this.cbOutputFormat.Size = new System.Drawing.Size(91, 21);
-            this.cbOutputFormat.TabIndex = 36;
-            // 
             // PrintServerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -858,7 +858,7 @@
             this.panelParameters.ResumeLayout(false);
             this.panelParameters.PerformLayout();
             this.panelAddRemoveParameters.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgKeyValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reportParametersGridView)).EndInit();
             this.gridContextMenuStrip.ResumeLayout(false);
             this.panelAddRemoveSettings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgSettings)).EndInit();
@@ -877,7 +877,7 @@
         private System.Windows.Forms.Panel panelParameters;
         private System.Windows.Forms.Button btDelete;
         private System.Windows.Forms.Button btAddParam;
-        private System.Windows.Forms.DataGridView dgKeyValue;
+        private System.Windows.Forms.DataGridView reportParametersGridView;
         private System.Windows.Forms.TextBox cbPath;
         private System.Windows.Forms.Label labelPath;
         private System.Windows.Forms.TabControl tabControl1;

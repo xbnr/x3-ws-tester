@@ -2,6 +2,7 @@
 using ConsoleTester.UI;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace ConsoleTester.Plugins.PrintServer
         private enum OutputFormatEnum
         {
             Default = 0,
-            Json = 1
+            JsonFile = 1
         }
 
         private enum ActionAsked
@@ -56,7 +57,7 @@ namespace ConsoleTester.Plugins.PrintServer
             OpenPreview = 5,
             ExportPdf = 6,
             ExportRpt = 8,
-            ExportMSWORD = 9,
+            ExportMsWord = 9,
             ExportRtf = 11,
             ExportCsv = 12,
             ExportCsvTab = 14,
@@ -75,6 +76,9 @@ namespace ConsoleTester.Plugins.PrintServer
             cbActions.DataSource = Enum.GetValues(typeof(ActionAsked));
             cbOutputFormat.DataSource = Enum.GetValues(typeof(OutputFormatEnum));
             cbOdbcDatasource.DataSource = EnumDsn();
+            dgSettings.ContextMenuStrip.Tag = dgSettings;
+            reportParametersGridView.ContextMenuStrip.Tag = reportParametersGridView;
+
 
             string dirInstallPath = GetPrintServerIntallPath();
             tbInstallPath.Text = dirInstallPath;
@@ -91,11 +95,12 @@ namespace ConsoleTester.Plugins.PrintServer
             foreach (string item in subKey.GetValueNames())
             {
                 tbSapCrystalReport.Text += $"{item}: {subKey.GetValue(item)} \r\n";
-                Logger.Log($"{item}: {subKey.GetValue(item)}");
+                // Logger.Log($"{item}: {subKey.GetValue(item)}");
             }
             foreach (string item in subKey.GetSubKeyNames())
             {
-                Logger.Log($"{item} \r\n");
+                tbSapCrystalReport.Text += $"{item} \r\n";
+                // Logger.Log($"{item} \r\n");
             }
         }
 
@@ -117,32 +122,7 @@ namespace ConsoleTester.Plugins.PrintServer
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
         }
-        /* TODO : Read JSON from TestConsole
-static void Main()
-    {
-        //
-        // Set up the process with the ProcessStartInfo class.
-        //
-        ProcessStartInfo start = new ProcessStartInfo();
-        start.FileName = @"C:\7za.exe"; // Specify exe name.
-        start.UseShellExecute = false;
-        start.RedirectStandardOutput = true;
-        //
-        // Start the process.
-        //
-        using (Process process = Process.Start(start))
-        {
-            //
-            // Read in all the text from the process with the StreamReader.
-            //
-            using (StreamReader reader = process.StandardOutput)
-            {
-                string result = reader.ReadToEnd();
-                Console.Write(result);
-            }
-        }
-    }
-          */
+
         private string logResult = string.Empty;
         private void OutputHandler2(object sendingProcess, DataReceivedEventArgs outLine)
         {
@@ -176,7 +156,7 @@ static void Main()
 
             if (config.Parameters != null)
             {
-                dgKeyValue.DataSource = config.Parameters;
+                reportParametersGridView.DataSource = config.Parameters;
             }
         }
 
@@ -202,9 +182,9 @@ static void Main()
                 conf.Settings = fileList;
             }
 
-            if (dgKeyValue.DataSource != null)
+            if (reportParametersGridView.DataSource != null)
             {
-                var fileList = dgKeyValue.DataSource as PrintServerConfigParameter[];
+                var fileList = reportParametersGridView.DataSource as PrintServerConfigParameter[];
                 conf.Parameters = fileList;
             }
             return conf;
@@ -294,14 +274,28 @@ static void Main()
         private void btAddParam_Click(object sender, EventArgs e)
         {
             var conf = GetConfigFromUI() as PrintServerConfig;
-            AddItem(conf.Parameters, dgKeyValue);
+            AddItemInGrid(conf.Parameters, new PrintServerConfigParameter(), reportParametersGridView);
         }
 
-        private void AddItem(PrintServerConfigParameter[] parameters, DataGridView dataGridView)
+
+        private void AddItemsInGrid(PrintServerConfigParameter[] parameters, List<PrintServerConfigParameter> newParams, DataGridView dataGridView)
         {
             ArrayList paramList = new ArrayList();
             paramList.AddRange(parameters);
-            paramList.Add(new PrintServerConfigParameter());
+            paramList.AddRange(newParams);
+            parameters = new PrintServerConfigParameter[paramList.Count];
+            paramList.CopyTo(parameters);
+
+            reportParametersGridView.DataSource = null;
+            reportParametersGridView.DataSource = parameters;
+
+
+        }
+        private void AddItemInGrid(PrintServerConfigParameter[] parameters, PrintServerConfigParameter newParam, DataGridView dataGridView)
+        {
+            ArrayList paramList = new ArrayList();
+            paramList.AddRange(parameters);
+            paramList.Add(newParam);
             parameters = new PrintServerConfigParameter[paramList.Count];
             paramList.CopyTo(parameters);
 
@@ -311,35 +305,36 @@ static void Main()
 
         private void btDelete_Click(object sender, EventArgs e)
         {
-            RemoveSelectedItem(dgKeyValue);
+            RemoveSelectedItems(reportParametersGridView);
         }
 
         private string GetSelectedParameter()
         {
-            if (dgKeyValue.SelectedRows.Count != 1)
+            if (reportParametersGridView.SelectedRows.Count != 1)
             {
                 MessageBox.Show($"Please, select just one item", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
             }
 
-            var selectedObj = dgKeyValue.SelectedRows[0];
+            var selectedObj = reportParametersGridView.SelectedRows[0];
             string selectedValue = selectedObj.DataBoundItem as string;
             return selectedValue;
         }
 
-        private void RemoveSelectedItem(DataGridView dataGridView)
+        private void RemoveSelectedItems(DataGridView dataGridView)
         {
             var fileList = dataGridView.DataSource as PrintServerConfigParameter[];
+            ArrayList paramList = new ArrayList();
+            paramList.AddRange(fileList);
+
             PrintServerConfigParameter[] parameters = new PrintServerConfigParameter[fileList.Length];
             foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
                 var file = row.DataBoundItem as PrintServerConfigParameter;
-                ArrayList paramList = new ArrayList();
-                paramList.AddRange(fileList);
                 paramList.Remove(file);
-                parameters = new PrintServerConfigParameter[paramList.Count];
-                paramList.CopyTo(parameters);
             }
+            parameters = new PrintServerConfigParameter[paramList.Count];
+            paramList.CopyTo(parameters);
             dataGridView.DataSource = null;
             dataGridView.DataSource = parameters;
         }
@@ -367,9 +362,13 @@ static void Main()
 
         private void removeSelectedXsdToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RemoveSelectedItem(dgKeyValue);
+            ToolStripMenuItem selectedTSMI = sender as ToolStripMenuItem;
+            DataGridView selectedView = ((ContextMenuStrip)(((ToolStripMenuItem)sender).Owner))?.SourceControl as DataGridView;
+            if (selectedView != null)
+            {
+                RemoveSelectedItems(selectedView);
+            }
         }
-
 
         private void copyPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -431,12 +430,12 @@ static void Main()
         private void btAddSetting_Click(object sender, EventArgs e)
         {
             var conf = GetConfigFromUI() as PrintServerConfig;
-            AddItem(conf.Settings, dgSettings);
+            AddItemInGrid(conf.Settings, new PrintServerConfigParameter(), dgSettings);
         }
 
         private void btRemoveSetting_Click(object sender, EventArgs e)
         {
-            RemoveSelectedItem(dgSettings);
+            RemoveSelectedItems(dgSettings);
         }
 
         private void btTestConnection_Click(object sender, EventArgs e)
@@ -546,12 +545,71 @@ static void Main()
 
         private void llFindReportParameters_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            var reportDetectedParameters = GetParameters();
+
+            var conf = GetConfigFromUI() as PrintServerConfig;
+            var uiParameters = conf.Parameters;
+
+            List<PrintServerConfigParameter> listToAdd = new List<PrintServerConfigParameter>();
+
+            foreach (var newParam in reportDetectedParameters)
+            {
+                bool found = false;
+                foreach (var parameter in uiParameters)
+                {
+                    if (parameter.Name == newParam.Name)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    listToAdd.Add(newParam);
+                    // Logger.Log($"add {newParam}");
+                    // AddItemInGrid(uiParameters, newParam, reportParametersGridView);
+                }
+            }
+
+            AddItemsInGrid(uiParameters, listToAdd, reportParametersGridView);
 
         }
 
-        private void llFindReportParameters_Click(object sender, EventArgs e)
-        {            
+        private List<PrintServerConfigParameter> GetParameters()
+        {
+            cbActions.Text = ActionAsked.ParametersFields.ToString();
+            cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TestConsolePrintNet", "TestConsolePrintNetResult.json");
+
             RunCommand();
+
+            List<PrintServerConfigParameter> list = new List<PrintServerConfigParameter>();
+            var conf = GetConfigFromUI() as PrintServerConfig;
+            string result = Path.Combine($"{conf.InstallDirectory}", "TestConsolePrintNetResult.json");
+            if (File.Exists(result))
+            {
+                object r = JsonConvert.DeserializeObject(File.ReadAllText(result));
+                JArray array = r as JArray;
+                if (array != null)
+                {
+                    foreach (JToken item in array)
+                    {
+                        bool? hasDefaultValue = item["hasDefaultValue"]?.Value<bool>();
+                        PrintServerConfigParameter param = new PrintServerConfigParameter(item["name"]?.Value<string>(), item["promptText"]?.Value<string>());
+                        if (!hasDefaultValue.HasValue || (hasDefaultValue.HasValue && !hasDefaultValue.Value))
+                        {
+                            list.Add(param);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Logger.Log($"File result {result} doesnt exist");
+            }
+
+            return list;
         }
+
     }
 }

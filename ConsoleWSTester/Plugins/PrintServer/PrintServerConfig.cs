@@ -12,6 +12,14 @@ namespace ConsoleTester.Plugins.PrintServer
     [JsonObject(IsReference = false)]
     public class PrintServerConfigParameter
     {
+        public PrintServerConfigParameter() { }
+
+        public PrintServerConfigParameter(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
+
         [JsonProperty]
         public string Name { get; set; }
 
