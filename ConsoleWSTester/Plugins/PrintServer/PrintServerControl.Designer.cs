@@ -852,7 +852,6 @@
             this.ClientSize = new System.Drawing.Size(884, 562);
             this.Controls.Add(this.tabControl1);
             this.Name = "PrintServerControl";
-            this.Load += new System.EventHandler(this.PrintServerControl_Load);
             this.tabPagePrintServer.ResumeLayout(false);
             this.tabPagePrintServer.PerformLayout();
             this.panelParameters.ResumeLayout(false);

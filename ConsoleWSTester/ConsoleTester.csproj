@@ -170,6 +170,12 @@
     <Compile Include="UI\ControlConfig.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\EnterValueDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EnterValueDialog.Designer.cs">
+      <DependentUpon>EnterValueDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\IControlConfig.cs" />
     <Compile Include="UI\Logs.cs">
       <SubType>Form</SubType>
@@ -291,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ControlConfig.resx">
       <DependentUpon>ControlConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\EnterValueDialog.resx">
+      <DependentUpon>EnterValueDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Logs.resx">
       <DependentUpon>Logs.cs</DependentUpon>

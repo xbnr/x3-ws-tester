@@ -35,12 +35,21 @@ namespace ConsoleTester.Plugins.XsdValidator
             return false;
 #endif
         }
+        public override void SetWorkspaceFilename(string filename)
+        {
+            this.filename = filename;
+        }
+
+        public override string GetDefaultWorkspaceFilename()
+        {
+            return XsdValidatorConfig.GetWorkspaceFilename();
+        }
 
         public override string GetWorkspaceFilename()
         {
             if (string.IsNullOrEmpty(this.filename))
             {
-                this.filename = XsdValidatorConfig.GetWorkspaceFilename();
+                this.filename = GetDefaultWorkspaceFilename();
             }
             return this.filename;
         }

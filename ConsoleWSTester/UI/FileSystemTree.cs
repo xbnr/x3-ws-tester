@@ -116,7 +116,7 @@ namespace ConsoleTester.UI
             }
         }
 
-        private void BuildTreeView()
+        public void BuildTreeView()
         {
             tvFileSystem.TopNode.Nodes.Clear();
 
@@ -138,6 +138,11 @@ namespace ConsoleTester.UI
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BuildTreeView();
+        }
+
+        private void renameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // TODO : FRDEPO
         }
     }
 }

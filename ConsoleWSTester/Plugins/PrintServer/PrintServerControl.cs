@@ -31,16 +31,21 @@ namespace ConsoleTester.Plugins.PrintServer
             this.filename = null;
         }
 
-        private void PrintServerControl_Load(object sender, EventArgs e)
+        public override void SetWorkspaceFilename(string filename)
         {
+            this.filename = filename;
+        }
 
+        public override string GetDefaultWorkspaceFilename()
+        {
+            return PrintServerConfig.GetWorkspaceFilename();
         }
 
         public override string GetWorkspaceFilename()
         {
             if (string.IsNullOrEmpty(this.filename))
             {
-                this.filename = PrintServerConfig.GetWorkspaceFilename();
+                this.filename = GetDefaultWorkspaceFilename();
             }
             return this.filename;
         }
@@ -66,7 +71,7 @@ namespace ConsoleTester.Plugins.PrintServer
             ExportExcelDataOonly = 17,
             ExportHtml = 18,
             ExportXExcel = 24,
-            TestPrinterSettings = 25,
+            PrinterSettings = 25,
             ParametersFields = 26,
             None = -1
         }
@@ -230,10 +235,12 @@ namespace ConsoleTester.Plugins.PrintServer
             Logger.Log(outLine.Data);
         }
 
+        private const string TestConsoleExeName = "TestConsolePrintNet";
+
         private void BuildCommand(out string exe, out string arguments)
         {
             var conf = GetConfigFromUI() as PrintServerConfig;
-            exe = $"{conf.InstallDirectory}\\TestConsolePrintNet.exe";
+            exe = $"{conf.InstallDirectory}\\{TestConsoleExeName}.exe";
             arguments = $" -connectioninfos:\"datasource={conf.OdbcDatasource};";
             if (!string.IsNullOrEmpty(conf.DatabaseName))
                 arguments += $"databasename={conf.DatabaseName};";
@@ -363,8 +370,7 @@ namespace ConsoleTester.Plugins.PrintServer
         private void removeSelectedXsdToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem selectedTSMI = sender as ToolStripMenuItem;
-            DataGridView selectedView = ((ContextMenuStrip)(((ToolStripMenuItem)sender).Owner))?.SourceControl as DataGridView;
-            if (selectedView != null)
+            if (((ContextMenuStrip)((ToolStripMenuItem)sender).Owner)?.SourceControl is DataGridView selectedView)
             {
                 RemoveSelectedItems(selectedView);
             }
@@ -540,7 +546,6 @@ namespace ConsoleTester.Plugins.PrintServer
             //}
             //dgSettings.DataSource = null;
             //dgSettings.DataSource = parameters;
-
         }
 
         private void llFindReportParameters_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -579,13 +584,13 @@ namespace ConsoleTester.Plugins.PrintServer
         private List<PrintServerConfigParameter> GetParameters()
         {
             cbActions.Text = ActionAsked.ParametersFields.ToString();
-            cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TestConsolePrintNet", "TestConsolePrintNetResult.json");
+            cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), TestConsoleExeName, $"{TestConsoleExeName}Result.json");
 
             RunCommand();
 
             List<PrintServerConfigParameter> list = new List<PrintServerConfigParameter>();
             var conf = GetConfigFromUI() as PrintServerConfig;
-            string result = Path.Combine($"{conf.InstallDirectory}", "TestConsolePrintNetResult.json");
+            string result = Path.Combine($"{conf.InstallDirectory}", $"{TestConsoleExeName}Result.json");
             if (File.Exists(result))
             {
                 object r = JsonConvert.DeserializeObject(File.ReadAllText(result));
@@ -605,7 +610,7 @@ namespace ConsoleTester.Plugins.PrintServer
             }
             else
             {
-                Logger.Log($"File result {result} doesnt exist");
+                Logger.Log($"File result {result} doesn't exist");
             }
 
             return list;

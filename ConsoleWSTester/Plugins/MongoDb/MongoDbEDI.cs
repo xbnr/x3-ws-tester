@@ -51,11 +51,21 @@ namespace ConsoleTester.Plugins.MongoDb
             Helper.SetTextFromSettings(config.Occurence, this.tbTextToSearch);
         }
 
+        public override void SetWorkspaceFilename(string filename)
+        {
+            this.filename = filename;
+        }
+
+        public override string GetDefaultWorkspaceFilename()
+        {
+            return MongoConfig.GetWorkspaceFilename();
+
+        }
         public override string GetWorkspaceFilename()
         {
             if (string.IsNullOrEmpty(this.filename))
             {
-                this.filename = MongoConfig.GetWorkspaceFilename();
+                this.filename = GetDefaultWorkspaceFilename();
             }
             return this.filename;
         }
