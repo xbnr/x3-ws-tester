@@ -87,7 +87,8 @@ namespace ConsoleTester.UI
 
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SelectedFile == null) {
+            if (SelectedFile == null)
+            {
                 return;
             }
             string newName = GetNewName(SelectedFile);
@@ -142,7 +143,29 @@ namespace ConsoleTester.UI
 
         private void renameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO : FRDEPO
+            if (SelectedFile == null)
+            {
+                return;
+            }
+
+            EnterValueDialog enterValue = new EnterValueDialog
+            {
+                Label = "Enter new name :"
+            };
+            enterValue.SetValue(SelectedFile.Name);
+            if (enterValue.ShowDialog() == DialogResult.OK)
+            {
+                string newName = enterValue.GetEnteredValue();
+                string newFullName = Path.Combine(SelectedFile.DirectoryName, $"{newName}");
+                if (Path.GetExtension(newFullName) == null || Path.GetExtension(newFullName) != SelectedFile.Extension)
+                {
+                    newFullName = newFullName + SelectedFile.Extension;
+                }
+                SelectedFile.CopyTo(newFullName);
+                SelectedFile.Delete();
+                BuildTreeView();
+            }
+
         }
     }
 }

@@ -19,6 +19,12 @@ namespace ConsoleTester.UI
 
         public string Label { get; set; }
 
+
+        public void SetValue(string val)
+        {
+            textBoxEntry.Text = val;
+        }
+
         public string GetEnteredValue()
         {
             return textBoxEntry.Text;

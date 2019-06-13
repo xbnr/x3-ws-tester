@@ -1,6 +1,6 @@
 ﻿{
   "installDirectory": "",
-  "action": "OpenPRINTER",
+  "action": "OpenPrinter",
   "odbcDatasource": "",
   "databaseName": "",
   "basetype": "",

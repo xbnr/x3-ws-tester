@@ -211,7 +211,7 @@
             this.cbOutputFormat.Location = new System.Drawing.Point(321, 113);
             this.cbOutputFormat.Name = "cbOutputFormat";
             this.cbOutputFormat.Size = new System.Drawing.Size(91, 21);
-            this.cbOutputFormat.TabIndex = 36;
+            this.cbOutputFormat.TabIndex = 24;
             // 
             // llFindReportParameters
             // 
@@ -220,7 +220,7 @@
             this.llFindReportParameters.Location = new System.Drawing.Point(733, 143);
             this.llFindReportParameters.Name = "llFindReportParameters";
             this.llFindReportParameters.Size = new System.Drawing.Size(112, 13);
-            this.llFindReportParameters.TabIndex = 35;
+            this.llFindReportParameters.TabIndex = 29;
             this.llFindReportParameters.TabStop = true;
             this.llFindReportParameters.Text = "Find report parameters";
             this.llFindReportParameters.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llFindReportParameters_LinkClicked);
@@ -232,7 +232,7 @@
             this.lbDatasourceInfo.Location = new System.Drawing.Point(737, 8);
             this.lbDatasourceInfo.Name = "lbDatasourceInfo";
             this.lbDatasourceInfo.Size = new System.Drawing.Size(123, 13);
-            this.lbDatasourceInfo.TabIndex = 34;
+            this.lbDatasourceInfo.TabIndex = 14;
             this.lbDatasourceInfo.TabStop = true;
             this.lbDatasourceInfo.Text = "Show all datasource info";
             this.lbDatasourceInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbDatasourceInfo_LinkClicked);
@@ -243,7 +243,7 @@
             this.lbServer.Location = new System.Drawing.Point(547, 10);
             this.lbServer.Name = "lbServer";
             this.lbServer.Size = new System.Drawing.Size(44, 13);
-            this.lbServer.TabIndex = 32;
+            this.lbServer.TabIndex = 5;
             this.lbServer.Text = "Server :";
             // 
             // tbDbServer
@@ -252,7 +252,7 @@
             this.tbDbServer.Name = "tbDbServer";
             this.tbDbServer.ReadOnly = true;
             this.tbDbServer.Size = new System.Drawing.Size(136, 20);
-            this.tbDbServer.TabIndex = 33;
+            this.tbDbServer.TabIndex = 6;
             // 
             // panelAddRemoveParameters
             // 
@@ -272,7 +272,7 @@
             this.btAddParam.Location = new System.Drawing.Point(283, 33);
             this.btAddParam.Name = "btAddParam";
             this.btAddParam.Size = new System.Drawing.Size(25, 23);
-            this.btAddParam.TabIndex = 0;
+            this.btAddParam.TabIndex = 1;
             this.btAddParam.Text = "+";
             this.btAddParam.UseVisualStyleBackColor = true;
             this.btAddParam.Click += new System.EventHandler(this.btAddParam_Click);
@@ -283,7 +283,7 @@
             this.btDelete.Location = new System.Drawing.Point(283, 62);
             this.btDelete.Name = "btDelete";
             this.btDelete.Size = new System.Drawing.Size(25, 23);
-            this.btDelete.TabIndex = 1;
+            this.btDelete.TabIndex = 2;
             this.btDelete.Text = "-";
             this.btDelete.UseVisualStyleBackColor = true;
             this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
@@ -324,7 +324,7 @@
             this.reportParametersGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.reportParametersGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.reportParametersGridView.Size = new System.Drawing.Size(274, 238);
-            this.reportParametersGridView.TabIndex = 29;
+            this.reportParametersGridView.TabIndex = 0;
             // 
             // ColumnName
             // 
@@ -346,20 +346,20 @@
             this.removeSelectedXsdToolStripMenuItem,
             this.copyPathToolStripMenuItem});
             this.gridContextMenuStrip.Name = "gridContextMenuStrip";
-            this.gridContextMenuStrip.Size = new System.Drawing.Size(181, 70);
+            this.gridContextMenuStrip.Size = new System.Drawing.Size(142, 48);
             // 
             // removeSelectedXsdToolStripMenuItem
             // 
             this.removeSelectedXsdToolStripMenuItem.Name = "removeSelectedXsdToolStripMenuItem";
             this.removeSelectedXsdToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.removeSelectedXsdToolStripMenuItem.Text = "Remove";
             this.removeSelectedXsdToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedXsdToolStripMenuItem_Click);
             // 
             // copyPathToolStripMenuItem
             // 
             this.copyPathToolStripMenuItem.Name = "copyPathToolStripMenuItem";
-            this.copyPathToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyPathToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.copyPathToolStripMenuItem.Text = "Copy";
             this.copyPathToolStripMenuItem.Click += new System.EventHandler(this.copyPathToolStripMenuItem_Click);
             // 
@@ -380,7 +380,7 @@
             this.btAddSetting.Location = new System.Drawing.Point(303, 33);
             this.btAddSetting.Name = "btAddSetting";
             this.btAddSetting.Size = new System.Drawing.Size(25, 23);
-            this.btAddSetting.TabIndex = 25;
+            this.btAddSetting.TabIndex = 1;
             this.btAddSetting.Text = "+";
             this.btAddSetting.UseVisualStyleBackColor = true;
             this.btAddSetting.Click += new System.EventHandler(this.btAddSetting_Click);
@@ -390,7 +390,7 @@
             this.btRemoveSetting.Location = new System.Drawing.Point(303, 63);
             this.btRemoveSetting.Name = "btRemoveSetting";
             this.btRemoveSetting.Size = new System.Drawing.Size(25, 23);
-            this.btRemoveSetting.TabIndex = 27;
+            this.btRemoveSetting.TabIndex = 2;
             this.btRemoveSetting.Text = "-";
             this.btRemoveSetting.UseVisualStyleBackColor = true;
             this.btRemoveSetting.Click += new System.EventHandler(this.btRemoveSetting_Click);
@@ -431,7 +431,7 @@
             this.dgSettings.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgSettings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSettings.Size = new System.Drawing.Size(294, 238);
-            this.dgSettings.TabIndex = 24;
+            this.dgSettings.TabIndex = 0;
             this.dgSettings.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSettings_CellValidated);
             // 
             // dataGridViewTextBoxColumn1
@@ -454,7 +454,7 @@
             this.label9.Location = new System.Drawing.Point(537, 35);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(55, 13);
-            this.label9.TabIndex = 5;
+            this.label9.TabIndex = 12;
             this.label9.Text = "DbName :";
             // 
             // tbDbName
@@ -463,7 +463,7 @@
             this.tbDbName.Name = "tbDbName";
             this.tbDbName.ReadOnly = true;
             this.tbDbName.Size = new System.Drawing.Size(136, 20);
-            this.tbDbName.TabIndex = 6;
+            this.tbDbName.TabIndex = 13;
             // 
             // btTestConnection
             // 
@@ -471,7 +471,7 @@
             this.btTestConnection.Location = new System.Drawing.Point(736, 30);
             this.btTestConnection.Name = "btTestConnection";
             this.btTestConnection.Size = new System.Drawing.Size(123, 20);
-            this.btTestConnection.TabIndex = 11;
+            this.btTestConnection.TabIndex = 15;
             this.btTestConnection.Text = "Test SQL connection";
             this.btTestConnection.UseVisualStyleBackColor = true;
             this.btTestConnection.Click += new System.EventHandler(this.btTestConnection_Click);
@@ -482,7 +482,7 @@
             this.tbExportFilename.Name = "tbExportFilename";
             this.tbExportFilename.PasswordChar = '*';
             this.tbExportFilename.Size = new System.Drawing.Size(190, 20);
-            this.tbExportFilename.TabIndex = 22;
+            this.tbExportFilename.TabIndex = 26;
             // 
             // label7
             // 
@@ -490,7 +490,7 @@
             this.label7.Location = new System.Drawing.Point(454, 116);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 13);
-            this.label7.TabIndex = 21;
+            this.label7.TabIndex = 25;
             this.label7.Text = "Export filename :";
             // 
             // linkOpenExportDirectory
@@ -500,7 +500,7 @@
             this.linkOpenExportDirectory.Location = new System.Drawing.Point(736, 89);
             this.linkOpenExportDirectory.Name = "linkOpenExportDirectory";
             this.linkOpenExportDirectory.Size = new System.Drawing.Size(76, 13);
-            this.linkOpenExportDirectory.TabIndex = 17;
+            this.linkOpenExportDirectory.TabIndex = 21;
             this.linkOpenExportDirectory.TabStop = true;
             this.linkOpenExportDirectory.Text = "Open directory";
             this.linkOpenExportDirectory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkOpenExportDirectory_LinkClicked);
@@ -586,7 +586,7 @@
             this.labelSettings.Location = new System.Drawing.Point(110, 143);
             this.labelSettings.Name = "labelSettings";
             this.labelSettings.Size = new System.Drawing.Size(51, 13);
-            this.labelSettings.TabIndex = 23;
+            this.labelSettings.TabIndex = 27;
             this.labelSettings.Text = "Settings :";
             // 
             // cbActions
@@ -595,7 +595,7 @@
             this.cbActions.Location = new System.Drawing.Point(113, 113);
             this.cbActions.Name = "cbActions";
             this.cbActions.Size = new System.Drawing.Size(130, 21);
-            this.cbActions.TabIndex = 20;
+            this.cbActions.TabIndex = 23;
             // 
             // labelActions
             // 
@@ -603,7 +603,7 @@
             this.labelActions.Location = new System.Drawing.Point(64, 116);
             this.labelActions.Name = "labelActions";
             this.labelActions.Size = new System.Drawing.Size(43, 13);
-            this.labelActions.TabIndex = 19;
+            this.labelActions.TabIndex = 22;
             this.labelActions.Text = "Action :";
             this.labelActions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -614,7 +614,7 @@
             this.cbReportName.Location = new System.Drawing.Point(113, 59);
             this.cbReportName.Name = "cbReportName";
             this.cbReportName.Size = new System.Drawing.Size(617, 20);
-            this.cbReportName.TabIndex = 13;
+            this.cbReportName.TabIndex = 17;
             this.cbReportName.Text = "TABCOUNTRY_CrDll_X3.rpt";
             // 
             // labelReportFile
@@ -623,7 +623,7 @@
             this.labelReportFile.Location = new System.Drawing.Point(49, 63);
             this.labelReportFile.Name = "labelReportFile";
             this.labelReportFile.Size = new System.Drawing.Size(58, 13);
-            this.labelReportFile.TabIndex = 12;
+            this.labelReportFile.TabIndex = 16;
             this.labelReportFile.Text = "Report file:";
             this.labelReportFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -651,7 +651,7 @@
             this.cbExportDirectory.Location = new System.Drawing.Point(113, 86);
             this.cbExportDirectory.Name = "cbExportDirectory";
             this.cbExportDirectory.Size = new System.Drawing.Size(617, 20);
-            this.cbExportDirectory.TabIndex = 16;
+            this.cbExportDirectory.TabIndex = 20;
             // 
             // btBrowseRpt
             // 
@@ -659,7 +659,7 @@
             this.btBrowseRpt.Location = new System.Drawing.Point(736, 57);
             this.btBrowseRpt.Name = "btBrowseRpt";
             this.btBrowseRpt.Size = new System.Drawing.Size(125, 23);
-            this.btBrowseRpt.TabIndex = 14;
+            this.btBrowseRpt.TabIndex = 18;
             this.btBrowseRpt.Text = "Choose Rpt file";
             this.btBrowseRpt.UseVisualStyleBackColor = true;
             this.btBrowseRpt.Click += new System.EventHandler(this.btBrowseRpt_Click);
@@ -670,7 +670,7 @@
             this.labelExportDirectory.Location = new System.Drawing.Point(21, 90);
             this.labelExportDirectory.Name = "labelExportDirectory";
             this.labelExportDirectory.Size = new System.Drawing.Size(86, 13);
-            this.labelExportDirectory.TabIndex = 15;
+            this.labelExportDirectory.TabIndex = 19;
             this.labelExportDirectory.Text = "Export directory :";
             this.labelExportDirectory.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
