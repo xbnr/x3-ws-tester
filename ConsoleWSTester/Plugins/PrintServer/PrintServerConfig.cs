@@ -12,6 +12,14 @@ namespace ConsoleTester.Plugins.PrintServer
     [JsonObject(IsReference = false)]
     public class PrintServerConfigParameter
     {
+        public PrintServerConfigParameter() { }
+
+        public PrintServerConfigParameter(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
+
         [JsonProperty]
         public string Name { get; set; }
 
@@ -40,6 +48,9 @@ namespace ConsoleTester.Plugins.PrintServer
 
         [JsonProperty]
         public string Action { get; set; }
+
+        [JsonProperty]
+        public string OutputFormat { get; set; }
 
         [JsonProperty]
         public string OdbcDatasource { get; set; }
