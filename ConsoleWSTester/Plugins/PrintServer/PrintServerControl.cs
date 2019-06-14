@@ -100,12 +100,10 @@ namespace ConsoleTester.Plugins.PrintServer
             foreach (string item in subKey.GetValueNames())
             {
                 tbSapCrystalReport.Text += $"{item}: {subKey.GetValue(item)} \r\n";
-                // Logger.Log($"{item}: {subKey.GetValue(item)}");
             }
             foreach (string item in subKey.GetSubKeyNames())
             {
                 tbSapCrystalReport.Text += $"{item} \r\n";
-                // Logger.Log($"{item} \r\n");
             }
         }
 
@@ -584,16 +582,17 @@ namespace ConsoleTester.Plugins.PrintServer
         private List<PrintServerConfigParameter> GetParameters()
         {
             cbActions.Text = ActionAsked.ParametersFields.ToString();
-            cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), TestConsoleExeName, $"{TestConsoleExeName}Result.json");
+            string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), TestConsoleExeName, $"{TestConsoleExeName}Result.json");
+            cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + resultJson;
 
             RunCommand();
 
             List<PrintServerConfigParameter> list = new List<PrintServerConfigParameter>();
             var conf = GetConfigFromUI() as PrintServerConfig;
-            string result = Path.Combine($"{conf.InstallDirectory}", $"{TestConsoleExeName}Result.json");
-            if (File.Exists(result))
+            //string result = Path.Combine($"{conf.InstallDirectory}", $"{TestConsoleExeName}Result.json");
+            if (File.Exists(resultJson))
             {
-                object r = JsonConvert.DeserializeObject(File.ReadAllText(result));
+                object r = JsonConvert.DeserializeObject(File.ReadAllText(resultJson));
                 JArray array = r as JArray;
                 if (array != null)
                 {
@@ -610,7 +609,7 @@ namespace ConsoleTester.Plugins.PrintServer
             }
             else
             {
-                Logger.Log($"File result {result} doesn't exist");
+                Logger.Log($"File result {resultJson} doesn't exist");
             }
 
             return list;
