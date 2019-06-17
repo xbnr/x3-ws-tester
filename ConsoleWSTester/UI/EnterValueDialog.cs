@@ -17,23 +17,29 @@ namespace ConsoleTester.UI
             InitializeComponent();
         }
 
-        public string Label { get; set; }
+        public string Label
+        {
+            get { return labelTitle.Text; }
+            set { labelTitle.Text = value; }
+        }
 
 
         public void SetValue(string val)
         {
             textBoxEntry.Text = val;
+            enteredValue = val;
         }
 
         public string GetEnteredValue()
         {
-            return textBoxEntry.Text;
+            return enteredValue;
         }
 
+        private string enteredValue = null;
         private void btOK_Click(object sender, EventArgs e)
         {
+            enteredValue = textBoxEntry.Text;
             DialogResult = DialogResult.OK;
-            // Close();
         }
     }
 }
