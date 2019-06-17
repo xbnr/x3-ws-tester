@@ -68,7 +68,7 @@ namespace ConsoleTester.Plugins.PrintServer
             ExportCsvTab = 14,
             ExportText = 15,
             ExportExcel = 16,
-            ExportExcelDataOonly = 17,
+            ExportExcelDataOnly = 17,
             ExportHtml = 18,
             ExportXExcel = 24,
             PrinterSettings = 25,
@@ -177,7 +177,8 @@ namespace ConsoleTester.Plugins.PrintServer
                 ReportFilename = cbReportName.Text,
                 ExportDirectory = cbExportDirectory.Text,
                 Action = cbActions.Text,
-                OutputFormat = cbOutputFormat.Text
+                OutputFormat = cbOutputFormat.Text,
+                // OutputFilename = ""
             };
             if (dgSettings.DataSource != null)
             {
@@ -542,7 +543,7 @@ namespace ConsoleTester.Plugins.PrintServer
             //{
 
             //}
-            //dgSettings.DataSource = null;
+            //dgSettings.DataSource = null;r
             //dgSettings.DataSource = parameters;
         }
 
@@ -589,20 +590,24 @@ namespace ConsoleTester.Plugins.PrintServer
 
             List<PrintServerConfigParameter> list = new List<PrintServerConfigParameter>();
             var conf = GetConfigFromUI() as PrintServerConfig;
-            //string result = Path.Combine($"{conf.InstallDirectory}", $"{TestConsoleExeName}Result.json");
             if (File.Exists(resultJson))
             {
-                object r = JsonConvert.DeserializeObject(File.ReadAllText(resultJson));
-                JArray array = r as JArray;
-                if (array != null)
+                object rawObject = JsonConvert.DeserializeObject(File.ReadAllText(resultJson));
+                JObject resultJObject = rawObject as JObject;
+                if (resultJObject["parameters"]?.Value<JArray>() != null)
                 {
-                    foreach (JToken item in array)
+                    JArray array = resultJObject["parameters"].Value<JArray>();
+                    // JArray array = r as JArray;
+                    if (array != null)
                     {
-                        bool? hasDefaultValue = item["hasDefaultValue"]?.Value<bool>();
-                        PrintServerConfigParameter param = new PrintServerConfigParameter(item["name"]?.Value<string>(), item["promptText"]?.Value<string>());
-                        if (!hasDefaultValue.HasValue || (hasDefaultValue.HasValue && !hasDefaultValue.Value))
+                        foreach (JToken item in array)
                         {
-                            list.Add(param);
+                            bool? hasDefaultValue = item["hasDefaultValue"]?.Value<bool>();
+                            PrintServerConfigParameter param = new PrintServerConfigParameter(item["name"]?.Value<string>(), item["promptText"]?.Value<string>());
+                            if (!hasDefaultValue.HasValue || (hasDefaultValue.HasValue && !hasDefaultValue.Value))
+                            {
+                                list.Add(param);
+                            }
                         }
                     }
                 }

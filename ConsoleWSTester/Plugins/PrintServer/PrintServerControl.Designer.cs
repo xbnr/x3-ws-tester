@@ -90,14 +90,11 @@
             this.tabPageOptions = new System.Windows.Forms.TabPage();
             this.tbCRRuntime32Version = new System.Windows.Forms.TextBox();
             this.lbCrystalReportRuntime = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.tbSapCrystalReport = new System.Windows.Forms.TextBox();
             this.tbService = new System.Windows.Forms.TextBox();
             this.lbService = new System.Windows.Forms.Label();
             this.tbInstallPath = new System.Windows.Forms.TextBox();
             this.labelInstalledPath = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.labelCrystalReport = new System.Windows.Forms.Label();
             this.tbPrintServerVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -147,7 +144,7 @@
             this.btGenerateCommand.BackColor = System.Drawing.Color.Transparent;
             this.btGenerateCommand.Location = new System.Drawing.Point(9, 499);
             this.btGenerateCommand.Name = "btGenerateCommand";
-            this.btGenerateCommand.Size = new System.Drawing.Size(112, 24);
+            this.btGenerateCommand.Size = new System.Drawing.Size(104, 24);
             this.btGenerateCommand.TabIndex = 4;
             this.btGenerateCommand.TabStop = true;
             this.btGenerateCommand.Text = "Generate command";
@@ -710,14 +707,11 @@
             // 
             this.tabPageOptions.Controls.Add(this.tbCRRuntime32Version);
             this.tabPageOptions.Controls.Add(this.lbCrystalReportRuntime);
-            this.tabPageOptions.Controls.Add(this.label11);
             this.tabPageOptions.Controls.Add(this.tbSapCrystalReport);
             this.tabPageOptions.Controls.Add(this.tbService);
             this.tabPageOptions.Controls.Add(this.lbService);
             this.tabPageOptions.Controls.Add(this.tbInstallPath);
             this.tabPageOptions.Controls.Add(this.labelInstalledPath);
-            this.tabPageOptions.Controls.Add(this.label5);
-            this.tabPageOptions.Controls.Add(this.label3);
             this.tabPageOptions.Controls.Add(this.labelCrystalReport);
             this.tabPageOptions.Controls.Add(this.tbPrintServerVersion);
             this.tabPageOptions.Controls.Add(this.label1);
@@ -745,15 +739,6 @@
             this.lbCrystalReportRuntime.TabIndex = 6;
             this.lbCrystalReportRuntime.Text = "Crystal Report Runtime :";
             this.lbCrystalReportRuntime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(17, 307);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(62, 13);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "Monitoring :";
             // 
             // tbSapCrystalReport
             // 
@@ -802,23 +787,6 @@
             this.labelInstalledPath.TabIndex = 0;
             this.labelInstalledPath.Text = "Install path :";
             this.labelInstalledPath.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 281);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Print Threads :";
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(17, 260);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Memory :";
             // 
             // labelCrystalReport
             // 
@@ -900,8 +868,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbDatabaseType;
         private System.Windows.Forms.Label labelCrystalReport;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.LinkLabel btGenerateCommand;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label lbLogin;
@@ -930,7 +896,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbSapCrystalReport;
         private System.Windows.Forms.TextBox tbCRRuntime32Version;
         private System.Windows.Forms.Label lbCrystalReportRuntime;
