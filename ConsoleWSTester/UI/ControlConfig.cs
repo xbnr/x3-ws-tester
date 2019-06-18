@@ -35,7 +35,16 @@ namespace ConsoleTester.UI
             Helper.SaveWorkspace(GetWorkspaceFilename(), GetConfigFromUI());
         }
 
+        public virtual string GetDefaultWorkspaceFilename()
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual string GetWorkspaceFilename()
+        {
+            throw new NotImplementedException();
+        }
+        public virtual void SetWorkspaceFilename(string filename)
         {
             throw new NotImplementedException();
         }

@@ -40,11 +40,21 @@ namespace ConsoleTester.Plugins.Soap
             domainUpDelay.Items.AddRange(Enumerable.Range(0, 100).ToList());
         }
 
+        public override void SetWorkspaceFilename(string filename)
+        {
+            this.filename = filename;
+        }
+
+        public override string GetDefaultWorkspaceFilename()
+        {
+            return SOAPConfig.GetWorkspaceFilename();
+        }
+
         public override string GetWorkspaceFilename()
         {
             if (string.IsNullOrEmpty(this.filename))
             {
-                this.filename = SOAPConfig.GetWorkspaceFilename();
+                this.filename = GetDefaultWorkspaceFilename();
             }
             return this.filename;
         } 

@@ -1,14 +1,7 @@
 ﻿using ConsoleTester.Common;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -23,6 +16,8 @@ namespace ConsoleTester.UI
 
         public static TextBox LogControl { get; private set; }
 
+        public static FileSystemTree FileSysTree { get; private set; }
+
 
         public MainForm()
         {
@@ -36,6 +31,7 @@ namespace ConsoleTester.UI
             this.Text = Program.GetApplicationName() + " - " + Program.GetApplicationVersion();
             Instance = this;
             var treeView = new FileSystemTree();
+            FileSysTree = treeView;
             treeView.Show(dockPanelMain, DockState.DockLeft);
             // var outputResult = new OutputResult();
             // outputResult.Show(dockPanelMain, DockState.DockBottom);
@@ -54,7 +50,7 @@ namespace ConsoleTester.UI
                     var toolTrip = newToolStripMenuItem.DropDownItems.Add(configService.GetTitle());
                     toolTrip.Tag = configService;
                     toolTrip.Click += new EventHandler(tsmiNewForm_Click);
-                } 
+                }
             }
         }
 
@@ -106,7 +102,14 @@ namespace ConsoleTester.UI
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ControlConfig control = MainForm.MainDockPanel.ActiveContent as ControlConfig;
-            control?.SaveWorkspace();
+            if (control.GetWorkspaceFilename() == control.GetDefaultWorkspaceFilename())
+            {
+                SaveAs(control);
+            }
+            else
+            {
+                control?.SaveWorkspace();
+            }
         }
 
         private void saveAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,6 +118,29 @@ namespace ConsoleTester.UI
             {
                 ControlConfig control = item as ControlConfig;
                 control?.SaveWorkspace();
+            }
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ControlConfig control = MainForm.MainDockPanel.ActiveContent as ControlConfig;
+            SaveAs(control);
+        }
+
+        private void SaveAs(ControlConfig control)
+        {
+            EnterValueDialog dialog = new EnterValueDialog
+            {
+                Label = "Enter filename :"
+            };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string defaultFilename = control.GetDefaultWorkspaceFilename();
+                string newFilename = Path.Combine(Path.GetDirectoryName(defaultFilename),
+                    $"{Path.GetFileNameWithoutExtension(defaultFilename)}{dialog.GetEnteredValue()}{Path.GetExtension(defaultFilename)}");
+                control.SetWorkspaceFilename(newFilename);
+                control.SaveWorkspace();
+                FileSysTree.BuildTreeView();
             }
         }
     }
