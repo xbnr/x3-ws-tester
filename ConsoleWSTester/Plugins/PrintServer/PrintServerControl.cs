@@ -235,14 +235,14 @@ namespace ConsoleTester.Plugins.PrintServer
             Logger.Log(outLine.Data);
         }
 
-        private const string TestConsoleExeName = "TestConsolePrintNet";
+        private const string ConsoleExeName = "ConsolePrintNet";
 
         private void BuildCommand(out string exe, out string arguments)
         {
             var conf = GetConfigFromUI() as PrintServerConfig;
             string dirInstallPath = string.IsNullOrEmpty(conf.InstallDirectory) ? PrintServerHelper.GetPrintServerIntallPath() : conf.InstallDirectory;
 
-            exe = $"{dirInstallPath}\\{TestConsoleExeName}.exe";
+            exe = $"{dirInstallPath}\\{ConsoleExeName}.exe";
             arguments = $" -connectioninfos:\"datasource={conf.OdbcDatasource};";
             if (!string.IsNullOrEmpty(conf.DatabaseName))
                 arguments += $"databasename={conf.DatabaseName};";
@@ -533,7 +533,7 @@ namespace ConsoleTester.Plugins.PrintServer
         private List<PrintServerConfigParameter> GetParameters()
         {
             cbActions.Text = ActionAsked.ParametersFields.ToString();
-            string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), TestConsoleExeName, $"{TestConsoleExeName}Result.json");
+            string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ConsoleExeName, $"{ConsoleExeName}Result.json");
             cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + resultJson;
 
             RunCommand();
@@ -571,7 +571,7 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             bool result = false;
             cbActions.Text = ActionAsked.PrinterServerInfo.ToString();
-            string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), TestConsoleExeName, $"{TestConsoleExeName}Result.json");
+            string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ConsoleExeName, $"{ConsoleExeName}Result.json");
             cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + resultJson;
 
             RunCommand();
