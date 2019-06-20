@@ -58,6 +58,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private enum ActionAsked
         {
+            PrinterServerInfo = 1,
             OpenPrinter = 3,
             OpenPreview = 5,
             ExportPdf = 6,
@@ -71,7 +72,6 @@ namespace ConsoleTester.Plugins.PrintServer
             ExportExcelDataOnly = 17,
             ExportHtml = 18,
             ExportXExcel = 24,
-            PrinterSettings = 25,
             ParametersFields = 26,
             None = -1
         }
@@ -80,31 +80,10 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             cbActions.DataSource = Enum.GetValues(typeof(ActionAsked));
             cbOutputFormat.DataSource = Enum.GetValues(typeof(OutputFormatEnum));
-            cbOdbcDatasource.DataSource = EnumDsn();
+            cbOdbcDatasource.DataSource = PrintServerHelper.EnumDsn();
             dgSettings.ContextMenuStrip.Tag = dgSettings;
             reportParametersGridView.ContextMenuStrip.Tag = reportParametersGridView;
-
-
-            string dirInstallPath = GetPrintServerIntallPath();
-            tbInstallPath.Text = dirInstallPath;
-            string adxSrvImp = Path.Combine(dirInstallPath, "AdxSrvImp.exe");
-            if (Directory.Exists(dirInstallPath) && File.Exists(adxSrvImp))
-            {
-                GetVersion(adxSrvImp, "/v");
-            }
-
-            var subKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Crystal Reports");
-
-            tbCRRuntime32Version.Text = $"{subKey.GetValue("CRRuntime32Version")}";
-
-            foreach (string item in subKey.GetValueNames())
-            {
-                tbSapCrystalReport.Text += $"{item}: {subKey.GetValue(item)} \r\n";
-            }
-            foreach (string item in subKey.GetSubKeyNames())
-            {
-                tbSapCrystalReport.Text += $"{item} \r\n";
-            }
+            tbInstallPath.Text = PrintServerHelper.GetPrintServerIntallPath();
         }
 
         private void GetVersion(string exe, string arguments)
@@ -161,6 +140,29 @@ namespace ConsoleTester.Plugins.PrintServer
             {
                 reportParametersGridView.DataSource = config.Parameters;
             }
+
+            if (!configurationInfoInitialized && !GetConfigurationInfo())
+            {
+                string dirInstallPath = PrintServerHelper.GetPrintServerIntallPath();
+                string adxSrvImp = Path.Combine(dirInstallPath, "AdxSrvImp.exe");
+                if (Directory.Exists(dirInstallPath) && File.Exists(adxSrvImp))
+                {
+                    GetVersion(adxSrvImp, "/v");
+                }
+                var subKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Crystal Reports");
+
+                tbCRRuntime32Version.Text = $"{subKey.GetValue("CRRuntime32Version")}";
+
+                foreach (string item in subKey.GetValueNames())
+                {
+                    tbSapCrystalReport.Text += $"{item}: {subKey.GetValue(item)} \r\n";
+                }
+                foreach (string item in subKey.GetSubKeyNames())
+                {
+                    tbSapCrystalReport.Text += $"{item} \r\n";
+                }
+                configurationInfoInitialized = true;
+            }
         }
 
 
@@ -178,7 +180,6 @@ namespace ConsoleTester.Plugins.PrintServer
                 ExportDirectory = cbExportDirectory.Text,
                 Action = cbActions.Text,
                 OutputFormat = cbOutputFormat.Text,
-                // OutputFilename = ""
             };
             if (dgSettings.DataSource != null)
             {
@@ -239,7 +240,9 @@ namespace ConsoleTester.Plugins.PrintServer
         private void BuildCommand(out string exe, out string arguments)
         {
             var conf = GetConfigFromUI() as PrintServerConfig;
-            exe = $"{conf.InstallDirectory}\\{TestConsoleExeName}.exe";
+            string dirInstallPath = string.IsNullOrEmpty(conf.InstallDirectory) ? PrintServerHelper.GetPrintServerIntallPath() : conf.InstallDirectory;
+
+            exe = $"{dirInstallPath}\\{TestConsoleExeName}.exe";
             arguments = $" -connectioninfos:\"datasource={conf.OdbcDatasource};";
             if (!string.IsNullOrEmpty(conf.DatabaseName))
                 arguments += $"databasename={conf.DatabaseName};";
@@ -384,42 +387,13 @@ namespace ConsoleTester.Plugins.PrintServer
             }
         }
 
-        private List<string> EnumDsn()
-        {
-            List<string> list = new List<string>();
-            list.AddRange(EnumDsn(Registry.CurrentUser));
-            list.AddRange(EnumDsn(Registry.LocalMachine));
-            return list;
-        }
-
-        private IEnumerable<string> EnumDsn(RegistryKey rootKey)
-        {
-            RegistryKey regKey = rootKey.OpenSubKey(@"Software\ODBC\ODBC.INI\ODBC Data Sources");
-            if (regKey != null)
-            {
-                foreach (string name in regKey.GetValueNames())
-                {
-                    string value = regKey.GetValue(name, "").ToString();
-                    yield return name;
-                }
-            }
-        }
-
+      
         private void btDetectInstall_Click(object sender, EventArgs e)
         {
-            cbPath.Text = GetPrintServerIntallPath();
+            cbPath.Text = PrintServerHelper.GetPrintServerIntallPath();
         }
 
-        private string GetPrintServerIntallPath()
-        {
-            string result = null;
-            RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Adonix\SRVIMP\0,1,5,0\GENERAL");
-            if (regKey != null)
-            {
-                result = (string)regKey.GetValue("Path");
-            }
-            return result;
-        }
+
         private void btGenerateCommand_Click(object sender, EventArgs e)
         {
             string exe, arguments;
@@ -478,44 +452,20 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void cbOdbcDatasource_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string dbName = GetDatabaseName(cbOdbcDatasource.Text);
+            string dbName = PrintServerHelper.GetDatabaseName(cbOdbcDatasource.Text);
             if (!string.IsNullOrEmpty(dbName))
             {
                 tbDbName.Text = dbName;
             }
 
-            string serverName = GetDbServerName(cbOdbcDatasource.Text);
+            string serverName = PrintServerHelper.GetDbServerName(cbOdbcDatasource.Text);
             if (!string.IsNullOrEmpty(serverName))
             {
                 tbDbServer.Text = serverName;
             }
         }
 
-        private string GetDatabaseName(string odbcDatasource)
-        {
-            string result = null;
-            RegistryKey regKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\ODBC\ODBC.INI\{odbcDatasource}");
-            if (regKey != null)
-            {
-                result = (string)regKey.GetValue("Database");
-            }
-            return result;
-        }
-
-        private string GetDbServerName(string odbcDatasource)
-        {
-            string result = null;
-            RegistryKey regKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\ODBC\ODBC.INI\{odbcDatasource}");
-            if (regKey != null)
-            {
-                result = (string)regKey.GetValue("Server");
-                if (string.IsNullOrEmpty(result))
-                    result = (string)regKey.GetValue("HostName");
-                if (string.IsNullOrEmpty(result))
-                    result = (string)regKey.GetValue("ServerName");
-            }
-            return result;
-        }
+             
 
         private void lbDatasourceInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -589,25 +539,20 @@ namespace ConsoleTester.Plugins.PrintServer
             RunCommand();
 
             List<PrintServerConfigParameter> list = new List<PrintServerConfigParameter>();
-            var conf = GetConfigFromUI() as PrintServerConfig;
             if (File.Exists(resultJson))
             {
                 object rawObject = JsonConvert.DeserializeObject(File.ReadAllText(resultJson));
                 JObject resultJObject = rawObject as JObject;
-                if (resultJObject["parameters"]?.Value<JArray>() != null)
+                JArray array = resultJObject["parameters"]?.Value<JArray>();
+                if (array != null)
                 {
-                    JArray array = resultJObject["parameters"].Value<JArray>();
-                    // JArray array = r as JArray;
-                    if (array != null)
+                    foreach (JToken item in array)
                     {
-                        foreach (JToken item in array)
+                        bool? hasDefaultValue = item["hasDefaultValue"]?.Value<bool>();
+                        PrintServerConfigParameter param = new PrintServerConfigParameter(item["name"]?.Value<string>(), item["promptText"]?.Value<string>());
+                        if (!hasDefaultValue.HasValue || (hasDefaultValue.HasValue && !hasDefaultValue.Value))
                         {
-                            bool? hasDefaultValue = item["hasDefaultValue"]?.Value<bool>();
-                            PrintServerConfigParameter param = new PrintServerConfigParameter(item["name"]?.Value<string>(), item["promptText"]?.Value<string>());
-                            if (!hasDefaultValue.HasValue || (hasDefaultValue.HasValue && !hasDefaultValue.Value))
-                            {
-                                list.Add(param);
-                            }
+                            list.Add(param);
                         }
                     }
                 }
@@ -618,6 +563,79 @@ namespace ConsoleTester.Plugins.PrintServer
             }
 
             return list;
+        }
+
+        private bool configurationInfoInitialized = false;
+
+        private bool GetConfigurationInfo()
+        {
+            bool result = false;
+            cbActions.Text = ActionAsked.PrinterServerInfo.ToString();
+            string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), TestConsoleExeName, $"{TestConsoleExeName}Result.json");
+            cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + resultJson;
+
+            RunCommand();
+
+            if (File.Exists(resultJson))
+            {
+                object rawObject = JsonConvert.DeserializeObject(File.ReadAllText(resultJson));
+                JObject resultJObject = rawObject as JObject;
+                result = true;
+                configurationInfoInitialized = true;
+                JObject printServerInfoObject = resultJObject["printServerInfo"]?.Value<JObject>();
+                if (printServerInfoObject != null)
+                {
+                    tbInstallPath.Text = printServerInfoObject["installPath"].Value<string>();
+
+                    JArray array = printServerInfoObject["version"].Value<JArray>();
+                    if (array != null)
+                    {
+                        string serverVersion = string.Empty;
+                        foreach (JToken item in array)
+                        {
+                            if (item["name"]?.Value<string>() == "AdxSrvImp.ProductName")
+                            {
+                                serverVersion += item["value"]?.Value<string>();
+                            }
+                            if (item["name"]?.Value<string>() == "AdxSrvImp.ProductVersion")
+                            {
+                                serverVersion += " " + item["value"]?.Value<string>();
+                            }
+                        }
+                        tbPrintServerVersion.Text = serverVersion;
+                    }
+                }
+
+                JArray arrayPrinters = resultJObject["serverPrinters"]?.Value<JArray>();
+                if (arrayPrinters != null)
+                {
+                    foreach (JToken item in arrayPrinters)
+                    {
+
+                    }
+                }
+
+                JObject CRInfoObject = resultJObject["crystalReportInfo"]?.Value<JObject>();
+                if (CRInfoObject != null)
+                {
+                    JArray array = CRInfoObject["version"]?.Value<JArray>();
+                    if (array != null)
+                    {
+                        foreach (JToken item in array)
+                        {
+                            if (item["name"]?.Value<string>() == "CRRuntime32Version")
+                            {
+                                tbCRRuntime32Version.Text = item["value"]?.Value<string>();
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Logger.Log($"File result {resultJson} doesn't exist");
+            }
+            return result;
         }
 
     }

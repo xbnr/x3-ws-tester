@@ -141,6 +141,7 @@
     <Compile Include="Plugins\MongoDb\MongoDbEDI.Designer.cs">
       <DependentUpon>MongoDbEDI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\PrintServer\PrintServerHelper.cs" />
     <Compile Include="Plugins\PrintServer\PrintServerConfig.cs" />
     <Compile Include="Plugins\PrintServer\PrintServerControl.cs">
       <SubType>Form</SubType>
