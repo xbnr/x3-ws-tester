@@ -574,7 +574,14 @@ namespace ConsoleTester.Plugins.PrintServer
             string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ConsoleExeName, $"{ConsoleExeName}Result.json");
             cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + resultJson;
 
-            RunCommand();
+            try
+            {
+                RunCommand();
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message);
+            }
 
             if (File.Exists(resultJson))
             {
