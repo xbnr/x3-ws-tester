@@ -50,6 +50,10 @@ namespace ConsoleTester.Plugins.PrintServer
         public string Action { get; set; }
 
         [JsonProperty]
+        public bool OpenGeneratedFile { get; set; }
+
+
+        [JsonProperty]
         public string OutputFormat { get; set; }
 
         [JsonProperty]

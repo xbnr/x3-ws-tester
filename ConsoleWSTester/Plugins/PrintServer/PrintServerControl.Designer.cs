@@ -40,6 +40,7 @@
             this.btGenerateCommand = new System.Windows.Forms.LinkLabel();
             this.btDetectInstall = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
+            this.cbOpenDocumentAfterGeneration = new System.Windows.Forms.CheckBox();
             this.cbOutputFormat = new System.Windows.Forms.ComboBox();
             this.llFindReportParameters = new System.Windows.Forms.LinkLabel();
             this.lbDatasourceInfo = new System.Windows.Forms.LinkLabel();
@@ -73,7 +74,7 @@
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.cbDatabaseType = new System.Windows.Forms.ComboBox();
             this.cbOdbcDatasource = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.labelReportParameters = new System.Windows.Forms.Label();
             this.labelSettings = new System.Windows.Forms.Label();
             this.cbActions = new System.Windows.Forms.ComboBox();
             this.labelActions = new System.Windows.Forms.Label();
@@ -166,6 +167,7 @@
             this.panelParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelParameters.Controls.Add(this.cbOpenDocumentAfterGeneration);
             this.panelParameters.Controls.Add(this.cbOutputFormat);
             this.panelParameters.Controls.Add(this.llFindReportParameters);
             this.panelParameters.Controls.Add(this.lbDatasourceInfo);
@@ -186,7 +188,7 @@
             this.panelParameters.Controls.Add(this.tbPassword);
             this.panelParameters.Controls.Add(this.cbDatabaseType);
             this.panelParameters.Controls.Add(this.cbOdbcDatasource);
-            this.panelParameters.Controls.Add(this.label8);
+            this.panelParameters.Controls.Add(this.labelReportParameters);
             this.panelParameters.Controls.Add(this.labelSettings);
             this.panelParameters.Controls.Add(this.cbActions);
             this.panelParameters.Controls.Add(this.labelActions);
@@ -202,12 +204,22 @@
             this.panelParameters.Size = new System.Drawing.Size(867, 426);
             this.panelParameters.TabIndex = 3;
             // 
+            // cbOpenDocumentAfterGeneration
+            // 
+            this.cbOpenDocumentAfterGeneration.AutoSize = true;
+            this.cbOpenDocumentAfterGeneration.Location = new System.Drawing.Point(115, 138);
+            this.cbOpenDocumentAfterGeneration.Name = "cbOpenDocumentAfterGeneration";
+            this.cbOpenDocumentAfterGeneration.Size = new System.Drawing.Size(179, 17);
+            this.cbOpenDocumentAfterGeneration.TabIndex = 32;
+            this.cbOpenDocumentAfterGeneration.Text = "Open document after generation";
+            this.cbOpenDocumentAfterGeneration.UseVisualStyleBackColor = true;
+            // 
             // cbOutputFormat
             // 
             this.cbOutputFormat.FormattingEnabled = true;
             this.cbOutputFormat.Location = new System.Drawing.Point(321, 113);
             this.cbOutputFormat.Name = "cbOutputFormat";
-            this.cbOutputFormat.Size = new System.Drawing.Size(91, 21);
+            this.cbOutputFormat.Size = new System.Drawing.Size(122, 21);
             this.cbOutputFormat.TabIndex = 24;
             // 
             // llFindReportParameters
@@ -258,7 +270,7 @@
             this.panelAddRemoveParameters.Controls.Add(this.btAddParam);
             this.panelAddRemoveParameters.Controls.Add(this.btDelete);
             this.panelAddRemoveParameters.Controls.Add(this.reportParametersGridView);
-            this.panelAddRemoveParameters.Location = new System.Drawing.Point(457, 168);
+            this.panelAddRemoveParameters.Location = new System.Drawing.Point(544, 168);
             this.panelAddRemoveParameters.Name = "panelAddRemoveParameters";
             this.panelAddRemoveParameters.Size = new System.Drawing.Size(320, 241);
             this.panelAddRemoveParameters.TabIndex = 31;
@@ -477,7 +489,6 @@
             // 
             this.tbExportFilename.Location = new System.Drawing.Point(540, 113);
             this.tbExportFilename.Name = "tbExportFilename";
-            this.tbExportFilename.PasswordChar = '*';
             this.tbExportFilename.Size = new System.Drawing.Size(190, 20);
             this.tbExportFilename.TabIndex = 26;
             // 
@@ -568,19 +579,19 @@
             this.cbOdbcDatasource.TabIndex = 2;
             this.cbOdbcDatasource.SelectedIndexChanged += new System.EventHandler(this.cbOdbcDatasource_SelectedIndexChanged);
             // 
-            // label8
+            // labelReportParameters
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(454, 143);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(100, 13);
-            this.label8.TabIndex = 28;
-            this.label8.Text = "Report parameters :";
+            this.labelReportParameters.Location = new System.Drawing.Point(448, 171);
+            this.labelReportParameters.Name = "labelReportParameters";
+            this.labelReportParameters.Size = new System.Drawing.Size(101, 53);
+            this.labelReportParameters.TabIndex = 28;
+            this.labelReportParameters.Text = "Report parameters :";
+            this.labelReportParameters.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // labelSettings
             // 
             this.labelSettings.AutoSize = true;
-            this.labelSettings.Location = new System.Drawing.Point(110, 143);
+            this.labelSettings.Location = new System.Drawing.Point(58, 168);
             this.labelSettings.Name = "labelSettings";
             this.labelSettings.Size = new System.Drawing.Size(51, 13);
             this.labelSettings.TabIndex = 27;
@@ -860,7 +871,7 @@
         private System.Windows.Forms.Label labelReportFile;
         private System.Windows.Forms.TextBox tbLogin;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labelReportParameters;
         private System.Windows.Forms.Label labelSettings;
         private System.Windows.Forms.Button btDetectInstall;
         private System.Windows.Forms.ComboBox cbOdbcDatasource;
@@ -901,5 +912,6 @@
         private System.Windows.Forms.Label lbCrystalReportRuntime;
         private System.Windows.Forms.LinkLabel llFindReportParameters;
         private System.Windows.Forms.ComboBox cbOutputFormat;
+        private System.Windows.Forms.CheckBox cbOpenDocumentAfterGeneration;
     }
 }

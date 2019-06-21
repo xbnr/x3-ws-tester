@@ -84,6 +84,10 @@ namespace ConsoleTester.Plugins.PrintServer
             dgSettings.ContextMenuStrip.Tag = dgSettings;
             reportParametersGridView.ContextMenuStrip.Tag = reportParametersGridView;
             tbInstallPath.Text = PrintServerHelper.GetPrintServerIntallPath();
+            if (string.IsNullOrEmpty( cbPath.Text))
+            {
+                cbPath.Text = tbInstallPath.Text;
+            }
         }
 
         private void GetVersion(string exe, string arguments)
@@ -130,6 +134,7 @@ namespace ConsoleTester.Plugins.PrintServer
             Helper.SetTextFromSettings(config.ExportDirectory, this.cbExportDirectory);
             Helper.SetSafeText(this.cbActions, config.Action);
             Helper.SetSafeText(this.cbOutputFormat, config.OutputFormat);
+            Helper.SetSafeCheck(this.cbOpenDocumentAfterGeneration, config.OpenGeneratedFile);
 
             if (config.Settings != null)
             {
@@ -180,7 +185,9 @@ namespace ConsoleTester.Plugins.PrintServer
                 ExportDirectory = cbExportDirectory.Text,
                 Action = cbActions.Text,
                 OutputFormat = cbOutputFormat.Text,
+                OpenGeneratedFile = cbOpenDocumentAfterGeneration.Checked
             };
+
             if (dgSettings.DataSource != null)
             {
                 var fileList = dgSettings.DataSource as PrintServerConfigParameter[];
@@ -257,6 +264,8 @@ namespace ConsoleTester.Plugins.PrintServer
                 arguments += $" -exportdirectory:\"{conf.ExportDirectory}\" ";
             if (!string.IsNullOrEmpty(conf.OutputFormat))
                 arguments += $" -outputformat:\"{conf.OutputFormat}\" ";
+            if (conf.OpenGeneratedFile)
+                arguments += $" -opengeneratedfile ";
 
             if (conf.Settings?.Length > 0)
             {
