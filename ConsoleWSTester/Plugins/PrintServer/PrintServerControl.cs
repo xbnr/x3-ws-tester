@@ -530,8 +530,6 @@ namespace ConsoleTester.Plugins.PrintServer
                 if (!found)
                 {
                     listToAdd.Add(newParam);
-                    // Logger.Log($"add {newParam}");
-                    // AddItemInGrid(uiParameters, newParam, reportParametersGridView);
                 }
             }
 
@@ -627,7 +625,7 @@ namespace ConsoleTester.Plugins.PrintServer
                 {
                     foreach (JToken item in arrayPrinters)
                     {
-
+                        tbPrinters.Text += $"{item["name"]} \t isDefault: {item["isDefault"]}  {item["isNetworkPrinter"]}   \t status : {item["status"]} \r\n";
                     }
                 }
 
@@ -639,6 +637,8 @@ namespace ConsoleTester.Plugins.PrintServer
                     {
                         foreach (JToken item in array)
                         {
+                            tbSapCrystalReport.Text += $"{item["name"]} : \t {item["value"]}  \t \r\n";
+
                             if (item["name"]?.Value<string>() == "CRRuntime32Version")
                             {
                                 tbCRRuntime32Version.Text = item["value"]?.Value<string>();

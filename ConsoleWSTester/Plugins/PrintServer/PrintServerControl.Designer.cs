@@ -40,6 +40,7 @@
             this.btGenerateCommand = new System.Windows.Forms.LinkLabel();
             this.btDetectInstall = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
+            this.btTestConnection = new System.Windows.Forms.Button();
             this.cbOpenDocumentAfterGeneration = new System.Windows.Forms.CheckBox();
             this.cbOutputFormat = new System.Windows.Forms.ComboBox();
             this.llFindReportParameters = new System.Windows.Forms.LinkLabel();
@@ -63,7 +64,6 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label9 = new System.Windows.Forms.Label();
             this.tbDbName = new System.Windows.Forms.TextBox();
-            this.btTestConnection = new System.Windows.Forms.Button();
             this.tbExportFilename = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.linkOpenExportDirectory = new System.Windows.Forms.LinkLabel();
@@ -99,6 +99,8 @@
             this.labelCrystalReport = new System.Windows.Forms.Label();
             this.tbPrintServerVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tbPrinters = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
             this.panelAddRemoveParameters.SuspendLayout();
@@ -167,6 +169,7 @@
             this.panelParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelParameters.Controls.Add(this.btTestConnection);
             this.panelParameters.Controls.Add(this.cbOpenDocumentAfterGeneration);
             this.panelParameters.Controls.Add(this.cbOutputFormat);
             this.panelParameters.Controls.Add(this.llFindReportParameters);
@@ -177,7 +180,6 @@
             this.panelParameters.Controls.Add(this.panelAddRemoveSettings);
             this.panelParameters.Controls.Add(this.label9);
             this.panelParameters.Controls.Add(this.tbDbName);
-            this.panelParameters.Controls.Add(this.btTestConnection);
             this.panelParameters.Controls.Add(this.tbExportFilename);
             this.panelParameters.Controls.Add(this.label7);
             this.panelParameters.Controls.Add(this.linkOpenExportDirectory);
@@ -203,6 +205,17 @@
             this.panelParameters.Name = "panelParameters";
             this.panelParameters.Size = new System.Drawing.Size(867, 426);
             this.panelParameters.TabIndex = 3;
+            // 
+            // btTestConnection
+            // 
+            this.btTestConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btTestConnection.Location = new System.Drawing.Point(736, 30);
+            this.btTestConnection.Name = "btTestConnection";
+            this.btTestConnection.Size = new System.Drawing.Size(123, 20);
+            this.btTestConnection.TabIndex = 15;
+            this.btTestConnection.Text = "Test SQL connection";
+            this.btTestConnection.UseVisualStyleBackColor = true;
+            this.btTestConnection.Click += new System.EventHandler(this.btTestConnection_Click);
             // 
             // cbOpenDocumentAfterGeneration
             // 
@@ -474,17 +487,6 @@
             this.tbDbName.Size = new System.Drawing.Size(136, 20);
             this.tbDbName.TabIndex = 13;
             // 
-            // btTestConnection
-            // 
-            this.btTestConnection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btTestConnection.Location = new System.Drawing.Point(736, 30);
-            this.btTestConnection.Name = "btTestConnection";
-            this.btTestConnection.Size = new System.Drawing.Size(123, 20);
-            this.btTestConnection.TabIndex = 15;
-            this.btTestConnection.Text = "Test SQL connection";
-            this.btTestConnection.UseVisualStyleBackColor = true;
-            this.btTestConnection.Click += new System.EventHandler(this.btTestConnection_Click);
-            // 
             // tbExportFilename
             // 
             this.tbExportFilename.Location = new System.Drawing.Point(540, 113);
@@ -716,6 +718,8 @@
             // 
             // tabPageOptions
             // 
+            this.tabPageOptions.Controls.Add(this.label2);
+            this.tabPageOptions.Controls.Add(this.tbPrinters);
             this.tabPageOptions.Controls.Add(this.tbCRRuntime32Version);
             this.tabPageOptions.Controls.Add(this.lbCrystalReportRuntime);
             this.tabPageOptions.Controls.Add(this.tbSapCrystalReport);
@@ -824,6 +828,29 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Version :";
             // 
+            // tbPrinters
+            // 
+            this.tbPrinters.AcceptsReturn = true;
+            this.tbPrinters.AcceptsTab = true;
+            this.tbPrinters.HideSelection = false;
+            this.tbPrinters.Location = new System.Drawing.Point(142, 257);
+            this.tbPrinters.Multiline = true;
+            this.tbPrinters.Name = "tbPrinters";
+            this.tbPrinters.ReadOnly = true;
+            this.tbPrinters.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbPrinters.Size = new System.Drawing.Size(693, 101);
+            this.tbPrinters.TabIndex = 10;
+            this.tbPrinters.WordWrap = false;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(-7, 257);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(143, 24);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Printers :";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // PrintServerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -913,5 +940,7 @@
         private System.Windows.Forms.LinkLabel llFindReportParameters;
         private System.Windows.Forms.ComboBox cbOutputFormat;
         private System.Windows.Forms.CheckBox cbOpenDocumentAfterGeneration;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbPrinters;
     }
 }
