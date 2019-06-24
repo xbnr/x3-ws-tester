@@ -38,7 +38,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         public override string GetDefaultWorkspaceFilename()
         {
-            return PrintServerConfig.GetWorkspaceFilename();
+            return ConsolePrintNet.GetWorkspaceFilename();
         }
 
         public override string GetWorkspaceFilename()
@@ -84,7 +84,7 @@ namespace ConsoleTester.Plugins.PrintServer
             dgSettings.ContextMenuStrip.Tag = dgSettings;
             reportParametersGridView.ContextMenuStrip.Tag = reportParametersGridView;
             tbInstallPath.Text = PrintServerHelper.GetPrintServerIntallPath();
-            if (string.IsNullOrEmpty( cbPath.Text))
+            if (string.IsNullOrEmpty(cbPath.Text))
             {
                 cbPath.Text = tbInstallPath.Text;
             }
@@ -123,16 +123,16 @@ namespace ConsoleTester.Plugins.PrintServer
             InitControls();
 
             this.filename = filename;
-            PrintServerConfig config = JsonConvert.DeserializeObject<PrintServerConfig>(File.ReadAllText(filename));
+            ConsolePrintNet config = JsonConvert.DeserializeObject<ConsolePrintNet>(File.ReadAllText(filename));
             Helper.SetTextFromSettings(config.InstallDirectory, this.cbPath);
             Helper.SetTextFromSettings(config.OdbcDatasource, this.cbOdbcDatasource);
             Helper.SetTextFromSettings(config.DatabaseName, this.tbDbName);
             Helper.SetTextFromSettings(config.Basetype, this.cbDatabaseType);
             Helper.SetTextFromSettings(config.Login, this.tbLogin);
             Helper.SetTextFromSettings(config.Password, this.tbPassword);
-            Helper.SetTextFromSettings(config.ReportFilename, this.cbReportName); // Path.GetFileName( this.cbReportName.Text));
+            Helper.SetTextFromSettings(config.ReportFilename, this.cbReportName);
             Helper.SetTextFromSettings(config.ExportDirectory, this.cbExportDirectory);
-            Helper.SetSafeText(this.cbActions, config.Action);
+            Helper.SetSafeComboBox(this.cbActions, (ActionAsked)Enum.Parse(typeof(ActionAsked), config.Action));
             Helper.SetSafeText(this.cbOutputFormat, config.OutputFormat);
             Helper.SetSafeCheck(this.cbOpenDocumentAfterGeneration, config.OpenGeneratedFile);
 
@@ -173,7 +173,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         public override IConfigService GetConfigFromUI()
         {
-            PrintServerConfig conf = new PrintServerConfig
+            ConsolePrintNet conf = new ConsolePrintNet
             {
                 InstallDirectory = cbPath.Text,
                 OdbcDatasource = cbOdbcDatasource.Text,
@@ -190,13 +190,13 @@ namespace ConsoleTester.Plugins.PrintServer
 
             if (dgSettings.DataSource != null)
             {
-                var fileList = dgSettings.DataSource as PrintServerConfigParameter[];
+                var fileList = dgSettings.DataSource as ConsolePrintNetParameter[];
                 conf.Settings = fileList;
             }
 
             if (reportParametersGridView.DataSource != null)
             {
-                var fileList = reportParametersGridView.DataSource as PrintServerConfigParameter[];
+                var fileList = reportParametersGridView.DataSource as ConsolePrintNetParameter[];
                 conf.Parameters = fileList;
             }
             return conf;
@@ -246,7 +246,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void BuildCommand(out string exe, out string arguments)
         {
-            var conf = GetConfigFromUI() as PrintServerConfig;
+            var conf = GetConfigFromUI() as ConsolePrintNet;
             string dirInstallPath = string.IsNullOrEmpty(conf.InstallDirectory) ? PrintServerHelper.GetPrintServerIntallPath() : conf.InstallDirectory;
 
             exe = $"{dirInstallPath}\\{ConsoleExeName}.exe";
@@ -291,17 +291,17 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void btAddParam_Click(object sender, EventArgs e)
         {
-            var conf = GetConfigFromUI() as PrintServerConfig;
-            AddItemInGrid(conf.Parameters, new PrintServerConfigParameter(), reportParametersGridView);
+            var conf = GetConfigFromUI() as ConsolePrintNet;
+            AddItemInGrid(conf.Parameters, new ConsolePrintNetParameter(), reportParametersGridView);
         }
 
 
-        private void AddItemsInGrid(PrintServerConfigParameter[] parameters, List<PrintServerConfigParameter> newParams, DataGridView dataGridView)
+        private void AddItemsInGrid(ConsolePrintNetParameter[] parameters, List<ConsolePrintNetParameter> newParams, DataGridView dataGridView)
         {
             ArrayList paramList = new ArrayList();
             paramList.AddRange(parameters);
             paramList.AddRange(newParams);
-            parameters = new PrintServerConfigParameter[paramList.Count];
+            parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
 
             reportParametersGridView.DataSource = null;
@@ -309,12 +309,12 @@ namespace ConsoleTester.Plugins.PrintServer
 
 
         }
-        private void AddItemInGrid(PrintServerConfigParameter[] parameters, PrintServerConfigParameter newParam, DataGridView dataGridView)
+        private void AddItemInGrid(ConsolePrintNetParameter[] parameters, ConsolePrintNetParameter newParam, DataGridView dataGridView)
         {
             ArrayList paramList = new ArrayList();
             paramList.AddRange(parameters);
             paramList.Add(newParam);
-            parameters = new PrintServerConfigParameter[paramList.Count];
+            parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
 
             dataGridView.DataSource = null;
@@ -341,17 +341,17 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void RemoveSelectedItems(DataGridView dataGridView)
         {
-            var fileList = dataGridView.DataSource as PrintServerConfigParameter[];
+            var fileList = dataGridView.DataSource as ConsolePrintNetParameter[];
             ArrayList paramList = new ArrayList();
             paramList.AddRange(fileList);
 
-            PrintServerConfigParameter[] parameters = new PrintServerConfigParameter[fileList.Length];
+            ConsolePrintNetParameter[] parameters = new ConsolePrintNetParameter[fileList.Length];
             foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
-                var file = row.DataBoundItem as PrintServerConfigParameter;
+                var file = row.DataBoundItem as ConsolePrintNetParameter;
                 paramList.Remove(file);
             }
-            parameters = new PrintServerConfigParameter[paramList.Count];
+            parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
             dataGridView.DataSource = null;
             dataGridView.DataSource = parameters;
@@ -362,7 +362,7 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             var folder = new OpenFileDialog
             {
-                InitialDirectory = Path.GetDirectoryName((GetConfigFromUI() as PrintServerConfig).ReportFilename),
+                InitialDirectory = Path.GetDirectoryName((GetConfigFromUI() as ConsolePrintNet).ReportFilename),
                 Multiselect = false,
                 Filter = "*.rpt|*.*"
             };
@@ -396,7 +396,7 @@ namespace ConsoleTester.Plugins.PrintServer
             }
         }
 
-      
+
         private void btDetectInstall_Click(object sender, EventArgs e)
         {
             cbPath.Text = PrintServerHelper.GetPrintServerIntallPath();
@@ -417,8 +417,8 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void btAddSetting_Click(object sender, EventArgs e)
         {
-            var conf = GetConfigFromUI() as PrintServerConfig;
-            AddItemInGrid(conf.Settings, new PrintServerConfigParameter(), dgSettings);
+            var conf = GetConfigFromUI() as ConsolePrintNet;
+            AddItemInGrid(conf.Settings, new ConsolePrintNetParameter(), dgSettings);
         }
 
         private void btRemoveSetting_Click(object sender, EventArgs e)
@@ -474,7 +474,7 @@ namespace ConsoleTester.Plugins.PrintServer
             }
         }
 
-             
+
 
         private void lbDatasourceInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -510,10 +510,10 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             var reportDetectedParameters = GetParameters();
 
-            var conf = GetConfigFromUI() as PrintServerConfig;
+            var conf = GetConfigFromUI() as ConsolePrintNet;
             var uiParameters = conf.Parameters;
 
-            List<PrintServerConfigParameter> listToAdd = new List<PrintServerConfigParameter>();
+            List<ConsolePrintNetParameter> listToAdd = new List<ConsolePrintNetParameter>();
 
             foreach (var newParam in reportDetectedParameters)
             {
@@ -537,7 +537,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         }
 
-        private List<PrintServerConfigParameter> GetParameters()
+        private List<ConsolePrintNetParameter> GetParameters()
         {
             cbActions.Text = ActionAsked.ParametersFields.ToString();
             string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ConsoleExeName, $"{ConsoleExeName}Result.json");
@@ -545,7 +545,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
             RunCommand();
 
-            List<PrintServerConfigParameter> list = new List<PrintServerConfigParameter>();
+            List<ConsolePrintNetParameter> list = new List<ConsolePrintNetParameter>();
             if (File.Exists(resultJson))
             {
                 object rawObject = JsonConvert.DeserializeObject(File.ReadAllText(resultJson));
@@ -556,7 +556,7 @@ namespace ConsoleTester.Plugins.PrintServer
                     foreach (JToken item in array)
                     {
                         bool? hasDefaultValue = item["hasDefaultValue"]?.Value<bool>();
-                        PrintServerConfigParameter param = new PrintServerConfigParameter(item["name"]?.Value<string>(), item["promptText"]?.Value<string>());
+                        ConsolePrintNetParameter param = new ConsolePrintNetParameter(item["name"]?.Value<string>(), item["promptText"]?.Value<string>());
                         if (!hasDefaultValue.HasValue || (hasDefaultValue.HasValue && !hasDefaultValue.Value))
                         {
                             list.Add(param);

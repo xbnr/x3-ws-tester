@@ -111,7 +111,7 @@ namespace ConsoleTester.Common
             }
             else
             {
-                control.Checked  = check;
+                control.Checked = check;
             }
         }
 
@@ -126,6 +126,21 @@ namespace ConsoleTester.Common
             else
             {
                 control.Text = text;
+            }
+        }
+
+        delegate void UpdateComboboxDelegate(ComboBox control, object itemValue);
+
+        public static void SetSafeComboBox(ComboBox control, object itemValue)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new UpdateComboboxDelegate(SetSafeComboBox), new object[] { control, itemValue });
+            }
+            else
+            {
+                control.SelectedItem = itemValue;
+                control.Text = itemValue?.ToString();
             }
         }
     }

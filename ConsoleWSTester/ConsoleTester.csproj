@@ -142,7 +142,7 @@
       <DependentUpon>MongoDbEDI.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\PrintServer\PrintServerHelper.cs" />
-    <Compile Include="Plugins\PrintServer\PrintServerConfig.cs" />
+    <Compile Include="Plugins\PrintServer\ConsolePrintNet.cs" />
     <Compile Include="Plugins\PrintServer\PrintServerControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,7 +253,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="Plugins\PrintServer\PrintServerConfig.default.json">
+    <None Include="Plugins\PrintServer\ConsolePrintNet.default.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Settings.settings">
