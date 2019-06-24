@@ -539,11 +539,25 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private List<ConsolePrintNetParameter> GetParameters()
         {
-            cbActions.Text = ActionAsked.ParametersFields.ToString();
+            ActionAsked formerAction = ActionAsked.None;
+            if (cbActions.SelectedItem != null && cbActions.SelectedItem is ActionAsked)
+                formerAction = (ActionAsked)cbActions.SelectedItem;
+            Helper.SetSafeComboBox(cbActions, ActionAsked.ParametersFields);
             string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ConsoleExeName, $"{ConsoleExeName}Result.json");
-            cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + resultJson;
-
-            RunCommand();
+            Helper.SetSafeText(cbOutputFormat, OutputFormatEnum.JsonFile.ToString() + "=" + resultJson);
+            try
+            {
+                RunCommand();
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message);
+            }
+            finally
+            {
+                if (formerAction != ActionAsked.None)
+                    Helper.SetSafeComboBox(this.cbActions, formerAction);
+            }
 
             List<ConsolePrintNetParameter> list = new List<ConsolePrintNetParameter>();
             if (File.Exists(resultJson))
@@ -577,9 +591,13 @@ namespace ConsoleTester.Plugins.PrintServer
         private bool GetConfigurationInfo()
         {
             bool result = false;
-            cbActions.Text = ActionAsked.PrinterServerInfo.ToString();
-            string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ConsoleExeName, $"{ConsoleExeName}Result.json");
-            cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + resultJson;
+            ActionAsked formerAction = ActionAsked.None;
+            if (cbActions.SelectedItem != null && cbActions.SelectedItem is ActionAsked)
+                formerAction = (ActionAsked)cbActions.SelectedItem;
+            Helper.SetSafeComboBox(cbActions, ActionAsked.PrinterServerInfo);
+            string currentReportName = GetWorkspaceFilename() != null ? Path.GetFileNameWithoutExtension(GetWorkspaceFilename()): ConsoleExeName;
+            string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ConsoleExeName, $"{currentReportName}Result.json");
+            Helper.SetSafeText(cbOutputFormat, OutputFormatEnum.JsonFile.ToString() + "=" + resultJson);
 
             try
             {
@@ -588,6 +606,11 @@ namespace ConsoleTester.Plugins.PrintServer
             catch (Exception ex)
             {
                 Logger.Log(ex.Message);
+            }
+            finally
+            {
+                if (formerAction != ActionAsked.None)
+                    Helper.SetSafeComboBox(this.cbActions, formerAction);
             }
 
             if (File.Exists(resultJson))
