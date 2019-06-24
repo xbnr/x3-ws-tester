@@ -10,11 +10,11 @@ using System.Collections.Generic;
 namespace ConsoleTester.Plugins.PrintServer
 {
     [JsonObject(IsReference = false)]
-    public class PrintServerConfigParameter
+    public class ConsolePrintNetParameter
     {
-        public PrintServerConfigParameter() { }
+        public ConsolePrintNetParameter() { }
 
-        public PrintServerConfigParameter(string name, string value)
+        public ConsolePrintNetParameter(string name, string value)
         {
             Name = name;
             Value = value;
@@ -29,9 +29,9 @@ namespace ConsoleTester.Plugins.PrintServer
     }
 
     [JsonObject(IsReference = false)]
-    public class PrintServerConfig : IConfigService
+    public class ConsolePrintNet : IConfigService
     {
-        internal const string ConfigName = "PrintServerConfig";
+        internal const string ConfigName = "ConsolePrintNet";
 
         public string GetTitle()
         {
@@ -48,6 +48,10 @@ namespace ConsoleTester.Plugins.PrintServer
 
         [JsonProperty]
         public string Action { get; set; }
+
+        [JsonProperty]
+        public bool OpenGeneratedFile { get; set; }
+
 
         [JsonProperty]
         public string OutputFormat { get; set; }
@@ -77,10 +81,10 @@ namespace ConsoleTester.Plugins.PrintServer
         public string ExportDirectory { get; set; }
 
         [JsonProperty]
-        public PrintServerConfigParameter[] Settings { get; set; }
+        public ConsolePrintNetParameter[] Settings { get; set; }
 
         [JsonProperty]
-        public PrintServerConfigParameter[] Parameters { get; set; }
+        public ConsolePrintNetParameter[] Parameters { get; set; }
 
 
         internal static string GetWorkspaceShortFilename()

@@ -38,7 +38,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         public override string GetDefaultWorkspaceFilename()
         {
-            return PrintServerConfig.GetWorkspaceFilename();
+            return ConsolePrintNet.GetWorkspaceFilename();
         }
 
         public override string GetWorkspaceFilename()
@@ -58,6 +58,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private enum ActionAsked
         {
+            PrinterServerInfo = 1,
             OpenPrinter = 3,
             OpenPreview = 5,
             ExportPdf = 6,
@@ -71,7 +72,6 @@ namespace ConsoleTester.Plugins.PrintServer
             ExportExcelDataOnly = 17,
             ExportHtml = 18,
             ExportXExcel = 24,
-            PrinterSettings = 25,
             ParametersFields = 26,
             None = -1
         }
@@ -80,30 +80,13 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             cbActions.DataSource = Enum.GetValues(typeof(ActionAsked));
             cbOutputFormat.DataSource = Enum.GetValues(typeof(OutputFormatEnum));
-            cbOdbcDatasource.DataSource = EnumDsn();
+            cbOdbcDatasource.DataSource = PrintServerHelper.EnumDsn();
             dgSettings.ContextMenuStrip.Tag = dgSettings;
             reportParametersGridView.ContextMenuStrip.Tag = reportParametersGridView;
-
-
-            string dirInstallPath = GetPrintServerIntallPath();
-            tbInstallPath.Text = dirInstallPath;
-            string adxSrvImp = Path.Combine(dirInstallPath, "AdxSrvImp.exe");
-            if (Directory.Exists(dirInstallPath) && File.Exists(adxSrvImp))
+            tbInstallPath.Text = PrintServerHelper.GetPrintServerIntallPath();
+            if (string.IsNullOrEmpty(cbPath.Text))
             {
-                GetVersion(adxSrvImp, "/v");
-            }
-
-            var subKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Crystal Reports");
-
-            tbCRRuntime32Version.Text = $"{subKey.GetValue("CRRuntime32Version")}";
-
-            foreach (string item in subKey.GetValueNames())
-            {
-                tbSapCrystalReport.Text += $"{item}: {subKey.GetValue(item)} \r\n";
-            }
-            foreach (string item in subKey.GetSubKeyNames())
-            {
-                tbSapCrystalReport.Text += $"{item} \r\n";
+                cbPath.Text = tbInstallPath.Text;
             }
         }
 
@@ -140,17 +123,18 @@ namespace ConsoleTester.Plugins.PrintServer
             InitControls();
 
             this.filename = filename;
-            PrintServerConfig config = JsonConvert.DeserializeObject<PrintServerConfig>(File.ReadAllText(filename));
+            ConsolePrintNet config = JsonConvert.DeserializeObject<ConsolePrintNet>(File.ReadAllText(filename));
             Helper.SetTextFromSettings(config.InstallDirectory, this.cbPath);
             Helper.SetTextFromSettings(config.OdbcDatasource, this.cbOdbcDatasource);
             Helper.SetTextFromSettings(config.DatabaseName, this.tbDbName);
             Helper.SetTextFromSettings(config.Basetype, this.cbDatabaseType);
             Helper.SetTextFromSettings(config.Login, this.tbLogin);
             Helper.SetTextFromSettings(config.Password, this.tbPassword);
-            Helper.SetTextFromSettings(config.ReportFilename, this.cbReportName); // Path.GetFileName( this.cbReportName.Text));
+            Helper.SetTextFromSettings(config.ReportFilename, this.cbReportName);
             Helper.SetTextFromSettings(config.ExportDirectory, this.cbExportDirectory);
-            Helper.SetSafeText(this.cbActions, config.Action);
+            Helper.SetSafeComboBox(this.cbActions, (ActionAsked)Enum.Parse(typeof(ActionAsked), config.Action));
             Helper.SetSafeText(this.cbOutputFormat, config.OutputFormat);
+            Helper.SetSafeCheck(this.cbOpenDocumentAfterGeneration, config.OpenGeneratedFile);
 
             if (config.Settings != null)
             {
@@ -161,12 +145,35 @@ namespace ConsoleTester.Plugins.PrintServer
             {
                 reportParametersGridView.DataSource = config.Parameters;
             }
+
+            if (!configurationInfoInitialized && !GetConfigurationInfo())
+            {
+                string dirInstallPath = PrintServerHelper.GetPrintServerIntallPath();
+                string adxSrvImp = Path.Combine(dirInstallPath, "AdxSrvImp.exe");
+                if (Directory.Exists(dirInstallPath) && File.Exists(adxSrvImp))
+                {
+                    GetVersion(adxSrvImp, "/v");
+                }
+                var subKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Crystal Reports");
+
+                tbCRRuntime32Version.Text = $"{subKey.GetValue("CRRuntime32Version")}";
+
+                foreach (string item in subKey.GetValueNames())
+                {
+                    tbSapCrystalReport.Text += $"{item}: {subKey.GetValue(item)} \r\n";
+                }
+                foreach (string item in subKey.GetSubKeyNames())
+                {
+                    tbSapCrystalReport.Text += $"{item} \r\n";
+                }
+                configurationInfoInitialized = true;
+            }
         }
 
 
         public override IConfigService GetConfigFromUI()
         {
-            PrintServerConfig conf = new PrintServerConfig
+            ConsolePrintNet conf = new ConsolePrintNet
             {
                 InstallDirectory = cbPath.Text,
                 OdbcDatasource = cbOdbcDatasource.Text,
@@ -178,17 +185,18 @@ namespace ConsoleTester.Plugins.PrintServer
                 ExportDirectory = cbExportDirectory.Text,
                 Action = cbActions.Text,
                 OutputFormat = cbOutputFormat.Text,
-                // OutputFilename = ""
+                OpenGeneratedFile = cbOpenDocumentAfterGeneration.Checked
             };
+
             if (dgSettings.DataSource != null)
             {
-                var fileList = dgSettings.DataSource as PrintServerConfigParameter[];
+                var fileList = dgSettings.DataSource as ConsolePrintNetParameter[];
                 conf.Settings = fileList;
             }
 
             if (reportParametersGridView.DataSource != null)
             {
-                var fileList = reportParametersGridView.DataSource as PrintServerConfigParameter[];
+                var fileList = reportParametersGridView.DataSource as ConsolePrintNetParameter[];
                 conf.Parameters = fileList;
             }
             return conf;
@@ -234,12 +242,14 @@ namespace ConsoleTester.Plugins.PrintServer
             Logger.Log(outLine.Data);
         }
 
-        private const string TestConsoleExeName = "TestConsolePrintNet";
+        private const string ConsoleExeName = "ConsolePrintNet";
 
         private void BuildCommand(out string exe, out string arguments)
         {
-            var conf = GetConfigFromUI() as PrintServerConfig;
-            exe = $"{conf.InstallDirectory}\\{TestConsoleExeName}.exe";
+            var conf = GetConfigFromUI() as ConsolePrintNet;
+            string dirInstallPath = string.IsNullOrEmpty(conf.InstallDirectory) ? PrintServerHelper.GetPrintServerIntallPath() : conf.InstallDirectory;
+
+            exe = $"{dirInstallPath}\\{ConsoleExeName}.exe";
             arguments = $" -connectioninfos:\"datasource={conf.OdbcDatasource};";
             if (!string.IsNullOrEmpty(conf.DatabaseName))
                 arguments += $"databasename={conf.DatabaseName};";
@@ -254,6 +264,8 @@ namespace ConsoleTester.Plugins.PrintServer
                 arguments += $" -exportdirectory:\"{conf.ExportDirectory}\" ";
             if (!string.IsNullOrEmpty(conf.OutputFormat))
                 arguments += $" -outputformat:\"{conf.OutputFormat}\" ";
+            if (conf.OpenGeneratedFile)
+                arguments += $" -opengeneratedfile ";
 
             if (conf.Settings?.Length > 0)
             {
@@ -279,17 +291,17 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void btAddParam_Click(object sender, EventArgs e)
         {
-            var conf = GetConfigFromUI() as PrintServerConfig;
-            AddItemInGrid(conf.Parameters, new PrintServerConfigParameter(), reportParametersGridView);
+            var conf = GetConfigFromUI() as ConsolePrintNet;
+            AddItemInGrid(conf.Parameters, new ConsolePrintNetParameter(), reportParametersGridView);
         }
 
 
-        private void AddItemsInGrid(PrintServerConfigParameter[] parameters, List<PrintServerConfigParameter> newParams, DataGridView dataGridView)
+        private void AddItemsInGrid(ConsolePrintNetParameter[] parameters, List<ConsolePrintNetParameter> newParams, DataGridView dataGridView)
         {
             ArrayList paramList = new ArrayList();
             paramList.AddRange(parameters);
             paramList.AddRange(newParams);
-            parameters = new PrintServerConfigParameter[paramList.Count];
+            parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
 
             reportParametersGridView.DataSource = null;
@@ -297,12 +309,12 @@ namespace ConsoleTester.Plugins.PrintServer
 
 
         }
-        private void AddItemInGrid(PrintServerConfigParameter[] parameters, PrintServerConfigParameter newParam, DataGridView dataGridView)
+        private void AddItemInGrid(ConsolePrintNetParameter[] parameters, ConsolePrintNetParameter newParam, DataGridView dataGridView)
         {
             ArrayList paramList = new ArrayList();
             paramList.AddRange(parameters);
             paramList.Add(newParam);
-            parameters = new PrintServerConfigParameter[paramList.Count];
+            parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
 
             dataGridView.DataSource = null;
@@ -329,17 +341,17 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void RemoveSelectedItems(DataGridView dataGridView)
         {
-            var fileList = dataGridView.DataSource as PrintServerConfigParameter[];
+            var fileList = dataGridView.DataSource as ConsolePrintNetParameter[];
             ArrayList paramList = new ArrayList();
             paramList.AddRange(fileList);
 
-            PrintServerConfigParameter[] parameters = new PrintServerConfigParameter[fileList.Length];
+            ConsolePrintNetParameter[] parameters = new ConsolePrintNetParameter[fileList.Length];
             foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
-                var file = row.DataBoundItem as PrintServerConfigParameter;
+                var file = row.DataBoundItem as ConsolePrintNetParameter;
                 paramList.Remove(file);
             }
-            parameters = new PrintServerConfigParameter[paramList.Count];
+            parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
             dataGridView.DataSource = null;
             dataGridView.DataSource = parameters;
@@ -350,7 +362,7 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             var folder = new OpenFileDialog
             {
-                InitialDirectory = Path.GetDirectoryName((GetConfigFromUI() as PrintServerConfig).ReportFilename),
+                InitialDirectory = Path.GetDirectoryName((GetConfigFromUI() as ConsolePrintNet).ReportFilename),
                 Multiselect = false,
                 Filter = "*.rpt|*.*"
             };
@@ -384,42 +396,13 @@ namespace ConsoleTester.Plugins.PrintServer
             }
         }
 
-        private List<string> EnumDsn()
-        {
-            List<string> list = new List<string>();
-            list.AddRange(EnumDsn(Registry.CurrentUser));
-            list.AddRange(EnumDsn(Registry.LocalMachine));
-            return list;
-        }
-
-        private IEnumerable<string> EnumDsn(RegistryKey rootKey)
-        {
-            RegistryKey regKey = rootKey.OpenSubKey(@"Software\ODBC\ODBC.INI\ODBC Data Sources");
-            if (regKey != null)
-            {
-                foreach (string name in regKey.GetValueNames())
-                {
-                    string value = regKey.GetValue(name, "").ToString();
-                    yield return name;
-                }
-            }
-        }
 
         private void btDetectInstall_Click(object sender, EventArgs e)
         {
-            cbPath.Text = GetPrintServerIntallPath();
+            cbPath.Text = PrintServerHelper.GetPrintServerIntallPath();
         }
 
-        private string GetPrintServerIntallPath()
-        {
-            string result = null;
-            RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Adonix\SRVIMP\0,1,5,0\GENERAL");
-            if (regKey != null)
-            {
-                result = (string)regKey.GetValue("Path");
-            }
-            return result;
-        }
+
         private void btGenerateCommand_Click(object sender, EventArgs e)
         {
             string exe, arguments;
@@ -434,8 +417,8 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void btAddSetting_Click(object sender, EventArgs e)
         {
-            var conf = GetConfigFromUI() as PrintServerConfig;
-            AddItemInGrid(conf.Settings, new PrintServerConfigParameter(), dgSettings);
+            var conf = GetConfigFromUI() as ConsolePrintNet;
+            AddItemInGrid(conf.Settings, new ConsolePrintNetParameter(), dgSettings);
         }
 
         private void btRemoveSetting_Click(object sender, EventArgs e)
@@ -478,44 +461,20 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void cbOdbcDatasource_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string dbName = GetDatabaseName(cbOdbcDatasource.Text);
+            string dbName = PrintServerHelper.GetDatabaseName(cbOdbcDatasource.Text);
             if (!string.IsNullOrEmpty(dbName))
             {
                 tbDbName.Text = dbName;
             }
 
-            string serverName = GetDbServerName(cbOdbcDatasource.Text);
+            string serverName = PrintServerHelper.GetDbServerName(cbOdbcDatasource.Text);
             if (!string.IsNullOrEmpty(serverName))
             {
                 tbDbServer.Text = serverName;
             }
         }
 
-        private string GetDatabaseName(string odbcDatasource)
-        {
-            string result = null;
-            RegistryKey regKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\ODBC\ODBC.INI\{odbcDatasource}");
-            if (regKey != null)
-            {
-                result = (string)regKey.GetValue("Database");
-            }
-            return result;
-        }
 
-        private string GetDbServerName(string odbcDatasource)
-        {
-            string result = null;
-            RegistryKey regKey = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\ODBC\ODBC.INI\{odbcDatasource}");
-            if (regKey != null)
-            {
-                result = (string)regKey.GetValue("Server");
-                if (string.IsNullOrEmpty(result))
-                    result = (string)regKey.GetValue("HostName");
-                if (string.IsNullOrEmpty(result))
-                    result = (string)regKey.GetValue("ServerName");
-            }
-            return result;
-        }
 
         private void lbDatasourceInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -551,10 +510,10 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             var reportDetectedParameters = GetParameters();
 
-            var conf = GetConfigFromUI() as PrintServerConfig;
+            var conf = GetConfigFromUI() as ConsolePrintNet;
             var uiParameters = conf.Parameters;
 
-            List<PrintServerConfigParameter> listToAdd = new List<PrintServerConfigParameter>();
+            List<ConsolePrintNetParameter> listToAdd = new List<ConsolePrintNetParameter>();
 
             foreach (var newParam in reportDetectedParameters)
             {
@@ -571,8 +530,6 @@ namespace ConsoleTester.Plugins.PrintServer
                 if (!found)
                 {
                     listToAdd.Add(newParam);
-                    // Logger.Log($"add {newParam}");
-                    // AddItemInGrid(uiParameters, newParam, reportParametersGridView);
                 }
             }
 
@@ -580,34 +537,43 @@ namespace ConsoleTester.Plugins.PrintServer
 
         }
 
-        private List<PrintServerConfigParameter> GetParameters()
+        private List<ConsolePrintNetParameter> GetParameters()
         {
-            cbActions.Text = ActionAsked.ParametersFields.ToString();
-            string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), TestConsoleExeName, $"{TestConsoleExeName}Result.json");
-            cbOutputFormat.Text = OutputFormatEnum.JsonFile.ToString() + "=" + resultJson;
+            ActionAsked formerAction = ActionAsked.None;
+            if (cbActions.SelectedItem != null && cbActions.SelectedItem is ActionAsked)
+                formerAction = (ActionAsked)cbActions.SelectedItem;
+            Helper.SetSafeComboBox(cbActions, ActionAsked.ParametersFields);
+            string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ConsoleExeName, $"{ConsoleExeName}Result.json");
+            Helper.SetSafeText(cbOutputFormat, OutputFormatEnum.JsonFile.ToString() + "=" + resultJson);
+            try
+            {
+                RunCommand();
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message);
+            }
+            finally
+            {
+                if (formerAction != ActionAsked.None)
+                    Helper.SetSafeComboBox(this.cbActions, formerAction);
+            }
 
-            RunCommand();
-
-            List<PrintServerConfigParameter> list = new List<PrintServerConfigParameter>();
-            var conf = GetConfigFromUI() as PrintServerConfig;
+            List<ConsolePrintNetParameter> list = new List<ConsolePrintNetParameter>();
             if (File.Exists(resultJson))
             {
                 object rawObject = JsonConvert.DeserializeObject(File.ReadAllText(resultJson));
                 JObject resultJObject = rawObject as JObject;
-                if (resultJObject["parameters"]?.Value<JArray>() != null)
+                JArray array = resultJObject["parameters"]?.Value<JArray>();
+                if (array != null)
                 {
-                    JArray array = resultJObject["parameters"].Value<JArray>();
-                    // JArray array = r as JArray;
-                    if (array != null)
+                    foreach (JToken item in array)
                     {
-                        foreach (JToken item in array)
+                        bool? hasDefaultValue = item["hasDefaultValue"]?.Value<bool>();
+                        ConsolePrintNetParameter param = new ConsolePrintNetParameter(item["name"]?.Value<string>(), item["promptText"]?.Value<string>());
+                        if (!hasDefaultValue.HasValue || (hasDefaultValue.HasValue && !hasDefaultValue.Value))
                         {
-                            bool? hasDefaultValue = item["hasDefaultValue"]?.Value<bool>();
-                            PrintServerConfigParameter param = new PrintServerConfigParameter(item["name"]?.Value<string>(), item["promptText"]?.Value<string>());
-                            if (!hasDefaultValue.HasValue || (hasDefaultValue.HasValue && !hasDefaultValue.Value))
-                            {
-                                list.Add(param);
-                            }
+                            list.Add(param);
                         }
                     }
                 }
@@ -618,6 +584,97 @@ namespace ConsoleTester.Plugins.PrintServer
             }
 
             return list;
+        }
+
+        private bool configurationInfoInitialized = false;
+
+        private bool GetConfigurationInfo()
+        {
+            bool result = false;
+            ActionAsked formerAction = ActionAsked.None;
+            if (cbActions.SelectedItem != null && cbActions.SelectedItem is ActionAsked)
+                formerAction = (ActionAsked)cbActions.SelectedItem;
+            Helper.SetSafeComboBox(cbActions, ActionAsked.PrinterServerInfo);
+            string currentReportName = GetWorkspaceFilename() != null ? Path.GetFileNameWithoutExtension(GetWorkspaceFilename()): ConsoleExeName;
+            string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ConsoleExeName, $"{currentReportName}Result.json");
+            Helper.SetSafeText(cbOutputFormat, OutputFormatEnum.JsonFile.ToString() + "=" + resultJson);
+
+            try
+            {
+                RunCommand();
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex.Message);
+            }
+            finally
+            {
+                if (formerAction != ActionAsked.None)
+                    Helper.SetSafeComboBox(this.cbActions, formerAction);
+            }
+
+            if (File.Exists(resultJson))
+            {
+                object rawObject = JsonConvert.DeserializeObject(File.ReadAllText(resultJson));
+                JObject resultJObject = rawObject as JObject;
+                result = true;
+                configurationInfoInitialized = true;
+                JObject printServerInfoObject = resultJObject["printServerInfo"]?.Value<JObject>();
+                if (printServerInfoObject != null)
+                {
+                    tbInstallPath.Text = printServerInfoObject["installPath"].Value<string>();
+
+                    JArray array = printServerInfoObject["version"].Value<JArray>();
+                    if (array != null)
+                    {
+                        string serverVersion = string.Empty;
+                        foreach (JToken item in array)
+                        {
+                            if (item["name"]?.Value<string>() == "AdxSrvImp.ProductName")
+                            {
+                                serverVersion += item["value"]?.Value<string>();
+                            }
+                            if (item["name"]?.Value<string>() == "AdxSrvImp.ProductVersion")
+                            {
+                                serverVersion += " " + item["value"]?.Value<string>();
+                            }
+                        }
+                        tbPrintServerVersion.Text = serverVersion;
+                    }
+                }
+
+                JArray arrayPrinters = resultJObject["serverPrinters"]?.Value<JArray>();
+                if (arrayPrinters != null)
+                {
+                    foreach (JToken item in arrayPrinters)
+                    {
+                        tbPrinters.Text += $"{item["name"]} \t isDefault: {item["isDefault"]}  {item["isNetworkPrinter"]}   \t status : {item["status"]} \r\n";
+                    }
+                }
+
+                JObject CRInfoObject = resultJObject["crystalReportInfo"]?.Value<JObject>();
+                if (CRInfoObject != null)
+                {
+                    JArray array = CRInfoObject["version"]?.Value<JArray>();
+                    if (array != null)
+                    {
+                        foreach (JToken item in array)
+                        {
+                            tbSapCrystalReport.Text += $"{item["name"]} : \t {item["value"]}  \t \r\n";
+
+                            if (item["name"]?.Value<string>() == "CRRuntime32Version")
+                            {
+                                tbCRRuntime32Version.Text = item["value"]?.Value<string>();
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Logger.Log($"File result {resultJson} doesn't exist");
+            }
+            return result;
         }
 
     }
