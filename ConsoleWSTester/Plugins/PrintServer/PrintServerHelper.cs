@@ -1,6 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using ConsoleTester.Common;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +11,23 @@ namespace ConsoleTester.Plugins.PrintServer
 {
     static class PrintServerHelper
     {
+
+        public static bool TestSqlConnection(string dsn, string userId, string password)
+        {
+            using (OdbcConnection connection = new OdbcConnection($"dsn={dsn};UID={userId};PWD={password};"))
+            {
+                try
+                {
+                    connection.Open();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
 
         public static string GetPrintServerIntallPath()
         {
