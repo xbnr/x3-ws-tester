@@ -29,12 +29,9 @@ namespace ConsoleTester.Plugins.XsdValidator
 
         public override bool IsVisibleInReleaseMode()
         {
-#if DEBUG
             return true;
-#else
-            return false;
-#endif
         }
+
         public override void SetWorkspaceFilename(string filename)
         {
             this.filename = filename;

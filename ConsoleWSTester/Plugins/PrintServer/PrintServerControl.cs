@@ -431,7 +431,7 @@ namespace ConsoleTester.Plugins.PrintServer
             string dsn = cbOdbcDatasource.Text;
             string userid = tbLogin.Text;
             string password = tbPassword.Text;
-            bool result = IsServerConnected(dsn, userid, password);
+            bool result = PrintServerHelper.TestSqlConnection(dsn, userid, password);
             if (result)
             {
                 MessageBox.Show($"Connection to {dsn} OK", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -442,23 +442,7 @@ namespace ConsoleTester.Plugins.PrintServer
             }
         }
 
-        private bool IsServerConnected(string dsn, string userId, string password)
-        {
-            using (OdbcConnection connection = new OdbcConnection($"dsn={dsn};UID={userId};PWD={password};"))
-            {
-                try
-                {
-                    connection.Open();
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Log(ex.Message);
-                    return false;
-                }
-            }
-        }
-
+       
         private void cbOdbcDatasource_SelectedIndexChanged(object sender, EventArgs e)
         {
             string dbName = PrintServerHelper.GetDatabaseName(cbOdbcDatasource.Text);
