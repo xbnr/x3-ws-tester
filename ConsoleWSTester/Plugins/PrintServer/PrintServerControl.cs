@@ -58,7 +58,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private enum ActionAsked
         {
-            PrinterServerInfo = 1,
+            PrintServerInfo = 1,
             OpenPrinter = 3,
             OpenPreview = 5,
             ExportPdf = 6,
@@ -442,7 +442,7 @@ namespace ConsoleTester.Plugins.PrintServer
             }
         }
 
-       
+
         private void cbOdbcDatasource_SelectedIndexChanged(object sender, EventArgs e)
         {
             string dbName = PrintServerHelper.GetDatabaseName(cbOdbcDatasource.Text);
@@ -578,10 +578,11 @@ namespace ConsoleTester.Plugins.PrintServer
             ActionAsked formerAction = ActionAsked.None;
             if (cbActions.SelectedItem != null && cbActions.SelectedItem is ActionAsked)
                 formerAction = (ActionAsked)cbActions.SelectedItem;
-            Helper.SetSafeComboBox(cbActions, ActionAsked.PrinterServerInfo);
-            string currentReportName = GetWorkspaceFilename() != null ? Path.GetFileNameWithoutExtension(GetWorkspaceFilename()): ConsoleExeName;
+            Helper.SetSafeComboBox(cbActions, ActionAsked.PrintServerInfo);
+            string currentReportName = GetWorkspaceFilename() != null ? Path.GetFileNameWithoutExtension(GetWorkspaceFilename()) : ConsoleExeName;
             string resultJson = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ConsoleExeName, $"{currentReportName}Result.json");
             Helper.SetSafeText(cbOutputFormat, OutputFormatEnum.JsonFile.ToString() + "=" + resultJson);
+            linkLabelJSon.Tag = resultJson;
 
             try
             {
@@ -608,11 +609,11 @@ namespace ConsoleTester.Plugins.PrintServer
                 {
                     tbInstallPath.Text = printServerInfoObject["installPath"].Value<string>();
 
-                    JArray array = printServerInfoObject["version"].Value<JArray>();
-                    if (array != null)
+                    JArray arrayVersion = printServerInfoObject["version"].Value<JArray>();
+                    if (arrayVersion != null)
                     {
                         string serverVersion = string.Empty;
-                        foreach (JToken item in array)
+                        foreach (JToken item in arrayVersion)
                         {
                             if (item["name"]?.Value<string>() == "AdxSrvImp.ProductName")
                             {
@@ -624,6 +625,64 @@ namespace ConsoleTester.Plugins.PrintServer
                             }
                         }
                         tbPrintServerVersion.Text = serverVersion;
+                    }
+                    JArray arrayService = printServerInfoObject["service"].Value<JArray>();
+                    if (arrayService != null)
+                    {
+                        string serverService = string.Empty;
+                        foreach (JToken item in arrayService)
+                        {
+                            if (item["name"]?.Value<string>() == "ServiceName")
+                            {
+                                serverService += item["value"]?.Value<string>() + "\r\n";
+                            }
+                            if (item["name"]?.Value<string>() == "ServicePath")
+                            {
+                                serverService += item["value"]?.Value<string>() + "\r\n";
+                            }
+                        }
+                        tbService.Text = serverService;
+                    }
+
+
+                    JObject configObject = printServerInfoObject["config"]?.Value<JObject>();
+                    if (configObject != null)
+                    {
+                        string configText = string.Empty;
+                        JObject serverConfigObject = configObject["serverConfig"]?.Value<JObject>();
+                        if (serverConfigObject != null)
+                        {
+                            JObject adxSrvImpObject = serverConfigObject["adxSrvImp"]?.Value<JObject>();
+                            if (adxSrvImpObject != null)
+                            {
+                                JArray arrayConfigs = adxSrvImpObject["config"]?.Value<JArray>();
+                                foreach (JToken configItem in arrayConfigs)
+                                {
+                                    configText += $"Profile '{configItem["id"]}' : {configItem["cap"]}  \r\n";
+                                    JObject general = configItem["general"]?.Value<JObject>();
+                                    if (general != null)
+                                    {
+                                        configText += $" General: lang: {general["lang"]}   Port: {general["port"]}  Recovery mode: {general["restartrpts"]} \r\n";
+                                    }
+                                    JObject jobs = configItem["jobs"]?.Value<JObject>();
+                                    if (jobs != null)
+                                    {
+                                        configText += $" Jobs : Time before purging job : {jobs["purgetime"]} minutes     Max. running print processes : {jobs["max"]}    vpalloc: {jobs["vpalloc"]} \r\n";
+                                    }
+                                    JObject log = configItem["log"]?.Value<JObject>();
+                                    if (log != null)
+                                    {
+                                        configText += $" Logs : number : {log["number"]}   size : {log["size"]} \r\n";
+                                    }
+                                    JObject processes = configItem["processes"]?.Value<JObject>();
+                                    if (log != null)
+                                    {
+                                        configText += $" Processes : killtime : {processes["killtime"]}  max : {processes["max"]}   min : {processes["min"]} \r\n";
+                                    }
+                                }
+                            }
+                        }
+                        tbAdxEditionServerConfigXml.Text = configText;
                     }
                 }
 
@@ -661,5 +720,16 @@ namespace ConsoleTester.Plugins.PrintServer
             return result;
         }
 
+        private void linkLabelJSon_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (linkLabelJSon.Tag  != null && linkLabelJSon.Tag is string)
+            {
+                string jsonFilename = (string)linkLabelJSon.Tag;
+                if (File.Exists(jsonFilename))
+                {
+                    Program.OpenJson(jsonFilename);
+                }
+            }
+        }
     }
 }
