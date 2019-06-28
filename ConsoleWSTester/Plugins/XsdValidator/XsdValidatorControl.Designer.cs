@@ -249,7 +249,6 @@
             this.cbPath.Name = "cbPath";
             this.cbPath.Size = new System.Drawing.Size(554, 21);
             this.cbPath.TabIndex = 33;
-            this.cbPath.Text = "C:\\Users\\frdepo\\OneDrive - Sage Software, Inc\\X3\\X3-CHORUS\\00-FSO1100-P24.xml";
             // 
             // labelPath
             // 
@@ -324,7 +323,6 @@
             this.cbXmlFileForXSD.Name = "cbXmlFileForXSD";
             this.cbXmlFileForXSD.Size = new System.Drawing.Size(554, 21);
             this.cbXmlFileForXSD.TabIndex = 45;
-            this.cbXmlFileForXSD.Text = "C:\\Users\\frdepo\\OneDrive - Sage Software, Inc\\X3\\X3-CHORUS\\00-FSO1100-P24.xml";
             // 
             // label1
             // 
