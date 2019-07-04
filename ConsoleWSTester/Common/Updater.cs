@@ -25,7 +25,7 @@ namespace ConsoleTester.Common
             var onLineVersionInformation = GetLastVersion();
 
             Version onLineVersion = new Version(onLineVersionInformation.Version);
-            Version currentMdVersion = new Version(Program.GetApplicationVersion());
+            Version currentMdVersion = new Version(ProgramUI.GetApplicationVersion());
 
             if (onLineVersion.CompareTo(currentMdVersion) > 0)
             {

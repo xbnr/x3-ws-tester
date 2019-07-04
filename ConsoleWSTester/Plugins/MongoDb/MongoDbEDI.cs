@@ -18,7 +18,7 @@ using System.Windows.Forms;
 namespace ConsoleTester.Plugins.MongoDb
 {
 
-    public partial class MongoDbEDI : ControlConfig
+    public partial class MongoDbEDI : ControlConfigUI
     {
         private string filename;
 
@@ -288,7 +288,7 @@ namespace ConsoleTester.Plugins.MongoDb
                 var result = await DownloadFileAsync(item);
                 if (!string.IsNullOrEmpty(result))
                 {
-                    Program.OpenJson(result);
+                    ProgramUI.OpenJson(result);
                 }
             }
             catch (Exception ex)
@@ -323,7 +323,7 @@ namespace ConsoleTester.Plugins.MongoDb
             var gridFsBucket = new GridFSBucket(GetDatabase());
             string filename = file.Metadata["fileName"].AsString;
             // string targetDir = Path.Combine(Program.GetWorkspaceDirectory(), DateTime.Now.ToString("yyyyMMddHHmm"));
-            string targetDir = Path.Combine(Program.GetWorkspaceDirectory(), MongoConfig.MongoConfigName);
+            string targetDir = Path.Combine(ProgramUI.GetWorkspaceDirectory(), MongoConfig.MongoConfigName);
             if (!Directory.Exists(targetDir))
             {
                 Directory.CreateDirectory(targetDir);

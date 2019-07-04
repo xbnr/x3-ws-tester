@@ -15,7 +15,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace ConsoleTester.Plugins.Rest
 {
-    public partial class WsRESTControl : ControlConfig
+    public partial class WsRESTControl : ControlConfigUI
     {
         private string filename;
 
@@ -42,7 +42,7 @@ namespace ConsoleTester.Plugins.Rest
         public override void SaveWorkspace()
         {
             var config = GetConfigFromUI();
-            string wsDirectory = Program.GetWorkspaceDirectory();
+            string wsDirectory = ProgramUI.GetWorkspaceDirectory();
             if (!Directory.Exists(wsDirectory))
             {
                 Directory.CreateDirectory(wsDirectory);

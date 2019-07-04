@@ -16,7 +16,11 @@ namespace ConsoleTester.LogsAnalyzer
 
         public string GetFormFullName()
         {
-            return typeof(ConsoleTester.UI.LogAnalyzer).FullName;
+            return typeof(UI.LogAnalyzer).FullName;
+        }
+        public string GetPromptToolFullName()
+        {
+            return typeof(UI.LogAnalyzer).FullName;
         }
 
         public string GetTitle()

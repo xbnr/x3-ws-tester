@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace ConsoleTester.Plugins.PrintServer
 {
-    public partial class PrintServerControl : ControlConfig
+    public partial class PrintServerControl : ControlConfigUI
     {
         private string filename;
 
@@ -727,7 +727,7 @@ namespace ConsoleTester.Plugins.PrintServer
                 string jsonFilename = (string)linkLabelJSon.Tag;
                 if (File.Exists(jsonFilename))
                 {
-                    Program.OpenJson(jsonFilename);
+                    ProgramUI.OpenJson(jsonFilename);
                 }
             }
         }

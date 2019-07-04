@@ -28,7 +28,7 @@ namespace ConsoleTester.UI
         {
             this.Size = new Size(Settings.Default.MainFormWidth, Settings.Default.MainFormHeight);
 
-            this.Text = Program.GetApplicationName() + " - " + Program.GetApplicationVersion();
+            this.Text = ProgramUI.GetApplicationName() + " - " + ProgramUI.GetApplicationVersion();
             Instance = this;
             var treeView = new FileSystemTree();
             FileSysTree = treeView;
@@ -40,7 +40,7 @@ namespace ConsoleTester.UI
             logs.Show(dockPanelMain, DockState.DockBottom);
             MainDockPanel = dockPanelMain;
 
-            foreach (var item in Program.GetConfigs())
+            foreach (var item in ProgramUI.GetConfigs())
             {
                 Type serviceType = Type.GetType(item.ToString());
                 IConfigService configService = Activator.CreateInstance(serviceType) as IConfigService;
@@ -101,7 +101,7 @@ namespace ConsoleTester.UI
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlConfig control = MainForm.MainDockPanel.ActiveContent as ControlConfig;
+            ControlConfigUI control = MainForm.MainDockPanel.ActiveContent as ControlConfigUI;
             if (control.GetWorkspaceFilename() == control.GetDefaultWorkspaceFilename())
             {
                 SaveAs(control);
@@ -116,18 +116,18 @@ namespace ConsoleTester.UI
         {
             foreach (var item in MainForm.MainDockPanel.Contents)
             {
-                ControlConfig control = item as ControlConfig;
+                ControlConfigUI control = item as ControlConfigUI;
                 control?.SaveWorkspace();
             }
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlConfig control = MainForm.MainDockPanel.ActiveContent as ControlConfig;
+            ControlConfigUI control = MainForm.MainDockPanel.ActiveContent as ControlConfigUI;
             SaveAs(control);
         }
 
-        private void SaveAs(ControlConfig control)
+        private void SaveAs(ControlConfigUI control)
         {
             EnterValueDialog dialog = new EnterValueDialog
             {

@@ -24,6 +24,12 @@ namespace ConsoleTester.Plugins.XsdValidator
             return typeof(XsdValidatorControl).FullName;
         }
 
+        public string GetPromptToolFullName()
+        {
+            return typeof(XsdValidatorControl).FullName;
+        }
+
+
         [JsonProperty]
         public string XMLFilename { get; set; }
 
@@ -48,7 +54,7 @@ namespace ConsoleTester.Plugins.XsdValidator
 
         internal static string GetWorkspaceFilename()
         {
-            return System.IO.Path.Combine(Program.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
+            return System.IO.Path.Combine(ProgramUI.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
 
         public string GetConfigPrefixFilename()

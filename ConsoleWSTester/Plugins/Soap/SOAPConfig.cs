@@ -23,6 +23,10 @@ namespace ConsoleTester.Plugins.Soap
         {
             return typeof(WsSOAPTester).FullName;
         }
+        public string GetPromptToolFullName()
+        {
+            return typeof(WsSOAPTester).FullName;
+        }
 
         public string GetConfigPrefixFilename()
         {
@@ -87,7 +91,7 @@ namespace ConsoleTester.Plugins.Soap
 
         internal static string GetWorkspaceFilename()
         {
-            return System.IO.Path.Combine(Program.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
+            return System.IO.Path.Combine(ProgramUI.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
 
     }

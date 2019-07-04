@@ -9,7 +9,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace ConsoleTester.UI
 {
-    public partial class LogAnalyzer : ControlConfig
+    public partial class LogAnalyzer : ControlConfigUI
     {
         public LogAnalyzer()
         {
@@ -30,7 +30,7 @@ namespace ConsoleTester.UI
             var folderDialog = new FolderBrowserDialog();
             folderDialog.ShowNewFolderButton = true;
             folderDialog.RootFolder = Environment.SpecialFolder.UserProfile;
-            folderDialog.SelectedPath = !string.IsNullOrEmpty(tbFolder.Text) ? tbFolder.Text : Program.GetWorkspaceDirectory();
+            folderDialog.SelectedPath = !string.IsNullOrEmpty(tbFolder.Text) ? tbFolder.Text : ProgramUI.GetWorkspaceDirectory();
             var result = folderDialog.ShowDialog();
             if (result == DialogResult.OK || result == DialogResult.Yes)
             {
@@ -52,13 +52,13 @@ namespace ConsoleTester.UI
 
         private void llOpenFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("explorer.exe", Program.GetWorkspaceDirectory());
+            Process.Start("explorer.exe", ProgramUI.GetWorkspaceDirectory());
         }
 
         private void llOpenConfigurationFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string configFilename = LogAnalyze.GetConfigFilename();
-            Program.OpenJson(configFilename);
+            ProgramUI.OpenJson(configFilename);
         }
 
         private void LogAnalyzer_FormClosing(object sender, FormClosingEventArgs e)
@@ -114,7 +114,7 @@ namespace ConsoleTester.UI
                 if (!string.IsNullOrEmpty(line))
                     lineNumber = int.Parse(line, System.Globalization.NumberStyles.Number);
             }
-            Program.OpenJson(path, lineNumber);
+            ProgramUI.OpenJson(path, lineNumber);
         }
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
