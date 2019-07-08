@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ConsoleTester.Program</StartupObject>
+    <StartupObject>ConsoleTester.ProgramUI</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>L_SAGE_Bright_Green.ico</ApplicationIcon>
@@ -130,9 +130,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Helper.cs" />
+    <Compile Include="Common\PromptHelper.cs" />
     <Compile Include="Plugins\LogAnalyzer\LogAnalyze.cs" />
     <Compile Include="Plugins\LogAnalyzer\Result.cs" />
     <Compile Include="Plugins\LogAnalyzer\Rules.cs" />
+    <Compile Include="Plugins\MongoDb\EdiHelper.cs" />
     <Compile Include="Plugins\MongoDb\EdiProcess.cs" />
     <Compile Include="Plugins\MongoDb\MongoConfig.cs" />
     <Compile Include="Plugins\MongoDb\MongoDbEDI.cs">
@@ -141,6 +143,7 @@
     <Compile Include="Plugins\MongoDb\MongoDbEDI.Designer.cs">
       <DependentUpon>MongoDbEDI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\MongoDb\MongoDbEdiPrompt.cs" />
     <Compile Include="Plugins\PrintServer\PrintServerHelper.cs" />
     <Compile Include="Plugins\PrintServer\ConsolePrintNet.cs" />
     <Compile Include="Plugins\PrintServer\PrintServerControl.cs">
@@ -168,7 +171,8 @@
     <Compile Include="UI\Browser.Designer.cs">
       <DependentUpon>Browser.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ControlConfig.cs">
+    <Compile Include="UI\ControlConfig.cs" />
+    <Compile Include="UI\ControlConfigUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\EnterValueDialog.cs">
@@ -235,7 +239,7 @@
     </Compile>
     <Compile Include="Common\ILogger.cs" />
     <Compile Include="Common\Logger.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="ProgramUI.cs" />
     <Compile Include="Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -296,8 +300,8 @@
     <EmbeddedResource Include="UI\Browser.resx">
       <DependentUpon>Browser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ControlConfig.resx">
-      <DependentUpon>ControlConfig.cs</DependentUpon>
+    <EmbeddedResource Include="UI\ControlConfigUI.resx">
+      <DependentUpon>ControlConfigUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EnterValueDialog.resx">
       <DependentUpon>EnterValueDialog.cs</DependentUpon>

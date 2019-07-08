@@ -21,6 +21,10 @@ namespace ConsoleTester.Plugins.MongoDb
         {
             return typeof(MongoDbEDI).FullName;
         }
+        public string GetPromptToolFullName()
+        {
+            return typeof(MongoDbEdiPrompt).FullName;
+        }
 
         [JsonProperty]
         public string ServerUrl { get; set; }
@@ -45,7 +49,7 @@ namespace ConsoleTester.Plugins.MongoDb
 
         internal static string GetWorkspaceFilename()
         {
-            return System.IO.Path.Combine(Program.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
+            return System.IO.Path.Combine(ProgramUI.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
 
         public string GetConfigPrefixFilename()

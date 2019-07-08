@@ -41,7 +41,7 @@ namespace ConsoleTester.LogsAnalyzer
         {
             if (string.IsNullOrEmpty(resultDirectoryTarget))
             {
-                resultDirectoryTarget = Path.Combine(Program.GetWorkspaceDirectory(), DateTime.Now.ToString("yyyyMMddHHmm"));
+                resultDirectoryTarget = Path.Combine(ProgramUI.GetWorkspaceDirectory(), DateTime.Now.ToString("yyyyMMddHHmm"));
             }
             return resultDirectoryTarget;
         }
@@ -53,7 +53,7 @@ namespace ConsoleTester.LogsAnalyzer
 
         internal static string GetConfigFilename()
         {
-            return Path.Combine(Program.GetWorkspaceDirectory(), GetConfigShortFilename());
+            return Path.Combine(ProgramUI.GetWorkspaceDirectory(), GetConfigShortFilename());
         }
 
         internal LogAnalyze(string folderToAnalyze, string filter, bool recurseSubFolder, ILogger logger)
@@ -136,7 +136,7 @@ namespace ConsoleTester.LogsAnalyzer
             this.logger.Log($"Create ConfigFile: {fileName}");
             this.rules = CreateDefaultConfig();
 
-            string wsDirectory = Program.GetWorkspaceDirectory();
+            string wsDirectory = ProgramUI.GetWorkspaceDirectory();
             if (!Directory.Exists(wsDirectory))
             {
                 Directory.CreateDirectory(wsDirectory);
@@ -262,7 +262,7 @@ namespace ConsoleTester.LogsAnalyzer
 
         internal void SaveResults(Rules rules, FileInfo file)
         {
-            string wsDirectory = Program.GetWorkspaceDirectory();
+            string wsDirectory = ProgramUI.GetWorkspaceDirectory();
             if (!Directory.Exists(wsDirectory))
             {
                 Directory.CreateDirectory(wsDirectory);

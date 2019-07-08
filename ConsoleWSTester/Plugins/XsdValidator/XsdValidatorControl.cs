@@ -18,7 +18,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace ConsoleTester.Plugins.XsdValidator
 {
-    public partial class XsdValidatorControl : ControlConfig
+    public partial class XsdValidatorControl : ControlConfigUI
     {
         private string filename;
 
@@ -268,7 +268,7 @@ namespace ConsoleTester.Plugins.XsdValidator
             var file = GetSelectedFile();
             if (file != null)
             {
-                Program.OpenJson(file.FullName);
+                ProgramUI.OpenJson(file.FullName);
             }
         }
 

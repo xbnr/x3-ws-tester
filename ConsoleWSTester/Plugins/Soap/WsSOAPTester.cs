@@ -17,7 +17,7 @@ using System.Windows.Forms;
 
 namespace ConsoleTester.Plugins.Soap
 {
-    public partial class WsSOAPTester : ControlConfig
+    public partial class WsSOAPTester : ControlConfigUI
     {
         private string filename;
         private List<CAWebService.CAdxParamKeyValue> parametersDS = new List<CAWebService.CAdxParamKeyValue>();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleTester.UI
 {
-    interface IControlConfig
+    public interface IControlConfig
     {
         bool IsVisibleInReleaseMode();
 

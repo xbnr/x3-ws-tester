@@ -23,6 +23,11 @@ namespace ConsoleTester.Plugins.Rest
             return typeof(WsRESTControl).FullName;
         }
 
+        public string GetPromptToolFullName()
+        {
+            return typeof(WsRESTControl).FullName;
+        }
+
         [JsonProperty]
         public string HostUrl { get; set; }
 
@@ -62,7 +67,7 @@ namespace ConsoleTester.Plugins.Rest
 
         internal static string GetWorkspaceFilename()
         {
-            return System.IO.Path.Combine(Program.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
+            return System.IO.Path.Combine(ProgramUI.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
 
         public string GetConfigPrefixFilename()

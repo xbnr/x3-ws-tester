@@ -44,25 +44,25 @@ namespace ConsoleTester.UI
             FileInfo file = SelectedFile;
             if (file != null)
             {
-                ControlConfig content = null;
+                ControlConfigUI content = null;
                 foreach (var item in MainForm.MainDockPanel.Contents)
                 {
                     if (((DockContent)item).Tag?.ToString() == file.FullName)
                     {
-                        content = ((ControlConfig)item);
+                        content = ((ControlConfigUI)item);
                         break;
                     }
                 }
                 if (content == null)
                 {
-                    foreach (var item in Program.GetConfigs())
+                    foreach (var item in ProgramUI.GetConfigs())
                     {
                         Type serviceType = Type.GetType(item.ToString());
                         IConfigService configService = Activator.CreateInstance(serviceType) as IConfigService;
                         if (Path.GetFileNameWithoutExtension(file.Name).IndexOf(configService.GetConfigPrefixFilename()) >= 0)
                         {
                             Type formType = Type.GetType(configService.GetFormFullName());
-                            content = Activator.CreateInstance(formType) as ControlConfig;
+                            content = Activator.CreateInstance(formType) as ControlConfigUI;
                             break;
                         }
                     }
@@ -82,7 +82,7 @@ namespace ConsoleTester.UI
 
         private void openWithToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.OpenJson(SelectedFile.FullName);
+            ProgramUI.OpenJson(SelectedFile.FullName);
         }
 
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -121,7 +121,7 @@ namespace ConsoleTester.UI
         {
             tvFileSystem.TopNode.Nodes.Clear();
 
-            var dir = new DirectoryInfo(Program.GetWorkspaceDirectory());
+            var dir = new DirectoryInfo(ProgramUI.GetWorkspaceDirectory());
             if (!dir.Exists)
             {
                 return;

@@ -42,6 +42,10 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             return typeof(PrintServerControl).FullName;
         }
+        public string GetPromptToolFullName()
+        {
+            return typeof(PrintServerControl).FullName;
+        }
 
         [JsonProperty]
         public string InstallDirectory { get; set; }
@@ -94,7 +98,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         internal static string GetWorkspaceFilename()
         {
-            return System.IO.Path.Combine(Program.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
+            return System.IO.Path.Combine(ProgramUI.GetWorkspaceDirectory(), GetWorkspaceShortFilename());
         }
 
         public string GetConfigPrefixFilename()

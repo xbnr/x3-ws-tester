@@ -22,8 +22,8 @@ namespace ConsoleTester.UI
 
         private void InitializeProductInformation()
         {
-            _labelProductName.Text = Program.GetApplicationName();
-            _labelVersion.Text = Program.GetApplicationVersion();
+            _labelProductName.Text = ProgramUI.GetApplicationName();
+            _labelVersion.Text = ProgramUI.GetApplicationVersion();
         }
 
         private void SystemButtonClick(object sender, EventArgs e) => Process.Start("msinfo32.exe");

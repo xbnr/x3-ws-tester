@@ -12,6 +12,8 @@ namespace ConsoleTester.Common
 
         string GetFormFullName();
 
+        string GetPromptToolFullName();
+
         string GetConfigPrefixFilename();
     }
 }

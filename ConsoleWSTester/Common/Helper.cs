@@ -16,7 +16,7 @@ namespace ConsoleTester.Common
     {
         public static void SaveWorkspace(string filename, IConfigService data)
         {
-            string wsDirectory = Program.GetWorkspaceDirectory();
+            string wsDirectory = ProgramUI.GetWorkspaceDirectory();
 
             if (!Directory.Exists(wsDirectory))
             {
@@ -80,10 +80,10 @@ namespace ConsoleTester.Common
             }
         }
 
-        public static ControlConfig GetUIControl(IConfigService configService)
+        public static ControlConfigUI GetUIControl(IConfigService configService)
         {
             Type formType = Type.GetType(configService.GetFormFullName());
-            ControlConfig dockContent = Activator.CreateInstance(formType) as ControlConfig;
+            ControlConfigUI dockContent = Activator.CreateInstance(formType) as ControlConfigUI;
             return dockContent;
         }
 
