@@ -683,8 +683,43 @@ namespace ConsoleTester.Plugins.PrintServer
                             }
                         }
                         tbAdxEditionServerConfigXml.Text = configText;
+
+
+                        // tbAdxEditionServerSolutions
+                        JObject serverSolutionObject = configObject["serverSolutions"]?.Value<JObject>();
+                        if (serverSolutionObject != null)
+                        {
+                            string serverSolutionText = string.Empty;
+                            JObject adonixObject = serverSolutionObject["adonix"]?.Value<JObject>();
+                            if (adonixObject != null)
+                            {
+                                JArray arrayProfiles = adonixObject["profile"]?.Value<JArray>();
+                                foreach (JToken profileItem in arrayProfiles)
+                                {
+                                    JObject grpsolsObject = profileItem["grpsols"]?.Value<JObject>();
+                                    if (grpsolsObject != null)
+                                    {
+
+                                        JArray arraySol = grpsolsObject["sol"]?.Value<JArray>();
+                                        foreach (JToken sol in arraySol)
+                                        {
+
+                                            serverSolutionText += $"id: {sol["id"]} \r\n";
+
+                                        }
+
+                                    }
+                                }
+                                tbAdxEditionServerSolutions.Text = serverSolutionText;
+                            }
+                        }
+
                     }
+
+                    
                 }
+
+                
 
                 JArray arrayPrinters = resultJObject["serverPrinters"]?.Value<JArray>();
                 if (arrayPrinters != null)
@@ -722,7 +757,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void linkLabelJSon_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (linkLabelJSon.Tag  != null && linkLabelJSon.Tag is string)
+            if (linkLabelJSon.Tag != null && linkLabelJSon.Tag is string)
             {
                 string jsonFilename = (string)linkLabelJSon.Tag;
                 if (File.Exists(jsonFilename))
