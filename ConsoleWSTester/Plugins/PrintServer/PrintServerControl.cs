@@ -644,82 +644,13 @@ namespace ConsoleTester.Plugins.PrintServer
                         tbService.Text = serverService;
                     }
 
-
-                    JObject configObject = printServerInfoObject["config"]?.Value<JObject>();
-                    if (configObject != null)
+                    if (printServerInfoObject["config"]?.Value<JObject>() != null)
                     {
-                        string configText = string.Empty;
-                        JObject serverConfigObject = configObject["serverConfig"]?.Value<JObject>();
-                        if (serverConfigObject != null)
-                        {
-                            JObject adxSrvImpObject = serverConfigObject["adxSrvImp"]?.Value<JObject>();
-                            if (adxSrvImpObject != null)
-                            {
-                                JArray arrayConfigs = adxSrvImpObject["config"]?.Value<JArray>();
-                                foreach (JToken configItem in arrayConfigs)
-                                {
-                                    configText += $"Profile '{configItem["id"]}' : {configItem["cap"]}  \r\n";
-                                    JObject general = configItem["general"]?.Value<JObject>();
-                                    if (general != null)
-                                    {
-                                        configText += $" General: lang: {general["lang"]}   Port: {general["port"]}  Recovery mode: {general["restartrpts"]} \r\n";
-                                    }
-                                    JObject jobs = configItem["jobs"]?.Value<JObject>();
-                                    if (jobs != null)
-                                    {
-                                        configText += $" Jobs : Time before purging job : {jobs["purgetime"]} minutes     Max. running print processes : {jobs["max"]}    vpalloc: {jobs["vpalloc"]} \r\n";
-                                    }
-                                    JObject log = configItem["log"]?.Value<JObject>();
-                                    if (log != null)
-                                    {
-                                        configText += $" Logs : number : {log["number"]}   size : {log["size"]} \r\n";
-                                    }
-                                    JObject processes = configItem["processes"]?.Value<JObject>();
-                                    if (log != null)
-                                    {
-                                        configText += $" Processes : killtime : {processes["killtime"]}  max : {processes["max"]}   min : {processes["min"]} \r\n";
-                                    }
-                                }
-                            }
-                        }
-                        tbAdxEditionServerConfigXml.Text = configText;
-
-
-                        // tbAdxEditionServerSolutions
-                        JObject serverSolutionObject = configObject["serverSolutions"]?.Value<JObject>();
-                        if (serverSolutionObject != null)
-                        {
-                            string serverSolutionText = string.Empty;
-                            JObject adonixObject = serverSolutionObject["adonix"]?.Value<JObject>();
-                            if (adonixObject != null)
-                            {
-                                JArray arrayProfiles = adonixObject["profile"]?.Value<JArray>();
-                                foreach (JToken profileItem in arrayProfiles)
-                                {
-                                    JObject grpsolsObject = profileItem["grpsols"]?.Value<JObject>();
-                                    if (grpsolsObject != null)
-                                    {
-
-                                        JArray arraySol = grpsolsObject["sol"]?.Value<JArray>();
-                                        foreach (JToken sol in arraySol)
-                                        {
-
-                                            serverSolutionText += $"id: {sol["id"]} \r\n";
-
-                                        }
-
-                                    }
-                                }
-                                tbAdxEditionServerSolutions.Text = serverSolutionText;
-                            }
-                        }
-
+                        ShowXmlConfigInfo(printServerInfoObject);
                     }
-
-                    
                 }
 
-                
+
 
                 JArray arrayPrinters = resultJObject["serverPrinters"]?.Value<JArray>();
                 if (arrayPrinters != null)
@@ -753,6 +684,84 @@ namespace ConsoleTester.Plugins.PrintServer
                 Logger.Log($"File result {resultJson} doesn't exist");
             }
             return result;
+        }
+
+        private void ShowXmlConfigInfo(JObject printServerInfoObject)
+        {
+            JObject configObject = printServerInfoObject["config"]?.Value<JObject>();
+            if (configObject != null)
+            {
+                string configText = string.Empty;
+                JObject serverConfigObject = configObject["serverConfig"]?.Value<JObject>();
+                if (serverConfigObject != null)
+                {
+                    JObject adxSrvImpObject = serverConfigObject["adxSrvImp"]?.Value<JObject>();
+                    if (adxSrvImpObject != null)
+                    {
+                        JArray arrayConfigs = adxSrvImpObject["config"]?.Value<JArray>();
+                        foreach (JToken configItem in arrayConfigs)
+                        {
+                            configText += $"Profile '{configItem["id"]}' : {configItem["cap"]}  \r\n";
+                            JObject general = configItem["general"]?.Value<JObject>();
+                            if (general != null)
+                            {
+                                configText += $" General: lang: {general["lang"]}   Port: {general["port"]}  Recovery mode: {general["restartrpts"]} \r\n";
+                            }
+                            JObject jobs = configItem["jobs"]?.Value<JObject>();
+                            if (jobs != null)
+                            {
+                                configText += $" Jobs : Time before purging job : {jobs["purgetime"]} minutes     Max. running print processes : {jobs["max"]}    vpalloc: {jobs["vpalloc"]} \r\n";
+                            }
+                            JObject log = configItem["log"]?.Value<JObject>();
+                            if (log != null)
+                            {
+                                configText += $" Logs : number : {log["number"]}   size : {log["size"]} \r\n";
+                            }
+                            JObject processes = configItem["processes"]?.Value<JObject>();
+                            if (log != null)
+                            {
+                                configText += $" Processes : killtime : {processes["killtime"]}  max : {processes["max"]}   min : {processes["min"]} \r\n";
+                            }
+                        }
+                    }
+                }
+                tbAdxEditionServerConfigXml.Text = configText;
+
+
+                // tbAdxEditionServerSolutions
+                JObject serverSolutionObject = configObject["serverSolutions"]?.Value<JObject>();
+                if (serverSolutionObject != null)
+                {
+                    string serverSolutionText = string.Empty;
+                    JObject adonixObject = serverSolutionObject["adonix"]?.Value<JObject>();
+                    if (adonixObject != null)
+                    {
+                        JArray arrayProfiles = adonixObject["profile"]?.Value<JArray>();
+                        foreach (JToken profileItem in arrayProfiles)
+                        {
+                            serverSolutionText += $"profile: {profileItem["id"]} \r\n";
+
+                            JObject grpsolsObject = profileItem["grpsols"]?.Value<JObject>();
+                            if (grpsolsObject != null)
+                            {
+
+                                JArray arraySol = grpsolsObject["sol"]?.Value<JArray>();
+                                foreach (JToken sol in arraySol)
+                                {
+
+                                    serverSolutionText += $"id: {sol["id"]} \r\n";
+
+                                }
+
+                            }
+
+                            serverSolutionText += $" \r\n";
+                        }
+                        tbAdxEditionServerSolutions.Text = serverSolutionText;
+                    }
+                }
+
+            }
         }
 
         private void linkLabelJSon_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
