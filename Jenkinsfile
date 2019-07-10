@@ -57,15 +57,16 @@ node('sign') {
 	  	    %msbuild% %slnConsoleTester% /p:configuration=Release /p:Platform="x86"
 			git checkout .
 	 	'''
-		stash name:"binRelease", includes: "ConsoleWSTester/bin/x86/Release/**/*"
+		stash name:"binRelease", includes: "ConsolePrompt/bin/x86/Release/**/*"
 	}
 }
 
 node('sign') {
 	stage('Sign exe and dlls') {
 		unstash "binRelease"
-		signExe("ConsoleWSTester\\bin\\x86\\Release\\ConsoleTester.exe")
-		stash name:"binRelease", includes: "ConsoleWSTester/bin/x86/Release/**/*"
+		signExe("ConsolePrompt\\bin\\x86\\Release\\ConsolePrompt.exe")
+		signExe("ConsolePrompt\\bin\\x86\\Release\\ConsoleTester.exe")
+		stash name:"binRelease", includes: "ConsolePrompt/bin/x86/Release/**/*"
 	}		
 }
 
@@ -76,7 +77,7 @@ node('sign') {
 			set  HEAT="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\heat.exe"		  
 			set wxsHeatFile="WSTesterHeat.wxs"
 			set releaseDir="Release"
-			xcopy /i /y /s ".\\ConsoleWSTester\\bin\\x86\\Release" ".\\Setup\\Release" 
+			xcopy /i /y /s ".\\ConsolePrompt\\bin\\x86\\Release" ".\\Setup\\Release" 
 			copy ".\\Resources\\log4Net-1.2.10\\log4net.dll" ".\\Setup\\Release"
 
 			cd .\\Setup
