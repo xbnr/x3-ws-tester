@@ -25,6 +25,7 @@ namespace ConsolePrompt
                 {
                     PromptHelper.ShowPromptInfo($"{item.Name}");
                 }
+                PromptHelper.ShowPromptInfo($" ");
 
                 FileInfo fileFound = null;
                 string jsonFilename = null;
@@ -44,7 +45,7 @@ namespace ConsolePrompt
                 }
 
                 var content = GetControlInstance(fileFound);
-                PromptHelper.ShowPromptInfo(content?.ToString());
+                // PromptHelper.ShowPromptInfo(content?.ToString());
                 content.CreateWS(fileFound);
 
             }
@@ -57,11 +58,10 @@ namespace ConsolePrompt
                 Type serviceType = Type.GetType(item.AssemblyQualifiedName);
                 if (serviceType != null)
                 {
-                    IConfigService configService = Activator.CreateInstance(serviceType) as IConfigService;
-                    if (configService != null && Path.GetFileNameWithoutExtension(fileFound.Name).IndexOf(configService.GetConfigPrefixFilename()) >= 0)
+                    if (Activator.CreateInstance(serviceType) is IConfigService configService && Path.GetFileNameWithoutExtension(fileFound.Name).IndexOf(configService.GetConfigPrefixFilename()) >= 0)
                     {
-                        Type promptType = Type.GetType($"{configService.GetPromptToolFullName()}, {serviceType.Assembly.GetName()}"); 
-                         var content = Activator.CreateInstance(promptType) as ControlConfig;
+                        Type promptType = Type.GetType($"{configService.GetPromptToolFullName()}, {serviceType.Assembly.GetName()}");
+                        var content = Activator.CreateInstance(promptType) as ControlConfig;
                         return content;
                     }
                 }

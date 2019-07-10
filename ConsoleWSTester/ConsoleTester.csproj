@@ -144,6 +144,7 @@
       <DependentUpon>MongoDbEDI.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\MongoDb\MongoDbEdiPrompt.cs" />
+    <Compile Include="Plugins\PrintServer\PrintPrompt.cs" />
     <Compile Include="Plugins\PrintServer\PrintServerHelper.cs" />
     <Compile Include="Plugins\PrintServer\ConsolePrintNet.cs" />
     <Compile Include="Plugins\PrintServer\PrintServerControl.cs">
@@ -152,6 +153,7 @@
     <Compile Include="Plugins\PrintServer\PrintServerControl.Designer.cs">
       <DependentUpon>PrintServerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\Soap\WsSOAPTesterPrompt.cs" />
     <Compile Include="Plugins\XsdValidator\XsdSchemaNormalizer.cs" />
     <Compile Include="Plugins\XsdValidator\Validation.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

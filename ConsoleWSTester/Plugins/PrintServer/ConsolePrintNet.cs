@@ -44,7 +44,7 @@ namespace ConsoleTester.Plugins.PrintServer
         }
         public string GetPromptToolFullName()
         {
-            return typeof(PrintServerControl).FullName;
+            return typeof(PrintPrompt).FullName;
         }
 
         [JsonProperty]
