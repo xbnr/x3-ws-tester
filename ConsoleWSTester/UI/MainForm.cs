@@ -101,13 +101,17 @@ namespace ConsoleTester.UI
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ControlConfigUI control = MainForm.MainDockPanel.ActiveContent as ControlConfigUI;
+            if (control == null)
+            {
+                return;
+            }
             if (control.GetWorkspaceFilename() == control.GetDefaultWorkspaceFilename())
             {
                 SaveAs(control);
             }
             else
             {
-                control?.SaveWorkspace();
+                control.SaveWorkspace();
             }
         }
 
