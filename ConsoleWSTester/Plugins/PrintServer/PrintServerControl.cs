@@ -132,7 +132,7 @@ namespace ConsoleTester.Plugins.PrintServer
             Helper.SetTextFromSettings(config.Password, this.tbPassword);
             Helper.SetTextFromSettings(config.ReportFilename, this.cbReportName);
             Helper.SetTextFromSettings(config.ExportDirectory, this.cbExportDirectory);
-            Helper.SetSafeComboBox(this.cbActions, (ActionAsked)Enum.Parse(typeof(ActionAsked), config.Action));
+            Helper.SetSafeComboBox(this.cbActions, SafeEnumParse(config.Action));
             Helper.SetSafeText(this.cbOutputFormat, config.OutputFormat);
             Helper.SetSafeCheck(this.cbOpenDocumentAfterGeneration, config.OpenGeneratedFile);
 
@@ -170,6 +170,19 @@ namespace ConsoleTester.Plugins.PrintServer
             }
         }
 
+        private static ActionAsked SafeEnumParse(string action)
+        {
+            ActionAsked result = ActionAsked.None;
+            try
+            {
+                result = (ActionAsked)Enum.Parse(typeof(ActionAsked), action);
+            }
+            catch (Exception)
+            {
+                Logger.Log($"Cannot parse value {action}. Possible values: {Enum.GetValues(typeof(ActionAsked))} . ");
+            }
+            return result;
+        }
 
         public override IConfigService GetConfigFromUI()
         {
@@ -635,7 +648,7 @@ namespace ConsoleTester.Plugins.PrintServer
                         }
                         tbPrintServerVersion.Text = serverVersion;
                     }
-                    JArray arrayService = printServerInfoObject["service"].Value<JArray>();
+                    JArray arrayService = printServerInfoObject["service"]?.Value<JArray>();
                     if (arrayService != null)
                     {
                         string serverService = string.Empty;

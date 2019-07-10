@@ -101,11 +101,11 @@
             this.tbPrintServerVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageConfig = new System.Windows.Forms.TabPage();
+            this.tbAdxEditionServerSolutions = new System.Windows.Forms.TextBox();
+            this.labelAdxEditionServerSolutions = new System.Windows.Forms.Label();
             this.tbAdxEditionServerConfigXml = new System.Windows.Forms.TextBox();
             this.labelAdxEditionServerConfigXml = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tbAdxEditionServerSolutions = new System.Windows.Forms.TextBox();
-            this.labelAdxEditionServerSolutions = new System.Windows.Forms.Label();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
             this.panelAddRemoveParameters.SuspendLayout();
@@ -868,29 +868,6 @@
             this.tabPageConfig.Text = "Config";
             this.tabPageConfig.UseVisualStyleBackColor = true;
             // 
-            // tbAdxEditionServerConfigXml
-            // 
-            this.tbAdxEditionServerConfigXml.AcceptsReturn = true;
-            this.tbAdxEditionServerConfigXml.AcceptsTab = true;
-            this.tbAdxEditionServerConfigXml.HideSelection = false;
-            this.tbAdxEditionServerConfigXml.Location = new System.Drawing.Point(159, 15);
-            this.tbAdxEditionServerConfigXml.Multiline = true;
-            this.tbAdxEditionServerConfigXml.Name = "tbAdxEditionServerConfigXml";
-            this.tbAdxEditionServerConfigXml.ReadOnly = true;
-            this.tbAdxEditionServerConfigXml.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbAdxEditionServerConfigXml.Size = new System.Drawing.Size(693, 101);
-            this.tbAdxEditionServerConfigXml.TabIndex = 11;
-            this.tbAdxEditionServerConfigXml.WordWrap = false;
-            // 
-            // labelAdxEditionServerConfigXml
-            // 
-            this.labelAdxEditionServerConfigXml.Location = new System.Drawing.Point(15, 19);
-            this.labelAdxEditionServerConfigXml.Name = "labelAdxEditionServerConfigXml";
-            this.labelAdxEditionServerConfigXml.Size = new System.Drawing.Size(143, 24);
-            this.labelAdxEditionServerConfigXml.TabIndex = 10;
-            this.labelAdxEditionServerConfigXml.Text = "AdxEditionServerConfigXml :";
-            this.labelAdxEditionServerConfigXml.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // tbAdxEditionServerSolutions
             // 
             this.tbAdxEditionServerSolutions.AcceptsReturn = true;
@@ -907,12 +884,35 @@
             // 
             // labelAdxEditionServerSolutions
             // 
-            this.labelAdxEditionServerSolutions.Location = new System.Drawing.Point(15, 143);
+            this.labelAdxEditionServerSolutions.Location = new System.Drawing.Point(5, 145);
             this.labelAdxEditionServerSolutions.Name = "labelAdxEditionServerSolutions";
-            this.labelAdxEditionServerSolutions.Size = new System.Drawing.Size(143, 24);
+            this.labelAdxEditionServerSolutions.Size = new System.Drawing.Size(153, 24);
             this.labelAdxEditionServerSolutions.TabIndex = 12;
-            this.labelAdxEditionServerSolutions.Text = "AdxEditionServerSolutionsXml :";
+            this.labelAdxEditionServerSolutions.Text = "AdxEditionServerSolutions.Xml :";
             this.labelAdxEditionServerSolutions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tbAdxEditionServerConfigXml
+            // 
+            this.tbAdxEditionServerConfigXml.AcceptsReturn = true;
+            this.tbAdxEditionServerConfigXml.AcceptsTab = true;
+            this.tbAdxEditionServerConfigXml.HideSelection = false;
+            this.tbAdxEditionServerConfigXml.Location = new System.Drawing.Point(159, 15);
+            this.tbAdxEditionServerConfigXml.Multiline = true;
+            this.tbAdxEditionServerConfigXml.Name = "tbAdxEditionServerConfigXml";
+            this.tbAdxEditionServerConfigXml.ReadOnly = true;
+            this.tbAdxEditionServerConfigXml.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbAdxEditionServerConfigXml.Size = new System.Drawing.Size(693, 101);
+            this.tbAdxEditionServerConfigXml.TabIndex = 11;
+            this.tbAdxEditionServerConfigXml.WordWrap = false;
+            // 
+            // labelAdxEditionServerConfigXml
+            // 
+            this.labelAdxEditionServerConfigXml.Location = new System.Drawing.Point(3, 19);
+            this.labelAdxEditionServerConfigXml.Name = "labelAdxEditionServerConfigXml";
+            this.labelAdxEditionServerConfigXml.Size = new System.Drawing.Size(155, 24);
+            this.labelAdxEditionServerConfigXml.TabIndex = 10;
+            this.labelAdxEditionServerConfigXml.Text = "AdxEditionServerConfig.Xml :";
+            this.labelAdxEditionServerConfigXml.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // PrintServerControl
             // 

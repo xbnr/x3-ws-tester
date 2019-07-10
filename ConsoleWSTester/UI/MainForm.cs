@@ -33,8 +33,6 @@ namespace ConsoleTester.UI
             var treeView = new FileSystemTree();
             FileSysTree = treeView;
             treeView.Show(dockPanelMain, DockState.DockLeft);
-            // var outputResult = new OutputResult();
-            // outputResult.Show(dockPanelMain, DockState.DockBottom);
             var logs = new Logs();
             LogControl = logs.LogControl;
             logs.Show(dockPanelMain, DockState.DockBottom);
@@ -60,6 +58,7 @@ namespace ConsoleTester.UI
             var configService = se.Tag as IConfigService;
             var UIControl = Helper.GetUIControl(configService);
             UIControl.CreateNewWS();
+            UIControl.Text = "New document";
             UIControl.Show(dockPanelMain, DockState.Document);
         }
 
@@ -138,6 +137,10 @@ namespace ConsoleTester.UI
                 string defaultFilename = control.GetDefaultWorkspaceFilename();
                 string newFilename = Path.Combine(Path.GetDirectoryName(defaultFilename),
                     $"{Path.GetFileNameWithoutExtension(defaultFilename)}{dialog.GetEnteredValue()}{Path.GetExtension(defaultFilename)}");
+
+                control.Text = Path.GetFileNameWithoutExtension(newFilename);
+                control.Tag = newFilename;
+
                 control.SetWorkspaceFilename(newFilename);
                 control.SaveWorkspace();
                 FileSysTree.BuildTreeView();
