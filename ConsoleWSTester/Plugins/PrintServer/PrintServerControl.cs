@@ -210,8 +210,17 @@ namespace ConsoleTester.Plugins.PrintServer
         private void RunCommand()
         {
             string exe, arguments;
+
             BuildCommand(out exe, out arguments);
             Logger.Log(exe + arguments);
+
+            if (!File.Exists(exe))
+            {
+                string friendlyMesg = $"Error: executable filename '{exe}' doesn't exist. Please check the Sage PrintServer directory and it's version. Version must be >= V2.18  ";
+                Logger.Log(friendlyMesg, true);
+                MessageBox.Show(friendlyMesg, $"{exe}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             //* Create your Process
             Process process = new Process();

@@ -28,7 +28,7 @@
 try {  
 
 
-node('windows') {
+node('sign') {
 
    stage('Checkout and scan') {
          checkout scm	  
@@ -61,16 +61,16 @@ node('windows') {
 	}
 }
 
-		node('sign') {
-		stage('Sign exe and dlls') {
-			unstash "binRelease"
-			signExe("ConsoleWSTester\\bin\\x86\\Release\\ConsoleTester.exe")
-			stash name:"binRelease", includes: "ConsoleWSTester/bin/x86/Release/**/*"
-		}		
-	}
+node('sign') {
+	stage('Sign exe and dlls') {
+		unstash "binRelease"
+		signExe("ConsoleWSTester\\bin\\x86\\Release\\ConsoleTester.exe")
+		stash name:"binRelease", includes: "ConsoleWSTester/bin/x86/Release/**/*"
+	}		
+}
 
 
-node('windows') {
+node('sign') {
     stage('Build setup') {
 	   	bat '''
 			set  HEAT="C:\\Program Files (x86)\\WiX Toolset v4.0\\bin\\heat.exe"		  
