@@ -15,41 +15,114 @@ namespace ConsolePrompt
     {
         static void Main(string[] args)
         {
+            new Program().Prompt();
+        }
+
+        private void Prompt()
+        {
             PromptHelper.ShowPromptInfo("Welcome to SAGE X3 Tester.");
             PromptHelper.ShowPromptInfo("");
+
+
+            while (true)
+            {
+                FileInfo[] files = ConfigurationFileList();
+
+                DisplayPromptMenu();
+
+                string lineRead = PromptHelper.EnterValue("Please, enter your choice, or the solution you want to open : ");
+                int number = -1;
+                bool ok = int.TryParse(lineRead, out number);
+
+                string configurationName = null;
+                if (!ok)
+                {
+                    if (lineRead.Equals("Quit", StringComparison.InvariantCultureIgnoreCase) || lineRead.Equals("Exit", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        number = (int)Menu.ExitProgram;
+                    }
+                    else
+                    {
+                        number = (int)Menu.OpenConfiguration;
+                        configurationName = lineRead;
+                    }
+                }
+
+                switch (number)
+                {
+                    case (int)Menu.DisplayPrompt:
+                        DisplayPromptMenu();
+                        break;
+                    case (int)Menu.OpenConfiguration:
+                        ConnectConfiguration(files, configurationName);
+                        break;
+                    case (int)Menu.ExitProgram:
+                        Environment.Exit(0);
+                        break;
+                }
+
+
+            }
+        }
+
+        private static void ConnectConfiguration(FileInfo[] files, string jsonFilename)
+        {
+            FileInfo fileFound = null;
+            while (fileFound == null)
+            {
+                if (!jsonFilename.EndsWith(".json", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    jsonFilename += ".json";
+                }
+                fileFound = files.ToList().SingleOrDefault(p => p.Name == jsonFilename);
+
+                if (fileFound == null)
+                {
+                    PromptHelper.ShowPromptHighlight($"{jsonFilename} doesn't exist.");
+                    jsonFilename = PromptHelper.EnterValue("Please, enter your choice, or the solution you want to open : ");
+                }
+            }
+
+            var content = GetControlInstance(fileFound);
+            content.CreateWS(fileFound);
+        }
+
+        private static FileInfo[] ConfigurationFileList()
+        {
+            FileInfo[] files = new FileInfo[0];
             var dir = new DirectoryInfo(ProgramUI.GetWorkspaceDirectory());
             if (dir.Exists)
             {
-                var files = dir.GetFiles();
+                files = dir.GetFiles();
                 foreach (var item in files)
                 {
                     PromptHelper.ShowPromptInfo($"{item.Name}");
                 }
                 PromptHelper.ShowPromptInfo($" ");
 
-                FileInfo fileFound = null;
-                string jsonFilename = null;
-                while (fileFound == null)
-                {
-                    jsonFilename = PromptHelper.EnterValue("Please enter the solution you want to open.");
-                    if (!jsonFilename.EndsWith(".json", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        jsonFilename += ".json";
-                    }
-                    fileFound = files.ToList().SingleOrDefault(p => p.Name == jsonFilename);
-
-                    if (fileFound == null)
-                    {
-                        PromptHelper.ShowPromptHighlight($"{jsonFilename} doesn't exist.");
-                    }
-                }
-
-                var content = GetControlInstance(fileFound);
-                // PromptHelper.ShowPromptInfo(content?.ToString());
-                content.CreateWS(fileFound);
-
             }
+            return files;
         }
+
+        private enum Menu
+        {
+            ListSolutions = 1,
+            CreateNewConfiguration = 2,
+            OpenConfiguration = 3,
+            DisplayPrompt = 30,
+            ExitProgram = 50,
+        }
+
+        private void DisplayPromptMenu()
+        {
+            PromptHelper.ShowPromptInfo($"\r");
+            PromptHelper.ShowPromptInfo($"{(int)Menu.ListSolutions}. List configurations");
+            PromptHelper.ShowPromptInfo($"{(int)Menu.OpenConfiguration}. Open configuration");
+            
+            PromptHelper.ShowPromptInfo($"{(int)Menu.CreateNewConfiguration}. Create new configuration");            
+            PromptHelper.ShowPromptInfo($"{(int)Menu.ExitProgram}. Quit");
+        }
+
 
         private static ControlConfig GetControlInstance(FileInfo fileFound)
         {

@@ -31,7 +31,7 @@ namespace ConsoleTester.Plugins.MongoDb
             return client?.GetDatabase(MongoDatabase); // "syracuse");
         }
 
-        public async Task<List<GridFSFileInfo>> SearchAsync(string fieldName, string searchType, string fieldvalue)
+        public async Task<List<GridFSFileInfo>> SearchAsync(string fieldName, string searchType, string fieldvalue, int xLastItems)
         {
             List<GridFSFileInfo> fileInfos = null;
             try
@@ -40,7 +40,7 @@ namespace ConsoleTester.Plugins.MongoDb
 
                 IMongoCollection<GridFSFileInfo> filesCollection = database.GetCollection<GridFSFileInfo>("fs.files");
                 if (string.IsNullOrEmpty(fieldvalue))
-                    fileInfos = await GetLastFilesAsync(filesCollection, LastItems);
+                    fileInfos = await GetLastFilesAsync(filesCollection, xLastItems);
                 else
                     fileInfos = await FindFilesAsync(filesCollection, fieldName, searchType, fieldvalue);
 

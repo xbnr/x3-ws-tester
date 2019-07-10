@@ -104,7 +104,7 @@ namespace ConsoleTester.Plugins.MongoDb
 
             // Task.Run(() => SearchAsync(cbFieldName.Text, tbTextToSearch.Text));
             EdiHelper h = new EdiHelper(MongoServer, MongoDatabase);
-            List<GridFSFileInfo> result = await h.SearchAsync(cbFieldName.Text, cbSearchType.Text, tbTextToSearch.Text);
+            List<GridFSFileInfo> result = await h.SearchAsync(cbFieldName.Text, cbSearchType.Text, tbTextToSearch.Text, 100);
             Helper.SetSafeDatasource(dgKeyValue, result);
         }
 
