@@ -43,7 +43,7 @@ namespace ConsoleTester.Plugins.MongoDb
 
         private void ShowMenu()
         {
-            PromptHelper.ShowPromptInfo($"Download file");
+            PromptHelper.ShowPromptHighlight($"Download file");
             // PromptHelper.ShowPromptInfo($"Download file");
         }
 
@@ -59,9 +59,18 @@ namespace ConsoleTester.Plugins.MongoDb
             EdiHelper h = new EdiHelper(MongoServer, MongoDatabase);
 
             List<GridFSFileInfo> result = await h.SearchAsync(fieldName, cbSearchType, tbTextToSearch, LastItems);
-            foreach(var item in result)
+            foreach (var item in result)
             {
-                PromptHelper.ShowPromptInfo($"{item.Filename} {item.ContentType} \t {item.UploadDateTime}");
+                string filename = string.Empty;
+                try
+                {
+                    filename = item.Metadata != null ? item.Metadata["fileName"]?.AsString : "";
+                }
+                catch (Exception)
+                {
+                    // nothing to do
+                }
+                PromptHelper.ShowPromptInfo($"{item.Filename} {filename } \t {item.ContentType} \t {item.Length} \t {item.UploadDateTime}");
             }
         }
 
