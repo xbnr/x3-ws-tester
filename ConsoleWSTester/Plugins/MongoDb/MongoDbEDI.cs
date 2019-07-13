@@ -58,8 +58,8 @@ namespace ConsoleTester.Plugins.MongoDb
         public override string GetDefaultWorkspaceFilename()
         {
             return MongoConfig.GetWorkspaceFilename();
-
         }
+
         public override string GetWorkspaceFilename()
         {
             if (string.IsNullOrEmpty(this.filename))

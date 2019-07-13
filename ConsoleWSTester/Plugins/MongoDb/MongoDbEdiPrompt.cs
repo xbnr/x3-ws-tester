@@ -20,6 +20,11 @@ namespace ConsoleTester.Plugins.MongoDb
             LoadConfigFromJSONAsync(item.FullName);
         }
 
+        public override string GetDefaultWorkspaceFilename()
+        {
+            return MongoConfig.GetWorkspaceFilename();
+        }
+
         private readonly int LastItems = 15;
 
         internal void LoadConfigFromJSONAsync(string filename)

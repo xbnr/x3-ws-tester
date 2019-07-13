@@ -27,5 +27,10 @@ namespace ConsoleTester.Plugins.PrintServer
             PromptHelper.ShowPromptHighlight($"ConsolePrintNet.exe -configurationfile:\"{filename}\"");
             PromptHelper.ShowPromptInfo("");
         }
+
+        public override string GetDefaultWorkspaceFilename()
+        {
+            return ConsolePrintNet.GetWorkspaceFilename();
+        }
     }
 }

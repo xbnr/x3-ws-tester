@@ -1,0 +1,7 @@
+﻿{
+  "serverUrl": "mongodb://localhost/?safe=true",
+  "database": "syracuse",
+  "searchType": "Contains",
+  "occurence": "",
+  "fieldName": "filename"
+}

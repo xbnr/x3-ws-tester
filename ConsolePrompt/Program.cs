@@ -53,6 +53,9 @@ namespace ConsolePrompt
                     case (int)Menu.DisplayPrompt:
                         DisplayPromptMenu();
                         break;
+                    case (int)Menu.CreateNewConfiguration:
+                        CreateNewConfiguration();
+                        break;
                     case (int)Menu.OpenConfiguration:
                         ConnectConfiguration(files, configurationName);
                         break;
@@ -63,6 +66,29 @@ namespace ConsolePrompt
 
 
             }
+        }
+
+        private void CreateNewConfiguration()
+        {
+            List<IConfigService> configServiceResult = new List<IConfigService>();
+
+            foreach (var item in ProgramUI.GetConfigs())
+            {
+                Type serviceType = Type.GetType(item.AssemblyQualifiedName);
+                IConfigService configService = Activator.CreateInstance(serviceType) as IConfigService;
+                configServiceResult.Add(configService);
+                PromptHelper.ShowPromptHighlight($"{configService.GetConfigPrefixFilename()} \t {configService.GetTitle()}");
+            }
+
+            string serviceFileName = PromptHelper.EnterValue($"Enter the config name you want to create: ");
+            IConfigService selectedService = configServiceResult.FirstOrDefault(item => item.GetConfigPrefixFilename() == serviceFileName);
+
+            Type promptType = Type.GetType($"{selectedService.GetPromptToolFullName()}, {typeof(IConfigService).Assembly.GetName()}");
+            var control = Activator.CreateInstance(promptType) as ControlConfig;
+            string defaultFilename = control.GetDefaultWorkspaceFilename();
+            string newFilename = Path.Combine(Path.GetDirectoryName(defaultFilename),  
+                $"{Path.GetFileNameWithoutExtension(defaultFilename)}{serviceFileName}{Path.GetExtension(defaultFilename)}");
+            control.CreateWS(new FileInfo(newFilename));
         }
 
         private static void ConnectConfiguration(FileInfo[] files, string jsonFilename)
@@ -118,8 +144,8 @@ namespace ConsolePrompt
             PromptHelper.ShowPromptInfo($"\r");
             PromptHelper.ShowPromptInfo($"{(int)Menu.ListSolutions}. List configurations");
             PromptHelper.ShowPromptInfo($"{(int)Menu.OpenConfiguration}. Open configuration");
-            
-            PromptHelper.ShowPromptInfo($"{(int)Menu.CreateNewConfiguration}. Create new configuration");            
+
+            PromptHelper.ShowPromptInfo($"{(int)Menu.CreateNewConfiguration}. Create new configuration");
             PromptHelper.ShowPromptInfo($"{(int)Menu.ExitProgram}. Quit");
         }
 
