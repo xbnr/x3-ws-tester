@@ -6,6 +6,7 @@ using ConsoleTester.Plugins;
 using ConsoleTester.Common;
 using ConsoleTester.UI;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace ConsoleTester.Plugins.PrintServer
 {
@@ -28,6 +29,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
     }
 
+    [Serializable()]
     [JsonObject(IsReference = false)]
     public class ConsolePrintNet : IConfigService
     {
@@ -77,6 +79,30 @@ namespace ConsoleTester.Plugins.PrintServer
 
         [JsonProperty]
         public string Password { get; set; }
+
+        [OnSerializing()]
+        internal void OnSerializingMethod(StreamingContext context)
+        {
+            Password = PrintServerHelper.EncodePasswordToCryptedtring(Password);
+        }
+
+        [OnSerialized()]
+        internal void OnSerializedMethod(StreamingContext context)
+        {
+            // member2 = "This value was reset after serialization.";
+        }
+
+        [OnDeserializing()]
+        internal void OnDeserializingMethod(StreamingContext context)
+        {
+          //  member3 = "This value was set during deserialization";
+        }
+
+        [OnDeserialized()]
+        internal void OnDeserializedMethod(StreamingContext context)
+        {
+            Password = PrintServerHelper.DecodePasswordFromCryptedString(Password);
+        }
 
         [JsonProperty]
         public string ReportFilename { get; set; }

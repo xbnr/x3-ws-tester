@@ -124,6 +124,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
             this.filename = filename;
             ConsolePrintNet config = JsonConvert.DeserializeObject<ConsolePrintNet>(File.ReadAllText(filename));
+            // config.Password = PrintServerHelper.DecodePasswordFromCryptedString(config.Password);
             Helper.SetTextFromSettings(config.InstallDirectory, this.cbPath);
             Helper.SetTextFromSettings(config.OdbcDatasource, this.cbOdbcDatasource);
             Helper.SetTextFromSettings(config.DatabaseName, this.tbDbName);
