@@ -106,6 +106,7 @@
             this.tbAdxEditionServerConfigXml = new System.Windows.Forms.TextBox();
             this.labelAdxEditionServerConfigXml = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.linkOpenJson = new System.Windows.Forms.LinkLabel();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
             this.panelAddRemoveParameters.SuspendLayout();
@@ -133,6 +134,7 @@
             // 
             // tabPagePrintServer
             // 
+            this.tabPagePrintServer.Controls.Add(this.linkOpenJson);
             this.tabPagePrintServer.Controls.Add(this.btGenerateCommand);
             this.tabPagePrintServer.Controls.Add(this.btDetectInstall);
             this.tabPagePrintServer.Controls.Add(this.panelParameters);
@@ -914,6 +916,18 @@
             this.labelAdxEditionServerConfigXml.Text = "AdxEditionServerConfig.Xml :";
             this.labelAdxEditionServerConfigXml.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // linkOpenJson
+            // 
+            this.linkOpenJson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkOpenJson.AutoSize = true;
+            this.linkOpenJson.Location = new System.Drawing.Point(743, 3);
+            this.linkOpenJson.Name = "linkOpenJson";
+            this.linkOpenJson.Size = new System.Drawing.Size(69, 13);
+            this.linkOpenJson.TabIndex = 22;
+            this.linkOpenJson.TabStop = true;
+            this.linkOpenJson.Text = "Open Json {}";
+            this.linkOpenJson.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkOpenJson_LinkClicked);
+            // 
             // PrintServerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1012,5 +1026,6 @@
         private System.Windows.Forms.LinkLabel linkLabelJSon;
         private System.Windows.Forms.TextBox tbAdxEditionServerSolutions;
         private System.Windows.Forms.Label labelAdxEditionServerSolutions;
+        private System.Windows.Forms.LinkLabel linkOpenJson;
     }
 }

@@ -122,9 +122,9 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             InitControls();
 
+            linkOpenJson.Tag = filename;
             this.filename = filename;
             ConsolePrintNet config = JsonConvert.DeserializeObject<ConsolePrintNet>(File.ReadAllText(filename));
-            // config.Password = PrintServerHelper.DecodePasswordFromCryptedString(config.Password);
             Helper.SetTextFromSettings(config.InstallDirectory, this.cbPath);
             Helper.SetTextFromSettings(config.OdbcDatasource, this.cbOdbcDatasource);
             Helper.SetTextFromSettings(config.DatabaseName, this.tbDbName);
@@ -150,10 +150,16 @@ namespace ConsoleTester.Plugins.PrintServer
             if (!configurationInfoInitialized && !GetConfigurationInfo())
             {
                 string dirInstallPath = PrintServerHelper.GetPrintServerIntallPath();
-                string adxSrvImp = Path.Combine(dirInstallPath, "AdxSrvImp.exe");
-                if (Directory.Exists(dirInstallPath) && File.Exists(adxSrvImp))
+                if (!string.IsNullOrEmpty(dirInstallPath))
                 {
-                    GetVersion(adxSrvImp, "/v");
+                    string adxSrvImp = Path.Combine(dirInstallPath, "AdxSrvImp.exe");
+                    if (Directory.Exists(dirInstallPath) && File.Exists(adxSrvImp))
+                    {
+                        GetVersion(adxSrvImp, "/v");
+                    }
+                } else
+                {
+                    Logger.Log("Error: PrintServer IntallPath not found");
                 }
                 var subKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Crystal Reports");
 
@@ -743,7 +749,7 @@ namespace ConsoleTester.Plugins.PrintServer
                             JObject processes = configItem["processes"]?.Value<JObject>();
                             if (log != null)
                             {
-                                configText += $" Processes : killtime : {processes["killtime"]}  max : {processes["max"]}   min : {processes["min"]} \r\n";
+                                configText += $" Processes : killtime : {processes["killtime"]} min,  max : {processes["max"]},   min : {processes["min"]},  maxjobsbyprocess : {processes["maxjobsbyprocess"] } \r\n";
                             }
                         }
                     }
@@ -789,14 +795,24 @@ namespace ConsoleTester.Plugins.PrintServer
 
         private void linkLabelJSon_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (linkLabelJSon.Tag != null && linkLabelJSon.Tag is string)
+            OpenJSONFile(linkLabelJSon);
+        }
+
+        private void OpenJSONFile(LinkLabel linkLabelJSon2)
+        {
+            if (linkLabelJSon2.Tag != null && linkLabelJSon2.Tag is string)
             {
-                string jsonFilename = (string)linkLabelJSon.Tag;
+                string jsonFilename = (string)linkLabelJSon2.Tag;
                 if (File.Exists(jsonFilename))
                 {
                     ProgramUI.OpenJson(jsonFilename);
                 }
             }
+        }
+
+        private void linkOpenJson_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenJSONFile(linkOpenJson);
         }
     }
 }
