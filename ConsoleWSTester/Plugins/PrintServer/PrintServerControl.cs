@@ -157,7 +157,8 @@ namespace ConsoleTester.Plugins.PrintServer
                     {
                         GetVersion(adxSrvImp, "/v");
                     }
-                } else
+                }
+                else
                 {
                     Logger.Log("Error: PrintServer IntallPath not found");
                 }
@@ -328,26 +329,31 @@ namespace ConsoleTester.Plugins.PrintServer
         private void AddItemsInGrid(ConsolePrintNetParameter[] parameters, List<ConsolePrintNetParameter> newParams, DataGridView dataGridView)
         {
             ArrayList paramList = new ArrayList();
-            paramList.AddRange(parameters);
-            paramList.AddRange(newParams);
+            if (parameters != null)
+                paramList.AddRange(parameters);
+            if (newParams != null)
+                paramList.AddRange(newParams);
             parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
 
-            reportParametersGridView.DataSource = null;
-            reportParametersGridView.DataSource = parameters;
-
-
+            if (newParams?.Count > 0)
+            {
+                Helper.SetSafeText(labelParametersMessage, "Please fill in parameter(s) value(s)");
+            }
+            Helper.SetSafeDatasource(reportParametersGridView, parameters);
         }
+
         private void AddItemInGrid(ConsolePrintNetParameter[] parameters, ConsolePrintNetParameter newParam, DataGridView dataGridView)
         {
             ArrayList paramList = new ArrayList();
-            paramList.AddRange(parameters);
-            paramList.Add(newParam);
+            if (parameters != null)
+                paramList.AddRange(parameters);
+            if (newParam != null)
+                paramList.Add(newParam);
             parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
 
-            dataGridView.DataSource = null;
-            dataGridView.DataSource = parameters;
+            Helper.SetSafeDatasource(dataGridView, parameters);
         }
 
         private void btDelete_Click(object sender, EventArgs e)
@@ -382,10 +388,17 @@ namespace ConsoleTester.Plugins.PrintServer
             }
             parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
-            dataGridView.DataSource = null;
-            dataGridView.DataSource = parameters;
+
+            Helper.SetSafeDatasource(dataGridView, parameters);
+            //dataGridView.DataSource = null;
+            //dataGridView.DataSource = parameters;
         }
 
+        private void RemoveAllItems(DataGridView dataGridView)
+        {
+            ConsolePrintNetParameter[] parameters = new ConsolePrintNetParameter[0];
+            Helper.SetSafeDatasource(dataGridView, parameters);
+        }
 
         private void btBrowseRpt_Click(object sender, EventArgs e)
         {
@@ -524,6 +537,10 @@ namespace ConsoleTester.Plugins.PrintServer
             var reportDetectedParameters = GetParameters();
 
             var conf = GetConfigFromUI() as ConsolePrintNet;
+            if (conf.Parameters == null)
+            {
+                conf.Parameters = new ConsolePrintNetParameter[0];
+            }
             var uiParameters = conf.Parameters;
 
             List<ConsolePrintNetParameter> listToAdd = new List<ConsolePrintNetParameter>();
@@ -813,6 +830,16 @@ namespace ConsoleTester.Plugins.PrintServer
         private void linkOpenJson_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             OpenJSONFile(linkOpenJson);
+        }
+
+        private void removeAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem selectedTSMI = sender as ToolStripMenuItem;
+            if (((ContextMenuStrip)((ToolStripMenuItem)sender).Owner)?.SourceControl is DataGridView selectedView)
+            {
+                RemoveAllItems(selectedView);
+            }
+
         }
     }
 }
