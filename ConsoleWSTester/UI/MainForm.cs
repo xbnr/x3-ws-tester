@@ -127,6 +127,8 @@ namespace ConsoleTester.UI
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ControlConfigUI control = MainForm.MainDockPanel.ActiveContent as ControlConfigUI;
+            if (control == null)
+                control = MainForm.MainDockPanel.ActiveDocument as ControlConfigUI;
             SaveAs(control);
         }
 

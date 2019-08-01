@@ -41,6 +41,7 @@
             this.btGenerateCommand = new System.Windows.Forms.LinkLabel();
             this.btDetectInstall = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
+            this.linkLabelODBC = new System.Windows.Forms.LinkLabel();
             this.btTestConnection = new System.Windows.Forms.Button();
             this.cbOpenDocumentAfterGeneration = new System.Windows.Forms.CheckBox();
             this.cbOutputFormat = new System.Windows.Forms.ComboBox();
@@ -68,7 +69,6 @@
             this.tbDbName = new System.Windows.Forms.TextBox();
             this.linkOpenExportDirectory = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
-            this.lbOdbcDatasource = new System.Windows.Forms.Label();
             this.lbLogin = new System.Windows.Forms.Label();
             this.lbPassword = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
@@ -191,6 +191,7 @@
             this.panelParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelParameters.Controls.Add(this.linkLabelODBC);
             this.panelParameters.Controls.Add(this.btTestConnection);
             this.panelParameters.Controls.Add(this.cbOpenDocumentAfterGeneration);
             this.panelParameters.Controls.Add(this.cbOutputFormat);
@@ -204,7 +205,6 @@
             this.panelParameters.Controls.Add(this.tbDbName);
             this.panelParameters.Controls.Add(this.linkOpenExportDirectory);
             this.panelParameters.Controls.Add(this.label6);
-            this.panelParameters.Controls.Add(this.lbOdbcDatasource);
             this.panelParameters.Controls.Add(this.lbLogin);
             this.panelParameters.Controls.Add(this.lbPassword);
             this.panelParameters.Controls.Add(this.tbPassword);
@@ -226,6 +226,17 @@
             this.panelParameters.Name = "panelParameters";
             this.panelParameters.Size = new System.Drawing.Size(867, 426);
             this.panelParameters.TabIndex = 3;
+            // 
+            // linkLabelODBC
+            // 
+            this.linkLabelODBC.AutoSize = true;
+            this.linkLabelODBC.Location = new System.Drawing.Point(110, 9);
+            this.linkLabelODBC.Name = "linkLabelODBC";
+            this.linkLabelODBC.Size = new System.Drawing.Size(99, 13);
+            this.linkLabelODBC.TabIndex = 33;
+            this.linkLabelODBC.TabStop = true;
+            this.linkLabelODBC.Text = "ODBC datasource :";
+            this.linkLabelODBC.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelODBC_LinkClicked);
             // 
             // btTestConnection
             // 
@@ -536,15 +547,6 @@
             this.label6.Size = new System.Drawing.Size(51, 13);
             this.label6.TabIndex = 3;
             this.label6.Text = "DB type :";
-            // 
-            // lbOdbcDatasource
-            // 
-            this.lbOdbcDatasource.AutoSize = true;
-            this.lbOdbcDatasource.Location = new System.Drawing.Point(105, 9);
-            this.lbOdbcDatasource.Name = "lbOdbcDatasource";
-            this.lbOdbcDatasource.Size = new System.Drawing.Size(101, 13);
-            this.lbOdbcDatasource.TabIndex = 1;
-            this.lbOdbcDatasource.Text = "ODBC Datasource :";
             // 
             // lbLogin
             // 
@@ -1011,7 +1013,6 @@
         private System.Windows.Forms.Label lbLogin;
         private System.Windows.Forms.Label lbPassword;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label lbOdbcDatasource;
         private System.Windows.Forms.LinkLabel linkOpenExportDirectory;
         private System.Windows.Forms.DataGridView dgSettings;
         private System.Windows.Forms.Button btRemoveSetting;
@@ -1050,5 +1051,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
         private System.Windows.Forms.ToolStripMenuItem removeAllToolStripMenuItem;
         private System.Windows.Forms.Label labelParametersMessage;
+        private System.Windows.Forms.LinkLabel linkLabelODBC;
     }
 }
