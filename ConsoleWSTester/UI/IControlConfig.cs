@@ -15,5 +15,7 @@ namespace ConsoleTester.UI
 
         void SaveWorkspace();
 
+        string GetDefaultWorkspaceFilename();
+
     }
 }

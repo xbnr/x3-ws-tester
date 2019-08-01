@@ -24,5 +24,10 @@ namespace ConsoleTester.UI
         {
             throw new NotImplementedException();
         }
+
+        public virtual string GetDefaultWorkspaceFilename()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

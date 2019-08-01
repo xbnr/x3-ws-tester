@@ -98,6 +98,8 @@ namespace ConsoleTester.Common
             {
                 dataGrid.DataSource = null;
                 dataGrid.DataSource = datasource;
+                dataGrid.Refresh();
+                dataGrid.RefreshEdit();
             }
         }
 

@@ -17,10 +17,17 @@ namespace ConsoleTester.Plugins.MongoDb
 
         public override void CreateWS(FileInfo item)
         {
-            LoadConfigFromJSON(item.FullName);
+            LoadConfigFromJSONAsync(item.FullName);
         }
 
-        internal void LoadConfigFromJSON(string filename)
+        public override string GetDefaultWorkspaceFilename()
+        {
+            return MongoConfig.GetWorkspaceFilename();
+        }
+
+        private readonly int LastItems = 15;
+
+        internal void LoadConfigFromJSONAsync(string filename)
         {
             this.filename = filename;
             MongoConfig config = JsonConvert.DeserializeObject<MongoConfig>(File.ReadAllText(filename));
@@ -31,8 +38,18 @@ namespace ConsoleTester.Plugins.MongoDb
             MongoServer = config.ServerUrl;
             MongoDatabase = config.Database;
 
-            PromptHelper.ShowPromptInfo($"Last X files: ");
-            InitGridAsync(config.FieldName, config.SearchType, "");
+            PromptHelper.ShowPromptInfo($"Last {LastItems} files: ");
+            InitGridAsync(config.FieldName, config.SearchType, "").GetAwaiter().GetResult();
+
+            ShowMenu();
+
+            string fileToDownload = PromptHelper.EnterValue($"Enter: ");
+        }
+
+        private void ShowMenu()
+        {
+            PromptHelper.ShowPromptHighlight($"Download file");
+            // PromptHelper.ShowPromptInfo($"Download file");
         }
 
         public string MongoServer { get; private set; }
@@ -42,13 +59,23 @@ namespace ConsoleTester.Plugins.MongoDb
         public string SearchType { get; private set; }
 
 
-        private async void InitGridAsync(string fieldName, string cbSearchType, string tbTextToSearch)
+        private async Task InitGridAsync(string fieldName, string cbSearchType, string tbTextToSearch)
         {
             EdiHelper h = new EdiHelper(MongoServer, MongoDatabase);
-            List<GridFSFileInfo> result = await h.SearchAsync(fieldName, cbSearchType, tbTextToSearch);
-            foreach(var item in result)
+
+            List<GridFSFileInfo> result = await h.SearchAsync(fieldName, cbSearchType, tbTextToSearch, LastItems);
+            foreach (var item in result)
             {
-                PromptHelper.ShowPromptInfo($"{item.Filename}");
+                string filename = string.Empty;
+                try
+                {
+                    filename = item.Metadata != null ? item.Metadata["fileName"]?.AsString : "";
+                }
+                catch (Exception)
+                {
+                    // nothing to do
+                }
+                PromptHelper.ShowPromptInfo($"{item.Filename} {filename } \t {item.ContentType} \t {item.Length} \t {item.UploadDateTime}");
             }
         }
 

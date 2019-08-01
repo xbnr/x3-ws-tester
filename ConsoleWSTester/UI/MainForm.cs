@@ -33,8 +33,6 @@ namespace ConsoleTester.UI
             var treeView = new FileSystemTree();
             FileSysTree = treeView;
             treeView.Show(dockPanelMain, DockState.DockLeft);
-            // var outputResult = new OutputResult();
-            // outputResult.Show(dockPanelMain, DockState.DockBottom);
             var logs = new Logs();
             LogControl = logs.LogControl;
             logs.Show(dockPanelMain, DockState.DockBottom);
@@ -60,6 +58,7 @@ namespace ConsoleTester.UI
             var configService = se.Tag as IConfigService;
             var UIControl = Helper.GetUIControl(configService);
             UIControl.CreateNewWS();
+            UIControl.Text = "New document";
             UIControl.Show(dockPanelMain, DockState.Document);
         }
 
@@ -102,13 +101,17 @@ namespace ConsoleTester.UI
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ControlConfigUI control = MainForm.MainDockPanel.ActiveContent as ControlConfigUI;
+            if (control == null)
+            {
+                return;
+            }
             if (control.GetWorkspaceFilename() == control.GetDefaultWorkspaceFilename())
             {
                 SaveAs(control);
             }
             else
             {
-                control?.SaveWorkspace();
+                control.SaveWorkspace();
             }
         }
 
@@ -124,6 +127,8 @@ namespace ConsoleTester.UI
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ControlConfigUI control = MainForm.MainDockPanel.ActiveContent as ControlConfigUI;
+            if (control == null)
+                control = MainForm.MainDockPanel.ActiveDocument as ControlConfigUI;
             SaveAs(control);
         }
 
@@ -138,6 +143,10 @@ namespace ConsoleTester.UI
                 string defaultFilename = control.GetDefaultWorkspaceFilename();
                 string newFilename = Path.Combine(Path.GetDirectoryName(defaultFilename),
                     $"{Path.GetFileNameWithoutExtension(defaultFilename)}{dialog.GetEnteredValue()}{Path.GetExtension(defaultFilename)}");
+
+                control.Text = Path.GetFileNameWithoutExtension(newFilename);
+                control.Tag = newFilename;
+
                 control.SetWorkspaceFilename(newFilename);
                 control.SaveWorkspace();
                 FileSysTree.BuildTreeView();

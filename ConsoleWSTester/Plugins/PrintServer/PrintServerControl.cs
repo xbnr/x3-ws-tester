@@ -88,6 +88,10 @@ namespace ConsoleTester.Plugins.PrintServer
             {
                 cbPath.Text = tbInstallPath.Text;
             }
+            if (string.IsNullOrEmpty(cbExportDirectory.Text))
+            {
+                cbExportDirectory.Text = System.IO.Path.GetTempPath();
+            }
         }
 
         private void GetVersion(string exe, string arguments)
@@ -122,6 +126,7 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             InitControls();
 
+            linkOpenJson.Tag = filename;
             this.filename = filename;
             ConsolePrintNet config = JsonConvert.DeserializeObject<ConsolePrintNet>(File.ReadAllText(filename));
             Helper.SetTextFromSettings(config.InstallDirectory, this.cbPath);
@@ -132,7 +137,7 @@ namespace ConsoleTester.Plugins.PrintServer
             Helper.SetTextFromSettings(config.Password, this.tbPassword);
             Helper.SetTextFromSettings(config.ReportFilename, this.cbReportName);
             Helper.SetTextFromSettings(config.ExportDirectory, this.cbExportDirectory);
-            Helper.SetSafeComboBox(this.cbActions, (ActionAsked)Enum.Parse(typeof(ActionAsked), config.Action));
+            Helper.SetSafeComboBox(this.cbActions, SafeEnumParse(config.Action));
             Helper.SetSafeText(this.cbOutputFormat, config.OutputFormat);
             Helper.SetSafeCheck(this.cbOpenDocumentAfterGeneration, config.OpenGeneratedFile);
 
@@ -149,10 +154,17 @@ namespace ConsoleTester.Plugins.PrintServer
             if (!configurationInfoInitialized && !GetConfigurationInfo())
             {
                 string dirInstallPath = PrintServerHelper.GetPrintServerIntallPath();
-                string adxSrvImp = Path.Combine(dirInstallPath, "AdxSrvImp.exe");
-                if (Directory.Exists(dirInstallPath) && File.Exists(adxSrvImp))
+                if (!string.IsNullOrEmpty(dirInstallPath))
                 {
-                    GetVersion(adxSrvImp, "/v");
+                    string adxSrvImp = Path.Combine(dirInstallPath, "AdxSrvImp.exe");
+                    if (Directory.Exists(dirInstallPath) && File.Exists(adxSrvImp))
+                    {
+                        GetVersion(adxSrvImp, "/v");
+                    }
+                }
+                else
+                {
+                    Logger.Log("Error: PrintServer IntallPath not found");
                 }
                 var subKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Crystal Reports");
 
@@ -170,6 +182,19 @@ namespace ConsoleTester.Plugins.PrintServer
             }
         }
 
+        private static ActionAsked SafeEnumParse(string action)
+        {
+            ActionAsked result = ActionAsked.None;
+            try
+            {
+                result = (ActionAsked)Enum.Parse(typeof(ActionAsked), action);
+            }
+            catch (Exception)
+            {
+                Logger.Log($"Cannot parse value {action}. Possible values: {Enum.GetValues(typeof(ActionAsked))} . ");
+            }
+            return result;
+        }
 
         public override IConfigService GetConfigFromUI()
         {
@@ -308,26 +333,31 @@ namespace ConsoleTester.Plugins.PrintServer
         private void AddItemsInGrid(ConsolePrintNetParameter[] parameters, List<ConsolePrintNetParameter> newParams, DataGridView dataGridView)
         {
             ArrayList paramList = new ArrayList();
-            paramList.AddRange(parameters);
-            paramList.AddRange(newParams);
+            if (parameters != null)
+                paramList.AddRange(parameters);
+            if (newParams != null)
+                paramList.AddRange(newParams);
             parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
 
-            reportParametersGridView.DataSource = null;
-            reportParametersGridView.DataSource = parameters;
-
-
+            if (newParams?.Count > 0)
+            {
+                Helper.SetSafeText(labelParametersMessage, "Please fill in parameter(s) value(s)");
+            }
+            Helper.SetSafeDatasource(reportParametersGridView, parameters);
         }
+
         private void AddItemInGrid(ConsolePrintNetParameter[] parameters, ConsolePrintNetParameter newParam, DataGridView dataGridView)
         {
             ArrayList paramList = new ArrayList();
-            paramList.AddRange(parameters);
-            paramList.Add(newParam);
+            if (parameters != null)
+                paramList.AddRange(parameters);
+            if (newParam != null)
+                paramList.Add(newParam);
             parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
 
-            dataGridView.DataSource = null;
-            dataGridView.DataSource = parameters;
+            Helper.SetSafeDatasource(dataGridView, parameters);
         }
 
         private void btDelete_Click(object sender, EventArgs e)
@@ -362,10 +392,17 @@ namespace ConsoleTester.Plugins.PrintServer
             }
             parameters = new ConsolePrintNetParameter[paramList.Count];
             paramList.CopyTo(parameters);
-            dataGridView.DataSource = null;
-            dataGridView.DataSource = parameters;
+
+            Helper.SetSafeDatasource(dataGridView, parameters);
+            //dataGridView.DataSource = null;
+            //dataGridView.DataSource = parameters;
         }
 
+        private void RemoveAllItems(DataGridView dataGridView)
+        {
+            ConsolePrintNetParameter[] parameters = new ConsolePrintNetParameter[0];
+            Helper.SetSafeDatasource(dataGridView, parameters);
+        }
 
         private void btBrowseRpt_Click(object sender, EventArgs e)
         {
@@ -504,6 +541,10 @@ namespace ConsoleTester.Plugins.PrintServer
             var reportDetectedParameters = GetParameters();
 
             var conf = GetConfigFromUI() as ConsolePrintNet;
+            if (conf.Parameters == null)
+            {
+                conf.Parameters = new ConsolePrintNetParameter[0];
+            }
             var uiParameters = conf.Parameters;
 
             List<ConsolePrintNetParameter> listToAdd = new List<ConsolePrintNetParameter>();
@@ -635,7 +676,7 @@ namespace ConsoleTester.Plugins.PrintServer
                         }
                         tbPrintServerVersion.Text = serverVersion;
                     }
-                    JArray arrayService = printServerInfoObject["service"].Value<JArray>();
+                    JArray arrayService = printServerInfoObject["service"]?.Value<JArray>();
                     if (arrayService != null)
                     {
                         string serverService = string.Empty;
@@ -700,89 +741,119 @@ namespace ConsoleTester.Plugins.PrintServer
             JObject configObject = printServerInfoObject["config"]?.Value<JObject>();
             if (configObject != null)
             {
-                string configText = string.Empty;
-                JObject serverConfigObject = configObject["serverConfig"]?.Value<JObject>();
-                if (serverConfigObject != null)
-                {
-                    JObject adxSrvImpObject = serverConfigObject["adxSrvImp"]?.Value<JObject>();
-                    if (adxSrvImpObject != null)
-                    {
-                        JArray arrayConfigs = adxSrvImpObject["config"]?.Value<JArray>();
-                        foreach (JToken configItem in arrayConfigs)
-                        {
-                            configText += $"Profile '{configItem["id"]}' : {configItem["cap"]}  \r\n";
-                            JObject general = configItem["general"]?.Value<JObject>();
-                            if (general != null)
-                            {
-                                configText += $" General: lang: {general["lang"]}   Port: {general["port"]}  Recovery mode: {general["restartrpts"]} \r\n";
-                            }
-                            JObject jobs = configItem["jobs"]?.Value<JObject>();
-                            if (jobs != null)
-                            {
-                                configText += $" Jobs : Time before purging job : {jobs["purgetime"]} minutes     Max. running print processes : {jobs["max"]}    vpalloc: {jobs["vpalloc"]} \r\n";
-                            }
-                            JObject log = configItem["log"]?.Value<JObject>();
-                            if (log != null)
-                            {
-                                configText += $" Logs : number : {log["number"]}   size : {log["size"]} \r\n";
-                            }
-                            JObject processes = configItem["processes"]?.Value<JObject>();
-                            if (log != null)
-                            {
-                                configText += $" Processes : killtime : {processes["killtime"]}  max : {processes["max"]}   min : {processes["min"]} \r\n";
-                            }
-                        }
-                    }
-                }
-                tbAdxEditionServerConfigXml.Text = configText;
-
-
-                // tbAdxEditionServerSolutions
-                JObject serverSolutionObject = configObject["serverSolutions"]?.Value<JObject>();
-                if (serverSolutionObject != null)
-                {
-                    string serverSolutionText = string.Empty;
-                    JObject adonixObject = serverSolutionObject["adonix"]?.Value<JObject>();
-                    if (adonixObject != null)
-                    {
-                        JArray arrayProfiles = adonixObject["profile"]?.Value<JArray>();
-                        foreach (JToken profileItem in arrayProfiles)
-                        {
-                            serverSolutionText += $"profile: {profileItem["id"]} \r\n";
-
-                            JObject grpsolsObject = profileItem["grpsols"]?.Value<JObject>();
-                            if (grpsolsObject != null)
-                            {
-
-                                JArray arraySol = grpsolsObject["sol"]?.Value<JArray>();
-                                foreach (JToken sol in arraySol)
-                                {
-
-                                    serverSolutionText += $"id: {sol["id"]} \r\n";
-
-                                }
-
-                            }
-
-                            serverSolutionText += $" \r\n";
-                        }
-                        tbAdxEditionServerSolutions.Text = serverSolutionText;
-                    }
-                }
+                tbAdxEditionServerConfigXml.Text = getAdxEditionServerConfigXml(configObject);
+                tbAdxEditionServerSolutions.Text = getAdxServerSolutionsXml(configObject);
 
             }
         }
 
+        private static string getAdxServerSolutionsXml(JObject configObject)
+        {
+            string result = string.Empty;
+
+            JObject serverSolutionObject = configObject["serverSolutions"]?.Value<JObject>();
+            if (serverSolutionObject != null)
+            {
+                JObject adonixObject = serverSolutionObject["adonix"]?.Value<JObject>();
+                if (adonixObject != null)
+                {
+                    JArray arrayProfiles = adonixObject["profile"]?.Value<JArray>();
+                    foreach (JToken profileItem in arrayProfiles)
+                    {
+                        result += $"profile: {profileItem["id"]} \r\n";
+
+                        JObject grpsolsObject = profileItem["grpsols"]?.Value<JObject>();
+                        if (grpsolsObject != null)
+                        {
+                            JArray arraySol = grpsolsObject["sol"]?.Value<JArray>();
+                            foreach (JToken sol in arraySol)
+                            {
+                                result += $"id: {sol["id"]} \r\n";
+                            }
+                        }
+                        result += $" \r\n";
+                    }
+                }
+            }
+            return result;
+        }
+
+        private static string getAdxEditionServerConfigXml(JObject configObject)
+        {
+            string result = string.Empty;
+            JObject serverConfigObject = configObject["serverConfig"]?.Value<JObject>();
+            if (serverConfigObject != null)
+            {
+                JObject adxSrvImpObject = serverConfigObject["adxSrvImp"]?.Value<JObject>();
+                if (adxSrvImpObject != null)
+                {
+                    JArray arrayConfigs = adxSrvImpObject["config"]?.Value<JArray>();
+                    foreach (JToken configItem in arrayConfigs)
+                    {
+                        result += $"Profile '{configItem["id"]}' : {configItem["cap"]}  \r\n";
+                        JObject general = configItem["general"]?.Value<JObject>();
+                        if (general != null)
+                        {
+                            result += $" General: lang: {general["lang"]}   Port: {general["port"]}  Recovery mode: {general["restartrpts"]} \r\n";
+                        }
+                        JObject jobs = configItem["jobs"]?.Value<JObject>();
+                        if (jobs != null)
+                        {
+                            result += $" Jobs : Time before purging job : {jobs["purgetime"]} minutes     Max. running print processes : {jobs["max"]}    vpalloc: {jobs["vpalloc"]} \r\n";
+                        }
+                        JObject log = configItem["log"]?.Value<JObject>();
+                        if (log != null)
+                        {
+                            result += $" Logs : number : {log["number"]}   size : {log["size"]} \r\n";
+                        }
+                        JObject processes = configItem["processes"]?.Value<JObject>();
+                        if (log != null)
+                        {
+                            result += $" Processes : killtime : {processes["killtime"]} min,  max : {processes["max"]},   min : {processes["min"]},  maxjobsbyprocess : {processes["maxjobsbyprocess"] } jobs before reborn \r\n";
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
         private void linkLabelJSon_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (linkLabelJSon.Tag != null && linkLabelJSon.Tag is string)
+            OpenJSONFile(linkLabelJSon);
+        }
+
+        private void OpenJSONFile(LinkLabel linkLabelJSon2)
+        {
+            if (linkLabelJSon2.Tag != null && linkLabelJSon2.Tag is string)
             {
-                string jsonFilename = (string)linkLabelJSon.Tag;
+                string jsonFilename = (string)linkLabelJSon2.Tag;
                 if (File.Exists(jsonFilename))
                 {
                     ProgramUI.OpenJson(jsonFilename);
                 }
             }
+        }
+
+        private void linkOpenJson_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenJSONFile(linkOpenJson);
+        }
+
+        private void removeAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem selectedTSMI = sender as ToolStripMenuItem;
+            if (((ContextMenuStrip)((ToolStripMenuItem)sender).Owner)?.SourceControl is DataGridView selectedView)
+            {
+                RemoveAllItems(selectedView);
+            }
+
+        }
+
+        private void linkLabelODBC_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // c:\Windows\SysWOW64\odbcad32.exe
+            Process.Start(new ProcessStartInfo("odbcad32.exe"));
         }
     }
 }

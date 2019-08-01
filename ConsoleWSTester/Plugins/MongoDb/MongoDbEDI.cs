@@ -58,8 +58,8 @@ namespace ConsoleTester.Plugins.MongoDb
         public override string GetDefaultWorkspaceFilename()
         {
             return MongoConfig.GetWorkspaceFilename();
-
         }
+
         public override string GetWorkspaceFilename()
         {
             if (string.IsNullOrEmpty(this.filename))
@@ -104,7 +104,7 @@ namespace ConsoleTester.Plugins.MongoDb
 
             // Task.Run(() => SearchAsync(cbFieldName.Text, tbTextToSearch.Text));
             EdiHelper h = new EdiHelper(MongoServer, MongoDatabase);
-            List<GridFSFileInfo> result = await h.SearchAsync(cbFieldName.Text, cbSearchType.Text, tbTextToSearch.Text);
+            List<GridFSFileInfo> result = await h.SearchAsync(cbFieldName.Text, cbSearchType.Text, tbTextToSearch.Text, 100);
             Helper.SetSafeDatasource(dgKeyValue, result);
         }
 

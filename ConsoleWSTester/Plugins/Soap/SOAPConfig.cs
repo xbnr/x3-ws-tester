@@ -25,7 +25,7 @@ namespace ConsoleTester.Plugins.Soap
         }
         public string GetPromptToolFullName()
         {
-            return typeof(WsSOAPTester).FullName;
+            return typeof(WsSOAPTesterPrompt).FullName;
         }
 
         public string GetConfigPrefixFilename()

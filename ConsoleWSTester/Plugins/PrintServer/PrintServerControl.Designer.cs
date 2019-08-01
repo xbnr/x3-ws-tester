@@ -37,9 +37,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btValidate = new System.Windows.Forms.Button();
             this.tabPagePrintServer = new System.Windows.Forms.TabPage();
+            this.linkOpenJson = new System.Windows.Forms.LinkLabel();
             this.btGenerateCommand = new System.Windows.Forms.LinkLabel();
             this.btDetectInstall = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
+            this.linkLabelODBC = new System.Windows.Forms.LinkLabel();
             this.btTestConnection = new System.Windows.Forms.Button();
             this.cbOpenDocumentAfterGeneration = new System.Windows.Forms.CheckBox();
             this.cbOutputFormat = new System.Windows.Forms.ComboBox();
@@ -55,6 +57,7 @@
             this.ColumnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeSelectedXsdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelAddRemoveSettings = new System.Windows.Forms.Panel();
             this.btAddSetting = new System.Windows.Forms.Button();
@@ -66,7 +69,6 @@
             this.tbDbName = new System.Windows.Forms.TextBox();
             this.linkOpenExportDirectory = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
-            this.lbOdbcDatasource = new System.Windows.Forms.Label();
             this.lbLogin = new System.Windows.Forms.Label();
             this.lbPassword = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
@@ -83,6 +85,7 @@
             this.cbExportDirectory = new System.Windows.Forms.TextBox();
             this.btBrowseRpt = new System.Windows.Forms.Button();
             this.labelExportDirectory = new System.Windows.Forms.Label();
+            this.labelParametersMessage = new System.Windows.Forms.Label();
             this.cbPath = new System.Windows.Forms.TextBox();
             this.labelPath = new System.Windows.Forms.Label();
             this.tabControlConfig = new System.Windows.Forms.TabControl();
@@ -101,11 +104,11 @@
             this.tbPrintServerVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageConfig = new System.Windows.Forms.TabPage();
+            this.tbAdxEditionServerSolutions = new System.Windows.Forms.TextBox();
+            this.labelAdxEditionServerSolutions = new System.Windows.Forms.Label();
             this.tbAdxEditionServerConfigXml = new System.Windows.Forms.TextBox();
             this.labelAdxEditionServerConfigXml = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tbAdxEditionServerSolutions = new System.Windows.Forms.TextBox();
-            this.labelAdxEditionServerSolutions = new System.Windows.Forms.Label();
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
             this.panelAddRemoveParameters.SuspendLayout();
@@ -133,6 +136,7 @@
             // 
             // tabPagePrintServer
             // 
+            this.tabPagePrintServer.Controls.Add(this.linkOpenJson);
             this.tabPagePrintServer.Controls.Add(this.btGenerateCommand);
             this.tabPagePrintServer.Controls.Add(this.btDetectInstall);
             this.tabPagePrintServer.Controls.Add(this.panelParameters);
@@ -146,6 +150,18 @@
             this.tabPagePrintServer.TabIndex = 0;
             this.tabPagePrintServer.Text = "PrintServer";
             this.tabPagePrintServer.UseVisualStyleBackColor = true;
+            // 
+            // linkOpenJson
+            // 
+            this.linkOpenJson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkOpenJson.AutoSize = true;
+            this.linkOpenJson.Location = new System.Drawing.Point(743, 3);
+            this.linkOpenJson.Name = "linkOpenJson";
+            this.linkOpenJson.Size = new System.Drawing.Size(69, 13);
+            this.linkOpenJson.TabIndex = 22;
+            this.linkOpenJson.TabStop = true;
+            this.linkOpenJson.Text = "Open Json {}";
+            this.linkOpenJson.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkOpenJson_LinkClicked);
             // 
             // btGenerateCommand
             // 
@@ -175,6 +191,7 @@
             this.panelParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelParameters.Controls.Add(this.linkLabelODBC);
             this.panelParameters.Controls.Add(this.btTestConnection);
             this.panelParameters.Controls.Add(this.cbOpenDocumentAfterGeneration);
             this.panelParameters.Controls.Add(this.cbOutputFormat);
@@ -188,7 +205,6 @@
             this.panelParameters.Controls.Add(this.tbDbName);
             this.panelParameters.Controls.Add(this.linkOpenExportDirectory);
             this.panelParameters.Controls.Add(this.label6);
-            this.panelParameters.Controls.Add(this.lbOdbcDatasource);
             this.panelParameters.Controls.Add(this.lbLogin);
             this.panelParameters.Controls.Add(this.lbPassword);
             this.panelParameters.Controls.Add(this.tbPassword);
@@ -205,10 +221,22 @@
             this.panelParameters.Controls.Add(this.cbExportDirectory);
             this.panelParameters.Controls.Add(this.btBrowseRpt);
             this.panelParameters.Controls.Add(this.labelExportDirectory);
+            this.panelParameters.Controls.Add(this.labelParametersMessage);
             this.panelParameters.Location = new System.Drawing.Point(6, 57);
             this.panelParameters.Name = "panelParameters";
             this.panelParameters.Size = new System.Drawing.Size(867, 426);
             this.panelParameters.TabIndex = 3;
+            // 
+            // linkLabelODBC
+            // 
+            this.linkLabelODBC.AutoSize = true;
+            this.linkLabelODBC.Location = new System.Drawing.Point(110, 9);
+            this.linkLabelODBC.Name = "linkLabelODBC";
+            this.linkLabelODBC.Size = new System.Drawing.Size(99, 13);
+            this.linkLabelODBC.TabIndex = 33;
+            this.linkLabelODBC.TabStop = true;
+            this.linkLabelODBC.Text = "ODBC datasource :";
+            this.linkLabelODBC.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelODBC_LinkClicked);
             // 
             // btTestConnection
             // 
@@ -287,15 +315,15 @@
             this.panelAddRemoveParameters.Controls.Add(this.btAddParam);
             this.panelAddRemoveParameters.Controls.Add(this.btDelete);
             this.panelAddRemoveParameters.Controls.Add(this.reportParametersGridView);
-            this.panelAddRemoveParameters.Location = new System.Drawing.Point(544, 168);
+            this.panelAddRemoveParameters.Location = new System.Drawing.Point(487, 168);
             this.panelAddRemoveParameters.Name = "panelAddRemoveParameters";
-            this.panelAddRemoveParameters.Size = new System.Drawing.Size(320, 241);
+            this.panelAddRemoveParameters.Size = new System.Drawing.Size(372, 241);
             this.panelAddRemoveParameters.TabIndex = 31;
             // 
             // btAddParam
             // 
             this.btAddParam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAddParam.Location = new System.Drawing.Point(283, 33);
+            this.btAddParam.Location = new System.Drawing.Point(335, 33);
             this.btAddParam.Name = "btAddParam";
             this.btAddParam.Size = new System.Drawing.Size(25, 23);
             this.btAddParam.TabIndex = 1;
@@ -306,7 +334,7 @@
             // btDelete
             // 
             this.btDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDelete.Location = new System.Drawing.Point(283, 62);
+            this.btDelete.Location = new System.Drawing.Point(335, 62);
             this.btDelete.Name = "btDelete";
             this.btDelete.Size = new System.Drawing.Size(25, 23);
             this.btDelete.TabIndex = 2;
@@ -349,7 +377,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.reportParametersGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.reportParametersGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.reportParametersGridView.Size = new System.Drawing.Size(274, 238);
+            this.reportParametersGridView.Size = new System.Drawing.Size(322, 238);
             this.reportParametersGridView.TabIndex = 0;
             // 
             // ColumnName
@@ -364,15 +392,16 @@
             this.ColumnValue.DataPropertyName = "Value";
             this.ColumnValue.HeaderText = "Value";
             this.ColumnValue.Name = "ColumnValue";
-            this.ColumnValue.Width = 120;
+            this.ColumnValue.Width = 150;
             // 
             // gridContextMenuStrip
             // 
             this.gridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.removeSelectedXsdToolStripMenuItem,
+            this.removeAllToolStripMenuItem,
             this.copyPathToolStripMenuItem});
             this.gridContextMenuStrip.Name = "gridContextMenuStrip";
-            this.gridContextMenuStrip.Size = new System.Drawing.Size(142, 48);
+            this.gridContextMenuStrip.Size = new System.Drawing.Size(142, 70);
             // 
             // removeSelectedXsdToolStripMenuItem
             // 
@@ -381,6 +410,13 @@
             this.removeSelectedXsdToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.removeSelectedXsdToolStripMenuItem.Text = "Remove";
             this.removeSelectedXsdToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedXsdToolStripMenuItem_Click);
+            // 
+            // removeAllToolStripMenuItem
+            // 
+            this.removeAllToolStripMenuItem.Name = "removeAllToolStripMenuItem";
+            this.removeAllToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.removeAllToolStripMenuItem.Text = "Remove all";
+            this.removeAllToolStripMenuItem.Click += new System.EventHandler(this.removeAllToolStripMenuItem_Click);
             // 
             // copyPathToolStripMenuItem
             // 
@@ -396,14 +432,14 @@
             this.panelAddRemoveSettings.Controls.Add(this.btAddSetting);
             this.panelAddRemoveSettings.Controls.Add(this.btRemoveSetting);
             this.panelAddRemoveSettings.Controls.Add(this.dgSettings);
-            this.panelAddRemoveSettings.Location = new System.Drawing.Point(115, 168);
+            this.panelAddRemoveSettings.Location = new System.Drawing.Point(108, 168);
             this.panelAddRemoveSettings.Name = "panelAddRemoveSettings";
-            this.panelAddRemoveSettings.Size = new System.Drawing.Size(336, 241);
+            this.panelAddRemoveSettings.Size = new System.Drawing.Size(343, 241);
             this.panelAddRemoveSettings.TabIndex = 30;
             // 
             // btAddSetting
             // 
-            this.btAddSetting.Location = new System.Drawing.Point(303, 33);
+            this.btAddSetting.Location = new System.Drawing.Point(307, 33);
             this.btAddSetting.Name = "btAddSetting";
             this.btAddSetting.Size = new System.Drawing.Size(25, 23);
             this.btAddSetting.TabIndex = 1;
@@ -413,7 +449,7 @@
             // 
             // btRemoveSetting
             // 
-            this.btRemoveSetting.Location = new System.Drawing.Point(303, 63);
+            this.btRemoveSetting.Location = new System.Drawing.Point(307, 63);
             this.btRemoveSetting.Name = "btRemoveSetting";
             this.btRemoveSetting.Size = new System.Drawing.Size(25, 23);
             this.btRemoveSetting.TabIndex = 2;
@@ -456,7 +492,7 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgSettings.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgSettings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgSettings.Size = new System.Drawing.Size(294, 238);
+            this.dgSettings.Size = new System.Drawing.Size(297, 238);
             this.dgSettings.TabIndex = 0;
             this.dgSettings.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSettings_CellValidated);
             // 
@@ -512,15 +548,6 @@
             this.label6.TabIndex = 3;
             this.label6.Text = "DB type :";
             // 
-            // lbOdbcDatasource
-            // 
-            this.lbOdbcDatasource.AutoSize = true;
-            this.lbOdbcDatasource.Location = new System.Drawing.Point(105, 9);
-            this.lbOdbcDatasource.Name = "lbOdbcDatasource";
-            this.lbOdbcDatasource.Size = new System.Drawing.Size(101, 13);
-            this.lbOdbcDatasource.TabIndex = 1;
-            this.lbOdbcDatasource.Text = "ODBC Datasource :";
-            // 
             // lbLogin
             // 
             this.lbLogin.AutoSize = true;
@@ -571,7 +598,7 @@
             // 
             // labelReportParameters
             // 
-            this.labelReportParameters.Location = new System.Drawing.Point(520, 143);
+            this.labelReportParameters.Location = new System.Drawing.Point(463, 143);
             this.labelReportParameters.Name = "labelReportParameters";
             this.labelReportParameters.Size = new System.Drawing.Size(121, 18);
             this.labelReportParameters.TabIndex = 29;
@@ -671,6 +698,16 @@
             this.labelExportDirectory.TabIndex = 18;
             this.labelExportDirectory.Text = "Export directory :";
             this.labelExportDirectory.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelParametersMessage
+            // 
+            this.labelParametersMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelParametersMessage.ForeColor = System.Drawing.Color.Red;
+            this.labelParametersMessage.Location = new System.Drawing.Point(487, 408);
+            this.labelParametersMessage.Name = "labelParametersMessage";
+            this.labelParametersMessage.Size = new System.Drawing.Size(369, 18);
+            this.labelParametersMessage.TabIndex = 32;
+            this.labelParametersMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbPath
             // 
@@ -868,29 +905,6 @@
             this.tabPageConfig.Text = "Config";
             this.tabPageConfig.UseVisualStyleBackColor = true;
             // 
-            // tbAdxEditionServerConfigXml
-            // 
-            this.tbAdxEditionServerConfigXml.AcceptsReturn = true;
-            this.tbAdxEditionServerConfigXml.AcceptsTab = true;
-            this.tbAdxEditionServerConfigXml.HideSelection = false;
-            this.tbAdxEditionServerConfigXml.Location = new System.Drawing.Point(159, 15);
-            this.tbAdxEditionServerConfigXml.Multiline = true;
-            this.tbAdxEditionServerConfigXml.Name = "tbAdxEditionServerConfigXml";
-            this.tbAdxEditionServerConfigXml.ReadOnly = true;
-            this.tbAdxEditionServerConfigXml.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbAdxEditionServerConfigXml.Size = new System.Drawing.Size(693, 101);
-            this.tbAdxEditionServerConfigXml.TabIndex = 11;
-            this.tbAdxEditionServerConfigXml.WordWrap = false;
-            // 
-            // labelAdxEditionServerConfigXml
-            // 
-            this.labelAdxEditionServerConfigXml.Location = new System.Drawing.Point(15, 19);
-            this.labelAdxEditionServerConfigXml.Name = "labelAdxEditionServerConfigXml";
-            this.labelAdxEditionServerConfigXml.Size = new System.Drawing.Size(143, 24);
-            this.labelAdxEditionServerConfigXml.TabIndex = 10;
-            this.labelAdxEditionServerConfigXml.Text = "AdxEditionServerConfigXml :";
-            this.labelAdxEditionServerConfigXml.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // tbAdxEditionServerSolutions
             // 
             this.tbAdxEditionServerSolutions.AcceptsReturn = true;
@@ -907,12 +921,35 @@
             // 
             // labelAdxEditionServerSolutions
             // 
-            this.labelAdxEditionServerSolutions.Location = new System.Drawing.Point(15, 143);
+            this.labelAdxEditionServerSolutions.Location = new System.Drawing.Point(5, 145);
             this.labelAdxEditionServerSolutions.Name = "labelAdxEditionServerSolutions";
-            this.labelAdxEditionServerSolutions.Size = new System.Drawing.Size(143, 24);
+            this.labelAdxEditionServerSolutions.Size = new System.Drawing.Size(153, 24);
             this.labelAdxEditionServerSolutions.TabIndex = 12;
-            this.labelAdxEditionServerSolutions.Text = "AdxEditionServerSolutionsXml :";
+            this.labelAdxEditionServerSolutions.Text = "AdxEditionServerSolutions.Xml :";
             this.labelAdxEditionServerSolutions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tbAdxEditionServerConfigXml
+            // 
+            this.tbAdxEditionServerConfigXml.AcceptsReturn = true;
+            this.tbAdxEditionServerConfigXml.AcceptsTab = true;
+            this.tbAdxEditionServerConfigXml.HideSelection = false;
+            this.tbAdxEditionServerConfigXml.Location = new System.Drawing.Point(159, 15);
+            this.tbAdxEditionServerConfigXml.Multiline = true;
+            this.tbAdxEditionServerConfigXml.Name = "tbAdxEditionServerConfigXml";
+            this.tbAdxEditionServerConfigXml.ReadOnly = true;
+            this.tbAdxEditionServerConfigXml.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbAdxEditionServerConfigXml.Size = new System.Drawing.Size(693, 101);
+            this.tbAdxEditionServerConfigXml.TabIndex = 11;
+            this.tbAdxEditionServerConfigXml.WordWrap = false;
+            // 
+            // labelAdxEditionServerConfigXml
+            // 
+            this.labelAdxEditionServerConfigXml.Location = new System.Drawing.Point(3, 19);
+            this.labelAdxEditionServerConfigXml.Name = "labelAdxEditionServerConfigXml";
+            this.labelAdxEditionServerConfigXml.Size = new System.Drawing.Size(155, 24);
+            this.labelAdxEditionServerConfigXml.TabIndex = 10;
+            this.labelAdxEditionServerConfigXml.Text = "AdxEditionServerConfig.Xml :";
+            this.labelAdxEditionServerConfigXml.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // PrintServerControl
             // 
@@ -976,7 +1013,6 @@
         private System.Windows.Forms.Label lbLogin;
         private System.Windows.Forms.Label lbPassword;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label lbOdbcDatasource;
         private System.Windows.Forms.LinkLabel linkOpenExportDirectory;
         private System.Windows.Forms.DataGridView dgSettings;
         private System.Windows.Forms.Button btRemoveSetting;
@@ -993,8 +1029,6 @@
         private System.Windows.Forms.Label lbServer;
         private System.Windows.Forms.TextBox tbDbServer;
         private System.Windows.Forms.LinkLabel lbDatasourceInfo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.TextBox tbSapCrystalReport;
@@ -1012,5 +1046,11 @@
         private System.Windows.Forms.LinkLabel linkLabelJSon;
         private System.Windows.Forms.TextBox tbAdxEditionServerSolutions;
         private System.Windows.Forms.Label labelAdxEditionServerSolutions;
+        private System.Windows.Forms.LinkLabel linkOpenJson;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
+        private System.Windows.Forms.ToolStripMenuItem removeAllToolStripMenuItem;
+        private System.Windows.Forms.Label labelParametersMessage;
+        private System.Windows.Forms.LinkLabel linkLabelODBC;
     }
 }

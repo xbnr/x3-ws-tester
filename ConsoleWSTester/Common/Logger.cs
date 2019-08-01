@@ -33,21 +33,21 @@ namespace ConsoleTester.Common
             logs.Add(message);
 
             int argbColorTextBox = 0;
-            if (error)
+            if (error && control != null)
             {
                 argbColorTextBox = control.ForeColor.ToArgb();
                 control.ForeColor = Color.Red;
                 Console.ForegroundColor = ConsoleColor.Red;
             }
-            if (control.InvokeRequired)
+            if (control != null && control.InvokeRequired)
             {
                 control.Invoke(new UpdateDelegate(Log), new object[] { message, error });
             }
             else
             {
                 Console.WriteLine(message);
-                control.AppendText(message + (error ? " ****" : "") + "\r\n");
-                if (error)
+                control?.AppendText(message + (error ? " ****" : "") + "\r\n");
+                if (error && control != null)
                 {
                     control.ForeColor = Color.FromArgb(argbColorTextBox);
                     // Console.ForegroundColor = ConsoleColor.White;

@@ -35,7 +35,7 @@ namespace ConsolePrompt
         public static string EnterValue(string promptLabel, string defaultValue, EnterValueOption valueOption)
         {
             string result = defaultValue;
-            PromptHelper.ShowPromptInfo(promptLabel);
+            PromptHelper.ShowPromptHighlight(promptLabel);
             string valueEntered = EnterString();
             if (!string.IsNullOrEmpty(valueEntered))
             {

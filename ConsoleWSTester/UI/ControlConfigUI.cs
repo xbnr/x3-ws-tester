@@ -11,7 +11,7 @@ namespace ConsoleTester.UI
 {
     public class ControlConfigUI : DockContent, IControlConfig
     {
-        public Logger Logger { get; } = new Logger(MainForm.LogControl);
+        public static Logger Logger { get; } = new Logger(MainForm.LogControl);
 
         public virtual bool IsVisibleInReleaseMode()
         {
