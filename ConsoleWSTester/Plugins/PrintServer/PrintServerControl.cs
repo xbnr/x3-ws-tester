@@ -743,40 +743,10 @@ namespace ConsoleTester.Plugins.PrintServer
             {
                 tbAdxEditionServerConfigXml.Text = getAdxEditionServerConfigXml(configObject);
                 tbAdxEditionServerSolutions.Text = getAdxServerSolutionsXml(configObject);
-
+                tbAdxOdbcConfigXml.Text = getAdxOdbcConfigXml(configObject);
             }
         }
 
-        private static string getAdxServerSolutionsXml(JObject configObject)
-        {
-            string result = string.Empty;
-
-            JObject serverSolutionObject = configObject["serverSolutions"]?.Value<JObject>();
-            if (serverSolutionObject != null)
-            {
-                JObject adonixObject = serverSolutionObject["adonix"]?.Value<JObject>();
-                if (adonixObject != null)
-                {
-                    JArray arrayProfiles = adonixObject["profile"]?.Value<JArray>();
-                    foreach (JToken profileItem in arrayProfiles)
-                    {
-                        result += $"profile: {profileItem["id"]} \r\n";
-
-                        JObject grpsolsObject = profileItem["grpsols"]?.Value<JObject>();
-                        if (grpsolsObject != null)
-                        {
-                            JArray arraySol = grpsolsObject["sol"]?.Value<JArray>();
-                            foreach (JToken sol in arraySol)
-                            {
-                                result += $"id: {sol["id"]} \r\n";
-                            }
-                        }
-                        result += $" \r\n";
-                    }
-                }
-            }
-            return result;
-        }
 
         private static string getAdxEditionServerConfigXml(JObject configObject)
         {
@@ -818,6 +788,85 @@ namespace ConsoleTester.Plugins.PrintServer
             return result;
         }
 
+
+        private static string getAdxServerSolutionsXml(JObject configObject)
+        {
+            string result = string.Empty;
+
+            JObject serverSolutionObject = configObject["serverSolutions"]?.Value<JObject>();
+            if (serverSolutionObject != null)
+            {
+                JObject adonixObject = serverSolutionObject["adonix"]?.Value<JObject>();
+                if (adonixObject != null)
+                {
+                    JArray arrayProfiles = adonixObject["profile"]?.Value<JArray>();
+                    foreach (JToken profileItem in arrayProfiles)
+                    {
+                        result += $"profile: {profileItem["id"]} \r\n";
+
+                        JObject grpsolsObject = profileItem["grpsols"]?.Value<JObject>();
+                        if (grpsolsObject != null)
+                        {
+                            JArray arraySol = grpsolsObject["sol"]?.Value<JArray>();
+                            foreach (JToken sol in arraySol)
+                            {
+                                result += $"solution id: {sol["id"]} \r\n";
+                                JObject grpapps = sol["grpapps"]?.Value<JObject>();
+                                if (grpapps != null)
+                                {
+                                    JObject app = grpapps["app"]?.Value<JObject>();
+                                    if (app != null)
+                                        result += $"folder: {app["folder"]}   host: {app["host"]}   port: {app["port"]} \r\n";
+                                }
+
+                                JObject odbc = sol["odbc"]?.Value<JObject>();
+                                if (odbc != null)
+                                {
+                                    result += $"base: {odbc["base"]}\\{odbc["instance"]}   host: {odbc["host"]}   id: {odbc["id"]} \r\n";
+                                }
+                            }
+                        }
+                        result += $" \r\n";
+                    }
+                }
+            }
+            return result;
+        }
+
+
+        private static string getAdxOdbcConfigXml(JObject configObject)
+        {
+            string result = string.Empty;
+            JObject serverSolutionObject = configObject["odbcConfig"]?.Value<JObject>();
+            if (serverSolutionObject != null)
+            {
+                JObject adxodbcObject = serverSolutionObject["adxodbc"]?.Value<JObject>();
+                JArray arraydbms = adxodbcObject["dbms"]?.Value<JArray>();
+                foreach (JToken dbms in arraydbms)
+                {
+                    result += $"id = {dbms["id"]} cap = {dbms["cap"]}";
+                    result += $"\r\n";
+                    JArray drivers = dbms["driver"]?.Value<JArray>();
+                    if (drivers != null)
+                    {
+                        foreach (JToken driver in drivers)
+                        {
+                            result += $"{ (driver["id"] != null ? $"id = {driver["id"]}" : string.Empty)} ";
+                            result += $"{ (driver["default"] != null ? $"default = {driver["default"]}" : string.Empty)} ";
+                            result += $"{ (driver["substitution"] != null ? $"substitution = {driver["substitution"]}" : string.Empty)} ";
+                            result += $"{ (driver["wireprotocol"] != null ? $"wireprotocol = {driver["wireprotocol"]}" : string.Empty)} ";
+                            result += $"{ (driver["wireprotocolmode"] != null ? $"wireprotocolmode = {driver["wireprotocolmode"]}" : string.Empty)} ";
+                            result += $"\r\n";
+                        }
+                    }
+                    result += $"\r\n";
+                }
+
+            }
+
+            return result;
+        }
+
         private void linkLabelJSon_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             OpenJSONFile(linkLabelJSon);
@@ -854,6 +903,16 @@ namespace ConsoleTester.Plugins.PrintServer
         {
             // c:\Windows\SysWOW64\odbcad32.exe
             Process.Start(new ProcessStartInfo("odbcad32.exe"));
+        }
+
+        private void linkLabelOpenReport_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cbReportName.Text) && File.Exists(cbReportName.Text))
+                Process.Start(new ProcessStartInfo(cbReportName.Text));
+            else
+            {
+                Logger.Log($"Cannot open rpt file {cbReportName.Text}");
+            }
         }
     }
 }

@@ -24,6 +24,10 @@ namespace ConsoleTester.UI
         {
             _labelProductName.Text = ProgramUI.GetApplicationName();
             _labelVersion.Text = ProgramUI.GetApplicationVersion();
+
+#if !DEBUG
+            _linkLabelUpdate.Visible = false;
+#endif
         }
 
         private void SystemButtonClick(object sender, EventArgs e) => Process.Start("msinfo32.exe");
