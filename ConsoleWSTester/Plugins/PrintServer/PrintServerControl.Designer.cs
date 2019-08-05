@@ -41,6 +41,7 @@
             this.btGenerateCommand = new System.Windows.Forms.LinkLabel();
             this.btDetectInstall = new System.Windows.Forms.Button();
             this.panelParameters = new System.Windows.Forms.Panel();
+            this.linkLabelOpenReport = new System.Windows.Forms.LinkLabel();
             this.linkLabelODBC = new System.Windows.Forms.LinkLabel();
             this.btTestConnection = new System.Windows.Forms.Button();
             this.cbOpenDocumentAfterGeneration = new System.Windows.Forms.CheckBox();
@@ -104,10 +105,12 @@
             this.tbPrintServerVersion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageConfig = new System.Windows.Forms.TabPage();
+            this.linkLabelOdbcConfigXml = new System.Windows.Forms.LinkLabel();
+            this.linkLabelEditionServerSolutionsXml = new System.Windows.Forms.LinkLabel();
+            this.linkLabelEditionServerConfigXml = new System.Windows.Forms.LinkLabel();
+            this.tbAdxOdbcConfigXml = new System.Windows.Forms.TextBox();
             this.tbAdxEditionServerSolutions = new System.Windows.Forms.TextBox();
-            this.labelAdxEditionServerSolutions = new System.Windows.Forms.Label();
             this.tbAdxEditionServerConfigXml = new System.Windows.Forms.TextBox();
-            this.labelAdxEditionServerConfigXml = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabPagePrintServer.SuspendLayout();
             this.panelParameters.SuspendLayout();
@@ -191,6 +194,7 @@
             this.panelParameters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelParameters.Controls.Add(this.linkLabelOpenReport);
             this.panelParameters.Controls.Add(this.linkLabelODBC);
             this.panelParameters.Controls.Add(this.btTestConnection);
             this.panelParameters.Controls.Add(this.cbOpenDocumentAfterGeneration);
@@ -226,6 +230,18 @@
             this.panelParameters.Name = "panelParameters";
             this.panelParameters.Size = new System.Drawing.Size(867, 426);
             this.panelParameters.TabIndex = 3;
+            // 
+            // linkLabelOpenReport
+            // 
+            this.linkLabelOpenReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLabelOpenReport.AutoSize = true;
+            this.linkLabelOpenReport.Location = new System.Drawing.Point(771, 62);
+            this.linkLabelOpenReport.Name = "linkLabelOpenReport";
+            this.linkLabelOpenReport.Size = new System.Drawing.Size(63, 13);
+            this.linkLabelOpenReport.TabIndex = 34;
+            this.linkLabelOpenReport.TabStop = true;
+            this.linkLabelOpenReport.Text = "Open report";
+            this.linkLabelOpenReport.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelOpenReport_LinkClicked);
             // 
             // linkLabelODBC
             // 
@@ -683,9 +699,9 @@
             this.btBrowseRpt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btBrowseRpt.Location = new System.Drawing.Point(736, 57);
             this.btBrowseRpt.Name = "btBrowseRpt";
-            this.btBrowseRpt.Size = new System.Drawing.Size(125, 23);
+            this.btBrowseRpt.Size = new System.Drawing.Size(29, 23);
             this.btBrowseRpt.TabIndex = 17;
-            this.btBrowseRpt.Text = "Choose Rpt file";
+            this.btBrowseRpt.Text = "...";
             this.btBrowseRpt.UseVisualStyleBackColor = true;
             this.btBrowseRpt.Click += new System.EventHandler(this.btBrowseRpt_Click);
             // 
@@ -790,6 +806,8 @@
             // 
             this.tbPrinters.AcceptsReturn = true;
             this.tbPrinters.AcceptsTab = true;
+            this.tbPrinters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPrinters.HideSelection = false;
             this.tbPrinters.Location = new System.Drawing.Point(142, 277);
             this.tbPrinters.Multiline = true;
@@ -802,6 +820,8 @@
             // 
             // tbCRRuntime32Version
             // 
+            this.tbCRRuntime32Version.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbCRRuntime32Version.Location = new System.Drawing.Point(142, 144);
             this.tbCRRuntime32Version.Name = "tbCRRuntime32Version";
             this.tbCRRuntime32Version.ReadOnly = true;
@@ -821,6 +841,8 @@
             // 
             this.tbSapCrystalReport.AcceptsReturn = true;
             this.tbSapCrystalReport.AcceptsTab = true;
+            this.tbSapCrystalReport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSapCrystalReport.HideSelection = false;
             this.tbSapCrystalReport.Location = new System.Drawing.Point(142, 170);
             this.tbSapCrystalReport.Multiline = true;
@@ -833,6 +855,8 @@
             // 
             // tbService
             // 
+            this.tbService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbService.Location = new System.Drawing.Point(142, 96);
             this.tbService.Multiline = true;
             this.tbService.Name = "tbService";
@@ -851,6 +875,8 @@
             // 
             // tbInstallPath
             // 
+            this.tbInstallPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbInstallPath.Location = new System.Drawing.Point(142, 44);
             this.tbInstallPath.Name = "tbInstallPath";
             this.tbInstallPath.ReadOnly = true;
@@ -877,6 +903,8 @@
             // 
             // tbPrintServerVersion
             // 
+            this.tbPrintServerVersion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPrintServerVersion.Location = new System.Drawing.Point(142, 70);
             this.tbPrintServerVersion.Name = "tbPrintServerVersion";
             this.tbPrintServerVersion.ReadOnly = true;
@@ -893,10 +921,12 @@
             // 
             // tabPageConfig
             // 
+            this.tabPageConfig.Controls.Add(this.linkLabelOdbcConfigXml);
+            this.tabPageConfig.Controls.Add(this.linkLabelEditionServerSolutionsXml);
+            this.tabPageConfig.Controls.Add(this.linkLabelEditionServerConfigXml);
+            this.tabPageConfig.Controls.Add(this.tbAdxOdbcConfigXml);
             this.tabPageConfig.Controls.Add(this.tbAdxEditionServerSolutions);
-            this.tabPageConfig.Controls.Add(this.labelAdxEditionServerSolutions);
             this.tabPageConfig.Controls.Add(this.tbAdxEditionServerConfigXml);
-            this.tabPageConfig.Controls.Add(this.labelAdxEditionServerConfigXml);
             this.tabPageConfig.Location = new System.Drawing.Point(4, 22);
             this.tabPageConfig.Name = "tabPageConfig";
             this.tabPageConfig.Padding = new System.Windows.Forms.Padding(3);
@@ -905,12 +935,64 @@
             this.tabPageConfig.Text = "Config";
             this.tabPageConfig.UseVisualStyleBackColor = true;
             // 
+            // linkLabelOdbcConfigXml
+            // 
+            this.linkLabelOdbcConfigXml.AutoSize = true;
+            this.linkLabelOdbcConfigXml.Location = new System.Drawing.Point(46, 306);
+            this.linkLabelOdbcConfigXml.Name = "linkLabelOdbcConfigXml";
+            this.linkLabelOdbcConfigXml.Size = new System.Drawing.Size(107, 13);
+            this.linkLabelOdbcConfigXml.TabIndex = 24;
+            this.linkLabelOdbcConfigXml.TabStop = true;
+            this.linkLabelOdbcConfigXml.Text = "AdxOdbcConfig.Xml :";
+            this.linkLabelOdbcConfigXml.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelOdbcConfigXml_LinkClicked);
+            // 
+            // linkLabelEditionServerSolutionsXml
+            // 
+            this.linkLabelEditionServerSolutionsXml.AutoSize = true;
+            this.linkLabelEditionServerSolutionsXml.Location = new System.Drawing.Point(-3, 152);
+            this.linkLabelEditionServerSolutionsXml.Name = "linkLabelEditionServerSolutionsXml";
+            this.linkLabelEditionServerSolutionsXml.Size = new System.Drawing.Size(157, 13);
+            this.linkLabelEditionServerSolutionsXml.TabIndex = 23;
+            this.linkLabelEditionServerSolutionsXml.TabStop = true;
+            this.linkLabelEditionServerSolutionsXml.Text = "AdxEditionServerSolutions.Xml :";
+            this.linkLabelEditionServerSolutionsXml.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelEditionServerSolutionsXml_LinkClicked);
+            // 
+            // linkLabelEditionServerConfigXml
+            // 
+            this.linkLabelEditionServerConfigXml.AutoSize = true;
+            this.linkLabelEditionServerConfigXml.Location = new System.Drawing.Point(10, 15);
+            this.linkLabelEditionServerConfigXml.Name = "linkLabelEditionServerConfigXml";
+            this.linkLabelEditionServerConfigXml.Size = new System.Drawing.Size(144, 13);
+            this.linkLabelEditionServerConfigXml.TabIndex = 22;
+            this.linkLabelEditionServerConfigXml.TabStop = true;
+            this.linkLabelEditionServerConfigXml.Text = "AdxEditionServerConfig.Xml :";
+            this.linkLabelEditionServerConfigXml.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelEditionServerConfigXml_LinkClicked);
+            // 
+            // tbAdxOdbcConfigXml
+            // 
+            this.tbAdxOdbcConfigXml.AcceptsReturn = true;
+            this.tbAdxOdbcConfigXml.AcceptsTab = true;
+            this.tbAdxOdbcConfigXml.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAdxOdbcConfigXml.HideSelection = false;
+            this.tbAdxOdbcConfigXml.Location = new System.Drawing.Point(159, 303);
+            this.tbAdxOdbcConfigXml.Multiline = true;
+            this.tbAdxOdbcConfigXml.Name = "tbAdxOdbcConfigXml";
+            this.tbAdxOdbcConfigXml.ReadOnly = true;
+            this.tbAdxOdbcConfigXml.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbAdxOdbcConfigXml.Size = new System.Drawing.Size(693, 133);
+            this.tbAdxOdbcConfigXml.TabIndex = 15;
+            this.tbAdxOdbcConfigXml.WordWrap = false;
+            // 
             // tbAdxEditionServerSolutions
             // 
             this.tbAdxEditionServerSolutions.AcceptsReturn = true;
             this.tbAdxEditionServerSolutions.AcceptsTab = true;
+            this.tbAdxEditionServerSolutions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAdxEditionServerSolutions.HideSelection = false;
-            this.tbAdxEditionServerSolutions.Location = new System.Drawing.Point(159, 139);
+            this.tbAdxEditionServerSolutions.Location = new System.Drawing.Point(159, 152);
             this.tbAdxEditionServerSolutions.Multiline = true;
             this.tbAdxEditionServerSolutions.Name = "tbAdxEditionServerSolutions";
             this.tbAdxEditionServerSolutions.ReadOnly = true;
@@ -919,37 +1001,21 @@
             this.tbAdxEditionServerSolutions.TabIndex = 13;
             this.tbAdxEditionServerSolutions.WordWrap = false;
             // 
-            // labelAdxEditionServerSolutions
-            // 
-            this.labelAdxEditionServerSolutions.Location = new System.Drawing.Point(5, 145);
-            this.labelAdxEditionServerSolutions.Name = "labelAdxEditionServerSolutions";
-            this.labelAdxEditionServerSolutions.Size = new System.Drawing.Size(153, 24);
-            this.labelAdxEditionServerSolutions.TabIndex = 12;
-            this.labelAdxEditionServerSolutions.Text = "AdxEditionServerSolutions.Xml :";
-            this.labelAdxEditionServerSolutions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // tbAdxEditionServerConfigXml
             // 
             this.tbAdxEditionServerConfigXml.AcceptsReturn = true;
             this.tbAdxEditionServerConfigXml.AcceptsTab = true;
+            this.tbAdxEditionServerConfigXml.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAdxEditionServerConfigXml.HideSelection = false;
             this.tbAdxEditionServerConfigXml.Location = new System.Drawing.Point(159, 15);
             this.tbAdxEditionServerConfigXml.Multiline = true;
             this.tbAdxEditionServerConfigXml.Name = "tbAdxEditionServerConfigXml";
             this.tbAdxEditionServerConfigXml.ReadOnly = true;
             this.tbAdxEditionServerConfigXml.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbAdxEditionServerConfigXml.Size = new System.Drawing.Size(693, 101);
+            this.tbAdxEditionServerConfigXml.Size = new System.Drawing.Size(693, 120);
             this.tbAdxEditionServerConfigXml.TabIndex = 11;
             this.tbAdxEditionServerConfigXml.WordWrap = false;
-            // 
-            // labelAdxEditionServerConfigXml
-            // 
-            this.labelAdxEditionServerConfigXml.Location = new System.Drawing.Point(3, 19);
-            this.labelAdxEditionServerConfigXml.Name = "labelAdxEditionServerConfigXml";
-            this.labelAdxEditionServerConfigXml.Size = new System.Drawing.Size(155, 24);
-            this.labelAdxEditionServerConfigXml.TabIndex = 10;
-            this.labelAdxEditionServerConfigXml.Text = "AdxEditionServerConfig.Xml :";
-            this.labelAdxEditionServerConfigXml.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // PrintServerControl
             // 
@@ -1042,15 +1108,18 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TabPage tabPageConfig;
         private System.Windows.Forms.TextBox tbAdxEditionServerConfigXml;
-        private System.Windows.Forms.Label labelAdxEditionServerConfigXml;
         private System.Windows.Forms.LinkLabel linkLabelJSon;
         private System.Windows.Forms.TextBox tbAdxEditionServerSolutions;
-        private System.Windows.Forms.Label labelAdxEditionServerSolutions;
         private System.Windows.Forms.LinkLabel linkOpenJson;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValue;
         private System.Windows.Forms.ToolStripMenuItem removeAllToolStripMenuItem;
         private System.Windows.Forms.Label labelParametersMessage;
         private System.Windows.Forms.LinkLabel linkLabelODBC;
+        private System.Windows.Forms.LinkLabel linkLabelOpenReport;
+        private System.Windows.Forms.TextBox tbAdxOdbcConfigXml;
+        private System.Windows.Forms.LinkLabel linkLabelOdbcConfigXml;
+        private System.Windows.Forms.LinkLabel linkLabelEditionServerSolutionsXml;
+        private System.Windows.Forms.LinkLabel linkLabelEditionServerConfigXml;
     }
 }
