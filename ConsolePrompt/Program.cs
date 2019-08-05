@@ -15,7 +15,15 @@ namespace ConsolePrompt
     {
         static void Main(string[] args)
         {
-            new Program().Prompt();
+            try
+            {
+                new Program().Prompt();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                Environment.Exit(1);
+            }
         }
 
         private void Prompt()

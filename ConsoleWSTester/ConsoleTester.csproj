@@ -144,6 +144,7 @@
       <DependentUpon>MongoDbEDI.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\MongoDb\MongoDbEdiPrompt.cs" />
+    <Compile Include="Plugins\PrintServer\JsonConfigHelper.cs" />
     <Compile Include="Plugins\PrintServer\PrintPrompt.cs" />
     <Compile Include="Plugins\PrintServer\PrintServerHelper.cs" />
     <Compile Include="Plugins\PrintServer\ConsolePrintNet.cs" />
