@@ -76,9 +76,13 @@ namespace ConsoleTester.Plugins.PrintServer
                                 JObject grpapps = sol["grpapps"]?.Value<JObject>();
                                 if (grpapps != null)
                                 {
-                                    JObject app = grpapps["app"]?.Value<JObject>();
-                                    if (app != null)
-                                        result += $"folder: {app["folder"]}   host: {app["host"]}   port: {app["port"]} \r\n";
+                                    JArray apps = grpapps["app"]?.Value<JArray>();
+                                    if (apps != null)
+
+                                        foreach (JToken app in apps)
+                                        {
+                                            result += $"folder: {app["folder"]}   host: {app["host"]}   port: {app["port"]} \r\n";
+                                        }
                                 }
 
                                 JObject odbc = sol["odbc"]?.Value<JObject>();
