@@ -977,11 +977,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAdxOdbcConfigXml.HideSelection = false;
             this.tbAdxOdbcConfigXml.Location = new System.Drawing.Point(159, 303);
+            this.tbAdxOdbcConfigXml.MinimumSize = new System.Drawing.Size(0, 20);
             this.tbAdxOdbcConfigXml.Multiline = true;
             this.tbAdxOdbcConfigXml.Name = "tbAdxOdbcConfigXml";
             this.tbAdxOdbcConfigXml.ReadOnly = true;
             this.tbAdxOdbcConfigXml.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbAdxOdbcConfigXml.Size = new System.Drawing.Size(693, 133);
+            this.tbAdxOdbcConfigXml.Size = new System.Drawing.Size(693, 222);
             this.tbAdxOdbcConfigXml.TabIndex = 15;
             this.tbAdxOdbcConfigXml.WordWrap = false;
             // 

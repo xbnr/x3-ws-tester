@@ -75,6 +75,9 @@
             this.panelDomainsUpDown = new System.Windows.Forms.Panel();
             this.domainUpDelay = new System.Windows.Forms.DomainUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelXmlFile.SuspendLayout();
             this.panelDeleteLines.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -84,15 +87,16 @@
             this.tabPageXmlObject.SuspendLayout();
             this.tabPageCredentials.SuspendLayout();
             this.panelDomainsUpDown.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(0, 361);
+            this.button1.Location = new System.Drawing.Point(6, 569);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(663, 38);
+            this.button1.Size = new System.Drawing.Size(866, 38);
             this.button1.TabIndex = 0;
             this.button1.Text = "Send";
             this.button1.UseVisualStyleBackColor = true;
@@ -171,7 +175,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbXmlFilename.Location = new System.Drawing.Point(61, 7);
             this.tbXmlFilename.Name = "tbXmlFilename";
-            this.tbXmlFilename.Size = new System.Drawing.Size(537, 20);
+            this.tbXmlFilename.Size = new System.Drawing.Size(756, 20);
             this.tbXmlFilename.TabIndex = 12;
             // 
             // label2
@@ -206,7 +210,7 @@
             // btBrowseXmlFile
             // 
             this.btBrowseXmlFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBrowseXmlFile.Location = new System.Drawing.Point(604, 7);
+            this.btBrowseXmlFile.Location = new System.Drawing.Point(823, 7);
             this.btBrowseXmlFile.Name = "btBrowseXmlFile";
             this.btBrowseXmlFile.Size = new System.Drawing.Size(39, 23);
             this.btBrowseXmlFile.TabIndex = 16;
@@ -261,7 +265,7 @@
             this.panelXmlFile.Controls.Add(this.label2);
             this.panelXmlFile.Location = new System.Drawing.Point(0, 6);
             this.panelXmlFile.Name = "panelXmlFile";
-            this.panelXmlFile.Size = new System.Drawing.Size(646, 33);
+            this.panelXmlFile.Size = new System.Drawing.Size(865, 33);
             this.panelXmlFile.TabIndex = 24;
             // 
             // cbListSize
@@ -392,7 +396,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(660, 331);
+            this.tabControl1.Size = new System.Drawing.Size(885, 512);
             this.tabControl1.TabIndex = 37;
             // 
             // tabPage1
@@ -419,7 +423,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(652, 305);
+            this.tabPage1.Size = new System.Drawing.Size(877, 486);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -485,7 +489,7 @@
             this.tabPageXmlObject.Location = new System.Drawing.Point(4, 22);
             this.tabPageXmlObject.Name = "tabPageXmlObject";
             this.tabPageXmlObject.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageXmlObject.Size = new System.Drawing.Size(652, 258);
+            this.tabPageXmlObject.Size = new System.Drawing.Size(877, 486);
             this.tabPageXmlObject.TabIndex = 2;
             this.tabPageXmlObject.Text = "Data: XmlObject";
             this.tabPageXmlObject.UseVisualStyleBackColor = true;
@@ -499,7 +503,7 @@
             this.tbXmlObject.Multiline = true;
             this.tbXmlObject.Name = "tbXmlObject";
             this.tbXmlObject.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbXmlObject.Size = new System.Drawing.Size(641, 174);
+            this.tbXmlObject.Size = new System.Drawing.Size(863, 179);
             this.tbXmlObject.TabIndex = 38;
             // 
             // tabPageCredentials
@@ -511,7 +515,7 @@
             this.tabPageCredentials.Location = new System.Drawing.Point(4, 22);
             this.tabPageCredentials.Name = "tabPageCredentials";
             this.tabPageCredentials.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCredentials.Size = new System.Drawing.Size(652, 258);
+            this.tabPageCredentials.Size = new System.Drawing.Size(877, 486);
             this.tabPageCredentials.TabIndex = 1;
             this.tabPageCredentials.Text = "Credentials";
             this.tabPageCredentials.UseVisualStyleBackColor = true;
@@ -540,7 +544,7 @@
             this.panelDomainsUpDown.Controls.Add(this.label1);
             this.panelDomainsUpDown.Controls.Add(this.domainUpTimes);
             this.panelDomainsUpDown.Controls.Add(this.labelTimes);
-            this.panelDomainsUpDown.Location = new System.Drawing.Point(3, 334);
+            this.panelDomainsUpDown.Location = new System.Drawing.Point(6, 539);
             this.panelDomainsUpDown.Name = "panelDomainsUpDown";
             this.panelDomainsUpDown.Size = new System.Drawing.Size(659, 24);
             this.panelDomainsUpDown.TabIndex = 39;
@@ -562,15 +566,46 @@
             this.label1.TabIndex = 39;
             this.label1.Text = "second(s) delay";
             // 
-            // Workspace
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 41;
+            this.label5.Text = "Status :";
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStatus.Location = new System.Drawing.Point(55, 6);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(11, 13);
+            this.labelStatus.TabIndex = 42;
+            this.labelStatus.Text = "-";
+            this.labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.labelStatus);
+            this.panel1.Location = new System.Drawing.Point(6, 515);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(659, 24);
+            this.panel1.TabIndex = 41;
+            // 
+            // WsSOAPTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(884, 612);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelDomainsUpDown);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button1);
-            this.Name = "Workspace";
-            this.Size = new System.Drawing.Size(675, 400);
+            this.Name = "WsSOAPTester";
             this.panelXmlFile.ResumeLayout(false);
             this.panelXmlFile.PerformLayout();
             this.panelDeleteLines.ResumeLayout(false);
@@ -586,6 +621,8 @@
             this.tabPageCredentials.PerformLayout();
             this.panelDomainsUpDown.ResumeLayout(false);
             this.panelDomainsUpDown.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -639,5 +676,8 @@
         private System.Windows.Forms.Panel panelDomainsUpDown;
         private System.Windows.Forms.DomainUpDown domainUpDelay;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Panel panel1;
     }
 }

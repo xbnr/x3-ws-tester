@@ -28,6 +28,10 @@ namespace ConsoleTester.UI
         {
             this.Size = new Size(Settings.Default.MainFormWidth, Settings.Default.MainFormHeight);
 
+#if !DEBUG
+            checkForUpdatesToolStripMenuItem.Visible = false;
+#endif
+
             this.Text = ProgramUI.GetApplicationName() + " - " + ProgramUI.GetApplicationVersion();
             Instance = this;
             var treeView = new FileSystemTree();

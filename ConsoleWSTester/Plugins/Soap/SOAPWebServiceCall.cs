@@ -5,6 +5,7 @@ using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace ConsoleTester.Plugins.Soap
 {
@@ -32,37 +33,37 @@ namespace ConsoleTester.Plugins.Soap
         }
 
 
-        public void Query()
-        {// int waitInMilliseconds
-            LaunchWSCallInBackGround(OperationMode.Query);
+        public Task<CAWebService.CAdxResultXml> Query()
+        {
+            return LaunchWSCallInBackGround(OperationMode.Query);
         }
 
-        public void Modify(string xml)
+        public Task<CAWebService.CAdxResultXml> Modify(string xml)
         {
             this.conf.XmlObject = xml;
-            LaunchWSCall(OperationMode.Modify);
+            return LaunchWSCall(OperationMode.Modify);
         }
-        public void DeleteLines(string xmlFileName)
+        public Task<CAWebService.CAdxResultXml> DeleteLines(string xmlFileName)
         {
-            LaunchWSCall(OperationMode.DeleteLines);
+            return LaunchWSCall(OperationMode.DeleteLines);
         }
-        public void Read()
+        public Task<CAWebService.CAdxResultXml> Read()
         {
-            LaunchWSCallInBackGround(OperationMode.Read);
+            return LaunchWSCallInBackGround(OperationMode.Read);
         }
-        public void GetDescription()
+        public Task<CAWebService.CAdxResultXml> GetDescription()
         {
-            LaunchWSCallInBackGround(OperationMode.GetDescription);
+            return LaunchWSCallInBackGround(OperationMode.GetDescription);
         }
-        public void Save(string xmlContains)
-        {
-            this.conf.XmlObject = xmlContains;
-            LaunchWSCall(OperationMode.Save);
-        }
-        public void Run(string xmlContains)
+        public Task<CAWebService.CAdxResultXml> Save(string xmlContains)
         {
             this.conf.XmlObject = xmlContains;
-            LaunchWSCallInBackGround(OperationMode.Run);
+            return LaunchWSCall(OperationMode.Save);
+        }
+        public Task<CAWebService.CAdxResultXml> Run(string xmlContains)
+        {
+            this.conf.XmlObject = xmlContains;
+            return LaunchWSCallInBackGround(OperationMode.Run);
         }
 
 
@@ -73,22 +74,28 @@ namespace ConsoleTester.Plugins.Soap
         }
 
         // int waitInMilliseconds
-        private void LaunchWSCallInBackGround(OperationMode mode)
+        private Task<CAWebService.CAdxResultXml> LaunchWSCallInBackGround(OperationMode mode)
         {
-            Thread t = new Thread(new ParameterizedThreadStart(LaunchWSCall));
-            t.Start(mode);
+            var result = Task.Run(() => LaunchWSCall(mode));
+            return result;
+            //Thread t = new Thread(new ParameterizedThreadStart(LaunchWSCall));
+            //t.Start(mode);
         }
 
-        private void LaunchWSCall(object modeOp)
+        private async Task<CAWebService.CAdxResultXml> LaunchWSCall(object modeOp)
         {
+            CAWebService.CAdxResultXml result = null;
+
             OperationMode mode = (OperationMode)modeOp;
 
             var caWebService = new CAWebService.CAdxWebServiceXmlCCClient();
-            var context = new CAWebService.CAdxCallContext();
-            context.poolAlias = conf.PoolAlias;
-            context.codeUser = conf.Login;
-            context.codeLang = conf.Language;
-            context.requestConfig = conf.RequestConfiguration;
+            var context = new CAWebService.CAdxCallContext
+            {
+                poolAlias = conf.PoolAlias,
+                codeUser = conf.Login,
+                codeLang = conf.Language,
+                requestConfig = conf.RequestConfiguration
+            };
 
             string absUrl = conf.HostUrl + conf.Path;
             caWebService.Endpoint.ListenUri = new Uri(absUrl);
@@ -127,7 +134,6 @@ namespace ConsoleTester.Plugins.Soap
                     }
 
                     logger.Log($" ");
-                    CAWebService.CAdxResultXml result = null;
                     switch (mode)
                     {
                         default:
@@ -154,6 +160,8 @@ namespace ConsoleTester.Plugins.Soap
                             break;
                     }
 
+
+
                     logger.Log($"Result: ");
                     logger.Log($"{ (string.IsNullOrEmpty(result.resultXml) ? "NO result returned" : GetParsedResult(result.resultXml)) }");
 
@@ -173,6 +181,7 @@ namespace ConsoleTester.Plugins.Soap
                     logger.Log(e.StackTrace);
                 }
             }
+            return result;
         }
 
         private string GetParsedResult(string s)
