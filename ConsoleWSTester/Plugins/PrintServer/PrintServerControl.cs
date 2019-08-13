@@ -25,7 +25,7 @@ namespace ConsoleTester.Plugins.PrintServer
 
         public override void CreateNewWS()
         {
-            string defaultFile = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, $"Plugins", "PrintServer", "PrintServerConfig.default.json");
+            string defaultFile = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, $"Plugins", "PrintServer", "ConsolePrintNet.default.json");
             if (File.Exists(defaultFile))
                 LoadConfigFromJSON(defaultFile);
             this.filename = null;
@@ -90,7 +90,10 @@ namespace ConsoleTester.Plugins.PrintServer
             }
             if (string.IsNullOrEmpty(cbExportDirectory.Text))
             {
-                cbExportDirectory.Text = System.IO.Path.GetTempPath();
+                string tempDir = System.IO.Path.GetTempPath();
+                if (tempDir.EndsWith("\\")) // to avoid issues while launching command line
+                    tempDir = tempDir.Substring(0, tempDir.Length - 1);
+                cbExportDirectory.Text = tempDir;
             }
 
             if (!string.IsNullOrEmpty(tbInstallPath.Text))
