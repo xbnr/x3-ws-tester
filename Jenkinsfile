@@ -10,7 +10,7 @@
 		} else {
 			env.TESTER_VERSION = "0.9"
 		}
-    env.RELEASE = "0"		
+    env.RELEASE = "1"		
 
     if ("${BRANCH_NAME}" =~ /^release\//)  {
         tag = "${BRANCH_NAME}".split('/')[1]
