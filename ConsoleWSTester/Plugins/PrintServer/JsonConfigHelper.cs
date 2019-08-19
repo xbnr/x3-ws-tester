@@ -88,7 +88,7 @@ namespace ConsoleTester.Plugins.PrintServer
                                 JObject odbc = sol["odbc"]?.Value<JObject>();
                                 if (odbc != null)
                                 {
-                                    result += $"base: {odbc["base"]}\\{odbc["instance"]}   host: {odbc["host"]}   id: {odbc["id"]} \r\n";
+                                    result += $"base: {odbc["base"]}{((odbc["instance"] != null && !string.IsNullOrEmpty(odbc["instance"].ToString())) ? "\\" : string.Empty)}{odbc["instance"]}   host: {odbc["host"]}   id: {odbc["id"]} \r\n";
                                 }
                             }
                         }
