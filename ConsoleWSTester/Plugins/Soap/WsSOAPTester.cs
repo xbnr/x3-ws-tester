@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ConsoleTester.Plugins.Soap
@@ -169,6 +170,8 @@ namespace ConsoleTester.Plugins.Soap
                 float.TryParse(domainUpDelay.Text, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.GetCultureInfo("en-GB"), out delayInSeconds);
             }
 
+            Task<CAWebService.CAdxResultXml> result = null;
+
             for (int i = 0; i < times; i++)
             {
                 if (delayInSeconds > 0)
@@ -180,32 +183,39 @@ namespace ConsoleTester.Plugins.Soap
                 {
                     default:
                     case SOAPWebServiceCall.OperationMode.Query:
-                        ws.Query();
+                        result = ws.Query();
                         break;
                     case SOAPWebServiceCall.OperationMode.Read:
-                        ws.Read();
+                        result = ws.Read();
                         break;
                     case SOAPWebServiceCall.OperationMode.GetDescription:
-                        ws.GetDescription();
+                        result = ws.GetDescription();
                         break;
                     case SOAPWebServiceCall.OperationMode.Modify:
-                        ws.Modify(xml);
+                        result = ws.Modify(xml);
                         break;
                     case SOAPWebServiceCall.OperationMode.DeleteLines:
-                        ws.Modify(xml);
+                        result = ws.Modify(xml);
                         break;
                     case SOAPWebServiceCall.OperationMode.Save:
-                        ws.Save(xml);
+                        result = ws.Save(xml);
                         break;
                     case SOAPWebServiceCall.OperationMode.Run:
-
-                        ws.Run(xml);
+                        result = ws.Run(xml);
                         break;
                 }
 
-
+                result.ContinueWith((input) => { Helper.SetSafeText(labelStatus, $"{input.Result?.status} ({(input.Result?.status== 1 ? "Success": "Error(s)")})" ); });
+                result.ContinueWith((input) => { Logger.Log($"Result Status { input.Result?.status}"); });
             }
         }
+
+        private Task InitAnswerStatus()
+        {
+            
+             return null;
+        }
+
 
         private SOAPWebServiceCall.OperationMode GetAction()
         {

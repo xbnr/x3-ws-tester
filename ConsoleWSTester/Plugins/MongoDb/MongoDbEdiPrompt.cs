@@ -49,7 +49,6 @@ namespace ConsoleTester.Plugins.MongoDb
         private void ShowMenu()
         {
             PromptHelper.ShowPromptHighlight($"Download file");
-            // PromptHelper.ShowPromptInfo($"Download file");
         }
 
         public string MongoServer { get; private set; }

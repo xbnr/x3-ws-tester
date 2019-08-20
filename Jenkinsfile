@@ -10,7 +10,7 @@
 		} else {
 			env.TESTER_VERSION = "0.9"
 		}
-    env.RELEASE = "0"		
+    env.RELEASE = "1"		
 
     if ("${BRANCH_NAME}" =~ /^release\//)  {
         tag = "${BRANCH_NAME}".split('/')[1]
@@ -93,6 +93,7 @@ node('sign') {
 			%light% %wixFileObj% %wixHeatFileObj% -cultures:en-US -ext WixUIExtension.dll -spdb -b Release -o %SETUP_NAME%.msi
 			cd %WORKSPACE%
 	    '''		 
+		signExe("Setup/${SETUP_NAME}.msi")
 		stash name:"consoleWSTester", includes: "Setup/${SETUP_NAME}.msi"
 
      }
